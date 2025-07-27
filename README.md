@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Frontend
 
-## Getting Started
+This project uses Next.js for the frontend. It includes:
 
-First, run the development server:
+- **Routing**: Implemented using Next.js Pages.
+- **State Management**: Utilizes Zustand for managing authentication state.
+- **UI Components**: Built with Radix-UI and Tailwind CSS for styling.
+- **Forms**: Uses React Hook Form with Zod validation for the registration and login pages.
+- **Auth Logic**: Mock authentication logic is used to simulate login and registration processes.
+
+### Key Components:
+- `LoginPage` & `RegisterPage`: Provide authentication forms.
+- `Dashboard`: Displays a summary of the user's projects and activities.
+
+## Backend
+The backend is set up with Express.js, handling HTTP requests and routes.
+
+- **Server**: Express server is configured to handle API requests.
+- **Middleware**: Includes CORS, cookie-parser, and dotenv for environment variables.
+- **Routing**: Basic routing configured in `src/routes/index.ts`.
+
+### Environment Variables:
+- `DATABASE_URL`: Connection string for the PostgreSQL database.
+- `PORT`: Port number for running the server locally.
+
+## Running the Project
+
+To start the development server, run the following commands for both frontend and backend:
 
 ```bash
+# Frontend
+cd client
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Backend
+cd server
+npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to access the frontend.
+Check the backend by accessing its corresponding API routes.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
