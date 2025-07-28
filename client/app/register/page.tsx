@@ -5,57 +5,37 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/schemas/registerSchema";
 import { z } from "zod";
-import { useAuth } from "@/stores/useAuth";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+
+import { handleRegister } from "@/lib/handlers/authHandlers";
+import { useAuth } from "@/stores/useAuth";
+
 type FormData = z.infer<typeof registerSchema>;
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { register, isLoading, error, clearError } = useAuth();
+  const { error, isLoading, clearError } = useAuth();
 
   const {
     register: formRegister,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<FormData>({
     resolver: zodResolver(registerSchema),
   });
 
   const onSubmit = async (data: FormData) => {
-    try {
-      const user = {
-        id: Date.now().toString(),
-        name: data.name,
-        email: data.email,
-        role: data.role as "client" | "freelancer", // Type assertion to match UserRole
-      };
-      const token = "fake-token";
-
-      register(user, token);
-      reset();
-      
-      // Role-based redirection
-      if (user.role === "client") {
-        router.push('/dashboard');
-      } else if (user.role === "freelancer") {
-        router.push('/dashboard');
-      } else {
-        // Default redirect for any other case
-        router.push('/dashboard');
-      }
-    } catch (err) {
-      console.error('Registration error:', err);
-    }
+    await handleRegister(data.name, data.email, data.password, data.role);
+    router.push("/dashboard");
   };
 
   useEffect(() => {
     return () => {
-      clearError(); // لما الصفحة تتقفل
+      clearError();
     };
   }, [clearError]);
 
@@ -110,8 +90,8 @@ export default function RegisterPage() {
                 className="w-full border rounded-md px-3 py-2 text-sm bg-input text-foreground border-border focus:ring-2 focus:ring-ring"
               >
                 <option value="">Select Role</option>
-                <option value="client">Client</option>
-                <option value="freelancer">Freelancer</option>
+                <option value="CLIENT">Client</option>
+                <option value="FREELANCER">Freelancer</option>
               </select>
               {errors.role && (
                 <p className="text-sm text-destructive mt-1">

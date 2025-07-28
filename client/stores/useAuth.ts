@@ -1,11 +1,10 @@
-import { boolean } from "zod";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
 export type UserRole = "client" | "freelancer" | "admin";
 
-type User = {
+export type User = {
   id: string;
   name: string;
   email: string;

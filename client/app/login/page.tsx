@@ -1,105 +1,103 @@
 "use client";
 
+import { handleLogin } from "@/lib/handlers/authHandlers";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "@/stores/useAuth";
+import { loginSchema } from "@/schemas/loginSchema";
+import z from "zod";
+
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+
+type FormData = z.infer<typeof loginSchema>;
 
 const LoginPage = () => {
-  const { login, isLoggedIn } = useAuth();
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      router.push("/dashboard");
-    }
-  }, [isLoggedIn, router]);
+  const { error, isLoading, clearError } = useAuth();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+  const {
+    register: formRegister,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(loginSchema),
+  });
 
-    try {
-      // TODO: Replace with actual API call
-      // For now, this is a mock login
-      const mockUser = {
-        id: "1",
-        name: "John Doe",
-        email: email,
-        role: "client" as const,
-      };
-      const mockToken = "mock-jwt-token";
-
-      login(mockUser, mockToken);
-      router.push("/dashboard");
-    } catch (error) {
-      console.error("Login failed:", error);
-    } finally {
-      setIsLoading(false);
-    }
+  const onSubmit = async (data: FormData) => {
+    await handleLogin(data.email, data.password, data.role);
+    router.push("/dashboard");
   };
 
-  if (isLoggedIn) {
-    return null; // Prevent flash while redirecting
-  }
+  useEffect(() => {
+    return () => {
+      clearError();
+    };
+  }, [clearError]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">
-            Sign in to your account
-          </h2>
-        </div>
-        <form className="mt-8 space-y-6" onSubmit={handleLogin}>
-          <div className="rounded-md shadow-sm -space-y-px">
+    <div className="flex justify-center items-center min-h-screen bg-background">
+      <Card className="w-full max-w-md shadow-xl p-4">
+        <CardHeader>
+          <h2 className="text-2xl font-semibold text-center">Sign In</h2>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
-              <label htmlFor="email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email"
-                name="email"
+              <Input
+                placeholder="Email"
                 type="email"
-                autoComplete="email"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-border placeholder-muted-foreground text-foreground bg-input rounded-t-md focus:outline-none focus:ring-ring focus:border-ring focus:z-10 sm:text-sm"
-                placeholder="Email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                {...formRegister("email")}
               />
+              {errors.email && (
+                <p className="text-sm text-destructive mt-1">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
             <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-border placeholder-muted-foreground text-foreground bg-input rounded-b-md focus:outline-none focus:ring-ring focus:border-ring focus:z-10 sm:text-sm"
+              <Input
                 placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                {...formRegister("password")}
               />
+              {errors.password && (
+                <p className="text-sm text-destructive mt-1">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
-          </div>
+            {error && (
+              <p className="text-sm text-destructive font-medium text-center">
+                {error}
+              </p>
+            )}
+            <div>
+              <select
+                {...formRegister("role")}
+                className="w-full border rounded-md px-3 py-2 text-sm bg-input text-foreground border-border focus:ring-2 focus:ring-ring"
+              >
+                <option value="">Select Role</option>
+                <option value="CLIENT">Client</option>
+                <option value="FREELANCER">Freelancer</option>
+              </select>
+              {errors.role && (
+                <p className="text-sm text-destructive mt-1">
+                  {errors.role.message}
+                </p>
+              )}
+            </div>
 
-          <div>
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-primary-foreground bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring disabled:opacity-50"
-            >
-              {isLoading ? "Signing in..." : "Sign in"}
-            </button>
-          </div>
-        </form>
-      </div>
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? "Signing in..." : "Sign In"}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 };
