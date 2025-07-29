@@ -1,6 +1,7 @@
 import { Router } from "express";
 import authRoutes from "./auth.routes";
 import otpRoutes from "./otp.routes";
+import jobRoutes from "./job.routes";
 
 const router = Router();
 
@@ -13,5 +14,8 @@ router.use(authRoutes);
 
 // Add OTP routes
 router.use(otpRoutes);
+
+// Add job routes
+router.use(jobRoutes);
 
 export default router;

@@ -9,23 +9,55 @@ export const AuthService = {
     if (existing) throw new Error("User already exists");
 
     const hashed = await bcrypt.hash(password, 10);
-    const user = await prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashed,
-        role: role.toUpperCase() as 'CLIENT' | 'FREELANCER' | 'ADMIN',
-        isVerified: false,
-      },
+    const normalizedRole = role.toUpperCase() as 'CLIENT' | 'FREELANCER' | 'ADMIN';
+    
+    // Use transaction to ensure both User and profile records are created together
+    const result = await prisma.$transaction(async (tx) => {
+      // Create the user
+      const user = await tx.user.create({
+        data: {
+          name,
+          email,
+          password: hashed,
+          role: normalizedRole,
+          isVerified: false,
+        },
+      });
+
+      // Create corresponding profile based on role
+      if (normalizedRole === 'CLIENT') {
+        await tx.client.create({
+          data: {
+            userId: user.id,
+            fullName: name,
+            // Optional fields can be filled later by the user
+            companyName: null,
+            bio: null,
+            website: null,
+            location: null,
+          },
+        });
+      } else if (normalizedRole === 'FREELANCER') {
+        await tx.freelancer.create({
+          data: {
+            userId: user.id,
+            experienceLevel: 'BEGINNER', // Default value, can be updated later
+            hourlyRate: null,
+            bio: null,
+          },
+        });
+      }
+
+      return user;
     });
 
     // Generate JWT token
-    const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, {
+    const token = jwt.sign({ userId: result.id, role: result.role }, JWT_SECRET, {
       expiresIn: "7d",
     });
 
     // Remove password from user object before returning
-    const { password: _, ...userWithoutPassword } = user;
+    const { password: _, ...userWithoutPassword } = result;
 
     return { user: userWithoutPassword, token };
   },

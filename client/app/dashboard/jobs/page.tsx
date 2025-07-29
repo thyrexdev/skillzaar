@@ -1,9 +1,49 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Guard from "@/components/Guard";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
+import CreateJobForm from "@/components/jobs/CreateJobForm";
+import { jobService, Job, JobStats } from "@/services/jobService";
 
 const JobsPage = () => {
+  const [isCreatingJob, setIsCreatingJob] = useState(false);
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [jobStats, setJobStats] = useState<JobStats | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadJobs() {
+      try {
+        const { data } = await jobService.getClientJobs({ page: 1, limit: 10 });
+        setJobs(data);
+      } catch (error) {
+        console.error("Failed to fetch jobs", error);
+      }
+    }
+
+    async function loadStats() {
+      try {
+        const { stats } = await jobService.getJobStats();
+        setJobStats(stats);
+      } catch (error) {
+        console.error("Failed to fetch stats", error);
+      }
+    }
+
+    loadJobs();
+    loadStats();
+    setLoading(false);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="p-6">
+        <h1 className="text-3xl font-light text-foreground">Loading...</h1>
+      </div>
+    );
+  }
+
   return (
     <Guard>
       <DashboardLayout>
@@ -24,7 +64,7 @@ const JobsPage = () => {
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-muted-foreground">Total Jobs</p>
-                  <p className="text-2xl font-semibold text-foreground">12</p>
+                  <p className="text-2xl font-semibold text-foreground">{jobStats?.totalJobs || 0}</p>
                 </div>
               </div>
             </div>
@@ -38,7 +78,7 @@ const JobsPage = () => {
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-muted-foreground">Active</p>
-                  <p className="text-2xl font-semibold text-foreground">3</p>
+                  <p className="text-2xl font-semibold text-foreground">{jobStats?.activeJobs || 0}</p>
                 </div>
               </div>
             </div>
@@ -52,7 +92,7 @@ const JobsPage = () => {
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-muted-foreground">Completed</p>
-                  <p className="text-2xl font-semibold text-foreground">7</p>
+                  <p className="text-2xl font-semibold text-foreground">{jobStats?.completedJobs || 0}</p>
                 </div>
               </div>
             </div>
@@ -65,8 +105,8 @@ const JobsPage = () => {
                   </svg>
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-muted-foreground">Drafts</p>
-                  <p className="text-2xl font-semibold text-foreground">2</p>
+                  <p className="text-sm font-medium text-muted-foreground">In Progress</p>
+                  <p className="text-2xl font-semibold text-foreground">{jobStats?.inProgressJobs || 0}</p>
                 </div>
               </div>
             </div>
@@ -75,7 +115,10 @@ const JobsPage = () => {
           {/* Action Buttons */}
           <div className="flex justify-between items-center mb-6">
             <div className="flex space-x-3">
-              <button className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+              <button 
+                onClick={() => setIsCreatingJob(true)}
+                className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+              >
                 + Post New Job
               </button>
               <button className="px-4 py-2 border border-border text-foreground rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors">
@@ -89,46 +132,85 @@ const JobsPage = () => {
             </div>
           </div>
 
+            {isCreatingJob && (
+              <CreateJobForm onClose={() => setIsCreatingJob(false)} onJobCreated={() => window.location.reload()} />
+            )}
+
           {/* Jobs List */}
           <div className="bg-card rounded-lg shadow">
             <div className="px-6 py-4 border-b border-border">
               <h3 className="text-lg font-medium text-foreground">Recent Jobs</h3>
             </div>
             <div className="divide-y divide-border">
-              {/* Sample job entries */}
-              {[
-                { title: "Full-Stack Web Developer Needed", status: "Active", proposals: 8, budget: "$2,500", date: "Dec 15, 2024" },
-                { title: "UI/UX Designer for Mobile App", status: "In Progress", proposals: 12, budget: "$1,800", date: "Dec 10, 2024" },
-                { title: "Content Writer for Blog Posts", status: "Completed", proposals: 5, budget: "$500", date: "Dec 5, 2024" },
-              ].map((job, index) => (
-                <div key={index} className="px-6 py-4 hover:bg-accent/50 cursor-pointer">
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <h4 className="text-sm font-medium text-foreground">{job.title}</h4>
-                      <div className="mt-1 flex items-center space-x-4 text-sm text-muted-foreground">
-                        <span className={`px-2 py-1 rounded-full text-xs ${
-                          job.status === 'Active' ? 'bg-accent/20 text-accent-foreground' :
-                          job.status === 'In Progress' ? 'bg-primary/20 text-primary-foreground' :
-                          'bg-secondary/20 text-secondary-foreground'
-                        }`}>
-                          {job.status}
-                        </span>
-                        <span>{job.proposals} proposals</span>
-                        <span>{job.budget}</span>
-                        <span>Posted {job.date}</span>
+              {jobs.length === 0 ? (
+                <div className="px-6 py-8 text-center">
+                  <p className="text-muted-foreground">No jobs posted yet.</p>
+                  <button 
+                    onClick={() => setIsCreatingJob(true)}
+                    className="mt-4 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                  >
+                    Post Your First Job
+                  </button>
+                </div>
+              ) : (
+                jobs.map((job) => {
+                  const getStatusColor = (status: string) => {
+                    switch (status) {
+                      case 'OPEN':
+                        return 'bg-green-100 text-green-800';
+                      case 'IN_PROGRESS':
+                        return 'bg-blue-100 text-blue-800';
+                      case 'COMPLETED':
+                        return 'bg-gray-100 text-gray-800';
+                      case 'CANCELED':
+                        return 'bg-red-100 text-red-800';
+                      default:
+                        return 'bg-gray-100 text-gray-800';
+                    }
+                  };
+
+                  const formatStatus = (status: string) => {
+                    switch (status) {
+                      case 'OPEN':
+                        return 'Open';
+                      case 'IN_PROGRESS':
+                        return 'In Progress';
+                      case 'COMPLETED':
+                        return 'Completed';
+                      case 'CANCELED':
+                        return 'Canceled';
+                      default:
+                        return status;
+                    }
+                  };
+
+                  return (
+                    <div key={job.id} className="px-6 py-4 hover:bg-accent/50 cursor-pointer">
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <h4 className="text-sm font-medium text-foreground">{job.title}</h4>
+                          <div className="mt-1 flex items-center space-x-4 text-sm text-muted-foreground">
+                            <span className={`px-2 py-1 rounded-full text-xs ${getStatusColor(job.status)}`}>
+                              {formatStatus(job.status)}
+                            </span>
+                            <span>{job._count.proposals} proposals</span>
+                            <span>${job.budget}</span>
+                            <span>Posted {new Date(job.createdAt).toLocaleDateString()}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <button className="text-primary hover:text-primary/80 text-sm">View</button>
+                          <button className="text-muted-foreground hover:text-foreground">
+                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                            </svg>
+                          </button>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <button className="text-primary hover:text-primary/80 text-sm">View</button>
-                      <button className="text-muted-foreground hover:text-foreground">
-                        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                  );
+                })
+              )}
             </div>
           </div>
         </div>
