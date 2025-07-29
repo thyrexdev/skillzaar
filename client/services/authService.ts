@@ -22,3 +22,24 @@ export const registerUser = async (
   });
   return res.data as { user: User; token: string };
 };
+
+// Password Reset Services
+export const requestPasswordReset = async (email: string) => {
+  const res = await axios.post(`${API_URL}/auth/forgot-password`, {
+    email
+  });
+  return res.data;
+};
+
+export const verifyOtpAndResetPassword = async (
+  email: string,
+  otp: string,
+  newPassword: string
+) => {
+  const res = await axios.post(`${API_URL}/auth/reset-password`, {
+    email,
+    otp,
+    newPassword
+  });
+  return res.data;
+};

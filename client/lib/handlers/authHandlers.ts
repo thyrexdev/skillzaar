@@ -1,4 +1,4 @@
-import { loginUser, registerUser } from "@/services/authService";
+import { loginUser, registerUser, requestPasswordReset, verifyOtpAndResetPassword } from "@/services/authService";
 import { useAuth } from "@/stores/useAuth";
 
 export const handleLogin = async (

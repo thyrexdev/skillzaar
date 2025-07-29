@@ -27,9 +27,17 @@ export const login = async (req: Request, res: Response) => {
 export const forgotPassword = async (req: Request, res: Response) => {
   const { email } = req.body;
 
-  try {
+  try {    
+    // Validate email is provided
+    if (!email) {
+      return res.status(400).json({ error: "Email is required" });
+    }
+
     const user = await prisma.user.findUnique({ where: { email } });
-    if (!user) return res.status(404).json({ message: "User not found" });
+    
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
 
     await OtpService.createAndSendOtp(email, OtpEmailType.PASSWORD_RESET);
     res.json({ message: "Password reset OTP sent to email" });

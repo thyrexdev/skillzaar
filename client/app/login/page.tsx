@@ -96,6 +96,15 @@ const LoginPage = () => {
               {isLoading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
+          
+          <div className="mt-4 text-center">
+            <a 
+              href="/forgot-password" 
+              className="text-sm text-muted-foreground hover:text-primary underline"
+            >
+              Forgot your password?
+            </a>
+          </div>
         </CardContent>
       </Card>
     </div>
