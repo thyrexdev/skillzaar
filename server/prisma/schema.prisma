@@ -31,6 +31,39 @@ enum Role {
   ADMIN
 }
 
+model Otp {
+  id          String    @id @default(cuid())
+  email       String
+  otp         String
+  type        OtpType
+  status      OtpStatus @default(PENDING)
+  userId      String?
+  attempts    Int       @default(0)
+  metadata    Json?
+  expiresAt   DateTime
+  createdAt   DateTime  @default(now())
+  verifiedAt  DateTime?
+  lastAttempt DateTime?
+
+  @@index([email, type, status])
+  @@index([expiresAt])
+}
+
+enum OtpType {
+  PASSWORD_RESET
+  EMAIL_VERIFICATION
+  TWO_FACTOR_AUTH
+  ACCOUNT_VERIFICATION
+}
+
+enum OtpStatus {
+  PENDING
+  VERIFIED
+  EXPIRED
+  USED
+}
+
+
 model Client {
   id          String   @id @default(uuid())
   userId      String   @unique
