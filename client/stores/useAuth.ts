@@ -12,6 +12,13 @@ export type User = {
   role?: UserRole;
   createdAt?: string;
   updatedAt?: string;
+  bio?: string;
+  company?: string;
+  website?: string;
+  industry?: string;
+  companySize?: string;
+  location?: string;
+  phone?: string;
 };
 
 type AuthState = {

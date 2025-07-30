@@ -1,7 +1,7 @@
 "use client";
 
 import Guard from "@/components/Guard";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "@/stores/useAuth";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
@@ -42,10 +42,11 @@ import {
   Download,
   AlertTriangle,
   CheckCircle,
+  MapPin,
 } from "lucide-react";
 import { useTheme } from "@/stores/useTheme";
-import ClientSidebar from "@/components/dashboard/Client/Sidebar";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
+import { clientService, ClientProfile, UpdateClientProfileData } from "@/services/clientService";
 
 const SettingsPage = () => {
   const { user } = useAuth();
@@ -63,6 +64,50 @@ const SettingsPage = () => {
   const [language, setLanguage] = useState("en");
   const [timezone, setTimezone] = useState("utc");
   const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
+
+  const [profile, setProfile] = useState<ClientProfile | null>(null);
+  const [formData, setFormData] = useState<UpdateClientProfileData>({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (!user) return;
+      try {
+        const response = await clientService.getClientProfile(user.id);
+        setProfile(response.client);
+        setFormData({
+          name: response.client.fullName,
+          company: response.client.companyName,
+          website: response.client.website,
+          location: response.client.location,
+          bio: response.client.bio,
+        });
+      } catch (err) {
+        setError("Failed to load profile data");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProfile();
+  }, [user]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!user) return;
+
+    try {
+      await clientService.updateClientProfile(user.id, formData);
+      // Optionally, show a success message
+    } catch (err) {
+      setError("Failed to update profile");
+    }
+  };
 
   const handleNotificationChange = (key: string, value: boolean) => {
     setNotifications((prev) => ({ ...prev, [key]: value }));
@@ -187,7 +232,7 @@ const SettingsPage = () => {
                   </div>
                 </div>
 
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label
@@ -200,7 +245,8 @@ const SettingsPage = () => {
                       <Input
                         id="firstName"
                         placeholder="John"
-                        defaultValue={user?.name?.split(" ")[0] || ""}
+                      defaultValue={formData.name?.split(" ")[0] || ""}
+                      onChange={handleInputChange}
                         className="h-11"
                       />
                     </div>
@@ -215,28 +261,45 @@ const SettingsPage = () => {
                       <Input
                         id="lastName"
                         placeholder="Doe"
-                        defaultValue={user?.name?.split(" ")[1] || ""}
+                      defaultValue={formData.name?.split(" ")[1] || ""}
+                      onChange={handleInputChange}
                         className="h-11"
                       />
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label
-                      htmlFor="email"
-                      className="text-sm font-medium flex items-center gap-2"
-                    >
-                      <Mail className="h-4 w-4" />
-                      Email Address
-                    </Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="john.doe@example.com"
-                      defaultValue={user?.email || ""}
-                      className="h-11"
-                    />
-                  </div>
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor="website"
+                        className="text-sm font-medium flex items-center gap-2"
+                      >
+                        <Globe className="h-4 w-4" />
+                        Website
+                      </Label>
+                      <Input
+                        id="website"
+                        placeholder="https://your-company.com"
+                        value={formData.website || ""}
+                        onChange={handleInputChange}
+                        className="h-11"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor="location"
+                        className="text-sm font-medium flex items-center gap-2"
+                      >
+                        <MapPin className="h-4 w-4" />
+                        Location
+                      </Label>
+                      <Input
+                        id="location"
+                        placeholder="Your City, Country"
+                        value={formData.location || ""}
+                        onChange={handleInputChange}
+                        className="h-11"
+                      />
+                    </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
@@ -264,7 +327,8 @@ const SettingsPage = () => {
                       <Input
                         id="company"
                         placeholder="Your Company Name"
-                        className="h-11"
+                      value={formData.company || ""}
+                      onChange={handleInputChange}
                       />
                     </div>
                   </div>
@@ -277,10 +341,12 @@ const SettingsPage = () => {
                       id="bio"
                       className="flex min-h-[100px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
                       placeholder="Tell us about yourself and your business..."
+                      value={formData.bio || ""}
+                      onChange={handleInputChange}
                     />
                   </div>
 
-                  <Button className="flex items-center gap-2 h-11 px-6">
+                  <Button type="submit" className="flex items-center gap-2 h-11 px-6">
                     <Save className="h-4 w-4" />
                     Save Changes
                   </Button>

@@ -102,6 +102,11 @@ const navigation: SidebarItem[] = [
 
 const bottomNavigation: SidebarItem[] = [
   {
+    name: "My Profile",
+    href: "/profile",
+    icon: UserCircleIcon,
+  },
+  {
     name: "Settings",
     href: "/account/settings",
     icon: Cog6ToothIcon,
