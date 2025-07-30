@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Guard from "@/components/Guard";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import CreateJobForm from "@/components/jobs/CreateJobForm";
 import { jobService, Job, JobStats } from "@/services/jobService";
 
 const JobsPage = () => {
+  const router = useRouter();
   const [isCreatingJob, setIsCreatingJob] = useState(false);
   const [jobs, setJobs] = useState<Job[]>([]);
   const [jobStats, setJobStats] = useState<JobStats | null>(null);
@@ -184,8 +186,12 @@ const JobsPage = () => {
                     }
                   };
 
+                  const handleJobClick = () => {
+                    router.push(`/dashboard/jobs/${job.id}`);
+                  };
+
                   return (
-                    <div key={job.id} className="px-6 py-4 hover:bg-accent/50 cursor-pointer">
+                    <div key={job.id} className="px-6 py-4 hover:bg-accent/50 cursor-pointer" onClick={handleJobClick}>
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
                           <h4 className="text-sm font-medium text-foreground">{job.title}</h4>
