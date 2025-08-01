@@ -1,18 +1,13 @@
-import { prisma } from "../config/prisma";
-import { JobStatus } from "../generated/prisma";
-
-interface UpdateProfileData {
-  name?: string;
-  avatar?: string;
-  bio?: string;
-  company?: string;
-  website?: string;
-  location?: string;
-  phone?: string;
-}
+import { prisma } from "../../../config/prisma";
+import { Client, Job, JobStatus } from "../../../generated/prisma";
+import {
+  UpdateProfileData,
+  ClientStats,
+  ClientWithJobs
+} from "../interfaces/client.interfaces";
 
 export const ClientService = {
-  getClientByUserId: async (userId: string) => {
+  getClientByUserId: async (userId: string): Promise<Client> => {
     const user = await prisma.user.findUnique({
       where: { id: userId },
       include: { Client: true },
@@ -25,7 +20,7 @@ export const ClientService = {
     return user.Client;
   },
 
-  getClientJobs: async (userId: string) => {
+  getClientJobs: async (userId: string): Promise<Job[]> => {
     const user = await prisma.user.findUnique({
       where: { id: userId },
       include: { Client: true },
@@ -58,7 +53,7 @@ export const ClientService = {
   updateClientProfile: async (
     userId: string,
     updateData: UpdateProfileData
-  ) => {
+  ): Promise<Client> => {
     const user = await prisma.user.findUnique({
       where: { id: userId },
       include: { Client: true },
@@ -81,7 +76,7 @@ export const ClientService = {
     return updatedClient;
   },
 
-  getClientStats: async (userId: string) => {
+  getClientStats: async (userId: string): Promise<ClientStats> => {
     const user = await prisma.user.findUnique({
       where: { id: userId },
       include: { Client: true },

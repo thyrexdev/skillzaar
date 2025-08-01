@@ -1,18 +1,30 @@
 import { Request, Response } from "express";
 import { JobService } from "../services/job.service";
 import { z } from "zod";
+import {
+  CreateJobRequest,
+  CreateJobResponse,
+  ClientJobsResponse,
+  JobByIdResponse,
+  UpdateJobResponse,
+  DeleteJobResponse,
+  JobStatsResponse,
+  JobProposalsResponse,
+  UpdateJobStatusResponse,
+  JobErrorResponse,
+  ValidationErrorResponse
+} from "../interfaces/job.interfaces";
+import {
+  createJobSchema,
+  updateJobSchema,
+  updateJobStatusSchema,
+  jobFiltersSchema
+} from "../validators/job.validators";
 
-// Job validation schemas
-const createJobSchema = z.object({
-  title: z.string().min(5, "Title must be at least 5 characters long"),
-  description: z.string().min(20, "Description must be at least 20 characters long"),
-  budget: z.number().min(1, "Budget must be greater than 0"),
-  category: z.string().min(1, "Category is required"),
-});
-
-const updateJobSchema = createJobSchema.partial();
-
-export const createJob = async (req: Request, res: Response) => {
+export const createJob = async (
+  req: Request<{}, CreateJobResponse | ValidationErrorResponse | JobErrorResponse, CreateJobRequest>,
+  res: Response<CreateJobResponse | ValidationErrorResponse | JobErrorResponse>
+) => {
   try {
     // Validate request body
     const validatedData = createJobSchema.parse(req.body);
@@ -39,21 +51,20 @@ export const createJob = async (req: Request, res: Response) => {
   }
 };
 
-export const getClientJobs = async (req: Request, res: Response) => {
+export const getClientJobs = async (
+  req: Request,
+  res: Response<ClientJobsResponse | JobErrorResponse>
+) => {
   try {
     const userId = (req as any).user?.userId;
     if (!userId) {
       return res.status(401).json({ error: "User not authenticated" });
     }
 
-    const { page = 1, limit = 10, status, category } = req.query;
+    // Validate query parameters
+    const validatedFilters = jobFiltersSchema.parse(req.query);
     
-    const jobs = await JobService.getClientJobs(userId, {
-      page: Number(page),
-      limit: Number(limit),
-      status: status as string,
-      category: category as string,
-    });
+    const jobs = await JobService.getClientJobs(userId, validatedFilters);
     
     res.json(jobs);
   } catch (error: any) {
@@ -61,7 +72,10 @@ export const getClientJobs = async (req: Request, res: Response) => {
   }
 };
 
-export const getJobById = async (req: Request, res: Response) => {
+export const getJobById = async (
+  req: Request,
+  res: Response<JobByIdResponse | JobErrorResponse>
+) => {
   try {
     const { jobId } = req.params;
     const userId = (req as any).user?.userId;
@@ -76,7 +90,10 @@ export const getJobById = async (req: Request, res: Response) => {
   }
 };
 
-export const updateJob = async (req: Request, res: Response) => {
+export const updateJob = async (
+  req: Request,
+  res: Response<UpdateJobResponse | ValidationErrorResponse | JobErrorResponse>
+) => {
   try {
     const { jobId } = req.params;
     const userId = (req as any).user?.userId;
@@ -103,7 +120,10 @@ export const updateJob = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteJob = async (req: Request, res: Response) => {
+export const deleteJob = async (
+  req: Request,
+  res: Response<DeleteJobResponse | JobErrorResponse>
+) => {
   try {
     const { jobId } = req.params;
     const userId = (req as any).user?.userId;
@@ -118,7 +138,10 @@ export const deleteJob = async (req: Request, res: Response) => {
   }
 };
 
-export const getJobStats = async (req: Request, res: Response) => {
+export const getJobStats = async (
+  req: Request,
+  res: Response<JobStatsResponse | JobErrorResponse>
+) => {
   try {
     const userId = (req as any).user?.userId;
     if (!userId) {
@@ -132,7 +155,10 @@ export const getJobStats = async (req: Request, res: Response) => {
   }
 };
 
-export const getJobProposals = async (req: Request, res: Response) => {
+export const getJobProposals = async (
+  req: Request,
+  res: Response<JobProposalsResponse | JobErrorResponse>
+) => {
   try {
     const { jobId } = req.params;
     const userId = (req as any).user?.userId;
@@ -152,19 +178,17 @@ export const getJobProposals = async (req: Request, res: Response) => {
   }
 };
 
-export const updateJobStatus = async (req: Request, res: Response) => {
+export const updateJobStatus = async (
+  req: Request,
+  res: Response<UpdateJobStatusResponse | JobErrorResponse>
+) => {
   try {
     const { jobId } = req.params;
-    const { status } = req.body;
     const userId = (req as any).user?.userId;
-
-    // Validate status
-    const validStatuses = ['OPEN', 'IN_PROGRESS', 'COMPLETED', 'CANCELED'];
-    if (!validStatuses.includes(status)) {
-      return res.status(400).json({ 
-        error: "Invalid status. Must be one of: " + validStatuses.join(', ')
-      });
-    }
+    
+    // Validate request body
+    const validatedData = updateJobStatusSchema.parse(req.body);
+    const { status } = validatedData;
 
     const job = await JobService.updateJobStatus(jobId, userId, status);
     res.json({ 

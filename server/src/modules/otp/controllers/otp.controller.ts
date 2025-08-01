@@ -1,8 +1,18 @@
 import { Request, Response } from "express";
 import { OtpService } from "../services/otp.service";
-import { OtpEmailType } from "../utils/sendOtpEmail";
+import { OtpEmailType } from "../../../utils/sendOtpEmail";
+import {
+  RequestOtpRequest,
+  VerifyOtpRequest,
+  OtpResponse,
+  OtpVerifyResponse,
+  OtpErrorResponse
+} from "../interfaces/otp.interfaces";
 
-export const requestOtp = async (req: Request, res: Response) => {
+export const requestOtp = async (
+  req: Request<{}, OtpResponse | OtpErrorResponse, RequestOtpRequest>,
+  res: Response<OtpResponse | OtpErrorResponse>
+) => {
   const { email, type } = req.body;
 
   try {
@@ -13,7 +23,10 @@ export const requestOtp = async (req: Request, res: Response) => {
   }
 };
 
-export const verifyOtp = async (req: Request, res: Response) => {
+export const verifyOtp = async (
+  req: Request<{}, OtpVerifyResponse | OtpErrorResponse, VerifyOtpRequest>,
+  res: Response<OtpVerifyResponse | OtpErrorResponse>
+) => {
   const { email, otp, type } = req.body;
 
   try {

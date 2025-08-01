@@ -1,10 +1,14 @@
-import { prisma } from "../config/prisma";
-import { generateOtp } from "../utils/generateOtp";
-import { sendOtpEmail, OtpEmailType } from "../utils/sendOtpEmail";
-import { OTP_CONFIGS } from "../config/otpConfig";
+import { prisma } from "../../../config/prisma";
+import { generateOtp } from "../../../utils/generateOtp";
+import { sendOtpEmail, OtpEmailType } from "../../../utils/sendOtpEmail";
+import { OTP_CONFIGS } from "../../../config/otpConfig";
+import {
+  CreateAndSendOtpResult,
+  VerifyOtpResult
+} from "../interfaces/otp.interfaces";
 
 export const OtpService = {
-  async createAndSendOtp(email: string, otpType: OtpEmailType) {
+  async createAndSendOtp(email: string, otpType: OtpEmailType): Promise<CreateAndSendOtpResult> {
     const config = OTP_CONFIGS[otpType];
     const now = new Date();
     
@@ -61,7 +65,7 @@ export const OtpService = {
     };
   },
 
-  async verifyOtp(email: string, otp: string, otpType: OtpEmailType) {
+  async verifyOtp(email: string, otp: string, otpType: OtpEmailType): Promise<VerifyOtpResult> {
     const config = OTP_CONFIGS[otpType];
     const now = new Date();
 
@@ -129,7 +133,7 @@ export const OtpService = {
     };
   },
 
-  async cleanupExpiredOtps() {
+  async cleanupExpiredOtps(): Promise<void> {
     const now = new Date();
     await prisma.otp.updateMany({
       where: {

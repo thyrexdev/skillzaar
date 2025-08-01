@@ -1,34 +1,18 @@
-import { prisma } from "../config/prisma";
-import { JobStatus } from "../generated/prisma";
-
-interface CreateJobData {
-  title: string;
-  description: string;
-  budget: number;
-  category: string;
-}
-
-interface UpdateJobData {
-  title?: string;
-  description?: string;
-  budget?: number;
-  category?: string;
-}
-
-interface JobFilters {
-  page: number;
-  limit: number;
-  status?: string;
-  category?: string;
-}
-
-interface ProposalFilters {
-  page: number;
-  limit: number;
-}
+import { prisma } from "../../../config/prisma";
+import { Job, JobStatus, Proposal } from "../../../generated/prisma";
+import {
+  CreateJobRequest,
+  UpdateJobRequest,
+  GetClientJobsFilters,
+  GetJobProposalsFilters,
+  JobStats,
+  ClientJobsResponse,
+  JobProposalsResponse,
+  DeleteJobResponse
+} from "../interfaces/job.interfaces";
 
 export const JobService = {
-  createJob: async (userId: string, jobData: CreateJobData) => {
+  createJob: async (userId: string, jobData: CreateJobRequest): Promise<Job> => {
     // First, verify that the user is a client
     const user = await prisma.user.findUnique({
       where: { id: userId },
@@ -80,7 +64,7 @@ export const JobService = {
     return job;
   },
 
-  getClientJobs: async (userId: string, filters: JobFilters) => {
+  getClientJobs: async (userId: string, filters: GetClientJobsFilters): Promise<ClientJobsResponse> => {
     // Verify user is a client
     const user = await prisma.user.findUnique({
       where: { id: userId },
@@ -100,7 +84,7 @@ export const JobService = {
     };
 
     if (status) {
-      where.status = status as JobStatus;
+      where.status = status;
     }
 
     if (category) {
@@ -152,7 +136,7 @@ export const JobService = {
     };
   },
 
-  getJobById: async (jobId: string, userId: string) => {
+  getJobById: async (jobId: string, userId: string): Promise<Job> => {
     // Verify user is a client
     const user = await prisma.user.findUnique({
       where: { id: userId },
@@ -214,7 +198,7 @@ export const JobService = {
     return job;
   },
 
-  updateJob: async (jobId: string, userId: string, updateData: UpdateJobData) => {
+  updateJob: async (jobId: string, userId: string, updateData: UpdateJobRequest): Promise<Job> => {
     // Verify user is a client and owns the job
     const user = await prisma.user.findUnique({
       where: { id: userId },
@@ -268,7 +252,7 @@ export const JobService = {
     return job;
   },
 
-  deleteJob: async (jobId: string, userId: string) => {
+  deleteJob: async (jobId: string, userId: string): Promise<DeleteJobResponse> => {
     // Verify user is a client and owns the job
     const user = await prisma.user.findUnique({
       where: { id: userId },
@@ -311,7 +295,7 @@ export const JobService = {
     return { message: "Job deleted successfully" };
   },
 
-  getJobStats: async (userId: string) => {
+  getJobStats: async (userId: string): Promise<JobStats> => {
     // Verify user is a client
     const user = await prisma.user.findUnique({
       where: { id: userId },
@@ -381,7 +365,7 @@ export const JobService = {
     };
   },
 
-  getJobProposals: async (jobId: string, userId: string, filters: ProposalFilters) => {
+  getJobProposals: async (jobId: string, userId: string, filters: GetJobProposalsFilters): Promise<JobProposalsResponse> => {
     // Verify user is a client and owns the job
     const user = await prisma.user.findUnique({
       where: { id: userId },
@@ -450,7 +434,7 @@ export const JobService = {
     };
   },
 
-  updateJobStatus: async (jobId: string, userId: string, status: string) => {
+  updateJobStatus: async (jobId: string, userId: string, status: string): Promise<Job> => {
     // Verify user is a client and owns the job
     const user = await prisma.user.findUnique({
       where: { id: userId },

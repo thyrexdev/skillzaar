@@ -1,10 +1,17 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { prisma } from "../config/prisma"; 
-import { JWT_SECRET } from "../config/env";
+import { prisma } from "../../../config/prisma"; 
+import { JWT_SECRET } from "../../../config/env";
+import { 
+  RegisterRequest, 
+  LoginRequest, 
+  AuthServiceRegisterResult, 
+  AuthServiceLoginResult,
+  JWTPayload 
+} from "../interfaces/auth.interfaces";
 
 export const AuthService = {
-  register: async ({ name, email, password, role }: any) => {
+register: async ({ name, email, password, role }: RegisterRequest): Promise<AuthServiceRegisterResult> => {
     const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) throw new Error("User already exists");
 
@@ -41,6 +48,7 @@ export const AuthService = {
         await tx.freelancer.create({
           data: {
             userId: user.id,
+            fullName: user.name,
             experienceLevel: 'BEGINNER', // Default value, can be updated later
             hourlyRate: null,
             bio: null,
@@ -62,7 +70,7 @@ export const AuthService = {
     return { user: userWithoutPassword, token };
   },
 
-  login: async ({ email, password }: any) => {
+login: async ({ email, password }: LoginRequest): Promise<AuthServiceLoginResult> => {
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) throw new Error("User not found");
 

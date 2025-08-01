@@ -1,19 +1,22 @@
 import { Request, Response } from "express";
 import { ClientService } from "../services/client.service";
 import { z } from "zod";
-import { prisma } from "../config/prisma";
+import { prisma } from "../../../config/prisma";
+import {
+  UpdateClientProfileRequest,
+  ClientProfileResponse,
+  ClientJobsResponse,
+  ClientStatsResponse,
+  UpdateClientProfileResponse,
+  ClientErrorResponse,
+  ValidationErrorResponse
+} from "../interfaces/client.interfaces";
+import { updateProfileSchema } from "../validators/client.validators";
 
-const updateProfileSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters long").optional(),
-  avatar: z.string().url("Invalid URL format").nullable().optional(),
-  bio: z.string().max(500, "Bio must be less than 500 characters").nullable().optional(),
-  company: z.string().nullable().optional(),
-  website: z.string().url("Invalid URL format").nullable().optional(),
-  location: z.string().nullable().optional(),
-  phone: z.string().nullable().optional(),
-});
-
-export const getClientProfile = async (req: Request, res: Response) => {
+export const getClientProfile = async (
+  req: Request,
+  res: Response<ClientProfileResponse | ClientErrorResponse>
+) => {
   try {
     const { userId } = req.params;
     
@@ -27,7 +30,10 @@ export const getClientProfile = async (req: Request, res: Response) => {
   }
 };
 
-export const getClientJobs = async (req: Request, res: Response) => {
+export const getClientJobs = async (
+  req: Request,
+  res: Response<ClientJobsResponse | ClientErrorResponse>
+) => {
   try {
     const { userId } = req.params;
     
@@ -41,7 +47,10 @@ export const getClientJobs = async (req: Request, res: Response) => {
   }
 };
 
-export const updateClientProfile = async (req: Request, res: Response) => {
+export const updateClientProfile = async (
+  req: Request<{ userId: string }, UpdateClientProfileResponse | ValidationErrorResponse | ClientErrorResponse, UpdateClientProfileRequest>,
+  res: Response<UpdateClientProfileResponse | ValidationErrorResponse | ClientErrorResponse>
+) => {
   try {
     const { userId } = req.params;
 
@@ -74,7 +83,10 @@ export const updateClientProfile = async (req: Request, res: Response) => {
   }
 };
 
-export const getClientStats = async (req: Request, res: Response) => {
+export const getClientStats = async (
+  req: Request,
+  res: Response<ClientStatsResponse | ClientErrorResponse>
+) => {
   try {
     const { userId } = req.params;
     

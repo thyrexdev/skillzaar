@@ -9,7 +9,7 @@ import {
   getJobProposals,
   updateJobStatus,
 } from "../controllers/job.controller";
-import { protect } from "../middlewares/auth.middleware";
+import { protect } from "../../../middlewares/auth.middleware";
 
 const router = Router();
 

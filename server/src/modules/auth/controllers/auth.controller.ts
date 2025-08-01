@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { AuthService } from "../services/auth.service";
-import { OtpService } from "../services/otp.service";
-import { OtpEmailType } from "../utils/sendOtpEmail";
-import { prisma } from "../config/prisma";
+import { OtpService } from "../../otp/services/otp.service";
+import { OtpEmailType } from "../../../utils/sendOtpEmail";
+import { prisma } from "../../../config/prisma";
 import bcrypt from "bcryptjs";
 
 export const register = async (req: Request, res: Response) => {

@@ -5,7 +5,7 @@ import {
   getClientStats,
   getClientJobs,
 } from "../controllers/client.controller";
-import { protect } from "../middlewares/auth.middleware";
+import { protect } from "../../../middlewares/auth.middleware";
 
 const router = Router();
 

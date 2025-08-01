@@ -1,8 +1,9 @@
 import { Router } from "express";
-import authRoutes from "./auth.routes";
-import otpRoutes from "./otp.routes";
-import jobRoutes from "./job.routes";
-import clientRoutes from "./client.routes";
+// Import routes from module indexes for cleaner, centralized imports
+import { authRoutes } from "../modules/auth";
+import { otpRoutes } from "../modules/otp";
+import { jobRoutes } from "../modules/job";
+import { clientRoutes } from "../modules/client";
 
 const router = Router();
 
