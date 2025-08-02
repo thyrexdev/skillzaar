@@ -147,6 +147,14 @@ model Proposal {
   createdAt    DateTime   @default(now())
   freelancer   Freelancer @relation(fields: [freelancerId], references: [id])
   job          Job        @relation(fields: [jobId], references: [id])
+  status       ProposalStatus @default(PENDING)
+}
+
+enum ProposalStatus {
+  PENDING
+  INTERVIEWING
+  ACCEPTED
+  DECLINED
 }
 
 model Review {
