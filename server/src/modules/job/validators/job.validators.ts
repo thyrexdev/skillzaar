@@ -28,3 +28,20 @@ export const jobFiltersSchema = z.object({
   category: z.string().optional(),
 }).refine(data => data.page > 0, { message: "Page must be greater than 0", path: ["page"] })
   .refine(data => data.limit > 0 && data.limit <= 100, { message: "Limit must be between 1 and 100", path: ["limit"] });
+
+export const browseJobsFiltersSchema = z.object({
+  page: z.string().optional().transform(val => val ? parseInt(val) : 1),
+  limit: z.string().optional().transform(val => val ? parseInt(val) : 10),
+  category: z.string().optional(),
+  minBudget: z.string().optional().transform(val => val ? parseFloat(val) : undefined),
+  maxBudget: z.string().optional().transform(val => val ? parseFloat(val) : undefined),
+  status: z.nativeEnum(JobStatus).optional(),
+  search: z.string().optional(),
+}).refine(data => data.page > 0, { message: "Page must be greater than 0", path: ["page"] })
+  .refine(data => data.limit > 0 && data.limit <= 100, { message: "Limit must be between 1 and 100", path: ["limit"] })
+  .refine(data => !data.minBudget || data.minBudget >= 0, { message: "Minimum budget must be non-negative", path: ["minBudget"] })
+  .refine(data => !data.maxBudget || data.maxBudget >= 0, { message: "Maximum budget must be non-negative", path: ["maxBudget"] })
+  .refine(data => !data.minBudget || !data.maxBudget || data.minBudget <= data.maxBudget, { 
+    message: "Minimum budget must be less than or equal to maximum budget", 
+    path: ["minBudget"] 
+  });

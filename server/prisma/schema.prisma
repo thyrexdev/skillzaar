@@ -69,6 +69,13 @@ model Job {
   contract    Contract?
   client      Client     @relation(fields: [clientId], references: [id])
   proposals   Proposal[]
+
+  // Indexes for browse jobs performance
+  @@index([status, createdAt(sort: Desc)])
+  @@index([category, status])
+  @@index([budget, status])
+  @@index([status, budget, createdAt(sort: Desc)])
+  @@index([category, budget, status])
 }
 
 model Contract {

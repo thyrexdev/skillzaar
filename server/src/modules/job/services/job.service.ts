@@ -8,7 +8,10 @@ import {
   JobStats,
   ClientJobsResponse,
   JobProposalsResponse,
-  DeleteJobResponse
+  DeleteJobResponse,
+  BrowseJobsFilters,
+  BrowseJobsResponse,
+  JobMarketStats
 } from "../interfaces/job.interfaces";
 
 export const JobService = {
@@ -481,5 +484,237 @@ export const JobService = {
     });
 
     return job;
+  },
+
+  // Browse all jobs (for freelancers and general browsing)
+  browseJobs: async (filters: BrowseJobsFilters): Promise<BrowseJobsResponse> => {
+    const { page, limit, category, minBudget, maxBudget, status, search } = filters;
+    const skip = (page - 1) * limit;
+
+    // Build where clause
+    const where: any = {};
+
+    // Filter by status (default to OPEN jobs)
+    where.status = status || JobStatus.OPEN;
+
+    // Filter by category
+    if (category) {
+      where.category = {
+        contains: category,
+        mode: 'insensitive'
+      };
+    }
+
+    // Filter by budget range
+    if (minBudget || maxBudget) {
+      where.budget = {};
+      if (minBudget) {
+        where.budget.gte = minBudget;
+      }
+      if (maxBudget) {
+        where.budget.lte = maxBudget;
+      }
+    }
+
+    // Search in title and description
+    if (search) {
+      where.OR = [
+        {
+          title: {
+            contains: search,
+            mode: 'insensitive'
+          }
+        },
+        {
+          description: {
+            contains: search,
+            mode: 'insensitive'
+          }
+        }
+      ];
+    }
+
+    // Get jobs with pagination
+    const [jobs, total] = await Promise.all([
+      prisma.job.findMany({
+        where,
+        skip,
+        take: limit,
+        orderBy: {
+          createdAt: 'desc'
+        },
+        include: {
+          client: {
+            select: {
+              id: true,
+              fullName: true,
+              companyName: true,
+              user: {
+                select: {
+                  id: true,
+                  name: true,
+                  email: true,
+                }
+              }
+            }
+          },
+          _count: {
+            select: {
+              proposals: true
+            }
+          }
+        }
+      }),
+      prisma.job.count({ where })
+    ]);
+
+    return {
+      jobs,
+      pagination: {
+        page,
+        limit,
+        total,
+        pages: Math.ceil(total / limit)
+      }
+    };
+  },
+
+  // Get job market statistics
+  getJobMarketStats: async (): Promise<JobMarketStats> => {
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+    const [
+      totalOpenJobs,
+      totalJobsThisWeek,
+      averageBudgetData,
+      topCategoriesData
+    ] = await Promise.all([
+      // Total open jobs
+      prisma.job.count({
+        where: { status: JobStatus.OPEN }
+      }),
+      // Jobs posted this week
+      prisma.job.count({
+        where: {
+          createdAt: {
+            gte: oneWeekAgo
+          }
+        }
+      }),
+      // Average budget of open jobs
+      prisma.job.aggregate({
+        where: { status: JobStatus.OPEN },
+        _avg: {
+          budget: true
+        }
+      }),
+      // Top categories by job count
+      prisma.job.groupBy({
+        by: ['category'],
+        where: { status: JobStatus.OPEN },
+        _count: {
+          category: true
+        },
+        orderBy: {
+          _count: {
+            category: 'desc'
+          }
+        },
+        take: 5
+      })
+    ]);
+
+    const topCategories = topCategoriesData.map(item => ({
+      category: item.category,
+      count: item._count.category
+    }));
+
+    return {
+      totalOpenJobs,
+      totalJobsThisWeek,
+      averageBudget: averageBudgetData._avg.budget || 0,
+      topCategories
+    };
+  },
+
+  // Get a single job by ID (public - for freelancers)
+  getJobByIdPublic: async (jobId: string): Promise<Job> => {
+    const job = await prisma.job.findUnique({
+      where: { id: jobId },
+      include: {
+        client: {
+          select: {
+            id: true,
+            fullName: true,
+            companyName: true,
+            user: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+              }
+            }
+          }
+        },
+        _count: {
+          select: {
+            proposals: true
+          }
+        }
+      }
+    });
+
+    if (!job) {
+      throw new Error("Job not found");
+    }
+
+    // Only return open jobs for public access
+    if (job.status !== JobStatus.OPEN) {
+      throw new Error("Job is not available");
+    }
+
+    return job;
+  },
+
+  // Get featured jobs (most recent or with most proposals)
+  getFeaturedJobs: async (limit: number = 6): Promise<Job[]> => {
+    const jobs = await prisma.job.findMany({
+      where: { status: JobStatus.OPEN },
+      take: limit,
+      orderBy: [
+        {
+          proposals: {
+            _count: 'desc'
+          }
+        },
+        {
+          createdAt: 'desc'
+        }
+      ],
+      include: {
+        client: {
+          select: {
+            id: true,
+            fullName: true,
+            companyName: true,
+            user: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+              }
+            }
+          }
+        },
+        _count: {
+          select: {
+            proposals: true
+          }
+        }
+      }
+    });
+
+    return jobs;
   }
 };

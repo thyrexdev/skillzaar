@@ -12,13 +12,16 @@ import {
   JobProposalsResponse,
   UpdateJobStatusResponse,
   JobErrorResponse,
-  ValidationErrorResponse
+  ValidationErrorResponse,
+  BrowseJobsResponse,
+  JobMarketStatsResponse
 } from "../interfaces/job.interfaces";
 import {
   createJobSchema,
   updateJobSchema,
   updateJobStatusSchema,
-  jobFiltersSchema
+  jobFiltersSchema,
+  browseJobsFiltersSchema
 } from "../validators/job.validators";
 
 export const createJob = async (
@@ -199,6 +202,73 @@ export const updateJobStatus = async (
     if (error.message === "Job not found") {
       return res.status(404).json({ error: error.message });
     }
+    res.status(400).json({ error: error.message });
+  }
+};
+
+export const browseJobs = async (
+  req: Request,
+  res: Response<BrowseJobsResponse | JobErrorResponse>
+) => {
+  try {
+    // Validate query parameters
+    const filters = browseJobsFiltersSchema.parse(req.query);
+
+    const jobs = await JobService.browseJobs(filters);
+    res.json(jobs);
+  } catch (error: any) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({ 
+        error: "Validation failed",
+        details: error.errors 
+      });
+    }
+    res.status(400).json({ error: error.message });
+  }
+};
+
+export const getJobMarketStats = async (
+  req: Request,
+  res: Response<JobMarketStatsResponse | JobErrorResponse>
+) => {
+  try {
+    const stats = await JobService.getJobMarketStats();
+    res.json({ stats });
+  } catch (error: any) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+// Public method to get a job by ID (for freelancers)
+export const getJobByIdPublic = async (
+  req: Request,
+  res: Response<JobByIdResponse | JobErrorResponse>
+) => {
+  try {
+    const { jobId } = req.params;
+
+    const job = await JobService.getJobByIdPublic(jobId);
+    res.json({ job });
+  } catch (error: any) {
+    if (error.message === "Job not found" || error.message === "Job is not available") {
+      return res.status(404).json({ error: error.message });
+    }
+    res.status(400).json({ error: error.message });
+  }
+};
+
+// Get featured jobs
+export const getFeaturedJobs = async (
+  req: Request,
+  res: Response<{ jobs: any[] } | JobErrorResponse>
+) => {
+  try {
+    const { limit } = req.query;
+    const limitNumber = limit ? parseInt(limit as string) : 6;
+
+    const jobs = await JobService.getFeaturedJobs(limitNumber);
+    res.json({ jobs });
+  } catch (error: any) {
     res.status(400).json({ error: error.message });
   }
 };

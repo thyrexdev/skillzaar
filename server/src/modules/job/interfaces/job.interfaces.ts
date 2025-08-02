@@ -104,6 +104,52 @@ export interface ProposalWithFreelancer extends Proposal {
   };
 }
 
+// Browse jobs interfaces (for freelancers)
+export interface BrowseJobsFilters {
+  page: number;
+  limit: number;
+  category?: string;
+  minBudget?: number;
+  maxBudget?: number;
+  status?: JobStatus;
+  search?: string;
+}
+
+export interface BrowseJobsResponse {
+  jobs: JobWithClient[];
+  pagination: PaginationInfo;
+}
+
+export interface JobWithClient extends Job {
+  client: {
+    id: string;
+    fullName: string;
+    companyName?: string | null;
+    user: {
+      id: string;
+      name: string;
+      email: string;
+    };
+  };
+  _count: {
+    proposals: number;
+  };
+}
+
+export interface JobMarketStatsResponse {
+  stats: JobMarketStats;
+}
+
+export interface JobMarketStats {
+  totalOpenJobs: number;
+  totalJobsThisWeek: number;
+  averageBudget: number;
+  topCategories: Array<{
+    category: string;
+    count: number;
+  }>;
+}
+
 // Error response interface
 export interface JobErrorResponse {
   error: string;
