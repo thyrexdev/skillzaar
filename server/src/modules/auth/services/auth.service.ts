@@ -49,7 +49,7 @@ register: async ({ name, email, password, role }: RegisterRequest): Promise<Auth
           data: {
             userId: user.id,
             fullName: user.name,
-            experienceLevel: 'BEGINNER', // Default value, can be updated later
+            experienceLevel: 'JUNIOR', // Default value, can be updated later
             hourlyRate: null,
             bio: null,
           },

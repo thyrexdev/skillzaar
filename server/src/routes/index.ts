@@ -4,6 +4,7 @@ import { authRoutes } from "../modules/auth";
 import { otpRoutes } from "../modules/otp";
 import { jobRoutes } from "../modules/job";
 import { clientRoutes } from "../modules/client";
+import { freelancerRoutes } from "../modules/freelancer";
 
 const router = Router();
 
@@ -22,5 +23,8 @@ router.use(jobRoutes);
 
 // Add client routes
 router.use("/client", clientRoutes);
+
+// Add freelancer routes
+router.use("/freelancer", freelancerRoutes);
 
 export default router;

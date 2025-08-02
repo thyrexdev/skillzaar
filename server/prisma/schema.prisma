@@ -102,6 +102,10 @@ model Freelancer {
   hourlyRate      Float?
   experienceLevel ExperienceLevel
   bio             String?
+  profilePicture  String?
+  isAvailable     Boolean         @default(true)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
   contracts       Contract[]
   user            User            @relation(fields: [userId], references: [id])
   portfolioLinks  PortfolioLink[]
@@ -118,9 +122,12 @@ model Skill {
 
 model PortfolioLink {
   id           String     @id @default(uuid())
-  freelancerId String
-  url          String
+  title        String
   description  String?
+  imageUrls    String[]
+  githubUrl    String?
+  liveUrl      String?
+  freelancerId String
   freelancer   Freelancer @relation(fields: [freelancerId], references: [id])
 }
 
@@ -181,7 +188,7 @@ enum ContractStatus {
 }
 
 enum ExperienceLevel {
-  BEGINNER
-  INTERMEDIATE
-  EXPERT
+  JUNIOR
+  MID
+  SENIOR
 }
