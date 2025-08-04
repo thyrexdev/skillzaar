@@ -24,13 +24,18 @@ model User {
 }
 
 model Message {
-  id                            String   @id @default(uuid())
+  id                            String    @id @default(uuid())
   senderId                      String
   receiverId                    String
   content                       String
-  timestamp                     DateTime @default(now())
-  User_Message_receiverIdToUser User     @relation("Message_receiverIdToUser", fields: [receiverId], references: [id])
-  User_Message_senderIdToUser   User     @relation("Message_senderIdToUser", fields: [senderId], references: [id])
+  timestamp                     DateTime  @default(now())
+  readAt                        DateTime? // Read receipt timestamp
+  User_Message_receiverIdToUser User      @relation("Message_receiverIdToUser", fields: [receiverId], references: [id])
+  User_Message_senderIdToUser   User      @relation("Message_senderIdToUser", fields: [senderId], references: [id])
+
+  // Index for efficient read receipt queries
+  @@index([receiverId, readAt])
+  @@index([senderId, timestamp])
 }
 
 model Client {

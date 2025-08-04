@@ -1,11 +1,19 @@
 import { jwtVerify } from "jose";
 import type { ServerWebSocket } from "bun";
-import { saveMessage } from "./src/services/message.service";
-
-type WSData = { userId: string };
+import {
+  handleChatMessage,
+  handleTypingMessage,
+  handleReadReceipt,
+  handleUserDisconnect,
+  setClientsMap,
+} from "./src/handlers/messageHandlers";
+import type { WSData, IncomingMessage } from "./src/types/message.types";
 
 const clients = new Map<string, ServerWebSocket<WSData>>();
 const jwtSecret = new TextEncoder().encode(process.env.JWT_SECRET);
+
+// Initialize handlers with clients map
+setClientsMap(clients);
 
 const server = Bun.serve<WSData, {}>({
   port: 3000,
@@ -54,7 +62,7 @@ const server = Bun.serve<WSData, {}>({
     message: async (ws, raw) => {
       const senderId = ws.data.userId;
 
-      let data;
+      let data: IncomingMessage;
       try {
         data = JSON.parse(raw.toString());
       } catch {
@@ -62,37 +70,45 @@ const server = Bun.serve<WSData, {}>({
         return;
       }
 
-      const { recipientId, message } = data;
+      // Handle different message types
+      const messageType = data.type || "chat"; // Default to chat for backward compatibility
 
-      if (!recipientId || !message) {
-        console.warn(`[WARN] Missing recipientId or message from ${senderId}`);
-        return;
-      }
-
-      console.log(`[MESSAGE] ${senderId} → ${recipientId}: ${message}`);
-
-      // 👇 إضافة مهمة هنا
       try {
-        await saveMessage({ senderId, recipientId, content: message });
-        console.log("✅ Message saved to DB");
-      } catch (err) {
-        console.error("[DB ERROR]", err);
-      }
+        switch (messageType) {
+          case "chat":
+            await handleChatMessage(ws, data as any);
+            break;
 
-      const recipient = clients.get(recipientId);
-      if (recipient && recipient.readyState === WebSocket.OPEN) {
-        recipient.send(
-          JSON.stringify({
-            from: senderId,
-            message,
-          })
-        );
+          case "typing_start":
+          case "typing_stop":
+            handleTypingMessage(ws, data as any);
+            break;
+
+          case "mark_read":
+            await handleReadReceipt(ws, data as any);
+            break;
+
+          default:
+            // Handle legacy format (backward compatibility)
+            if (data.recipientId && (data as any).message) {
+              await handleChatMessage(ws, {
+                type: "chat",
+                recipientId: data.recipientId,
+                message: (data as any).message,
+              });
+            } else {
+              console.warn(`[WARN] Unknown message type: ${messageType} from ${senderId}`);
+            }
+        }
+      } catch (error) {
+        console.error(`[MESSAGE_HANDLER_ERROR] ${messageType}:`, error);
       }
     },
 
     close(ws) {
       const { userId } = ws.data;
       clients.delete(userId);
+      handleUserDisconnect(userId);
       console.log(`[CLOSE] ${userId} disconnected`);
     },
   },

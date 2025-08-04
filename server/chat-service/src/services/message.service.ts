@@ -20,3 +20,27 @@ export const saveMessage = async ({
     },
   });
 };
+
+/**
+ * Get messages between two users with pagination
+ */
+export const getMessagesBetweenUsers = async (
+  userId1: string,
+  userId2: string,
+  limit: number = 50,
+  offset: number = 0
+): Promise<Message[]> => {
+  return await prisma.message.findMany({
+    where: {
+      OR: [
+        { senderId: userId1, receiverId: userId2 },
+        { senderId: userId2, receiverId: userId1 },
+      ],
+    },
+    orderBy: {
+      timestamp: "desc",
+    },
+    take: limit,
+    skip: offset,
+  });
+};
