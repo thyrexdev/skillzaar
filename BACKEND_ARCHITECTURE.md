@@ -125,13 +125,19 @@ module/
 ### Project Structure
 ```
 chat-service/
-├── index.ts                    # Main WebSocket server
+├── index.ts                       # Main WebSocket server with enhanced message routing
 ├── src/
-│   ├── db.ts                  # Prisma client configuration
-│   └── services/
-│       └── message.service.ts  # Message persistence service
+│   ├── db.ts                     # Prisma client configuration
+│   ├── handlers/
+│   │   └── messageHandlers.ts    # Message type handlers (chat, typing, read receipts)
+│   ├── services/
+│   │   ├── message.service.ts    # Message persistence service
+│   │   ├── readReceipt.service.ts # Read receipt operations
+│   │   └── conversation.service.ts # Conversation management service
+│   └── types/
+│       └── message.types.ts      # TypeScript definitions for all message types
 ├── prisma/
-│   └── schema.prisma          # Chat-specific database schema
+│   └── schema.prisma            # Enhanced schema with conversations and readAt field
 └── package.json
 ```
 
@@ -159,13 +165,177 @@ chat-service/
 
 ### Database Schema (Chat-Specific)
 ```sql
+model Conversation {
+  id            String    @id @default(uuid())
+  user1Id       String    // First participant (always smaller user ID)
+  user2Id       String    // Second participant (always larger user ID)
+  lastMessageId String?   @unique // Reference to last message
+  lastActivity  DateTime  @default(now())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Relations and indexes for efficient queries
+  @@unique([user1Id, user2Id])
+  @@index([user1Id, lastActivity])
+  @@index([user2Id, lastActivity])
+}
+
 model Message {
-  id         String   @id @default(uuid())
+  id             String       @id @default(uuid())
+  conversationId String       // Belongs to a conversation
+  senderId       String
+  receiverId     String
+  content        String
+  timestamp      DateTime     @default(now())
+  readAt         DateTime?    // Read receipt timestamp
+  
+  // Relations and indexes
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  @@index([conversationId, timestamp])
+  @@index([receiverId, readAt])
+  @@index([senderId, timestamp])
+}
+```
+
+### Enhanced Message Protocol
+
+#### Message Types
+The chat service supports multiple message types for different functionalities:
+
+```typescript
+// Chat message (default)
+{
+  "type": "chat",
+  "recipientId": "user_id",
+  "message": "Hello world"
+}
+
+// Typing indicators
+{
+  "type": "typing_start",
+  "recipientId": "user_id"
+}
+
+{
+  "type": "typing_stop", 
+  "recipientId": "user_id"
+}
+
+// Read receipts
+{
+  "type": "mark_read",
+  "messageIds": ["msg1", "msg2"]
+}
+```
+
+#### Server Responses
+```typescript
+// Typing status broadcast
+{
+  "type": "user_typing",
+  "from": "sender_id",
+  "isTyping": true/false
+}
+
+// Read receipt confirmation
+{
+  "type": "messages_read",
+  "messageIds": ["msg1", "msg2"],
+  "readBy": "reader_id",
+  "readAt": "2025-01-01T12:00:00Z"
+}
+
+// Enhanced chat message
+{
+  "from": "sender_id",
+  "message": "Hello",
+  "messageId": "unique_id",
+  "timestamp": "2025-01-01T12:00:00Z"
+}
+```
+
+### Typing Status Features
+- **Real-time indicators**: Instant typing notifications between users
+- **Auto-timeout**: Typing status automatically clears after 5 seconds
+- **State management**: Server tracks typing state per user-recipient pair
+- **Cleanup on disconnect**: Proper cleanup when users disconnect
+- **Multiple conversations**: Supports typing in multiple conversations simultaneously
+
+#### Typing Status Implementation Details
+```typescript
+// Server maintains global typing state
+const typingUsers: Map<string, Set<string>> = new Map(); // recipientId -> Set of typing userIds
+const typingTimeouts: Map<string, NodeJS.Timeout> = new Map(); // userId-recipientId -> timeout
+
+// Auto-timeout mechanism (5 seconds)
+const timeout = setTimeout(() => {
+  handleTypingStop(senderId, recipientId);
+}, 5000);
+
+// Cleanup on user disconnect
+export const handleUserDisconnect = (userId: string) => {
+  // Clear all typing timeouts and states for disconnected user
+  // Send typing_stop notifications to all recipients
+};
+```
+
+### Read Receipts Features
+- **Database persistence**: Read status stored with timestamp
+- **Batch operations**: Multiple messages can be marked read in single request
+- **Sender notifications**: Senders receive confirmation when messages are read
+- **Offline compatibility**: Read receipts work across sessions
+- **Efficient queries**: Optimized database indexes for read receipt operations
+
+#### Read Receipts Implementation Details
+```typescript
+// Database schema enhancement
+model Message {
+  id         String    @id @default(uuid())
   senderId   String
   receiverId String
   content    String
-  timestamp  DateTime @default(now())
-  -- Relations to User model for sender and receiver
+  timestamp  DateTime  @default(now())
+  readAt     DateTime? // Added for read receipts
+  
+  // Optimized indexes for read receipt queries
+  @@index([receiverId, readAt])
+  @@index([senderId, timestamp])
+}
+
+// Batch read receipt service
+export const markMessagesAsRead = async ({
+  messageIds,
+  readerId,
+}: ReadReceiptInput): Promise<ReadReceiptResult> => {
+  // Update multiple messages atomically
+  // Group by sender for efficient notifications
+  // Return grouped results for sender notification
+};
+
+// Service functions available:
+- markMessagesAsRead(messageIds, readerId)
+- getUnreadMessageCount(userId)
+- getUnreadMessagesBetweenUsers(userId, otherUserId)
+```
+
+#### Enhanced Message Routing
+The WebSocket server now uses type-based message routing:
+```typescript
+// Main message handler with type routing
+switch (messageType) {
+  case "chat":
+    await handleChatMessage(ws, data);
+    break;
+  case "typing_start":
+  case "typing_stop":
+    handleTypingMessage(ws, data);
+    break;
+  case "mark_read":
+    await handleReadReceipt(ws, data);
+    break;
+  default:
+    // Backward compatibility for legacy format
+    handleLegacyMessage(ws, data);
 }
 ```
 
@@ -218,6 +388,55 @@ bun run index.ts   # Start WebSocket server
 - Online user tracking
 - Direct message delivery
 - Connection state management
+- **Typing indicators** with auto-timeout (5 seconds)
+- **Read receipts** with database persistence
+- Type-based message routing (chat, typing, read receipts)
+- Backward compatibility for legacy message format
+- **Detailed Typing Status Mechanics:**
+  - Real-time updates with start and stop notifications.
+  - Managed by server with per-user timeouts and cleanup on disconnect.
+
+- **Read Receipts Handling:**
+  - Efficient database updates with `readAt` timestamp.
+  - Batch operations and notifications for senders, ensuring information persistence across sessions.
+  - Enhanced query indexes for performance and rapid lookup.
+
+### Conversation System Features
+- **WhatsApp-like Structure**: Messages are organized in conversations between two users
+- **Automatic Creation**: Conversations are created automatically when first message is sent
+- **Consistent Ordering**: User IDs are consistently ordered (smaller ID as user1) for uniqueness
+- **Metadata Tracking**: Last message, last activity timestamp, and conversation history
+- **Real-time Updates**: Conversation metadata updates in real-time with new messages
+
+#### Conversation Implementation Details
+```typescript
+// Conversation service functions
+export const findOrCreateConversation = async (
+  user1Id: string,
+  user2Id: string
+): Promise<Conversation> => {
+  // Ensure consistent ordering for uniqueness
+  const [smallerId, largerId] = [user1Id, user2Id].sort();
+  
+  // Find existing or create new conversation
+  // Update lastActivity when messages are sent
+};
+
+// Available conversation operations:
+- findOrCreateConversation(user1Id, user2Id)
+- updateConversationActivity(conversationId, lastMessageId)
+- getUserConversations(userId, limit, offset)
+- getConversationMessages(conversationId, userId, limit, offset)
+- getConversationById(conversationId, userId)
+```
+
+#### Conversation Features
+- **Chat History**: Complete message history grouped by conversation
+- **Unread Counts**: Track unread messages per conversation
+- **Last Message Preview**: Display last message in conversation list
+- **User Authorization**: Only conversation participants can access messages
+- **Efficient Pagination**: Optimized queries for conversation and message lists
+- **Cascade Deletion**: Messages are deleted when conversation is deleted
 
 ## Scalability Considerations
 

@@ -1,5 +1,6 @@
 import { prisma } from "../db"; 
 import type { Message } from "../../generated/prisma/";
+import { findOrCreateConversation, updateConversationActivity } from "./conversation.service";
 
 type SaveMessageInput = {
   senderId: string;
@@ -12,13 +13,29 @@ export const saveMessage = async ({
   recipientId,
   content,
 }: SaveMessageInput): Promise<Message> => {
-  return await prisma.message.create({
-    data: {
-      senderId,
-      receiverId: recipientId,
-      content,
-    },
-  });
+  try {
+    // Find or create conversation between users
+    const conversation = await findOrCreateConversation(senderId, recipientId);
+    
+    // Create message within the conversation
+    const message = await prisma.message.create({
+      data: {
+        conversationId: conversation.id,
+        senderId,
+        receiverId: recipientId,
+        content,
+      },
+    });
+    
+    // Update conversation's last activity and last message
+    await updateConversationActivity(conversation.id, message.id);
+    
+    console.log(`📝 Message saved to conversation ${conversation.id}: ${message.id}`);
+    return message;
+  } catch (error) {
+    console.error("[SAVE_MESSAGE_ERROR]", error);
+    throw new Error("Failed to save message");
+  }
 };
 
 /**

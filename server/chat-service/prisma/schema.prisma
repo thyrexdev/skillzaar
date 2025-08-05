@@ -9,31 +9,61 @@ datasource db {
 }
 
 model User {
-  id                               String      @id @default(uuid())
-  email                            String      @unique
-  password                         String
-  name                             String
-  role                             Role
-  isVerified                       Boolean
-  createdAt                        DateTime    @default(now())
-  updatedAt                        DateTime
-  Client                           Client?
-  Freelancer                       Freelancer?
-  Message_Message_receiverIdToUser Message[]   @relation("Message_receiverIdToUser")
-  Message_Message_senderIdToUser   Message[]   @relation("Message_senderIdToUser")
+  id                                    String         @id @default(uuid())
+  email                                 String         @unique
+  password                              String
+  name                                  String
+  role                                  Role
+  isVerified                            Boolean
+  createdAt                             DateTime       @default(now())
+  updatedAt                             DateTime
+  Client                                Client?
+  Freelancer                            Freelancer?
+  Message_Message_receiverIdToUser      Message[]      @relation("Message_receiverIdToUser")
+  Message_Message_senderIdToUser        Message[]      @relation("Message_senderIdToUser")
+  Conversation_Conversation_user1IdToUser Conversation[] @relation("Conversation_user1IdToUser")
+  Conversation_Conversation_user2IdToUser Conversation[] @relation("Conversation_user2IdToUser")
+}
+
+model Conversation {
+  id            String    @id @default(uuid())
+  user1Id       String    // First participant (always the smaller user ID)
+  user2Id       String    // Second participant (always the larger user ID)
+  lastMessageId String?   @unique // Reference to last message (unique for one-to-one relation)
+  lastActivity  DateTime  @default(now())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Relations
+  user1         User      @relation("Conversation_user1IdToUser", fields: [user1Id], references: [id])
+  user2         User      @relation("Conversation_user2IdToUser", fields: [user2Id], references: [id])
+  messages      Message[]
+  lastMessage   Message?  @relation("ConversationLastMessage", fields: [lastMessageId], references: [id])
+  
+  // Ensure unique conversation between two users
+  @@unique([user1Id, user2Id])
+  @@index([user1Id, lastActivity])
+  @@index([user2Id, lastActivity])
+  @@index([lastActivity])
 }
 
 model Message {
-  id                            String    @id @default(uuid())
+  id                            String        @id @default(uuid())
+  conversationId                String
   senderId                      String
   receiverId                    String
   content                       String
-  timestamp                     DateTime  @default(now())
-  readAt                        DateTime? // Read receipt timestamp
-  User_Message_receiverIdToUser User      @relation("Message_receiverIdToUser", fields: [receiverId], references: [id])
-  User_Message_senderIdToUser   User      @relation("Message_senderIdToUser", fields: [senderId], references: [id])
+  timestamp                     DateTime      @default(now())
+  readAt                        DateTime?     // Read receipt timestamp
+  
+  // Relations
+  conversation                  Conversation  @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender                        User          @relation("Message_senderIdToUser", fields: [senderId], references: [id])
+  receiver                      User          @relation("Message_receiverIdToUser", fields: [receiverId], references: [id])
+  ConversationAsLast            Conversation? @relation("ConversationLastMessage")
 
-  // Index for efficient read receipt queries
+  // Indexes for efficient queries
+  @@index([conversationId, timestamp])
   @@index([receiverId, readAt])
   @@index([senderId, timestamp])
 }
