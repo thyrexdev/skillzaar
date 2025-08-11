@@ -23,8 +23,6 @@ app.route('/otp', otpRoutes);
 app.route('/client', clientRoutes);
 app.route('/freelancer', freelancerRoutes);
 
-logger.info('Auth service started');
-
 export default {
     port: process.env.PORT || 5001,
     fetch: app.fetch,
