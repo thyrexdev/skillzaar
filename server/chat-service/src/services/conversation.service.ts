@@ -1,5 +1,6 @@
-import { prisma } from "../db";
-import type { Conversation, Message } from "../../generated/prisma/";
+import { prisma } from "@frevix/shared";
+import type { Conversation, Message } from "@frevix/shared/src/generated/prisma/";
+import { logger } from "@frevix/config";
 
 export type ConversationWithLastMessage = Conversation & {
   lastMessage: Message | null;
@@ -55,12 +56,12 @@ export const findOrCreateConversation = async (
           lastActivity: new Date(),
         },
       });
-      console.log(`✅ Created new conversation: ${conversation.id} between ${user1Id} and ${user2Id}`);
+      logger.info(`✅ Created new conversation: ${conversation.id} between ${user1Id} and ${user2Id}`);
     }
 
     return conversation;
   } catch (error) {
-    console.error("[CONVERSATION_CREATE_ERROR]", error);
+    logger.error("[CONVERSATION_CREATE_ERROR]", error);
     throw new Error("Failed to create or find conversation");
   }
 };
@@ -81,7 +82,7 @@ export const updateConversationActivity = async (
       },
     });
   } catch (error) {
-    console.error("[CONVERSATION_UPDATE_ERROR]", error);
+    logger.error("[CONVERSATION_UPDATE_ERROR]", error);
     throw new Error("Failed to update conversation activity");
   }
 };
@@ -152,7 +153,7 @@ export const getUserConversations = async (
 
     return conversationList;
   } catch (error) {
-    console.error("[CONVERSATION_LIST_ERROR]", error);
+    logger.error("[CONVERSATION_LIST_ERROR]", error);
     throw new Error("Failed to get user conversations");
   }
 };
@@ -195,7 +196,7 @@ export const getConversationMessages = async (
 
     return messages.reverse(); // Return in chronological order
   } catch (error) {
-    console.error("[CONVERSATION_MESSAGES_ERROR]", error);
+    logger.error("[CONVERSATION_MESSAGES_ERROR]", error);
     throw new Error("Failed to get conversation messages");
   }
 };
@@ -229,7 +230,7 @@ export const getConversationById = async (
 
     return conversation;
   } catch (error) {
-    console.error("[CONVERSATION_GET_ERROR]", error);
+    logger.error("[CONVERSATION_GET_ERROR]", error);
     return null;
   }
 };
@@ -262,10 +263,10 @@ export const deleteConversation = async (
       where: { id: conversationId },
     });
 
-    console.log(`🗑️ Deleted conversation: ${conversationId}`);
+    logger.info(`🗑️ Deleted conversation: ${conversationId}`);
     return true;
   } catch (error) {
-    console.error("[CONVERSATION_DELETE_ERROR]", error);
+    logger.error("[CONVERSATION_DELETE_ERROR]", error);
     return false;
   }
 };

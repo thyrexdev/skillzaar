@@ -1,0 +1,31 @@
+{
+  "name": "@frevix/shared",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    },
+    "./prisma": {
+      "import": "./prisma/client.ts"
+    },
+    "./auth": {
+      "import": "./auth/jwt.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.13.0",
+    "jose": "^6.0.12",
+    "prisma": "^6.13.0"
+  }
+}

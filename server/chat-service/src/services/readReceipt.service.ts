@@ -1,4 +1,5 @@
-import { prisma } from "../db";
+import { prisma } from "@frevix/shared";
+import { logger } from "@frevix/config";
 
 export type ReadReceiptInput = {
   messageIds: string[];
@@ -66,7 +67,7 @@ export const markMessagesAsRead = async ({
       senderGroups,
     };
   } catch (error) {
-    console.error("[READ_RECEIPT_ERROR]", error);
+    logger.error("[READ_RECEIPT_ERROR]", error);
     throw new Error("Failed to mark messages as read");
   }
 };
@@ -83,7 +84,7 @@ export const getUnreadMessageCount = async (userId: string): Promise<number> => 
       },
     });
   } catch (error) {
-    console.error("[UNREAD_COUNT_ERROR]", error);
+    logger.error("[UNREAD_COUNT_ERROR]", error);
     return 0;
   }
 };
@@ -112,7 +113,7 @@ export const getUnreadMessagesBetweenUsers = async (
 
     return unreadMessages.map((msg) => msg.id);
   } catch (error) {
-    console.error("[UNREAD_MESSAGES_ERROR]", error);
+    logger.error("[UNREAD_MESSAGES_ERROR]", error);
     return [];
   }
 };

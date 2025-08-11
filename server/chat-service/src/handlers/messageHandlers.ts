@@ -1,5 +1,6 @@
 import type { ServerWebSocket } from "bun";
 import { saveMessage } from "../services/message.service";
+import { logger } from "@frevix/config";
 import { markMessagesAsRead } from "../services/readReceipt.service";
 import type {
   WSData,
@@ -47,11 +48,11 @@ export const handleChatMessage = async (
   const { recipientId, message } = data;
 
   if (!recipientId || !message) {
-    console.warn(`[WARN] Missing recipientId or message from ${senderId}`);
+    logger.warn(`[WARN] Missing recipientId or message from ${senderId}`);
     return;
   }
 
-  console.log(`[MESSAGE] ${senderId} → ${recipientId}: ${message}`);
+  logger.info(`[MESSAGE] ${senderId} → ${recipientId}: ${message}`);
 
   try {
     // Save message to database
@@ -61,7 +62,7 @@ export const handleChatMessage = async (
       content: message,
     });
 
-    console.log("✅ Message saved to DB");
+    logger.info("✅ Message saved to DB");
 
     // Clear typing status if sender was typing
     handleTypingStop(senderId, recipientId);
@@ -78,13 +79,13 @@ export const handleChatMessage = async (
     const delivered = sendToUser(recipientId, messageToSend);
     
     if (delivered) {
-      console.log(`✅ Message delivered to ${recipientId}`);
+      logger.info(`✅ Message delivered to ${recipientId}`);
     } else {
-      console.log(`📱 Recipient ${recipientId} is offline - message saved for later`);
+      logger.info(`📱 Recipient ${recipientId} is offline - message saved for later`);
     }
 
   } catch (error) {
-    console.error("[MESSAGE_ERROR]", error);
+    logger.error("[MESSAGE_ERROR]", error);
   }
 };
 
@@ -158,7 +159,7 @@ export const handleTypingStop = (
 
   const sent = sendToUser(recipientId, typingMessage);
   if (sent) {
-    console.log(`🛑 Typing stopped: ${senderId} → ${recipientId}`);
+    logger.info(`🛑 Typing stopped: ${senderId} → ${recipientId}`);
   }
 };
 
@@ -173,7 +174,7 @@ export const handleTypingMessage = (
   const { type, recipientId } = data;
 
   if (!recipientId) {
-    console.warn(`[WARN] Missing recipientId in typing message from ${senderId}`);
+    logger.warn(`[WARN] Missing recipientId in typing message from ${senderId}`);
     return;
   }
 
@@ -195,7 +196,7 @@ export const handleReadReceipt = async (
   const { messageIds } = data;
 
   if (!messageIds || messageIds.length === 0) {
-    console.warn(`[WARN] Missing messageIds in read receipt from ${readerId}`);
+    logger.warn(`[WARN] Missing messageIds in read receipt from ${readerId}`);
     return;
   }
 
@@ -207,11 +208,11 @@ export const handleReadReceipt = async (
     });
 
     if (result.updatedMessageIds.length === 0) {
-      console.log(`📖 No new messages marked as read for ${readerId}`);
+      logger.info(`📖 No new messages marked as read for ${readerId}`);
       return;
     }
 
-    console.log(
+    logger.info(
       `✅ Marked ${result.updatedMessageIds.length} messages as read for ${readerId}`
     );
 
@@ -226,14 +227,14 @@ export const handleReadReceipt = async (
 
       const sent = sendToUser(senderId, readReceiptMessage);
       if (sent) {
-        console.log(
+        logger.info(
           `📖 Read receipt sent to ${senderId} for ${msgIds.length} messages`
         );
       }
     });
 
   } catch (error) {
-    console.error("[READ_RECEIPT_ERROR]", error);
+    logger.error("[READ_RECEIPT_ERROR]", error);
   }
 };
 
@@ -271,5 +272,5 @@ export const handleUserDisconnect = (userId: string): void => {
     }
   });
 
-  console.log(`🧹 Cleaned up typing state for disconnected user: ${userId}`);
+  logger.info(`🧹 Cleaned up typing state for disconnected user: ${userId}`);
 };

@@ -1,6 +1,7 @@
-import { prisma } from "../db"; 
-import type { Message } from "../../generated/prisma/";
+import { prisma } from "@frevix/shared";
+import type { Message } from "@frevix/shared/src/generated/prisma/";
 import { findOrCreateConversation, updateConversationActivity } from "./conversation.service";
+import { logger } from "@frevix/config";
 
 type SaveMessageInput = {
   senderId: string;
@@ -30,10 +31,10 @@ export const saveMessage = async ({
     // Update conversation's last activity and last message
     await updateConversationActivity(conversation.id, message.id);
     
-    console.log(`📝 Message saved to conversation ${conversation.id}: ${message.id}`);
+    logger.info(`📝 Message saved to conversation ${conversation.id}: ${message.id}`);
     return message;
   } catch (error) {
-    console.error("[SAVE_MESSAGE_ERROR]", error);
+    logger.error("[SAVE_MESSAGE_ERROR]", error);
     throw new Error("Failed to save message");
   }
 };

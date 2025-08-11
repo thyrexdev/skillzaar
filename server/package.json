@@ -1,0 +1,13 @@
+{
+  "name": "frevix-server",
+  "private": true,
+  "workspaces": [
+    "auth-service",
+    "chat-service",
+    "core-service",
+    "packages/*"
+  ],
+  "scripts": {
+    "prisma": "prisma --schema packages/shared/prisma/schema.prisma"
+  }
+}
