@@ -16,7 +16,7 @@ const jwtSecret = new TextEncoder().encode(process.env.JWT_SECRET);
 setClientsMap(clients);
 
 const server = Bun.serve<WSData, {}>({
-  port: 3000,
+  port: 5002,
 
   async fetch(req, server) {
     const upgradeHeader = req.headers.get("upgrade") || "";

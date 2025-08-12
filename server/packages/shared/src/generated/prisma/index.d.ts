@@ -93,6 +93,26 @@ export type WalletTransaction = $Result.DefaultSelection<Prisma.$WalletTransacti
  * 
  */
 export type Review = $Result.DefaultSelection<Prisma.$ReviewPayload>
+/**
+ * Model VerificationDocument
+ * 
+ */
+export type VerificationDocument = $Result.DefaultSelection<Prisma.$VerificationDocumentPayload>
+/**
+ * Model JobAsset
+ * 
+ */
+export type JobAsset = $Result.DefaultSelection<Prisma.$JobAssetPayload>
+/**
+ * Model ChatAttachment
+ * 
+ */
+export type ChatAttachment = $Result.DefaultSelection<Prisma.$ChatAttachmentPayload>
+/**
+ * Model MediaFile
+ * 
+ */
+export type MediaFile = $Result.DefaultSelection<Prisma.$MediaFilePayload>
 
 /**
  * Enums
@@ -203,6 +223,36 @@ export const AuthProvider: {
 
 export type AuthProvider = (typeof AuthProvider)[keyof typeof AuthProvider]
 
+
+export const VerificationDocType: {
+  FRONT: 'FRONT',
+  BACK: 'BACK',
+  SELFIE: 'SELFIE'
+};
+
+export type VerificationDocType = (typeof VerificationDocType)[keyof typeof VerificationDocType]
+
+
+export const VerificationStatus: {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  EXPIRED: 'EXPIRED'
+};
+
+export type VerificationStatus = (typeof VerificationStatus)[keyof typeof VerificationStatus]
+
+
+export const MediaUploadType: {
+  VERIFICATION: 'VERIFICATION',
+  JOB: 'JOB',
+  CHAT: 'CHAT',
+  PROFILE: 'PROFILE',
+  OTHER: 'OTHER'
+};
+
+export type MediaUploadType = (typeof MediaUploadType)[keyof typeof MediaUploadType]
+
 }
 
 export type ProposalStatus = $Enums.ProposalStatus
@@ -248,6 +298,18 @@ export const ExperienceLevel: typeof $Enums.ExperienceLevel
 export type AuthProvider = $Enums.AuthProvider
 
 export const AuthProvider: typeof $Enums.AuthProvider
+
+export type VerificationDocType = $Enums.VerificationDocType
+
+export const VerificationDocType: typeof $Enums.VerificationDocType
+
+export type VerificationStatus = $Enums.VerificationStatus
+
+export const VerificationStatus: typeof $Enums.VerificationStatus
+
+export type MediaUploadType = $Enums.MediaUploadType
+
+export const MediaUploadType: typeof $Enums.MediaUploadType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -533,6 +595,46 @@ export class PrismaClient<
     * ```
     */
   get review(): Prisma.ReviewDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.verificationDocument`: Exposes CRUD operations for the **VerificationDocument** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more VerificationDocuments
+    * const verificationDocuments = await prisma.verificationDocument.findMany()
+    * ```
+    */
+  get verificationDocument(): Prisma.VerificationDocumentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.jobAsset`: Exposes CRUD operations for the **JobAsset** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more JobAssets
+    * const jobAssets = await prisma.jobAsset.findMany()
+    * ```
+    */
+  get jobAsset(): Prisma.JobAssetDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.chatAttachment`: Exposes CRUD operations for the **ChatAttachment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ChatAttachments
+    * const chatAttachments = await prisma.chatAttachment.findMany()
+    * ```
+    */
+  get chatAttachment(): Prisma.ChatAttachmentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.mediaFile`: Exposes CRUD operations for the **MediaFile** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MediaFiles
+    * const mediaFiles = await prisma.mediaFile.findMany()
+    * ```
+    */
+  get mediaFile(): Prisma.MediaFileDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -988,7 +1090,11 @@ export namespace Prisma {
     Wallet: 'Wallet',
     Withdrawal: 'Withdrawal',
     WalletTransaction: 'WalletTransaction',
-    Review: 'Review'
+    Review: 'Review',
+    VerificationDocument: 'VerificationDocument',
+    JobAsset: 'JobAsset',
+    ChatAttachment: 'ChatAttachment',
+    MediaFile: 'MediaFile'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1007,7 +1113,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "conversation" | "message" | "otp" | "client" | "job" | "contract" | "freelancer" | "skill" | "portfolioLink" | "proposal" | "payment" | "wallet" | "withdrawal" | "walletTransaction" | "review"
+      modelProps: "user" | "conversation" | "message" | "otp" | "client" | "job" | "contract" | "freelancer" | "skill" | "portfolioLink" | "proposal" | "payment" | "wallet" | "withdrawal" | "walletTransaction" | "review" | "verificationDocument" | "jobAsset" | "chatAttachment" | "mediaFile"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2195,6 +2301,302 @@ export namespace Prisma {
           }
         }
       }
+      VerificationDocument: {
+        payload: Prisma.$VerificationDocumentPayload<ExtArgs>
+        fields: Prisma.VerificationDocumentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VerificationDocumentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationDocumentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VerificationDocumentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationDocumentPayload>
+          }
+          findFirst: {
+            args: Prisma.VerificationDocumentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationDocumentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VerificationDocumentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationDocumentPayload>
+          }
+          findMany: {
+            args: Prisma.VerificationDocumentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationDocumentPayload>[]
+          }
+          create: {
+            args: Prisma.VerificationDocumentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationDocumentPayload>
+          }
+          createMany: {
+            args: Prisma.VerificationDocumentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.VerificationDocumentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationDocumentPayload>[]
+          }
+          delete: {
+            args: Prisma.VerificationDocumentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationDocumentPayload>
+          }
+          update: {
+            args: Prisma.VerificationDocumentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationDocumentPayload>
+          }
+          deleteMany: {
+            args: Prisma.VerificationDocumentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VerificationDocumentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VerificationDocumentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationDocumentPayload>[]
+          }
+          upsert: {
+            args: Prisma.VerificationDocumentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationDocumentPayload>
+          }
+          aggregate: {
+            args: Prisma.VerificationDocumentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVerificationDocument>
+          }
+          groupBy: {
+            args: Prisma.VerificationDocumentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VerificationDocumentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VerificationDocumentCountArgs<ExtArgs>
+            result: $Utils.Optional<VerificationDocumentCountAggregateOutputType> | number
+          }
+        }
+      }
+      JobAsset: {
+        payload: Prisma.$JobAssetPayload<ExtArgs>
+        fields: Prisma.JobAssetFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.JobAssetFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JobAssetPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.JobAssetFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JobAssetPayload>
+          }
+          findFirst: {
+            args: Prisma.JobAssetFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JobAssetPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.JobAssetFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JobAssetPayload>
+          }
+          findMany: {
+            args: Prisma.JobAssetFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JobAssetPayload>[]
+          }
+          create: {
+            args: Prisma.JobAssetCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JobAssetPayload>
+          }
+          createMany: {
+            args: Prisma.JobAssetCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.JobAssetCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JobAssetPayload>[]
+          }
+          delete: {
+            args: Prisma.JobAssetDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JobAssetPayload>
+          }
+          update: {
+            args: Prisma.JobAssetUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JobAssetPayload>
+          }
+          deleteMany: {
+            args: Prisma.JobAssetDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.JobAssetUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.JobAssetUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JobAssetPayload>[]
+          }
+          upsert: {
+            args: Prisma.JobAssetUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$JobAssetPayload>
+          }
+          aggregate: {
+            args: Prisma.JobAssetAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateJobAsset>
+          }
+          groupBy: {
+            args: Prisma.JobAssetGroupByArgs<ExtArgs>
+            result: $Utils.Optional<JobAssetGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.JobAssetCountArgs<ExtArgs>
+            result: $Utils.Optional<JobAssetCountAggregateOutputType> | number
+          }
+        }
+      }
+      ChatAttachment: {
+        payload: Prisma.$ChatAttachmentPayload<ExtArgs>
+        fields: Prisma.ChatAttachmentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ChatAttachmentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChatAttachmentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ChatAttachmentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChatAttachmentPayload>
+          }
+          findFirst: {
+            args: Prisma.ChatAttachmentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChatAttachmentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ChatAttachmentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChatAttachmentPayload>
+          }
+          findMany: {
+            args: Prisma.ChatAttachmentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChatAttachmentPayload>[]
+          }
+          create: {
+            args: Prisma.ChatAttachmentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChatAttachmentPayload>
+          }
+          createMany: {
+            args: Prisma.ChatAttachmentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ChatAttachmentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChatAttachmentPayload>[]
+          }
+          delete: {
+            args: Prisma.ChatAttachmentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChatAttachmentPayload>
+          }
+          update: {
+            args: Prisma.ChatAttachmentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChatAttachmentPayload>
+          }
+          deleteMany: {
+            args: Prisma.ChatAttachmentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ChatAttachmentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ChatAttachmentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChatAttachmentPayload>[]
+          }
+          upsert: {
+            args: Prisma.ChatAttachmentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChatAttachmentPayload>
+          }
+          aggregate: {
+            args: Prisma.ChatAttachmentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateChatAttachment>
+          }
+          groupBy: {
+            args: Prisma.ChatAttachmentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ChatAttachmentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ChatAttachmentCountArgs<ExtArgs>
+            result: $Utils.Optional<ChatAttachmentCountAggregateOutputType> | number
+          }
+        }
+      }
+      MediaFile: {
+        payload: Prisma.$MediaFilePayload<ExtArgs>
+        fields: Prisma.MediaFileFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MediaFileFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaFilePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MediaFileFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaFilePayload>
+          }
+          findFirst: {
+            args: Prisma.MediaFileFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaFilePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MediaFileFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaFilePayload>
+          }
+          findMany: {
+            args: Prisma.MediaFileFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaFilePayload>[]
+          }
+          create: {
+            args: Prisma.MediaFileCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaFilePayload>
+          }
+          createMany: {
+            args: Prisma.MediaFileCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MediaFileCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaFilePayload>[]
+          }
+          delete: {
+            args: Prisma.MediaFileDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaFilePayload>
+          }
+          update: {
+            args: Prisma.MediaFileUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaFilePayload>
+          }
+          deleteMany: {
+            args: Prisma.MediaFileDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MediaFileUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MediaFileUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaFilePayload>[]
+          }
+          upsert: {
+            args: Prisma.MediaFileUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaFilePayload>
+          }
+          aggregate: {
+            args: Prisma.MediaFileAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMediaFile>
+          }
+          groupBy: {
+            args: Prisma.MediaFileGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MediaFileGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MediaFileCountArgs<ExtArgs>
+            result: $Utils.Optional<MediaFileCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2303,6 +2705,10 @@ export namespace Prisma {
     withdrawal?: WithdrawalOmit
     walletTransaction?: WalletTransactionOmit
     review?: ReviewOmit
+    verificationDocument?: VerificationDocumentOmit
+    jobAsset?: JobAssetOmit
+    chatAttachment?: ChatAttachmentOmit
+    mediaFile?: MediaFileOmit
   }
 
   /* Types for Logging */
@@ -2406,6 +2812,10 @@ export namespace Prisma {
     Message_Message_senderIdToUser: number
     Conversation_Conversation_user1IdToUser: number
     Conversation_Conversation_user2IdToUser: number
+    verificationDocuments: number
+    jobAssets: number
+    chatAttachments: number
+    mediaFiles: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2413,6 +2823,10 @@ export namespace Prisma {
     Message_Message_senderIdToUser?: boolean | UserCountOutputTypeCountMessage_Message_senderIdToUserArgs
     Conversation_Conversation_user1IdToUser?: boolean | UserCountOutputTypeCountConversation_Conversation_user1IdToUserArgs
     Conversation_Conversation_user2IdToUser?: boolean | UserCountOutputTypeCountConversation_Conversation_user2IdToUserArgs
+    verificationDocuments?: boolean | UserCountOutputTypeCountVerificationDocumentsArgs
+    jobAssets?: boolean | UserCountOutputTypeCountJobAssetsArgs
+    chatAttachments?: boolean | UserCountOutputTypeCountChatAttachmentsArgs
+    mediaFiles?: boolean | UserCountOutputTypeCountMediaFilesArgs
   }
 
   // Custom InputTypes
@@ -2454,6 +2868,34 @@ export namespace Prisma {
     where?: ConversationWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountVerificationDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VerificationDocumentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountJobAssetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: JobAssetWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountChatAttachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChatAttachmentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMediaFilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MediaFileWhereInput
+  }
+
 
   /**
    * Count Type ConversationCountOutputType
@@ -2461,10 +2903,12 @@ export namespace Prisma {
 
   export type ConversationCountOutputType = {
     messages: number
+    attachments: number
   }
 
   export type ConversationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     messages?: boolean | ConversationCountOutputTypeCountMessagesArgs
+    attachments?: boolean | ConversationCountOutputTypeCountAttachmentsArgs
   }
 
   // Custom InputTypes
@@ -2483,6 +2927,44 @@ export namespace Prisma {
    */
   export type ConversationCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MessageWhereInput
+  }
+
+  /**
+   * ConversationCountOutputType without action
+   */
+  export type ConversationCountOutputTypeCountAttachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChatAttachmentWhereInput
+  }
+
+
+  /**
+   * Count Type MessageCountOutputType
+   */
+
+  export type MessageCountOutputType = {
+    attachments: number
+  }
+
+  export type MessageCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    attachments?: boolean | MessageCountOutputTypeCountAttachmentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MessageCountOutputType without action
+   */
+  export type MessageCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MessageCountOutputType
+     */
+    select?: MessageCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MessageCountOutputType without action
+   */
+  export type MessageCountOutputTypeCountAttachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChatAttachmentWhereInput
   }
 
 
@@ -2532,10 +3014,12 @@ export namespace Prisma {
 
   export type JobCountOutputType = {
     proposals: number
+    assets: number
   }
 
   export type JobCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     proposals?: boolean | JobCountOutputTypeCountProposalsArgs
+    assets?: boolean | JobCountOutputTypeCountAssetsArgs
   }
 
   // Custom InputTypes
@@ -2554,6 +3038,13 @@ export namespace Prisma {
    */
   export type JobCountOutputTypeCountProposalsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProposalWhereInput
+  }
+
+  /**
+   * JobCountOutputType without action
+   */
+  export type JobCountOutputTypeCountAssetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: JobAssetWhereInput
   }
 
 
@@ -2949,6 +3440,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: boolean | User$Conversation_Conversation_user1IdToUserArgs<ExtArgs>
     Conversation_Conversation_user2IdToUser?: boolean | User$Conversation_Conversation_user2IdToUserArgs<ExtArgs>
     wallet?: boolean | User$walletArgs<ExtArgs>
+    verificationDocuments?: boolean | User$verificationDocumentsArgs<ExtArgs>
+    jobAssets?: boolean | User$jobAssetsArgs<ExtArgs>
+    chatAttachments?: boolean | User$chatAttachmentsArgs<ExtArgs>
+    mediaFiles?: boolean | User$mediaFilesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3003,6 +3498,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: boolean | User$Conversation_Conversation_user1IdToUserArgs<ExtArgs>
     Conversation_Conversation_user2IdToUser?: boolean | User$Conversation_Conversation_user2IdToUserArgs<ExtArgs>
     wallet?: boolean | User$walletArgs<ExtArgs>
+    verificationDocuments?: boolean | User$verificationDocumentsArgs<ExtArgs>
+    jobAssets?: boolean | User$jobAssetsArgs<ExtArgs>
+    chatAttachments?: boolean | User$chatAttachmentsArgs<ExtArgs>
+    mediaFiles?: boolean | User$mediaFilesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3018,6 +3517,10 @@ export namespace Prisma {
       Conversation_Conversation_user1IdToUser: Prisma.$ConversationPayload<ExtArgs>[]
       Conversation_Conversation_user2IdToUser: Prisma.$ConversationPayload<ExtArgs>[]
       wallet: Prisma.$WalletPayload<ExtArgs> | null
+      verificationDocuments: Prisma.$VerificationDocumentPayload<ExtArgs>[]
+      jobAssets: Prisma.$JobAssetPayload<ExtArgs>[]
+      chatAttachments: Prisma.$ChatAttachmentPayload<ExtArgs>[]
+      mediaFiles: Prisma.$MediaFilePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3432,6 +3935,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser<T extends User$Conversation_Conversation_user1IdToUserArgs<ExtArgs> = {}>(args?: Subset<T, User$Conversation_Conversation_user1IdToUserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Conversation_Conversation_user2IdToUser<T extends User$Conversation_Conversation_user2IdToUserArgs<ExtArgs> = {}>(args?: Subset<T, User$Conversation_Conversation_user2IdToUserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     wallet<T extends User$walletArgs<ExtArgs> = {}>(args?: Subset<T, User$walletArgs<ExtArgs>>): Prisma__WalletClient<$Result.GetResult<Prisma.$WalletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    verificationDocuments<T extends User$verificationDocumentsArgs<ExtArgs> = {}>(args?: Subset<T, User$verificationDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    jobAssets<T extends User$jobAssetsArgs<ExtArgs> = {}>(args?: Subset<T, User$jobAssetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JobAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    chatAttachments<T extends User$chatAttachmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$chatAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    mediaFiles<T extends User$mediaFilesArgs<ExtArgs> = {}>(args?: Subset<T, User$mediaFilesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4013,6 +4520,102 @@ export namespace Prisma {
   }
 
   /**
+   * User.verificationDocuments
+   */
+  export type User$verificationDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationDocument
+     */
+    select?: VerificationDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationDocument
+     */
+    omit?: VerificationDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationDocumentInclude<ExtArgs> | null
+    where?: VerificationDocumentWhereInput
+    orderBy?: VerificationDocumentOrderByWithRelationInput | VerificationDocumentOrderByWithRelationInput[]
+    cursor?: VerificationDocumentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VerificationDocumentScalarFieldEnum | VerificationDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * User.jobAssets
+   */
+  export type User$jobAssetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JobAsset
+     */
+    select?: JobAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JobAsset
+     */
+    omit?: JobAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobAssetInclude<ExtArgs> | null
+    where?: JobAssetWhereInput
+    orderBy?: JobAssetOrderByWithRelationInput | JobAssetOrderByWithRelationInput[]
+    cursor?: JobAssetWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: JobAssetScalarFieldEnum | JobAssetScalarFieldEnum[]
+  }
+
+  /**
+   * User.chatAttachments
+   */
+  export type User$chatAttachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatAttachment
+     */
+    select?: ChatAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatAttachment
+     */
+    omit?: ChatAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatAttachmentInclude<ExtArgs> | null
+    where?: ChatAttachmentWhereInput
+    orderBy?: ChatAttachmentOrderByWithRelationInput | ChatAttachmentOrderByWithRelationInput[]
+    cursor?: ChatAttachmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChatAttachmentScalarFieldEnum | ChatAttachmentScalarFieldEnum[]
+  }
+
+  /**
+   * User.mediaFiles
+   */
+  export type User$mediaFilesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaFile
+     */
+    select?: MediaFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaFile
+     */
+    omit?: MediaFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaFileInclude<ExtArgs> | null
+    where?: MediaFileWhereInput
+    orderBy?: MediaFileOrderByWithRelationInput | MediaFileOrderByWithRelationInput[]
+    cursor?: MediaFileWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MediaFileScalarFieldEnum | MediaFileScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4215,6 +4818,7 @@ export namespace Prisma {
     user2?: boolean | UserDefaultArgs<ExtArgs>
     messages?: boolean | Conversation$messagesArgs<ExtArgs>
     lastMessage?: boolean | Conversation$lastMessageArgs<ExtArgs>
+    attachments?: boolean | Conversation$attachmentsArgs<ExtArgs>
     _count?: boolean | ConversationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["conversation"]>
 
@@ -4260,6 +4864,7 @@ export namespace Prisma {
     user2?: boolean | UserDefaultArgs<ExtArgs>
     messages?: boolean | Conversation$messagesArgs<ExtArgs>
     lastMessage?: boolean | Conversation$lastMessageArgs<ExtArgs>
+    attachments?: boolean | Conversation$attachmentsArgs<ExtArgs>
     _count?: boolean | ConversationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ConversationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4280,6 +4885,7 @@ export namespace Prisma {
       user2: Prisma.$UserPayload<ExtArgs>
       messages: Prisma.$MessagePayload<ExtArgs>[]
       lastMessage: Prisma.$MessagePayload<ExtArgs> | null
+      attachments: Prisma.$ChatAttachmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4687,6 +5293,7 @@ export namespace Prisma {
     user2<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     messages<T extends Conversation$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     lastMessage<T extends Conversation$lastMessageArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$lastMessageArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    attachments<T extends Conversation$attachmentsArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5162,6 +5769,30 @@ export namespace Prisma {
   }
 
   /**
+   * Conversation.attachments
+   */
+  export type Conversation$attachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatAttachment
+     */
+    select?: ChatAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatAttachment
+     */
+    omit?: ChatAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatAttachmentInclude<ExtArgs> | null
+    where?: ChatAttachmentWhereInput
+    orderBy?: ChatAttachmentOrderByWithRelationInput | ChatAttachmentOrderByWithRelationInput[]
+    cursor?: ChatAttachmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChatAttachmentScalarFieldEnum | ChatAttachmentScalarFieldEnum[]
+  }
+
+  /**
    * Conversation without action
    */
   export type ConversationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5364,6 +5995,8 @@ export namespace Prisma {
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | UserDefaultArgs<ExtArgs>
     ConversationAsLast?: boolean | Message$ConversationAsLastArgs<ExtArgs>
+    attachments?: boolean | Message$attachmentsArgs<ExtArgs>
+    _count?: boolean | MessageCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["message"]>
 
   export type MessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5408,6 +6041,8 @@ export namespace Prisma {
     sender?: boolean | UserDefaultArgs<ExtArgs>
     receiver?: boolean | UserDefaultArgs<ExtArgs>
     ConversationAsLast?: boolean | Message$ConversationAsLastArgs<ExtArgs>
+    attachments?: boolean | Message$attachmentsArgs<ExtArgs>
+    _count?: boolean | MessageCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     conversation?: boolean | ConversationDefaultArgs<ExtArgs>
@@ -5427,6 +6062,7 @@ export namespace Prisma {
       sender: Prisma.$UserPayload<ExtArgs>
       receiver: Prisma.$UserPayload<ExtArgs>
       ConversationAsLast: Prisma.$ConversationPayload<ExtArgs> | null
+      attachments: Prisma.$ChatAttachmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5834,6 +6470,7 @@ export namespace Prisma {
     sender<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     receiver<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     ConversationAsLast<T extends Message$ConversationAsLastArgs<ExtArgs> = {}>(args?: Subset<T, Message$ConversationAsLastArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    attachments<T extends Message$attachmentsArgs<ExtArgs> = {}>(args?: Subset<T, Message$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6282,6 +6919,30 @@ export namespace Prisma {
      */
     include?: ConversationInclude<ExtArgs> | null
     where?: ConversationWhereInput
+  }
+
+  /**
+   * Message.attachments
+   */
+  export type Message$attachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatAttachment
+     */
+    select?: ChatAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatAttachment
+     */
+    omit?: ChatAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatAttachmentInclude<ExtArgs> | null
+    where?: ChatAttachmentWhereInput
+    orderBy?: ChatAttachmentOrderByWithRelationInput | ChatAttachmentOrderByWithRelationInput[]
+    cursor?: ChatAttachmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChatAttachmentScalarFieldEnum | ChatAttachmentScalarFieldEnum[]
   }
 
   /**
@@ -8820,6 +9481,7 @@ export namespace Prisma {
     contract?: boolean | Job$contractArgs<ExtArgs>
     client?: boolean | ClientDefaultArgs<ExtArgs>
     proposals?: boolean | Job$proposalsArgs<ExtArgs>
+    assets?: boolean | Job$assetsArgs<ExtArgs>
     _count?: boolean | JobCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["job"]>
 
@@ -8866,6 +9528,7 @@ export namespace Prisma {
     contract?: boolean | Job$contractArgs<ExtArgs>
     client?: boolean | ClientDefaultArgs<ExtArgs>
     proposals?: boolean | Job$proposalsArgs<ExtArgs>
+    assets?: boolean | Job$assetsArgs<ExtArgs>
     _count?: boolean | JobCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type JobIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8881,6 +9544,7 @@ export namespace Prisma {
       contract: Prisma.$ContractPayload<ExtArgs> | null
       client: Prisma.$ClientPayload<ExtArgs>
       proposals: Prisma.$ProposalPayload<ExtArgs>[]
+      assets: Prisma.$JobAssetPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9289,6 +9953,7 @@ export namespace Prisma {
     contract<T extends Job$contractArgs<ExtArgs> = {}>(args?: Subset<T, Job$contractArgs<ExtArgs>>): Prisma__ContractClient<$Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     client<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     proposals<T extends Job$proposalsArgs<ExtArgs> = {}>(args?: Subset<T, Job$proposalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProposalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    assets<T extends Job$assetsArgs<ExtArgs> = {}>(args?: Subset<T, Job$assetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JobAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9763,6 +10428,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ProposalScalarFieldEnum | ProposalScalarFieldEnum[]
+  }
+
+  /**
+   * Job.assets
+   */
+  export type Job$assetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JobAsset
+     */
+    select?: JobAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JobAsset
+     */
+    omit?: JobAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobAssetInclude<ExtArgs> | null
+    where?: JobAssetWhereInput
+    orderBy?: JobAssetOrderByWithRelationInput | JobAssetOrderByWithRelationInput[]
+    cursor?: JobAssetWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: JobAssetScalarFieldEnum | JobAssetScalarFieldEnum[]
   }
 
   /**
@@ -21152,6 +21841,4875 @@ export namespace Prisma {
 
 
   /**
+   * Model VerificationDocument
+   */
+
+  export type AggregateVerificationDocument = {
+    _count: VerificationDocumentCountAggregateOutputType | null
+    _avg: VerificationDocumentAvgAggregateOutputType | null
+    _sum: VerificationDocumentSumAggregateOutputType | null
+    _min: VerificationDocumentMinAggregateOutputType | null
+    _max: VerificationDocumentMaxAggregateOutputType | null
+  }
+
+  export type VerificationDocumentAvgAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type VerificationDocumentSumAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type VerificationDocumentMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    docType: $Enums.VerificationDocType | null
+    fileName: string | null
+    originalName: string | null
+    fileType: string | null
+    fileSize: number | null
+    status: $Enums.VerificationStatus | null
+    uploadedAt: Date | null
+    reviewedAt: Date | null
+    reviewedBy: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VerificationDocumentMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    docType: $Enums.VerificationDocType | null
+    fileName: string | null
+    originalName: string | null
+    fileType: string | null
+    fileSize: number | null
+    status: $Enums.VerificationStatus | null
+    uploadedAt: Date | null
+    reviewedAt: Date | null
+    reviewedBy: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VerificationDocumentCountAggregateOutputType = {
+    id: number
+    userId: number
+    docType: number
+    fileName: number
+    originalName: number
+    fileType: number
+    fileSize: number
+    status: number
+    uploadedAt: number
+    reviewedAt: number
+    reviewedBy: number
+    metadata: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type VerificationDocumentAvgAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type VerificationDocumentSumAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type VerificationDocumentMinAggregateInputType = {
+    id?: true
+    userId?: true
+    docType?: true
+    fileName?: true
+    originalName?: true
+    fileType?: true
+    fileSize?: true
+    status?: true
+    uploadedAt?: true
+    reviewedAt?: true
+    reviewedBy?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VerificationDocumentMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    docType?: true
+    fileName?: true
+    originalName?: true
+    fileType?: true
+    fileSize?: true
+    status?: true
+    uploadedAt?: true
+    reviewedAt?: true
+    reviewedBy?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VerificationDocumentCountAggregateInputType = {
+    id?: true
+    userId?: true
+    docType?: true
+    fileName?: true
+    originalName?: true
+    fileType?: true
+    fileSize?: true
+    status?: true
+    uploadedAt?: true
+    reviewedAt?: true
+    reviewedBy?: true
+    metadata?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type VerificationDocumentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VerificationDocument to aggregate.
+     */
+    where?: VerificationDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VerificationDocuments to fetch.
+     */
+    orderBy?: VerificationDocumentOrderByWithRelationInput | VerificationDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VerificationDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VerificationDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VerificationDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned VerificationDocuments
+    **/
+    _count?: true | VerificationDocumentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: VerificationDocumentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: VerificationDocumentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VerificationDocumentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VerificationDocumentMaxAggregateInputType
+  }
+
+  export type GetVerificationDocumentAggregateType<T extends VerificationDocumentAggregateArgs> = {
+        [P in keyof T & keyof AggregateVerificationDocument]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVerificationDocument[P]>
+      : GetScalarType<T[P], AggregateVerificationDocument[P]>
+  }
+
+
+
+
+  export type VerificationDocumentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VerificationDocumentWhereInput
+    orderBy?: VerificationDocumentOrderByWithAggregationInput | VerificationDocumentOrderByWithAggregationInput[]
+    by: VerificationDocumentScalarFieldEnum[] | VerificationDocumentScalarFieldEnum
+    having?: VerificationDocumentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VerificationDocumentCountAggregateInputType | true
+    _avg?: VerificationDocumentAvgAggregateInputType
+    _sum?: VerificationDocumentSumAggregateInputType
+    _min?: VerificationDocumentMinAggregateInputType
+    _max?: VerificationDocumentMaxAggregateInputType
+  }
+
+  export type VerificationDocumentGroupByOutputType = {
+    id: string
+    userId: string
+    docType: $Enums.VerificationDocType
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    status: $Enums.VerificationStatus
+    uploadedAt: Date
+    reviewedAt: Date | null
+    reviewedBy: string | null
+    metadata: JsonValue | null
+    createdAt: Date
+    updatedAt: Date
+    _count: VerificationDocumentCountAggregateOutputType | null
+    _avg: VerificationDocumentAvgAggregateOutputType | null
+    _sum: VerificationDocumentSumAggregateOutputType | null
+    _min: VerificationDocumentMinAggregateOutputType | null
+    _max: VerificationDocumentMaxAggregateOutputType | null
+  }
+
+  type GetVerificationDocumentGroupByPayload<T extends VerificationDocumentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VerificationDocumentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VerificationDocumentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VerificationDocumentGroupByOutputType[P]>
+            : GetScalarType<T[P], VerificationDocumentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VerificationDocumentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    docType?: boolean
+    fileName?: boolean
+    originalName?: boolean
+    fileType?: boolean
+    fileSize?: boolean
+    status?: boolean
+    uploadedAt?: boolean
+    reviewedAt?: boolean
+    reviewedBy?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["verificationDocument"]>
+
+  export type VerificationDocumentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    docType?: boolean
+    fileName?: boolean
+    originalName?: boolean
+    fileType?: boolean
+    fileSize?: boolean
+    status?: boolean
+    uploadedAt?: boolean
+    reviewedAt?: boolean
+    reviewedBy?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["verificationDocument"]>
+
+  export type VerificationDocumentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    docType?: boolean
+    fileName?: boolean
+    originalName?: boolean
+    fileType?: boolean
+    fileSize?: boolean
+    status?: boolean
+    uploadedAt?: boolean
+    reviewedAt?: boolean
+    reviewedBy?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["verificationDocument"]>
+
+  export type VerificationDocumentSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    docType?: boolean
+    fileName?: boolean
+    originalName?: boolean
+    fileType?: boolean
+    fileSize?: boolean
+    status?: boolean
+    uploadedAt?: boolean
+    reviewedAt?: boolean
+    reviewedBy?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type VerificationDocumentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "docType" | "fileName" | "originalName" | "fileType" | "fileSize" | "status" | "uploadedAt" | "reviewedAt" | "reviewedBy" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["verificationDocument"]>
+  export type VerificationDocumentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type VerificationDocumentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type VerificationDocumentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $VerificationDocumentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "VerificationDocument"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      docType: $Enums.VerificationDocType
+      fileName: string
+      originalName: string
+      fileType: string
+      fileSize: number
+      status: $Enums.VerificationStatus
+      uploadedAt: Date
+      reviewedAt: Date | null
+      reviewedBy: string | null
+      metadata: Prisma.JsonValue | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["verificationDocument"]>
+    composites: {}
+  }
+
+  type VerificationDocumentGetPayload<S extends boolean | null | undefined | VerificationDocumentDefaultArgs> = $Result.GetResult<Prisma.$VerificationDocumentPayload, S>
+
+  type VerificationDocumentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<VerificationDocumentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: VerificationDocumentCountAggregateInputType | true
+    }
+
+  export interface VerificationDocumentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['VerificationDocument'], meta: { name: 'VerificationDocument' } }
+    /**
+     * Find zero or one VerificationDocument that matches the filter.
+     * @param {VerificationDocumentFindUniqueArgs} args - Arguments to find a VerificationDocument
+     * @example
+     * // Get one VerificationDocument
+     * const verificationDocument = await prisma.verificationDocument.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends VerificationDocumentFindUniqueArgs>(args: SelectSubset<T, VerificationDocumentFindUniqueArgs<ExtArgs>>): Prisma__VerificationDocumentClient<$Result.GetResult<Prisma.$VerificationDocumentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one VerificationDocument that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {VerificationDocumentFindUniqueOrThrowArgs} args - Arguments to find a VerificationDocument
+     * @example
+     * // Get one VerificationDocument
+     * const verificationDocument = await prisma.verificationDocument.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends VerificationDocumentFindUniqueOrThrowArgs>(args: SelectSubset<T, VerificationDocumentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VerificationDocumentClient<$Result.GetResult<Prisma.$VerificationDocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first VerificationDocument that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationDocumentFindFirstArgs} args - Arguments to find a VerificationDocument
+     * @example
+     * // Get one VerificationDocument
+     * const verificationDocument = await prisma.verificationDocument.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends VerificationDocumentFindFirstArgs>(args?: SelectSubset<T, VerificationDocumentFindFirstArgs<ExtArgs>>): Prisma__VerificationDocumentClient<$Result.GetResult<Prisma.$VerificationDocumentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first VerificationDocument that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationDocumentFindFirstOrThrowArgs} args - Arguments to find a VerificationDocument
+     * @example
+     * // Get one VerificationDocument
+     * const verificationDocument = await prisma.verificationDocument.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends VerificationDocumentFindFirstOrThrowArgs>(args?: SelectSubset<T, VerificationDocumentFindFirstOrThrowArgs<ExtArgs>>): Prisma__VerificationDocumentClient<$Result.GetResult<Prisma.$VerificationDocumentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more VerificationDocuments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationDocumentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all VerificationDocuments
+     * const verificationDocuments = await prisma.verificationDocument.findMany()
+     * 
+     * // Get first 10 VerificationDocuments
+     * const verificationDocuments = await prisma.verificationDocument.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const verificationDocumentWithIdOnly = await prisma.verificationDocument.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends VerificationDocumentFindManyArgs>(args?: SelectSubset<T, VerificationDocumentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a VerificationDocument.
+     * @param {VerificationDocumentCreateArgs} args - Arguments to create a VerificationDocument.
+     * @example
+     * // Create one VerificationDocument
+     * const VerificationDocument = await prisma.verificationDocument.create({
+     *   data: {
+     *     // ... data to create a VerificationDocument
+     *   }
+     * })
+     * 
+     */
+    create<T extends VerificationDocumentCreateArgs>(args: SelectSubset<T, VerificationDocumentCreateArgs<ExtArgs>>): Prisma__VerificationDocumentClient<$Result.GetResult<Prisma.$VerificationDocumentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many VerificationDocuments.
+     * @param {VerificationDocumentCreateManyArgs} args - Arguments to create many VerificationDocuments.
+     * @example
+     * // Create many VerificationDocuments
+     * const verificationDocument = await prisma.verificationDocument.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends VerificationDocumentCreateManyArgs>(args?: SelectSubset<T, VerificationDocumentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many VerificationDocuments and returns the data saved in the database.
+     * @param {VerificationDocumentCreateManyAndReturnArgs} args - Arguments to create many VerificationDocuments.
+     * @example
+     * // Create many VerificationDocuments
+     * const verificationDocument = await prisma.verificationDocument.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many VerificationDocuments and only return the `id`
+     * const verificationDocumentWithIdOnly = await prisma.verificationDocument.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VerificationDocumentCreateManyAndReturnArgs>(args?: SelectSubset<T, VerificationDocumentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationDocumentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a VerificationDocument.
+     * @param {VerificationDocumentDeleteArgs} args - Arguments to delete one VerificationDocument.
+     * @example
+     * // Delete one VerificationDocument
+     * const VerificationDocument = await prisma.verificationDocument.delete({
+     *   where: {
+     *     // ... filter to delete one VerificationDocument
+     *   }
+     * })
+     * 
+     */
+    delete<T extends VerificationDocumentDeleteArgs>(args: SelectSubset<T, VerificationDocumentDeleteArgs<ExtArgs>>): Prisma__VerificationDocumentClient<$Result.GetResult<Prisma.$VerificationDocumentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one VerificationDocument.
+     * @param {VerificationDocumentUpdateArgs} args - Arguments to update one VerificationDocument.
+     * @example
+     * // Update one VerificationDocument
+     * const verificationDocument = await prisma.verificationDocument.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends VerificationDocumentUpdateArgs>(args: SelectSubset<T, VerificationDocumentUpdateArgs<ExtArgs>>): Prisma__VerificationDocumentClient<$Result.GetResult<Prisma.$VerificationDocumentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more VerificationDocuments.
+     * @param {VerificationDocumentDeleteManyArgs} args - Arguments to filter VerificationDocuments to delete.
+     * @example
+     * // Delete a few VerificationDocuments
+     * const { count } = await prisma.verificationDocument.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends VerificationDocumentDeleteManyArgs>(args?: SelectSubset<T, VerificationDocumentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VerificationDocuments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationDocumentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many VerificationDocuments
+     * const verificationDocument = await prisma.verificationDocument.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends VerificationDocumentUpdateManyArgs>(args: SelectSubset<T, VerificationDocumentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VerificationDocuments and returns the data updated in the database.
+     * @param {VerificationDocumentUpdateManyAndReturnArgs} args - Arguments to update many VerificationDocuments.
+     * @example
+     * // Update many VerificationDocuments
+     * const verificationDocument = await prisma.verificationDocument.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more VerificationDocuments and only return the `id`
+     * const verificationDocumentWithIdOnly = await prisma.verificationDocument.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VerificationDocumentUpdateManyAndReturnArgs>(args: SelectSubset<T, VerificationDocumentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationDocumentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one VerificationDocument.
+     * @param {VerificationDocumentUpsertArgs} args - Arguments to update or create a VerificationDocument.
+     * @example
+     * // Update or create a VerificationDocument
+     * const verificationDocument = await prisma.verificationDocument.upsert({
+     *   create: {
+     *     // ... data to create a VerificationDocument
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the VerificationDocument we want to update
+     *   }
+     * })
+     */
+    upsert<T extends VerificationDocumentUpsertArgs>(args: SelectSubset<T, VerificationDocumentUpsertArgs<ExtArgs>>): Prisma__VerificationDocumentClient<$Result.GetResult<Prisma.$VerificationDocumentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of VerificationDocuments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationDocumentCountArgs} args - Arguments to filter VerificationDocuments to count.
+     * @example
+     * // Count the number of VerificationDocuments
+     * const count = await prisma.verificationDocument.count({
+     *   where: {
+     *     // ... the filter for the VerificationDocuments we want to count
+     *   }
+     * })
+    **/
+    count<T extends VerificationDocumentCountArgs>(
+      args?: Subset<T, VerificationDocumentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VerificationDocumentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a VerificationDocument.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationDocumentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VerificationDocumentAggregateArgs>(args: Subset<T, VerificationDocumentAggregateArgs>): Prisma.PrismaPromise<GetVerificationDocumentAggregateType<T>>
+
+    /**
+     * Group by VerificationDocument.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationDocumentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VerificationDocumentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VerificationDocumentGroupByArgs['orderBy'] }
+        : { orderBy?: VerificationDocumentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VerificationDocumentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVerificationDocumentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the VerificationDocument model
+   */
+  readonly fields: VerificationDocumentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for VerificationDocument.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VerificationDocumentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the VerificationDocument model
+   */
+  interface VerificationDocumentFieldRefs {
+    readonly id: FieldRef<"VerificationDocument", 'String'>
+    readonly userId: FieldRef<"VerificationDocument", 'String'>
+    readonly docType: FieldRef<"VerificationDocument", 'VerificationDocType'>
+    readonly fileName: FieldRef<"VerificationDocument", 'String'>
+    readonly originalName: FieldRef<"VerificationDocument", 'String'>
+    readonly fileType: FieldRef<"VerificationDocument", 'String'>
+    readonly fileSize: FieldRef<"VerificationDocument", 'Int'>
+    readonly status: FieldRef<"VerificationDocument", 'VerificationStatus'>
+    readonly uploadedAt: FieldRef<"VerificationDocument", 'DateTime'>
+    readonly reviewedAt: FieldRef<"VerificationDocument", 'DateTime'>
+    readonly reviewedBy: FieldRef<"VerificationDocument", 'String'>
+    readonly metadata: FieldRef<"VerificationDocument", 'Json'>
+    readonly createdAt: FieldRef<"VerificationDocument", 'DateTime'>
+    readonly updatedAt: FieldRef<"VerificationDocument", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * VerificationDocument findUnique
+   */
+  export type VerificationDocumentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationDocument
+     */
+    select?: VerificationDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationDocument
+     */
+    omit?: VerificationDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which VerificationDocument to fetch.
+     */
+    where: VerificationDocumentWhereUniqueInput
+  }
+
+  /**
+   * VerificationDocument findUniqueOrThrow
+   */
+  export type VerificationDocumentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationDocument
+     */
+    select?: VerificationDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationDocument
+     */
+    omit?: VerificationDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which VerificationDocument to fetch.
+     */
+    where: VerificationDocumentWhereUniqueInput
+  }
+
+  /**
+   * VerificationDocument findFirst
+   */
+  export type VerificationDocumentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationDocument
+     */
+    select?: VerificationDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationDocument
+     */
+    omit?: VerificationDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which VerificationDocument to fetch.
+     */
+    where?: VerificationDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VerificationDocuments to fetch.
+     */
+    orderBy?: VerificationDocumentOrderByWithRelationInput | VerificationDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VerificationDocuments.
+     */
+    cursor?: VerificationDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VerificationDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VerificationDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VerificationDocuments.
+     */
+    distinct?: VerificationDocumentScalarFieldEnum | VerificationDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * VerificationDocument findFirstOrThrow
+   */
+  export type VerificationDocumentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationDocument
+     */
+    select?: VerificationDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationDocument
+     */
+    omit?: VerificationDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which VerificationDocument to fetch.
+     */
+    where?: VerificationDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VerificationDocuments to fetch.
+     */
+    orderBy?: VerificationDocumentOrderByWithRelationInput | VerificationDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VerificationDocuments.
+     */
+    cursor?: VerificationDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VerificationDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VerificationDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VerificationDocuments.
+     */
+    distinct?: VerificationDocumentScalarFieldEnum | VerificationDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * VerificationDocument findMany
+   */
+  export type VerificationDocumentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationDocument
+     */
+    select?: VerificationDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationDocument
+     */
+    omit?: VerificationDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which VerificationDocuments to fetch.
+     */
+    where?: VerificationDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VerificationDocuments to fetch.
+     */
+    orderBy?: VerificationDocumentOrderByWithRelationInput | VerificationDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing VerificationDocuments.
+     */
+    cursor?: VerificationDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VerificationDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VerificationDocuments.
+     */
+    skip?: number
+    distinct?: VerificationDocumentScalarFieldEnum | VerificationDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * VerificationDocument create
+   */
+  export type VerificationDocumentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationDocument
+     */
+    select?: VerificationDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationDocument
+     */
+    omit?: VerificationDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationDocumentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a VerificationDocument.
+     */
+    data: XOR<VerificationDocumentCreateInput, VerificationDocumentUncheckedCreateInput>
+  }
+
+  /**
+   * VerificationDocument createMany
+   */
+  export type VerificationDocumentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many VerificationDocuments.
+     */
+    data: VerificationDocumentCreateManyInput | VerificationDocumentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * VerificationDocument createManyAndReturn
+   */
+  export type VerificationDocumentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationDocument
+     */
+    select?: VerificationDocumentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationDocument
+     */
+    omit?: VerificationDocumentOmit<ExtArgs> | null
+    /**
+     * The data used to create many VerificationDocuments.
+     */
+    data: VerificationDocumentCreateManyInput | VerificationDocumentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationDocumentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * VerificationDocument update
+   */
+  export type VerificationDocumentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationDocument
+     */
+    select?: VerificationDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationDocument
+     */
+    omit?: VerificationDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationDocumentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a VerificationDocument.
+     */
+    data: XOR<VerificationDocumentUpdateInput, VerificationDocumentUncheckedUpdateInput>
+    /**
+     * Choose, which VerificationDocument to update.
+     */
+    where: VerificationDocumentWhereUniqueInput
+  }
+
+  /**
+   * VerificationDocument updateMany
+   */
+  export type VerificationDocumentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update VerificationDocuments.
+     */
+    data: XOR<VerificationDocumentUpdateManyMutationInput, VerificationDocumentUncheckedUpdateManyInput>
+    /**
+     * Filter which VerificationDocuments to update
+     */
+    where?: VerificationDocumentWhereInput
+    /**
+     * Limit how many VerificationDocuments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * VerificationDocument updateManyAndReturn
+   */
+  export type VerificationDocumentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationDocument
+     */
+    select?: VerificationDocumentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationDocument
+     */
+    omit?: VerificationDocumentOmit<ExtArgs> | null
+    /**
+     * The data used to update VerificationDocuments.
+     */
+    data: XOR<VerificationDocumentUpdateManyMutationInput, VerificationDocumentUncheckedUpdateManyInput>
+    /**
+     * Filter which VerificationDocuments to update
+     */
+    where?: VerificationDocumentWhereInput
+    /**
+     * Limit how many VerificationDocuments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationDocumentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * VerificationDocument upsert
+   */
+  export type VerificationDocumentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationDocument
+     */
+    select?: VerificationDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationDocument
+     */
+    omit?: VerificationDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationDocumentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the VerificationDocument to update in case it exists.
+     */
+    where: VerificationDocumentWhereUniqueInput
+    /**
+     * In case the VerificationDocument found by the `where` argument doesn't exist, create a new VerificationDocument with this data.
+     */
+    create: XOR<VerificationDocumentCreateInput, VerificationDocumentUncheckedCreateInput>
+    /**
+     * In case the VerificationDocument was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VerificationDocumentUpdateInput, VerificationDocumentUncheckedUpdateInput>
+  }
+
+  /**
+   * VerificationDocument delete
+   */
+  export type VerificationDocumentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationDocument
+     */
+    select?: VerificationDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationDocument
+     */
+    omit?: VerificationDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationDocumentInclude<ExtArgs> | null
+    /**
+     * Filter which VerificationDocument to delete.
+     */
+    where: VerificationDocumentWhereUniqueInput
+  }
+
+  /**
+   * VerificationDocument deleteMany
+   */
+  export type VerificationDocumentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VerificationDocuments to delete
+     */
+    where?: VerificationDocumentWhereInput
+    /**
+     * Limit how many VerificationDocuments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * VerificationDocument without action
+   */
+  export type VerificationDocumentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationDocument
+     */
+    select?: VerificationDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationDocument
+     */
+    omit?: VerificationDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationDocumentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model JobAsset
+   */
+
+  export type AggregateJobAsset = {
+    _count: JobAssetCountAggregateOutputType | null
+    _avg: JobAssetAvgAggregateOutputType | null
+    _sum: JobAssetSumAggregateOutputType | null
+    _min: JobAssetMinAggregateOutputType | null
+    _max: JobAssetMaxAggregateOutputType | null
+  }
+
+  export type JobAssetAvgAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type JobAssetSumAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type JobAssetMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    jobId: string | null
+    fileName: string | null
+    originalName: string | null
+    fileType: string | null
+    fileSize: number | null
+    category: string | null
+    isPublic: boolean | null
+    url: string | null
+    uploadedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type JobAssetMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    jobId: string | null
+    fileName: string | null
+    originalName: string | null
+    fileType: string | null
+    fileSize: number | null
+    category: string | null
+    isPublic: boolean | null
+    url: string | null
+    uploadedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type JobAssetCountAggregateOutputType = {
+    id: number
+    userId: number
+    jobId: number
+    fileName: number
+    originalName: number
+    fileType: number
+    fileSize: number
+    category: number
+    isPublic: number
+    url: number
+    uploadedAt: number
+    metadata: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type JobAssetAvgAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type JobAssetSumAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type JobAssetMinAggregateInputType = {
+    id?: true
+    userId?: true
+    jobId?: true
+    fileName?: true
+    originalName?: true
+    fileType?: true
+    fileSize?: true
+    category?: true
+    isPublic?: true
+    url?: true
+    uploadedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type JobAssetMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    jobId?: true
+    fileName?: true
+    originalName?: true
+    fileType?: true
+    fileSize?: true
+    category?: true
+    isPublic?: true
+    url?: true
+    uploadedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type JobAssetCountAggregateInputType = {
+    id?: true
+    userId?: true
+    jobId?: true
+    fileName?: true
+    originalName?: true
+    fileType?: true
+    fileSize?: true
+    category?: true
+    isPublic?: true
+    url?: true
+    uploadedAt?: true
+    metadata?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type JobAssetAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which JobAsset to aggregate.
+     */
+    where?: JobAssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of JobAssets to fetch.
+     */
+    orderBy?: JobAssetOrderByWithRelationInput | JobAssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: JobAssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` JobAssets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` JobAssets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned JobAssets
+    **/
+    _count?: true | JobAssetCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: JobAssetAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: JobAssetSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: JobAssetMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: JobAssetMaxAggregateInputType
+  }
+
+  export type GetJobAssetAggregateType<T extends JobAssetAggregateArgs> = {
+        [P in keyof T & keyof AggregateJobAsset]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateJobAsset[P]>
+      : GetScalarType<T[P], AggregateJobAsset[P]>
+  }
+
+
+
+
+  export type JobAssetGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: JobAssetWhereInput
+    orderBy?: JobAssetOrderByWithAggregationInput | JobAssetOrderByWithAggregationInput[]
+    by: JobAssetScalarFieldEnum[] | JobAssetScalarFieldEnum
+    having?: JobAssetScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: JobAssetCountAggregateInputType | true
+    _avg?: JobAssetAvgAggregateInputType
+    _sum?: JobAssetSumAggregateInputType
+    _min?: JobAssetMinAggregateInputType
+    _max?: JobAssetMaxAggregateInputType
+  }
+
+  export type JobAssetGroupByOutputType = {
+    id: string
+    userId: string
+    jobId: string | null
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    category: string | null
+    isPublic: boolean
+    url: string | null
+    uploadedAt: Date
+    metadata: JsonValue | null
+    createdAt: Date
+    updatedAt: Date
+    _count: JobAssetCountAggregateOutputType | null
+    _avg: JobAssetAvgAggregateOutputType | null
+    _sum: JobAssetSumAggregateOutputType | null
+    _min: JobAssetMinAggregateOutputType | null
+    _max: JobAssetMaxAggregateOutputType | null
+  }
+
+  type GetJobAssetGroupByPayload<T extends JobAssetGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<JobAssetGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof JobAssetGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], JobAssetGroupByOutputType[P]>
+            : GetScalarType<T[P], JobAssetGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type JobAssetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    jobId?: boolean
+    fileName?: boolean
+    originalName?: boolean
+    fileType?: boolean
+    fileSize?: boolean
+    category?: boolean
+    isPublic?: boolean
+    url?: boolean
+    uploadedAt?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    job?: boolean | JobAsset$jobArgs<ExtArgs>
+  }, ExtArgs["result"]["jobAsset"]>
+
+  export type JobAssetSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    jobId?: boolean
+    fileName?: boolean
+    originalName?: boolean
+    fileType?: boolean
+    fileSize?: boolean
+    category?: boolean
+    isPublic?: boolean
+    url?: boolean
+    uploadedAt?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    job?: boolean | JobAsset$jobArgs<ExtArgs>
+  }, ExtArgs["result"]["jobAsset"]>
+
+  export type JobAssetSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    jobId?: boolean
+    fileName?: boolean
+    originalName?: boolean
+    fileType?: boolean
+    fileSize?: boolean
+    category?: boolean
+    isPublic?: boolean
+    url?: boolean
+    uploadedAt?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    job?: boolean | JobAsset$jobArgs<ExtArgs>
+  }, ExtArgs["result"]["jobAsset"]>
+
+  export type JobAssetSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    jobId?: boolean
+    fileName?: boolean
+    originalName?: boolean
+    fileType?: boolean
+    fileSize?: boolean
+    category?: boolean
+    isPublic?: boolean
+    url?: boolean
+    uploadedAt?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type JobAssetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "jobId" | "fileName" | "originalName" | "fileType" | "fileSize" | "category" | "isPublic" | "url" | "uploadedAt" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["jobAsset"]>
+  export type JobAssetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    job?: boolean | JobAsset$jobArgs<ExtArgs>
+  }
+  export type JobAssetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    job?: boolean | JobAsset$jobArgs<ExtArgs>
+  }
+  export type JobAssetIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    job?: boolean | JobAsset$jobArgs<ExtArgs>
+  }
+
+  export type $JobAssetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "JobAsset"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      job: Prisma.$JobPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      jobId: string | null
+      fileName: string
+      originalName: string
+      fileType: string
+      fileSize: number
+      category: string | null
+      isPublic: boolean
+      url: string | null
+      uploadedAt: Date
+      metadata: Prisma.JsonValue | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["jobAsset"]>
+    composites: {}
+  }
+
+  type JobAssetGetPayload<S extends boolean | null | undefined | JobAssetDefaultArgs> = $Result.GetResult<Prisma.$JobAssetPayload, S>
+
+  type JobAssetCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<JobAssetFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: JobAssetCountAggregateInputType | true
+    }
+
+  export interface JobAssetDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['JobAsset'], meta: { name: 'JobAsset' } }
+    /**
+     * Find zero or one JobAsset that matches the filter.
+     * @param {JobAssetFindUniqueArgs} args - Arguments to find a JobAsset
+     * @example
+     * // Get one JobAsset
+     * const jobAsset = await prisma.jobAsset.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends JobAssetFindUniqueArgs>(args: SelectSubset<T, JobAssetFindUniqueArgs<ExtArgs>>): Prisma__JobAssetClient<$Result.GetResult<Prisma.$JobAssetPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one JobAsset that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {JobAssetFindUniqueOrThrowArgs} args - Arguments to find a JobAsset
+     * @example
+     * // Get one JobAsset
+     * const jobAsset = await prisma.jobAsset.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends JobAssetFindUniqueOrThrowArgs>(args: SelectSubset<T, JobAssetFindUniqueOrThrowArgs<ExtArgs>>): Prisma__JobAssetClient<$Result.GetResult<Prisma.$JobAssetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first JobAsset that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JobAssetFindFirstArgs} args - Arguments to find a JobAsset
+     * @example
+     * // Get one JobAsset
+     * const jobAsset = await prisma.jobAsset.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends JobAssetFindFirstArgs>(args?: SelectSubset<T, JobAssetFindFirstArgs<ExtArgs>>): Prisma__JobAssetClient<$Result.GetResult<Prisma.$JobAssetPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first JobAsset that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JobAssetFindFirstOrThrowArgs} args - Arguments to find a JobAsset
+     * @example
+     * // Get one JobAsset
+     * const jobAsset = await prisma.jobAsset.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends JobAssetFindFirstOrThrowArgs>(args?: SelectSubset<T, JobAssetFindFirstOrThrowArgs<ExtArgs>>): Prisma__JobAssetClient<$Result.GetResult<Prisma.$JobAssetPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more JobAssets that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JobAssetFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all JobAssets
+     * const jobAssets = await prisma.jobAsset.findMany()
+     * 
+     * // Get first 10 JobAssets
+     * const jobAssets = await prisma.jobAsset.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const jobAssetWithIdOnly = await prisma.jobAsset.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends JobAssetFindManyArgs>(args?: SelectSubset<T, JobAssetFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JobAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a JobAsset.
+     * @param {JobAssetCreateArgs} args - Arguments to create a JobAsset.
+     * @example
+     * // Create one JobAsset
+     * const JobAsset = await prisma.jobAsset.create({
+     *   data: {
+     *     // ... data to create a JobAsset
+     *   }
+     * })
+     * 
+     */
+    create<T extends JobAssetCreateArgs>(args: SelectSubset<T, JobAssetCreateArgs<ExtArgs>>): Prisma__JobAssetClient<$Result.GetResult<Prisma.$JobAssetPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many JobAssets.
+     * @param {JobAssetCreateManyArgs} args - Arguments to create many JobAssets.
+     * @example
+     * // Create many JobAssets
+     * const jobAsset = await prisma.jobAsset.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends JobAssetCreateManyArgs>(args?: SelectSubset<T, JobAssetCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many JobAssets and returns the data saved in the database.
+     * @param {JobAssetCreateManyAndReturnArgs} args - Arguments to create many JobAssets.
+     * @example
+     * // Create many JobAssets
+     * const jobAsset = await prisma.jobAsset.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many JobAssets and only return the `id`
+     * const jobAssetWithIdOnly = await prisma.jobAsset.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends JobAssetCreateManyAndReturnArgs>(args?: SelectSubset<T, JobAssetCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JobAssetPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a JobAsset.
+     * @param {JobAssetDeleteArgs} args - Arguments to delete one JobAsset.
+     * @example
+     * // Delete one JobAsset
+     * const JobAsset = await prisma.jobAsset.delete({
+     *   where: {
+     *     // ... filter to delete one JobAsset
+     *   }
+     * })
+     * 
+     */
+    delete<T extends JobAssetDeleteArgs>(args: SelectSubset<T, JobAssetDeleteArgs<ExtArgs>>): Prisma__JobAssetClient<$Result.GetResult<Prisma.$JobAssetPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one JobAsset.
+     * @param {JobAssetUpdateArgs} args - Arguments to update one JobAsset.
+     * @example
+     * // Update one JobAsset
+     * const jobAsset = await prisma.jobAsset.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends JobAssetUpdateArgs>(args: SelectSubset<T, JobAssetUpdateArgs<ExtArgs>>): Prisma__JobAssetClient<$Result.GetResult<Prisma.$JobAssetPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more JobAssets.
+     * @param {JobAssetDeleteManyArgs} args - Arguments to filter JobAssets to delete.
+     * @example
+     * // Delete a few JobAssets
+     * const { count } = await prisma.jobAsset.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends JobAssetDeleteManyArgs>(args?: SelectSubset<T, JobAssetDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more JobAssets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JobAssetUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many JobAssets
+     * const jobAsset = await prisma.jobAsset.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends JobAssetUpdateManyArgs>(args: SelectSubset<T, JobAssetUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more JobAssets and returns the data updated in the database.
+     * @param {JobAssetUpdateManyAndReturnArgs} args - Arguments to update many JobAssets.
+     * @example
+     * // Update many JobAssets
+     * const jobAsset = await prisma.jobAsset.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more JobAssets and only return the `id`
+     * const jobAssetWithIdOnly = await prisma.jobAsset.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends JobAssetUpdateManyAndReturnArgs>(args: SelectSubset<T, JobAssetUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JobAssetPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one JobAsset.
+     * @param {JobAssetUpsertArgs} args - Arguments to update or create a JobAsset.
+     * @example
+     * // Update or create a JobAsset
+     * const jobAsset = await prisma.jobAsset.upsert({
+     *   create: {
+     *     // ... data to create a JobAsset
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the JobAsset we want to update
+     *   }
+     * })
+     */
+    upsert<T extends JobAssetUpsertArgs>(args: SelectSubset<T, JobAssetUpsertArgs<ExtArgs>>): Prisma__JobAssetClient<$Result.GetResult<Prisma.$JobAssetPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of JobAssets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JobAssetCountArgs} args - Arguments to filter JobAssets to count.
+     * @example
+     * // Count the number of JobAssets
+     * const count = await prisma.jobAsset.count({
+     *   where: {
+     *     // ... the filter for the JobAssets we want to count
+     *   }
+     * })
+    **/
+    count<T extends JobAssetCountArgs>(
+      args?: Subset<T, JobAssetCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], JobAssetCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a JobAsset.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JobAssetAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends JobAssetAggregateArgs>(args: Subset<T, JobAssetAggregateArgs>): Prisma.PrismaPromise<GetJobAssetAggregateType<T>>
+
+    /**
+     * Group by JobAsset.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {JobAssetGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends JobAssetGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: JobAssetGroupByArgs['orderBy'] }
+        : { orderBy?: JobAssetGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, JobAssetGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetJobAssetGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the JobAsset model
+   */
+  readonly fields: JobAssetFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for JobAsset.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__JobAssetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    job<T extends JobAsset$jobArgs<ExtArgs> = {}>(args?: Subset<T, JobAsset$jobArgs<ExtArgs>>): Prisma__JobClient<$Result.GetResult<Prisma.$JobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the JobAsset model
+   */
+  interface JobAssetFieldRefs {
+    readonly id: FieldRef<"JobAsset", 'String'>
+    readonly userId: FieldRef<"JobAsset", 'String'>
+    readonly jobId: FieldRef<"JobAsset", 'String'>
+    readonly fileName: FieldRef<"JobAsset", 'String'>
+    readonly originalName: FieldRef<"JobAsset", 'String'>
+    readonly fileType: FieldRef<"JobAsset", 'String'>
+    readonly fileSize: FieldRef<"JobAsset", 'Int'>
+    readonly category: FieldRef<"JobAsset", 'String'>
+    readonly isPublic: FieldRef<"JobAsset", 'Boolean'>
+    readonly url: FieldRef<"JobAsset", 'String'>
+    readonly uploadedAt: FieldRef<"JobAsset", 'DateTime'>
+    readonly metadata: FieldRef<"JobAsset", 'Json'>
+    readonly createdAt: FieldRef<"JobAsset", 'DateTime'>
+    readonly updatedAt: FieldRef<"JobAsset", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * JobAsset findUnique
+   */
+  export type JobAssetFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JobAsset
+     */
+    select?: JobAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JobAsset
+     */
+    omit?: JobAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobAssetInclude<ExtArgs> | null
+    /**
+     * Filter, which JobAsset to fetch.
+     */
+    where: JobAssetWhereUniqueInput
+  }
+
+  /**
+   * JobAsset findUniqueOrThrow
+   */
+  export type JobAssetFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JobAsset
+     */
+    select?: JobAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JobAsset
+     */
+    omit?: JobAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobAssetInclude<ExtArgs> | null
+    /**
+     * Filter, which JobAsset to fetch.
+     */
+    where: JobAssetWhereUniqueInput
+  }
+
+  /**
+   * JobAsset findFirst
+   */
+  export type JobAssetFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JobAsset
+     */
+    select?: JobAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JobAsset
+     */
+    omit?: JobAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobAssetInclude<ExtArgs> | null
+    /**
+     * Filter, which JobAsset to fetch.
+     */
+    where?: JobAssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of JobAssets to fetch.
+     */
+    orderBy?: JobAssetOrderByWithRelationInput | JobAssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for JobAssets.
+     */
+    cursor?: JobAssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` JobAssets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` JobAssets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of JobAssets.
+     */
+    distinct?: JobAssetScalarFieldEnum | JobAssetScalarFieldEnum[]
+  }
+
+  /**
+   * JobAsset findFirstOrThrow
+   */
+  export type JobAssetFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JobAsset
+     */
+    select?: JobAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JobAsset
+     */
+    omit?: JobAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobAssetInclude<ExtArgs> | null
+    /**
+     * Filter, which JobAsset to fetch.
+     */
+    where?: JobAssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of JobAssets to fetch.
+     */
+    orderBy?: JobAssetOrderByWithRelationInput | JobAssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for JobAssets.
+     */
+    cursor?: JobAssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` JobAssets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` JobAssets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of JobAssets.
+     */
+    distinct?: JobAssetScalarFieldEnum | JobAssetScalarFieldEnum[]
+  }
+
+  /**
+   * JobAsset findMany
+   */
+  export type JobAssetFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JobAsset
+     */
+    select?: JobAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JobAsset
+     */
+    omit?: JobAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobAssetInclude<ExtArgs> | null
+    /**
+     * Filter, which JobAssets to fetch.
+     */
+    where?: JobAssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of JobAssets to fetch.
+     */
+    orderBy?: JobAssetOrderByWithRelationInput | JobAssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing JobAssets.
+     */
+    cursor?: JobAssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` JobAssets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` JobAssets.
+     */
+    skip?: number
+    distinct?: JobAssetScalarFieldEnum | JobAssetScalarFieldEnum[]
+  }
+
+  /**
+   * JobAsset create
+   */
+  export type JobAssetCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JobAsset
+     */
+    select?: JobAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JobAsset
+     */
+    omit?: JobAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobAssetInclude<ExtArgs> | null
+    /**
+     * The data needed to create a JobAsset.
+     */
+    data: XOR<JobAssetCreateInput, JobAssetUncheckedCreateInput>
+  }
+
+  /**
+   * JobAsset createMany
+   */
+  export type JobAssetCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many JobAssets.
+     */
+    data: JobAssetCreateManyInput | JobAssetCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * JobAsset createManyAndReturn
+   */
+  export type JobAssetCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JobAsset
+     */
+    select?: JobAssetSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the JobAsset
+     */
+    omit?: JobAssetOmit<ExtArgs> | null
+    /**
+     * The data used to create many JobAssets.
+     */
+    data: JobAssetCreateManyInput | JobAssetCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobAssetIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * JobAsset update
+   */
+  export type JobAssetUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JobAsset
+     */
+    select?: JobAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JobAsset
+     */
+    omit?: JobAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobAssetInclude<ExtArgs> | null
+    /**
+     * The data needed to update a JobAsset.
+     */
+    data: XOR<JobAssetUpdateInput, JobAssetUncheckedUpdateInput>
+    /**
+     * Choose, which JobAsset to update.
+     */
+    where: JobAssetWhereUniqueInput
+  }
+
+  /**
+   * JobAsset updateMany
+   */
+  export type JobAssetUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update JobAssets.
+     */
+    data: XOR<JobAssetUpdateManyMutationInput, JobAssetUncheckedUpdateManyInput>
+    /**
+     * Filter which JobAssets to update
+     */
+    where?: JobAssetWhereInput
+    /**
+     * Limit how many JobAssets to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * JobAsset updateManyAndReturn
+   */
+  export type JobAssetUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JobAsset
+     */
+    select?: JobAssetSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the JobAsset
+     */
+    omit?: JobAssetOmit<ExtArgs> | null
+    /**
+     * The data used to update JobAssets.
+     */
+    data: XOR<JobAssetUpdateManyMutationInput, JobAssetUncheckedUpdateManyInput>
+    /**
+     * Filter which JobAssets to update
+     */
+    where?: JobAssetWhereInput
+    /**
+     * Limit how many JobAssets to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobAssetIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * JobAsset upsert
+   */
+  export type JobAssetUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JobAsset
+     */
+    select?: JobAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JobAsset
+     */
+    omit?: JobAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobAssetInclude<ExtArgs> | null
+    /**
+     * The filter to search for the JobAsset to update in case it exists.
+     */
+    where: JobAssetWhereUniqueInput
+    /**
+     * In case the JobAsset found by the `where` argument doesn't exist, create a new JobAsset with this data.
+     */
+    create: XOR<JobAssetCreateInput, JobAssetUncheckedCreateInput>
+    /**
+     * In case the JobAsset was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<JobAssetUpdateInput, JobAssetUncheckedUpdateInput>
+  }
+
+  /**
+   * JobAsset delete
+   */
+  export type JobAssetDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JobAsset
+     */
+    select?: JobAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JobAsset
+     */
+    omit?: JobAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobAssetInclude<ExtArgs> | null
+    /**
+     * Filter which JobAsset to delete.
+     */
+    where: JobAssetWhereUniqueInput
+  }
+
+  /**
+   * JobAsset deleteMany
+   */
+  export type JobAssetDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which JobAssets to delete
+     */
+    where?: JobAssetWhereInput
+    /**
+     * Limit how many JobAssets to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * JobAsset.job
+   */
+  export type JobAsset$jobArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Job
+     */
+    select?: JobSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Job
+     */
+    omit?: JobOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobInclude<ExtArgs> | null
+    where?: JobWhereInput
+  }
+
+  /**
+   * JobAsset without action
+   */
+  export type JobAssetDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JobAsset
+     */
+    select?: JobAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the JobAsset
+     */
+    omit?: JobAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: JobAssetInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ChatAttachment
+   */
+
+  export type AggregateChatAttachment = {
+    _count: ChatAttachmentCountAggregateOutputType | null
+    _avg: ChatAttachmentAvgAggregateOutputType | null
+    _sum: ChatAttachmentSumAggregateOutputType | null
+    _min: ChatAttachmentMinAggregateOutputType | null
+    _max: ChatAttachmentMaxAggregateOutputType | null
+  }
+
+  export type ChatAttachmentAvgAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type ChatAttachmentSumAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type ChatAttachmentMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    chatId: string | null
+    messageId: string | null
+    fileName: string | null
+    originalName: string | null
+    fileType: string | null
+    fileSize: number | null
+    url: string | null
+    uploadedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ChatAttachmentMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    chatId: string | null
+    messageId: string | null
+    fileName: string | null
+    originalName: string | null
+    fileType: string | null
+    fileSize: number | null
+    url: string | null
+    uploadedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ChatAttachmentCountAggregateOutputType = {
+    id: number
+    userId: number
+    chatId: number
+    messageId: number
+    fileName: number
+    originalName: number
+    fileType: number
+    fileSize: number
+    url: number
+    uploadedAt: number
+    metadata: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ChatAttachmentAvgAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type ChatAttachmentSumAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type ChatAttachmentMinAggregateInputType = {
+    id?: true
+    userId?: true
+    chatId?: true
+    messageId?: true
+    fileName?: true
+    originalName?: true
+    fileType?: true
+    fileSize?: true
+    url?: true
+    uploadedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ChatAttachmentMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    chatId?: true
+    messageId?: true
+    fileName?: true
+    originalName?: true
+    fileType?: true
+    fileSize?: true
+    url?: true
+    uploadedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ChatAttachmentCountAggregateInputType = {
+    id?: true
+    userId?: true
+    chatId?: true
+    messageId?: true
+    fileName?: true
+    originalName?: true
+    fileType?: true
+    fileSize?: true
+    url?: true
+    uploadedAt?: true
+    metadata?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ChatAttachmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ChatAttachment to aggregate.
+     */
+    where?: ChatAttachmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChatAttachments to fetch.
+     */
+    orderBy?: ChatAttachmentOrderByWithRelationInput | ChatAttachmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ChatAttachmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChatAttachments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChatAttachments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ChatAttachments
+    **/
+    _count?: true | ChatAttachmentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ChatAttachmentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ChatAttachmentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ChatAttachmentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ChatAttachmentMaxAggregateInputType
+  }
+
+  export type GetChatAttachmentAggregateType<T extends ChatAttachmentAggregateArgs> = {
+        [P in keyof T & keyof AggregateChatAttachment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateChatAttachment[P]>
+      : GetScalarType<T[P], AggregateChatAttachment[P]>
+  }
+
+
+
+
+  export type ChatAttachmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChatAttachmentWhereInput
+    orderBy?: ChatAttachmentOrderByWithAggregationInput | ChatAttachmentOrderByWithAggregationInput[]
+    by: ChatAttachmentScalarFieldEnum[] | ChatAttachmentScalarFieldEnum
+    having?: ChatAttachmentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ChatAttachmentCountAggregateInputType | true
+    _avg?: ChatAttachmentAvgAggregateInputType
+    _sum?: ChatAttachmentSumAggregateInputType
+    _min?: ChatAttachmentMinAggregateInputType
+    _max?: ChatAttachmentMaxAggregateInputType
+  }
+
+  export type ChatAttachmentGroupByOutputType = {
+    id: string
+    userId: string
+    chatId: string
+    messageId: string | null
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    url: string
+    uploadedAt: Date
+    metadata: JsonValue | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ChatAttachmentCountAggregateOutputType | null
+    _avg: ChatAttachmentAvgAggregateOutputType | null
+    _sum: ChatAttachmentSumAggregateOutputType | null
+    _min: ChatAttachmentMinAggregateOutputType | null
+    _max: ChatAttachmentMaxAggregateOutputType | null
+  }
+
+  type GetChatAttachmentGroupByPayload<T extends ChatAttachmentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ChatAttachmentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ChatAttachmentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ChatAttachmentGroupByOutputType[P]>
+            : GetScalarType<T[P], ChatAttachmentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ChatAttachmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    chatId?: boolean
+    messageId?: boolean
+    fileName?: boolean
+    originalName?: boolean
+    fileType?: boolean
+    fileSize?: boolean
+    url?: boolean
+    uploadedAt?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+    message?: boolean | ChatAttachment$messageArgs<ExtArgs>
+  }, ExtArgs["result"]["chatAttachment"]>
+
+  export type ChatAttachmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    chatId?: boolean
+    messageId?: boolean
+    fileName?: boolean
+    originalName?: boolean
+    fileType?: boolean
+    fileSize?: boolean
+    url?: boolean
+    uploadedAt?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+    message?: boolean | ChatAttachment$messageArgs<ExtArgs>
+  }, ExtArgs["result"]["chatAttachment"]>
+
+  export type ChatAttachmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    chatId?: boolean
+    messageId?: boolean
+    fileName?: boolean
+    originalName?: boolean
+    fileType?: boolean
+    fileSize?: boolean
+    url?: boolean
+    uploadedAt?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+    message?: boolean | ChatAttachment$messageArgs<ExtArgs>
+  }, ExtArgs["result"]["chatAttachment"]>
+
+  export type ChatAttachmentSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    chatId?: boolean
+    messageId?: boolean
+    fileName?: boolean
+    originalName?: boolean
+    fileType?: boolean
+    fileSize?: boolean
+    url?: boolean
+    uploadedAt?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ChatAttachmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "chatId" | "messageId" | "fileName" | "originalName" | "fileType" | "fileSize" | "url" | "uploadedAt" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["chatAttachment"]>
+  export type ChatAttachmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+    message?: boolean | ChatAttachment$messageArgs<ExtArgs>
+  }
+  export type ChatAttachmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+    message?: boolean | ChatAttachment$messageArgs<ExtArgs>
+  }
+  export type ChatAttachmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    conversation?: boolean | ConversationDefaultArgs<ExtArgs>
+    message?: boolean | ChatAttachment$messageArgs<ExtArgs>
+  }
+
+  export type $ChatAttachmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ChatAttachment"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      conversation: Prisma.$ConversationPayload<ExtArgs>
+      message: Prisma.$MessagePayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      chatId: string
+      messageId: string | null
+      fileName: string
+      originalName: string
+      fileType: string
+      fileSize: number
+      url: string
+      uploadedAt: Date
+      metadata: Prisma.JsonValue | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["chatAttachment"]>
+    composites: {}
+  }
+
+  type ChatAttachmentGetPayload<S extends boolean | null | undefined | ChatAttachmentDefaultArgs> = $Result.GetResult<Prisma.$ChatAttachmentPayload, S>
+
+  type ChatAttachmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ChatAttachmentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ChatAttachmentCountAggregateInputType | true
+    }
+
+  export interface ChatAttachmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ChatAttachment'], meta: { name: 'ChatAttachment' } }
+    /**
+     * Find zero or one ChatAttachment that matches the filter.
+     * @param {ChatAttachmentFindUniqueArgs} args - Arguments to find a ChatAttachment
+     * @example
+     * // Get one ChatAttachment
+     * const chatAttachment = await prisma.chatAttachment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ChatAttachmentFindUniqueArgs>(args: SelectSubset<T, ChatAttachmentFindUniqueArgs<ExtArgs>>): Prisma__ChatAttachmentClient<$Result.GetResult<Prisma.$ChatAttachmentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ChatAttachment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ChatAttachmentFindUniqueOrThrowArgs} args - Arguments to find a ChatAttachment
+     * @example
+     * // Get one ChatAttachment
+     * const chatAttachment = await prisma.chatAttachment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ChatAttachmentFindUniqueOrThrowArgs>(args: SelectSubset<T, ChatAttachmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ChatAttachmentClient<$Result.GetResult<Prisma.$ChatAttachmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ChatAttachment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChatAttachmentFindFirstArgs} args - Arguments to find a ChatAttachment
+     * @example
+     * // Get one ChatAttachment
+     * const chatAttachment = await prisma.chatAttachment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ChatAttachmentFindFirstArgs>(args?: SelectSubset<T, ChatAttachmentFindFirstArgs<ExtArgs>>): Prisma__ChatAttachmentClient<$Result.GetResult<Prisma.$ChatAttachmentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ChatAttachment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChatAttachmentFindFirstOrThrowArgs} args - Arguments to find a ChatAttachment
+     * @example
+     * // Get one ChatAttachment
+     * const chatAttachment = await prisma.chatAttachment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ChatAttachmentFindFirstOrThrowArgs>(args?: SelectSubset<T, ChatAttachmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__ChatAttachmentClient<$Result.GetResult<Prisma.$ChatAttachmentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ChatAttachments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChatAttachmentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ChatAttachments
+     * const chatAttachments = await prisma.chatAttachment.findMany()
+     * 
+     * // Get first 10 ChatAttachments
+     * const chatAttachments = await prisma.chatAttachment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const chatAttachmentWithIdOnly = await prisma.chatAttachment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ChatAttachmentFindManyArgs>(args?: SelectSubset<T, ChatAttachmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ChatAttachment.
+     * @param {ChatAttachmentCreateArgs} args - Arguments to create a ChatAttachment.
+     * @example
+     * // Create one ChatAttachment
+     * const ChatAttachment = await prisma.chatAttachment.create({
+     *   data: {
+     *     // ... data to create a ChatAttachment
+     *   }
+     * })
+     * 
+     */
+    create<T extends ChatAttachmentCreateArgs>(args: SelectSubset<T, ChatAttachmentCreateArgs<ExtArgs>>): Prisma__ChatAttachmentClient<$Result.GetResult<Prisma.$ChatAttachmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ChatAttachments.
+     * @param {ChatAttachmentCreateManyArgs} args - Arguments to create many ChatAttachments.
+     * @example
+     * // Create many ChatAttachments
+     * const chatAttachment = await prisma.chatAttachment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ChatAttachmentCreateManyArgs>(args?: SelectSubset<T, ChatAttachmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ChatAttachments and returns the data saved in the database.
+     * @param {ChatAttachmentCreateManyAndReturnArgs} args - Arguments to create many ChatAttachments.
+     * @example
+     * // Create many ChatAttachments
+     * const chatAttachment = await prisma.chatAttachment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ChatAttachments and only return the `id`
+     * const chatAttachmentWithIdOnly = await prisma.chatAttachment.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ChatAttachmentCreateManyAndReturnArgs>(args?: SelectSubset<T, ChatAttachmentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatAttachmentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ChatAttachment.
+     * @param {ChatAttachmentDeleteArgs} args - Arguments to delete one ChatAttachment.
+     * @example
+     * // Delete one ChatAttachment
+     * const ChatAttachment = await prisma.chatAttachment.delete({
+     *   where: {
+     *     // ... filter to delete one ChatAttachment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ChatAttachmentDeleteArgs>(args: SelectSubset<T, ChatAttachmentDeleteArgs<ExtArgs>>): Prisma__ChatAttachmentClient<$Result.GetResult<Prisma.$ChatAttachmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ChatAttachment.
+     * @param {ChatAttachmentUpdateArgs} args - Arguments to update one ChatAttachment.
+     * @example
+     * // Update one ChatAttachment
+     * const chatAttachment = await prisma.chatAttachment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ChatAttachmentUpdateArgs>(args: SelectSubset<T, ChatAttachmentUpdateArgs<ExtArgs>>): Prisma__ChatAttachmentClient<$Result.GetResult<Prisma.$ChatAttachmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ChatAttachments.
+     * @param {ChatAttachmentDeleteManyArgs} args - Arguments to filter ChatAttachments to delete.
+     * @example
+     * // Delete a few ChatAttachments
+     * const { count } = await prisma.chatAttachment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ChatAttachmentDeleteManyArgs>(args?: SelectSubset<T, ChatAttachmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ChatAttachments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChatAttachmentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ChatAttachments
+     * const chatAttachment = await prisma.chatAttachment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ChatAttachmentUpdateManyArgs>(args: SelectSubset<T, ChatAttachmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ChatAttachments and returns the data updated in the database.
+     * @param {ChatAttachmentUpdateManyAndReturnArgs} args - Arguments to update many ChatAttachments.
+     * @example
+     * // Update many ChatAttachments
+     * const chatAttachment = await prisma.chatAttachment.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ChatAttachments and only return the `id`
+     * const chatAttachmentWithIdOnly = await prisma.chatAttachment.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ChatAttachmentUpdateManyAndReturnArgs>(args: SelectSubset<T, ChatAttachmentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatAttachmentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ChatAttachment.
+     * @param {ChatAttachmentUpsertArgs} args - Arguments to update or create a ChatAttachment.
+     * @example
+     * // Update or create a ChatAttachment
+     * const chatAttachment = await prisma.chatAttachment.upsert({
+     *   create: {
+     *     // ... data to create a ChatAttachment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ChatAttachment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ChatAttachmentUpsertArgs>(args: SelectSubset<T, ChatAttachmentUpsertArgs<ExtArgs>>): Prisma__ChatAttachmentClient<$Result.GetResult<Prisma.$ChatAttachmentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ChatAttachments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChatAttachmentCountArgs} args - Arguments to filter ChatAttachments to count.
+     * @example
+     * // Count the number of ChatAttachments
+     * const count = await prisma.chatAttachment.count({
+     *   where: {
+     *     // ... the filter for the ChatAttachments we want to count
+     *   }
+     * })
+    **/
+    count<T extends ChatAttachmentCountArgs>(
+      args?: Subset<T, ChatAttachmentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ChatAttachmentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ChatAttachment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChatAttachmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ChatAttachmentAggregateArgs>(args: Subset<T, ChatAttachmentAggregateArgs>): Prisma.PrismaPromise<GetChatAttachmentAggregateType<T>>
+
+    /**
+     * Group by ChatAttachment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChatAttachmentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ChatAttachmentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ChatAttachmentGroupByArgs['orderBy'] }
+        : { orderBy?: ChatAttachmentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ChatAttachmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetChatAttachmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ChatAttachment model
+   */
+  readonly fields: ChatAttachmentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ChatAttachment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ChatAttachmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    conversation<T extends ConversationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ConversationDefaultArgs<ExtArgs>>): Prisma__ConversationClient<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    message<T extends ChatAttachment$messageArgs<ExtArgs> = {}>(args?: Subset<T, ChatAttachment$messageArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ChatAttachment model
+   */
+  interface ChatAttachmentFieldRefs {
+    readonly id: FieldRef<"ChatAttachment", 'String'>
+    readonly userId: FieldRef<"ChatAttachment", 'String'>
+    readonly chatId: FieldRef<"ChatAttachment", 'String'>
+    readonly messageId: FieldRef<"ChatAttachment", 'String'>
+    readonly fileName: FieldRef<"ChatAttachment", 'String'>
+    readonly originalName: FieldRef<"ChatAttachment", 'String'>
+    readonly fileType: FieldRef<"ChatAttachment", 'String'>
+    readonly fileSize: FieldRef<"ChatAttachment", 'Int'>
+    readonly url: FieldRef<"ChatAttachment", 'String'>
+    readonly uploadedAt: FieldRef<"ChatAttachment", 'DateTime'>
+    readonly metadata: FieldRef<"ChatAttachment", 'Json'>
+    readonly createdAt: FieldRef<"ChatAttachment", 'DateTime'>
+    readonly updatedAt: FieldRef<"ChatAttachment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ChatAttachment findUnique
+   */
+  export type ChatAttachmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatAttachment
+     */
+    select?: ChatAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatAttachment
+     */
+    omit?: ChatAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter, which ChatAttachment to fetch.
+     */
+    where: ChatAttachmentWhereUniqueInput
+  }
+
+  /**
+   * ChatAttachment findUniqueOrThrow
+   */
+  export type ChatAttachmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatAttachment
+     */
+    select?: ChatAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatAttachment
+     */
+    omit?: ChatAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter, which ChatAttachment to fetch.
+     */
+    where: ChatAttachmentWhereUniqueInput
+  }
+
+  /**
+   * ChatAttachment findFirst
+   */
+  export type ChatAttachmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatAttachment
+     */
+    select?: ChatAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatAttachment
+     */
+    omit?: ChatAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter, which ChatAttachment to fetch.
+     */
+    where?: ChatAttachmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChatAttachments to fetch.
+     */
+    orderBy?: ChatAttachmentOrderByWithRelationInput | ChatAttachmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ChatAttachments.
+     */
+    cursor?: ChatAttachmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChatAttachments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChatAttachments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ChatAttachments.
+     */
+    distinct?: ChatAttachmentScalarFieldEnum | ChatAttachmentScalarFieldEnum[]
+  }
+
+  /**
+   * ChatAttachment findFirstOrThrow
+   */
+  export type ChatAttachmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatAttachment
+     */
+    select?: ChatAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatAttachment
+     */
+    omit?: ChatAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter, which ChatAttachment to fetch.
+     */
+    where?: ChatAttachmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChatAttachments to fetch.
+     */
+    orderBy?: ChatAttachmentOrderByWithRelationInput | ChatAttachmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ChatAttachments.
+     */
+    cursor?: ChatAttachmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChatAttachments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChatAttachments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ChatAttachments.
+     */
+    distinct?: ChatAttachmentScalarFieldEnum | ChatAttachmentScalarFieldEnum[]
+  }
+
+  /**
+   * ChatAttachment findMany
+   */
+  export type ChatAttachmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatAttachment
+     */
+    select?: ChatAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatAttachment
+     */
+    omit?: ChatAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter, which ChatAttachments to fetch.
+     */
+    where?: ChatAttachmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ChatAttachments to fetch.
+     */
+    orderBy?: ChatAttachmentOrderByWithRelationInput | ChatAttachmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ChatAttachments.
+     */
+    cursor?: ChatAttachmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ChatAttachments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ChatAttachments.
+     */
+    skip?: number
+    distinct?: ChatAttachmentScalarFieldEnum | ChatAttachmentScalarFieldEnum[]
+  }
+
+  /**
+   * ChatAttachment create
+   */
+  export type ChatAttachmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatAttachment
+     */
+    select?: ChatAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatAttachment
+     */
+    omit?: ChatAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatAttachmentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ChatAttachment.
+     */
+    data: XOR<ChatAttachmentCreateInput, ChatAttachmentUncheckedCreateInput>
+  }
+
+  /**
+   * ChatAttachment createMany
+   */
+  export type ChatAttachmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ChatAttachments.
+     */
+    data: ChatAttachmentCreateManyInput | ChatAttachmentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ChatAttachment createManyAndReturn
+   */
+  export type ChatAttachmentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatAttachment
+     */
+    select?: ChatAttachmentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatAttachment
+     */
+    omit?: ChatAttachmentOmit<ExtArgs> | null
+    /**
+     * The data used to create many ChatAttachments.
+     */
+    data: ChatAttachmentCreateManyInput | ChatAttachmentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatAttachmentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ChatAttachment update
+   */
+  export type ChatAttachmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatAttachment
+     */
+    select?: ChatAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatAttachment
+     */
+    omit?: ChatAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatAttachmentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ChatAttachment.
+     */
+    data: XOR<ChatAttachmentUpdateInput, ChatAttachmentUncheckedUpdateInput>
+    /**
+     * Choose, which ChatAttachment to update.
+     */
+    where: ChatAttachmentWhereUniqueInput
+  }
+
+  /**
+   * ChatAttachment updateMany
+   */
+  export type ChatAttachmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ChatAttachments.
+     */
+    data: XOR<ChatAttachmentUpdateManyMutationInput, ChatAttachmentUncheckedUpdateManyInput>
+    /**
+     * Filter which ChatAttachments to update
+     */
+    where?: ChatAttachmentWhereInput
+    /**
+     * Limit how many ChatAttachments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ChatAttachment updateManyAndReturn
+   */
+  export type ChatAttachmentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatAttachment
+     */
+    select?: ChatAttachmentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatAttachment
+     */
+    omit?: ChatAttachmentOmit<ExtArgs> | null
+    /**
+     * The data used to update ChatAttachments.
+     */
+    data: XOR<ChatAttachmentUpdateManyMutationInput, ChatAttachmentUncheckedUpdateManyInput>
+    /**
+     * Filter which ChatAttachments to update
+     */
+    where?: ChatAttachmentWhereInput
+    /**
+     * Limit how many ChatAttachments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatAttachmentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ChatAttachment upsert
+   */
+  export type ChatAttachmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatAttachment
+     */
+    select?: ChatAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatAttachment
+     */
+    omit?: ChatAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatAttachmentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ChatAttachment to update in case it exists.
+     */
+    where: ChatAttachmentWhereUniqueInput
+    /**
+     * In case the ChatAttachment found by the `where` argument doesn't exist, create a new ChatAttachment with this data.
+     */
+    create: XOR<ChatAttachmentCreateInput, ChatAttachmentUncheckedCreateInput>
+    /**
+     * In case the ChatAttachment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ChatAttachmentUpdateInput, ChatAttachmentUncheckedUpdateInput>
+  }
+
+  /**
+   * ChatAttachment delete
+   */
+  export type ChatAttachmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatAttachment
+     */
+    select?: ChatAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatAttachment
+     */
+    omit?: ChatAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatAttachmentInclude<ExtArgs> | null
+    /**
+     * Filter which ChatAttachment to delete.
+     */
+    where: ChatAttachmentWhereUniqueInput
+  }
+
+  /**
+   * ChatAttachment deleteMany
+   */
+  export type ChatAttachmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ChatAttachments to delete
+     */
+    where?: ChatAttachmentWhereInput
+    /**
+     * Limit how many ChatAttachments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ChatAttachment.message
+   */
+  export type ChatAttachment$messageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    where?: MessageWhereInput
+  }
+
+  /**
+   * ChatAttachment without action
+   */
+  export type ChatAttachmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatAttachment
+     */
+    select?: ChatAttachmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatAttachment
+     */
+    omit?: ChatAttachmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatAttachmentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MediaFile
+   */
+
+  export type AggregateMediaFile = {
+    _count: MediaFileCountAggregateOutputType | null
+    _avg: MediaFileAvgAggregateOutputType | null
+    _sum: MediaFileSumAggregateOutputType | null
+    _min: MediaFileMinAggregateOutputType | null
+    _max: MediaFileMaxAggregateOutputType | null
+  }
+
+  export type MediaFileAvgAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type MediaFileSumAggregateOutputType = {
+    fileSize: number | null
+  }
+
+  export type MediaFileMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    fileName: string | null
+    originalName: string | null
+    fileType: string | null
+    fileSize: number | null
+    uploadType: $Enums.MediaUploadType | null
+    category: string | null
+    isPublic: boolean | null
+    url: string | null
+    uploadedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MediaFileMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    fileName: string | null
+    originalName: string | null
+    fileType: string | null
+    fileSize: number | null
+    uploadType: $Enums.MediaUploadType | null
+    category: string | null
+    isPublic: boolean | null
+    url: string | null
+    uploadedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MediaFileCountAggregateOutputType = {
+    id: number
+    userId: number
+    fileName: number
+    originalName: number
+    fileType: number
+    fileSize: number
+    uploadType: number
+    category: number
+    isPublic: number
+    url: number
+    uploadedAt: number
+    metadata: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type MediaFileAvgAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type MediaFileSumAggregateInputType = {
+    fileSize?: true
+  }
+
+  export type MediaFileMinAggregateInputType = {
+    id?: true
+    userId?: true
+    fileName?: true
+    originalName?: true
+    fileType?: true
+    fileSize?: true
+    uploadType?: true
+    category?: true
+    isPublic?: true
+    url?: true
+    uploadedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MediaFileMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    fileName?: true
+    originalName?: true
+    fileType?: true
+    fileSize?: true
+    uploadType?: true
+    category?: true
+    isPublic?: true
+    url?: true
+    uploadedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MediaFileCountAggregateInputType = {
+    id?: true
+    userId?: true
+    fileName?: true
+    originalName?: true
+    fileType?: true
+    fileSize?: true
+    uploadType?: true
+    category?: true
+    isPublic?: true
+    url?: true
+    uploadedAt?: true
+    metadata?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type MediaFileAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MediaFile to aggregate.
+     */
+    where?: MediaFileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MediaFiles to fetch.
+     */
+    orderBy?: MediaFileOrderByWithRelationInput | MediaFileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MediaFileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MediaFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MediaFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MediaFiles
+    **/
+    _count?: true | MediaFileCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MediaFileAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MediaFileSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MediaFileMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MediaFileMaxAggregateInputType
+  }
+
+  export type GetMediaFileAggregateType<T extends MediaFileAggregateArgs> = {
+        [P in keyof T & keyof AggregateMediaFile]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMediaFile[P]>
+      : GetScalarType<T[P], AggregateMediaFile[P]>
+  }
+
+
+
+
+  export type MediaFileGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MediaFileWhereInput
+    orderBy?: MediaFileOrderByWithAggregationInput | MediaFileOrderByWithAggregationInput[]
+    by: MediaFileScalarFieldEnum[] | MediaFileScalarFieldEnum
+    having?: MediaFileScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MediaFileCountAggregateInputType | true
+    _avg?: MediaFileAvgAggregateInputType
+    _sum?: MediaFileSumAggregateInputType
+    _min?: MediaFileMinAggregateInputType
+    _max?: MediaFileMaxAggregateInputType
+  }
+
+  export type MediaFileGroupByOutputType = {
+    id: string
+    userId: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    uploadType: $Enums.MediaUploadType
+    category: string | null
+    isPublic: boolean
+    url: string | null
+    uploadedAt: Date
+    metadata: JsonValue | null
+    createdAt: Date
+    updatedAt: Date
+    _count: MediaFileCountAggregateOutputType | null
+    _avg: MediaFileAvgAggregateOutputType | null
+    _sum: MediaFileSumAggregateOutputType | null
+    _min: MediaFileMinAggregateOutputType | null
+    _max: MediaFileMaxAggregateOutputType | null
+  }
+
+  type GetMediaFileGroupByPayload<T extends MediaFileGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MediaFileGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MediaFileGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MediaFileGroupByOutputType[P]>
+            : GetScalarType<T[P], MediaFileGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MediaFileSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    fileName?: boolean
+    originalName?: boolean
+    fileType?: boolean
+    fileSize?: boolean
+    uploadType?: boolean
+    category?: boolean
+    isPublic?: boolean
+    url?: boolean
+    uploadedAt?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mediaFile"]>
+
+  export type MediaFileSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    fileName?: boolean
+    originalName?: boolean
+    fileType?: boolean
+    fileSize?: boolean
+    uploadType?: boolean
+    category?: boolean
+    isPublic?: boolean
+    url?: boolean
+    uploadedAt?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mediaFile"]>
+
+  export type MediaFileSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    fileName?: boolean
+    originalName?: boolean
+    fileType?: boolean
+    fileSize?: boolean
+    uploadType?: boolean
+    category?: boolean
+    isPublic?: boolean
+    url?: boolean
+    uploadedAt?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mediaFile"]>
+
+  export type MediaFileSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    fileName?: boolean
+    originalName?: boolean
+    fileType?: boolean
+    fileSize?: boolean
+    uploadType?: boolean
+    category?: boolean
+    isPublic?: boolean
+    url?: boolean
+    uploadedAt?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type MediaFileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "fileName" | "originalName" | "fileType" | "fileSize" | "uploadType" | "category" | "isPublic" | "url" | "uploadedAt" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["mediaFile"]>
+  export type MediaFileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MediaFileIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type MediaFileIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $MediaFilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MediaFile"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      fileName: string
+      originalName: string
+      fileType: string
+      fileSize: number
+      uploadType: $Enums.MediaUploadType
+      category: string | null
+      isPublic: boolean
+      url: string | null
+      uploadedAt: Date
+      metadata: Prisma.JsonValue | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["mediaFile"]>
+    composites: {}
+  }
+
+  type MediaFileGetPayload<S extends boolean | null | undefined | MediaFileDefaultArgs> = $Result.GetResult<Prisma.$MediaFilePayload, S>
+
+  type MediaFileCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MediaFileFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MediaFileCountAggregateInputType | true
+    }
+
+  export interface MediaFileDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MediaFile'], meta: { name: 'MediaFile' } }
+    /**
+     * Find zero or one MediaFile that matches the filter.
+     * @param {MediaFileFindUniqueArgs} args - Arguments to find a MediaFile
+     * @example
+     * // Get one MediaFile
+     * const mediaFile = await prisma.mediaFile.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MediaFileFindUniqueArgs>(args: SelectSubset<T, MediaFileFindUniqueArgs<ExtArgs>>): Prisma__MediaFileClient<$Result.GetResult<Prisma.$MediaFilePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MediaFile that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MediaFileFindUniqueOrThrowArgs} args - Arguments to find a MediaFile
+     * @example
+     * // Get one MediaFile
+     * const mediaFile = await prisma.mediaFile.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MediaFileFindUniqueOrThrowArgs>(args: SelectSubset<T, MediaFileFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MediaFileClient<$Result.GetResult<Prisma.$MediaFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MediaFile that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaFileFindFirstArgs} args - Arguments to find a MediaFile
+     * @example
+     * // Get one MediaFile
+     * const mediaFile = await prisma.mediaFile.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MediaFileFindFirstArgs>(args?: SelectSubset<T, MediaFileFindFirstArgs<ExtArgs>>): Prisma__MediaFileClient<$Result.GetResult<Prisma.$MediaFilePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MediaFile that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaFileFindFirstOrThrowArgs} args - Arguments to find a MediaFile
+     * @example
+     * // Get one MediaFile
+     * const mediaFile = await prisma.mediaFile.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MediaFileFindFirstOrThrowArgs>(args?: SelectSubset<T, MediaFileFindFirstOrThrowArgs<ExtArgs>>): Prisma__MediaFileClient<$Result.GetResult<Prisma.$MediaFilePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MediaFiles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaFileFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MediaFiles
+     * const mediaFiles = await prisma.mediaFile.findMany()
+     * 
+     * // Get first 10 MediaFiles
+     * const mediaFiles = await prisma.mediaFile.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mediaFileWithIdOnly = await prisma.mediaFile.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MediaFileFindManyArgs>(args?: SelectSubset<T, MediaFileFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MediaFile.
+     * @param {MediaFileCreateArgs} args - Arguments to create a MediaFile.
+     * @example
+     * // Create one MediaFile
+     * const MediaFile = await prisma.mediaFile.create({
+     *   data: {
+     *     // ... data to create a MediaFile
+     *   }
+     * })
+     * 
+     */
+    create<T extends MediaFileCreateArgs>(args: SelectSubset<T, MediaFileCreateArgs<ExtArgs>>): Prisma__MediaFileClient<$Result.GetResult<Prisma.$MediaFilePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MediaFiles.
+     * @param {MediaFileCreateManyArgs} args - Arguments to create many MediaFiles.
+     * @example
+     * // Create many MediaFiles
+     * const mediaFile = await prisma.mediaFile.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MediaFileCreateManyArgs>(args?: SelectSubset<T, MediaFileCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MediaFiles and returns the data saved in the database.
+     * @param {MediaFileCreateManyAndReturnArgs} args - Arguments to create many MediaFiles.
+     * @example
+     * // Create many MediaFiles
+     * const mediaFile = await prisma.mediaFile.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MediaFiles and only return the `id`
+     * const mediaFileWithIdOnly = await prisma.mediaFile.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MediaFileCreateManyAndReturnArgs>(args?: SelectSubset<T, MediaFileCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaFilePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MediaFile.
+     * @param {MediaFileDeleteArgs} args - Arguments to delete one MediaFile.
+     * @example
+     * // Delete one MediaFile
+     * const MediaFile = await prisma.mediaFile.delete({
+     *   where: {
+     *     // ... filter to delete one MediaFile
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MediaFileDeleteArgs>(args: SelectSubset<T, MediaFileDeleteArgs<ExtArgs>>): Prisma__MediaFileClient<$Result.GetResult<Prisma.$MediaFilePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MediaFile.
+     * @param {MediaFileUpdateArgs} args - Arguments to update one MediaFile.
+     * @example
+     * // Update one MediaFile
+     * const mediaFile = await prisma.mediaFile.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MediaFileUpdateArgs>(args: SelectSubset<T, MediaFileUpdateArgs<ExtArgs>>): Prisma__MediaFileClient<$Result.GetResult<Prisma.$MediaFilePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MediaFiles.
+     * @param {MediaFileDeleteManyArgs} args - Arguments to filter MediaFiles to delete.
+     * @example
+     * // Delete a few MediaFiles
+     * const { count } = await prisma.mediaFile.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MediaFileDeleteManyArgs>(args?: SelectSubset<T, MediaFileDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MediaFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaFileUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MediaFiles
+     * const mediaFile = await prisma.mediaFile.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MediaFileUpdateManyArgs>(args: SelectSubset<T, MediaFileUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MediaFiles and returns the data updated in the database.
+     * @param {MediaFileUpdateManyAndReturnArgs} args - Arguments to update many MediaFiles.
+     * @example
+     * // Update many MediaFiles
+     * const mediaFile = await prisma.mediaFile.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MediaFiles and only return the `id`
+     * const mediaFileWithIdOnly = await prisma.mediaFile.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MediaFileUpdateManyAndReturnArgs>(args: SelectSubset<T, MediaFileUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaFilePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MediaFile.
+     * @param {MediaFileUpsertArgs} args - Arguments to update or create a MediaFile.
+     * @example
+     * // Update or create a MediaFile
+     * const mediaFile = await prisma.mediaFile.upsert({
+     *   create: {
+     *     // ... data to create a MediaFile
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MediaFile we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MediaFileUpsertArgs>(args: SelectSubset<T, MediaFileUpsertArgs<ExtArgs>>): Prisma__MediaFileClient<$Result.GetResult<Prisma.$MediaFilePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MediaFiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaFileCountArgs} args - Arguments to filter MediaFiles to count.
+     * @example
+     * // Count the number of MediaFiles
+     * const count = await prisma.mediaFile.count({
+     *   where: {
+     *     // ... the filter for the MediaFiles we want to count
+     *   }
+     * })
+    **/
+    count<T extends MediaFileCountArgs>(
+      args?: Subset<T, MediaFileCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MediaFileCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MediaFile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaFileAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MediaFileAggregateArgs>(args: Subset<T, MediaFileAggregateArgs>): Prisma.PrismaPromise<GetMediaFileAggregateType<T>>
+
+    /**
+     * Group by MediaFile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaFileGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MediaFileGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MediaFileGroupByArgs['orderBy'] }
+        : { orderBy?: MediaFileGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MediaFileGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMediaFileGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MediaFile model
+   */
+  readonly fields: MediaFileFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MediaFile.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MediaFileClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MediaFile model
+   */
+  interface MediaFileFieldRefs {
+    readonly id: FieldRef<"MediaFile", 'String'>
+    readonly userId: FieldRef<"MediaFile", 'String'>
+    readonly fileName: FieldRef<"MediaFile", 'String'>
+    readonly originalName: FieldRef<"MediaFile", 'String'>
+    readonly fileType: FieldRef<"MediaFile", 'String'>
+    readonly fileSize: FieldRef<"MediaFile", 'Int'>
+    readonly uploadType: FieldRef<"MediaFile", 'MediaUploadType'>
+    readonly category: FieldRef<"MediaFile", 'String'>
+    readonly isPublic: FieldRef<"MediaFile", 'Boolean'>
+    readonly url: FieldRef<"MediaFile", 'String'>
+    readonly uploadedAt: FieldRef<"MediaFile", 'DateTime'>
+    readonly metadata: FieldRef<"MediaFile", 'Json'>
+    readonly createdAt: FieldRef<"MediaFile", 'DateTime'>
+    readonly updatedAt: FieldRef<"MediaFile", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MediaFile findUnique
+   */
+  export type MediaFileFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaFile
+     */
+    select?: MediaFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaFile
+     */
+    omit?: MediaFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaFileInclude<ExtArgs> | null
+    /**
+     * Filter, which MediaFile to fetch.
+     */
+    where: MediaFileWhereUniqueInput
+  }
+
+  /**
+   * MediaFile findUniqueOrThrow
+   */
+  export type MediaFileFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaFile
+     */
+    select?: MediaFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaFile
+     */
+    omit?: MediaFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaFileInclude<ExtArgs> | null
+    /**
+     * Filter, which MediaFile to fetch.
+     */
+    where: MediaFileWhereUniqueInput
+  }
+
+  /**
+   * MediaFile findFirst
+   */
+  export type MediaFileFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaFile
+     */
+    select?: MediaFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaFile
+     */
+    omit?: MediaFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaFileInclude<ExtArgs> | null
+    /**
+     * Filter, which MediaFile to fetch.
+     */
+    where?: MediaFileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MediaFiles to fetch.
+     */
+    orderBy?: MediaFileOrderByWithRelationInput | MediaFileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MediaFiles.
+     */
+    cursor?: MediaFileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MediaFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MediaFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MediaFiles.
+     */
+    distinct?: MediaFileScalarFieldEnum | MediaFileScalarFieldEnum[]
+  }
+
+  /**
+   * MediaFile findFirstOrThrow
+   */
+  export type MediaFileFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaFile
+     */
+    select?: MediaFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaFile
+     */
+    omit?: MediaFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaFileInclude<ExtArgs> | null
+    /**
+     * Filter, which MediaFile to fetch.
+     */
+    where?: MediaFileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MediaFiles to fetch.
+     */
+    orderBy?: MediaFileOrderByWithRelationInput | MediaFileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MediaFiles.
+     */
+    cursor?: MediaFileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MediaFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MediaFiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MediaFiles.
+     */
+    distinct?: MediaFileScalarFieldEnum | MediaFileScalarFieldEnum[]
+  }
+
+  /**
+   * MediaFile findMany
+   */
+  export type MediaFileFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaFile
+     */
+    select?: MediaFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaFile
+     */
+    omit?: MediaFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaFileInclude<ExtArgs> | null
+    /**
+     * Filter, which MediaFiles to fetch.
+     */
+    where?: MediaFileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MediaFiles to fetch.
+     */
+    orderBy?: MediaFileOrderByWithRelationInput | MediaFileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MediaFiles.
+     */
+    cursor?: MediaFileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MediaFiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MediaFiles.
+     */
+    skip?: number
+    distinct?: MediaFileScalarFieldEnum | MediaFileScalarFieldEnum[]
+  }
+
+  /**
+   * MediaFile create
+   */
+  export type MediaFileCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaFile
+     */
+    select?: MediaFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaFile
+     */
+    omit?: MediaFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaFileInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MediaFile.
+     */
+    data: XOR<MediaFileCreateInput, MediaFileUncheckedCreateInput>
+  }
+
+  /**
+   * MediaFile createMany
+   */
+  export type MediaFileCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MediaFiles.
+     */
+    data: MediaFileCreateManyInput | MediaFileCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MediaFile createManyAndReturn
+   */
+  export type MediaFileCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaFile
+     */
+    select?: MediaFileSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaFile
+     */
+    omit?: MediaFileOmit<ExtArgs> | null
+    /**
+     * The data used to create many MediaFiles.
+     */
+    data: MediaFileCreateManyInput | MediaFileCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaFileIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MediaFile update
+   */
+  export type MediaFileUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaFile
+     */
+    select?: MediaFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaFile
+     */
+    omit?: MediaFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaFileInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MediaFile.
+     */
+    data: XOR<MediaFileUpdateInput, MediaFileUncheckedUpdateInput>
+    /**
+     * Choose, which MediaFile to update.
+     */
+    where: MediaFileWhereUniqueInput
+  }
+
+  /**
+   * MediaFile updateMany
+   */
+  export type MediaFileUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MediaFiles.
+     */
+    data: XOR<MediaFileUpdateManyMutationInput, MediaFileUncheckedUpdateManyInput>
+    /**
+     * Filter which MediaFiles to update
+     */
+    where?: MediaFileWhereInput
+    /**
+     * Limit how many MediaFiles to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MediaFile updateManyAndReturn
+   */
+  export type MediaFileUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaFile
+     */
+    select?: MediaFileSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaFile
+     */
+    omit?: MediaFileOmit<ExtArgs> | null
+    /**
+     * The data used to update MediaFiles.
+     */
+    data: XOR<MediaFileUpdateManyMutationInput, MediaFileUncheckedUpdateManyInput>
+    /**
+     * Filter which MediaFiles to update
+     */
+    where?: MediaFileWhereInput
+    /**
+     * Limit how many MediaFiles to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaFileIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MediaFile upsert
+   */
+  export type MediaFileUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaFile
+     */
+    select?: MediaFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaFile
+     */
+    omit?: MediaFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaFileInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MediaFile to update in case it exists.
+     */
+    where: MediaFileWhereUniqueInput
+    /**
+     * In case the MediaFile found by the `where` argument doesn't exist, create a new MediaFile with this data.
+     */
+    create: XOR<MediaFileCreateInput, MediaFileUncheckedCreateInput>
+    /**
+     * In case the MediaFile was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MediaFileUpdateInput, MediaFileUncheckedUpdateInput>
+  }
+
+  /**
+   * MediaFile delete
+   */
+  export type MediaFileDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaFile
+     */
+    select?: MediaFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaFile
+     */
+    omit?: MediaFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaFileInclude<ExtArgs> | null
+    /**
+     * Filter which MediaFile to delete.
+     */
+    where: MediaFileWhereUniqueInput
+  }
+
+  /**
+   * MediaFile deleteMany
+   */
+  export type MediaFileDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MediaFiles to delete
+     */
+    where?: MediaFileWhereInput
+    /**
+     * Limit how many MediaFiles to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MediaFile without action
+   */
+  export type MediaFileDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaFile
+     */
+    select?: MediaFileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaFile
+     */
+    omit?: MediaFileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaFileInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -21384,6 +26942,85 @@ export namespace Prisma {
   };
 
   export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
+
+
+  export const VerificationDocumentScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    docType: 'docType',
+    fileName: 'fileName',
+    originalName: 'originalName',
+    fileType: 'fileType',
+    fileSize: 'fileSize',
+    status: 'status',
+    uploadedAt: 'uploadedAt',
+    reviewedAt: 'reviewedAt',
+    reviewedBy: 'reviewedBy',
+    metadata: 'metadata',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type VerificationDocumentScalarFieldEnum = (typeof VerificationDocumentScalarFieldEnum)[keyof typeof VerificationDocumentScalarFieldEnum]
+
+
+  export const JobAssetScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    jobId: 'jobId',
+    fileName: 'fileName',
+    originalName: 'originalName',
+    fileType: 'fileType',
+    fileSize: 'fileSize',
+    category: 'category',
+    isPublic: 'isPublic',
+    url: 'url',
+    uploadedAt: 'uploadedAt',
+    metadata: 'metadata',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type JobAssetScalarFieldEnum = (typeof JobAssetScalarFieldEnum)[keyof typeof JobAssetScalarFieldEnum]
+
+
+  export const ChatAttachmentScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    chatId: 'chatId',
+    messageId: 'messageId',
+    fileName: 'fileName',
+    originalName: 'originalName',
+    fileType: 'fileType',
+    fileSize: 'fileSize',
+    url: 'url',
+    uploadedAt: 'uploadedAt',
+    metadata: 'metadata',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ChatAttachmentScalarFieldEnum = (typeof ChatAttachmentScalarFieldEnum)[keyof typeof ChatAttachmentScalarFieldEnum]
+
+
+  export const MediaFileScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    fileName: 'fileName',
+    originalName: 'originalName',
+    fileType: 'fileType',
+    fileSize: 'fileSize',
+    uploadType: 'uploadType',
+    category: 'category',
+    isPublic: 'isPublic',
+    url: 'url',
+    uploadedAt: 'uploadedAt',
+    metadata: 'metadata',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type MediaFileScalarFieldEnum = (typeof MediaFileScalarFieldEnum)[keyof typeof MediaFileScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -21661,6 +27298,48 @@ export namespace Prisma {
    */
   export type ListEnumTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionType[]'>
     
+
+
+  /**
+   * Reference to a field of type 'VerificationDocType'
+   */
+  export type EnumVerificationDocTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VerificationDocType'>
+    
+
+
+  /**
+   * Reference to a field of type 'VerificationDocType[]'
+   */
+  export type ListEnumVerificationDocTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VerificationDocType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'VerificationStatus'
+   */
+  export type EnumVerificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VerificationStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'VerificationStatus[]'
+   */
+  export type ListEnumVerificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VerificationStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'MediaUploadType'
+   */
+  export type EnumMediaUploadTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MediaUploadType'>
+    
+
+
+  /**
+   * Reference to a field of type 'MediaUploadType[]'
+   */
+  export type ListEnumMediaUploadTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MediaUploadType[]'>
+    
   /**
    * Deep Input Types
    */
@@ -21688,6 +27367,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationListRelationFilter
     Conversation_Conversation_user2IdToUser?: ConversationListRelationFilter
     wallet?: XOR<WalletNullableScalarRelationFilter, WalletWhereInput> | null
+    verificationDocuments?: VerificationDocumentListRelationFilter
+    jobAssets?: JobAssetListRelationFilter
+    chatAttachments?: ChatAttachmentListRelationFilter
+    mediaFiles?: MediaFileListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -21709,6 +27392,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationOrderByRelationAggregateInput
     Conversation_Conversation_user2IdToUser?: ConversationOrderByRelationAggregateInput
     wallet?: WalletOrderByWithRelationInput
+    verificationDocuments?: VerificationDocumentOrderByRelationAggregateInput
+    jobAssets?: JobAssetOrderByRelationAggregateInput
+    chatAttachments?: ChatAttachmentOrderByRelationAggregateInput
+    mediaFiles?: MediaFileOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -21733,6 +27420,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationListRelationFilter
     Conversation_Conversation_user2IdToUser?: ConversationListRelationFilter
     wallet?: XOR<WalletNullableScalarRelationFilter, WalletWhereInput> | null
+    verificationDocuments?: VerificationDocumentListRelationFilter
+    jobAssets?: JobAssetListRelationFilter
+    chatAttachments?: ChatAttachmentListRelationFilter
+    mediaFiles?: MediaFileListRelationFilter
   }, "id" | "email" | "googleId">
 
   export type UserOrderByWithAggregationInput = {
@@ -21784,6 +27475,7 @@ export namespace Prisma {
     user2?: XOR<UserScalarRelationFilter, UserWhereInput>
     messages?: MessageListRelationFilter
     lastMessage?: XOR<MessageNullableScalarRelationFilter, MessageWhereInput> | null
+    attachments?: ChatAttachmentListRelationFilter
   }
 
   export type ConversationOrderByWithRelationInput = {
@@ -21798,6 +27490,7 @@ export namespace Prisma {
     user2?: UserOrderByWithRelationInput
     messages?: MessageOrderByRelationAggregateInput
     lastMessage?: MessageOrderByWithRelationInput
+    attachments?: ChatAttachmentOrderByRelationAggregateInput
   }
 
   export type ConversationWhereUniqueInput = Prisma.AtLeast<{
@@ -21816,6 +27509,7 @@ export namespace Prisma {
     user2?: XOR<UserScalarRelationFilter, UserWhereInput>
     messages?: MessageListRelationFilter
     lastMessage?: XOR<MessageNullableScalarRelationFilter, MessageWhereInput> | null
+    attachments?: ChatAttachmentListRelationFilter
   }, "id" | "lastMessageId" | "user1Id_user2Id">
 
   export type ConversationOrderByWithAggregationInput = {
@@ -21859,6 +27553,7 @@ export namespace Prisma {
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     receiver?: XOR<UserScalarRelationFilter, UserWhereInput>
     ConversationAsLast?: XOR<ConversationNullableScalarRelationFilter, ConversationWhereInput> | null
+    attachments?: ChatAttachmentListRelationFilter
   }
 
   export type MessageOrderByWithRelationInput = {
@@ -21873,6 +27568,7 @@ export namespace Prisma {
     sender?: UserOrderByWithRelationInput
     receiver?: UserOrderByWithRelationInput
     ConversationAsLast?: ConversationOrderByWithRelationInput
+    attachments?: ChatAttachmentOrderByRelationAggregateInput
   }
 
   export type MessageWhereUniqueInput = Prisma.AtLeast<{
@@ -21890,6 +27586,7 @@ export namespace Prisma {
     sender?: XOR<UserScalarRelationFilter, UserWhereInput>
     receiver?: XOR<UserScalarRelationFilter, UserWhereInput>
     ConversationAsLast?: XOR<ConversationNullableScalarRelationFilter, ConversationWhereInput> | null
+    attachments?: ChatAttachmentListRelationFilter
   }, "id">
 
   export type MessageOrderByWithAggregationInput = {
@@ -22104,6 +27801,7 @@ export namespace Prisma {
     contract?: XOR<ContractNullableScalarRelationFilter, ContractWhereInput> | null
     client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
     proposals?: ProposalListRelationFilter
+    assets?: JobAssetListRelationFilter
   }
 
   export type JobOrderByWithRelationInput = {
@@ -22119,6 +27817,7 @@ export namespace Prisma {
     contract?: ContractOrderByWithRelationInput
     client?: ClientOrderByWithRelationInput
     proposals?: ProposalOrderByRelationAggregateInput
+    assets?: JobAssetOrderByRelationAggregateInput
   }
 
   export type JobWhereUniqueInput = Prisma.AtLeast<{
@@ -22137,6 +27836,7 @@ export namespace Prisma {
     contract?: XOR<ContractNullableScalarRelationFilter, ContractWhereInput> | null
     client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
     proposals?: ProposalListRelationFilter
+    assets?: JobAssetListRelationFilter
   }, "id">
 
   export type JobOrderByWithAggregationInput = {
@@ -22874,6 +28574,419 @@ export namespace Prisma {
     freelancerId?: StringWithAggregatesFilter<"Review"> | string
   }
 
+  export type VerificationDocumentWhereInput = {
+    AND?: VerificationDocumentWhereInput | VerificationDocumentWhereInput[]
+    OR?: VerificationDocumentWhereInput[]
+    NOT?: VerificationDocumentWhereInput | VerificationDocumentWhereInput[]
+    id?: StringFilter<"VerificationDocument"> | string
+    userId?: StringFilter<"VerificationDocument"> | string
+    docType?: EnumVerificationDocTypeFilter<"VerificationDocument"> | $Enums.VerificationDocType
+    fileName?: StringFilter<"VerificationDocument"> | string
+    originalName?: StringFilter<"VerificationDocument"> | string
+    fileType?: StringFilter<"VerificationDocument"> | string
+    fileSize?: IntFilter<"VerificationDocument"> | number
+    status?: EnumVerificationStatusFilter<"VerificationDocument"> | $Enums.VerificationStatus
+    uploadedAt?: DateTimeFilter<"VerificationDocument"> | Date | string
+    reviewedAt?: DateTimeNullableFilter<"VerificationDocument"> | Date | string | null
+    reviewedBy?: StringNullableFilter<"VerificationDocument"> | string | null
+    metadata?: JsonNullableFilter<"VerificationDocument">
+    createdAt?: DateTimeFilter<"VerificationDocument"> | Date | string
+    updatedAt?: DateTimeFilter<"VerificationDocument"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type VerificationDocumentOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    docType?: SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    status?: SortOrder
+    uploadedAt?: SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    reviewedBy?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type VerificationDocumentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_docType?: VerificationDocumentUserIdDocTypeCompoundUniqueInput
+    AND?: VerificationDocumentWhereInput | VerificationDocumentWhereInput[]
+    OR?: VerificationDocumentWhereInput[]
+    NOT?: VerificationDocumentWhereInput | VerificationDocumentWhereInput[]
+    userId?: StringFilter<"VerificationDocument"> | string
+    docType?: EnumVerificationDocTypeFilter<"VerificationDocument"> | $Enums.VerificationDocType
+    fileName?: StringFilter<"VerificationDocument"> | string
+    originalName?: StringFilter<"VerificationDocument"> | string
+    fileType?: StringFilter<"VerificationDocument"> | string
+    fileSize?: IntFilter<"VerificationDocument"> | number
+    status?: EnumVerificationStatusFilter<"VerificationDocument"> | $Enums.VerificationStatus
+    uploadedAt?: DateTimeFilter<"VerificationDocument"> | Date | string
+    reviewedAt?: DateTimeNullableFilter<"VerificationDocument"> | Date | string | null
+    reviewedBy?: StringNullableFilter<"VerificationDocument"> | string | null
+    metadata?: JsonNullableFilter<"VerificationDocument">
+    createdAt?: DateTimeFilter<"VerificationDocument"> | Date | string
+    updatedAt?: DateTimeFilter<"VerificationDocument"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId_docType">
+
+  export type VerificationDocumentOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    docType?: SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    status?: SortOrder
+    uploadedAt?: SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    reviewedBy?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: VerificationDocumentCountOrderByAggregateInput
+    _avg?: VerificationDocumentAvgOrderByAggregateInput
+    _max?: VerificationDocumentMaxOrderByAggregateInput
+    _min?: VerificationDocumentMinOrderByAggregateInput
+    _sum?: VerificationDocumentSumOrderByAggregateInput
+  }
+
+  export type VerificationDocumentScalarWhereWithAggregatesInput = {
+    AND?: VerificationDocumentScalarWhereWithAggregatesInput | VerificationDocumentScalarWhereWithAggregatesInput[]
+    OR?: VerificationDocumentScalarWhereWithAggregatesInput[]
+    NOT?: VerificationDocumentScalarWhereWithAggregatesInput | VerificationDocumentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"VerificationDocument"> | string
+    userId?: StringWithAggregatesFilter<"VerificationDocument"> | string
+    docType?: EnumVerificationDocTypeWithAggregatesFilter<"VerificationDocument"> | $Enums.VerificationDocType
+    fileName?: StringWithAggregatesFilter<"VerificationDocument"> | string
+    originalName?: StringWithAggregatesFilter<"VerificationDocument"> | string
+    fileType?: StringWithAggregatesFilter<"VerificationDocument"> | string
+    fileSize?: IntWithAggregatesFilter<"VerificationDocument"> | number
+    status?: EnumVerificationStatusWithAggregatesFilter<"VerificationDocument"> | $Enums.VerificationStatus
+    uploadedAt?: DateTimeWithAggregatesFilter<"VerificationDocument"> | Date | string
+    reviewedAt?: DateTimeNullableWithAggregatesFilter<"VerificationDocument"> | Date | string | null
+    reviewedBy?: StringNullableWithAggregatesFilter<"VerificationDocument"> | string | null
+    metadata?: JsonNullableWithAggregatesFilter<"VerificationDocument">
+    createdAt?: DateTimeWithAggregatesFilter<"VerificationDocument"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"VerificationDocument"> | Date | string
+  }
+
+  export type JobAssetWhereInput = {
+    AND?: JobAssetWhereInput | JobAssetWhereInput[]
+    OR?: JobAssetWhereInput[]
+    NOT?: JobAssetWhereInput | JobAssetWhereInput[]
+    id?: StringFilter<"JobAsset"> | string
+    userId?: StringFilter<"JobAsset"> | string
+    jobId?: StringNullableFilter<"JobAsset"> | string | null
+    fileName?: StringFilter<"JobAsset"> | string
+    originalName?: StringFilter<"JobAsset"> | string
+    fileType?: StringFilter<"JobAsset"> | string
+    fileSize?: IntFilter<"JobAsset"> | number
+    category?: StringNullableFilter<"JobAsset"> | string | null
+    isPublic?: BoolFilter<"JobAsset"> | boolean
+    url?: StringNullableFilter<"JobAsset"> | string | null
+    uploadedAt?: DateTimeFilter<"JobAsset"> | Date | string
+    metadata?: JsonNullableFilter<"JobAsset">
+    createdAt?: DateTimeFilter<"JobAsset"> | Date | string
+    updatedAt?: DateTimeFilter<"JobAsset"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    job?: XOR<JobNullableScalarRelationFilter, JobWhereInput> | null
+  }
+
+  export type JobAssetOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    jobId?: SortOrderInput | SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    category?: SortOrderInput | SortOrder
+    isPublic?: SortOrder
+    url?: SortOrderInput | SortOrder
+    uploadedAt?: SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    job?: JobOrderByWithRelationInput
+  }
+
+  export type JobAssetWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: JobAssetWhereInput | JobAssetWhereInput[]
+    OR?: JobAssetWhereInput[]
+    NOT?: JobAssetWhereInput | JobAssetWhereInput[]
+    userId?: StringFilter<"JobAsset"> | string
+    jobId?: StringNullableFilter<"JobAsset"> | string | null
+    fileName?: StringFilter<"JobAsset"> | string
+    originalName?: StringFilter<"JobAsset"> | string
+    fileType?: StringFilter<"JobAsset"> | string
+    fileSize?: IntFilter<"JobAsset"> | number
+    category?: StringNullableFilter<"JobAsset"> | string | null
+    isPublic?: BoolFilter<"JobAsset"> | boolean
+    url?: StringNullableFilter<"JobAsset"> | string | null
+    uploadedAt?: DateTimeFilter<"JobAsset"> | Date | string
+    metadata?: JsonNullableFilter<"JobAsset">
+    createdAt?: DateTimeFilter<"JobAsset"> | Date | string
+    updatedAt?: DateTimeFilter<"JobAsset"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    job?: XOR<JobNullableScalarRelationFilter, JobWhereInput> | null
+  }, "id">
+
+  export type JobAssetOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    jobId?: SortOrderInput | SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    category?: SortOrderInput | SortOrder
+    isPublic?: SortOrder
+    url?: SortOrderInput | SortOrder
+    uploadedAt?: SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: JobAssetCountOrderByAggregateInput
+    _avg?: JobAssetAvgOrderByAggregateInput
+    _max?: JobAssetMaxOrderByAggregateInput
+    _min?: JobAssetMinOrderByAggregateInput
+    _sum?: JobAssetSumOrderByAggregateInput
+  }
+
+  export type JobAssetScalarWhereWithAggregatesInput = {
+    AND?: JobAssetScalarWhereWithAggregatesInput | JobAssetScalarWhereWithAggregatesInput[]
+    OR?: JobAssetScalarWhereWithAggregatesInput[]
+    NOT?: JobAssetScalarWhereWithAggregatesInput | JobAssetScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"JobAsset"> | string
+    userId?: StringWithAggregatesFilter<"JobAsset"> | string
+    jobId?: StringNullableWithAggregatesFilter<"JobAsset"> | string | null
+    fileName?: StringWithAggregatesFilter<"JobAsset"> | string
+    originalName?: StringWithAggregatesFilter<"JobAsset"> | string
+    fileType?: StringWithAggregatesFilter<"JobAsset"> | string
+    fileSize?: IntWithAggregatesFilter<"JobAsset"> | number
+    category?: StringNullableWithAggregatesFilter<"JobAsset"> | string | null
+    isPublic?: BoolWithAggregatesFilter<"JobAsset"> | boolean
+    url?: StringNullableWithAggregatesFilter<"JobAsset"> | string | null
+    uploadedAt?: DateTimeWithAggregatesFilter<"JobAsset"> | Date | string
+    metadata?: JsonNullableWithAggregatesFilter<"JobAsset">
+    createdAt?: DateTimeWithAggregatesFilter<"JobAsset"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"JobAsset"> | Date | string
+  }
+
+  export type ChatAttachmentWhereInput = {
+    AND?: ChatAttachmentWhereInput | ChatAttachmentWhereInput[]
+    OR?: ChatAttachmentWhereInput[]
+    NOT?: ChatAttachmentWhereInput | ChatAttachmentWhereInput[]
+    id?: StringFilter<"ChatAttachment"> | string
+    userId?: StringFilter<"ChatAttachment"> | string
+    chatId?: StringFilter<"ChatAttachment"> | string
+    messageId?: StringNullableFilter<"ChatAttachment"> | string | null
+    fileName?: StringFilter<"ChatAttachment"> | string
+    originalName?: StringFilter<"ChatAttachment"> | string
+    fileType?: StringFilter<"ChatAttachment"> | string
+    fileSize?: IntFilter<"ChatAttachment"> | number
+    url?: StringFilter<"ChatAttachment"> | string
+    uploadedAt?: DateTimeFilter<"ChatAttachment"> | Date | string
+    metadata?: JsonNullableFilter<"ChatAttachment">
+    createdAt?: DateTimeFilter<"ChatAttachment"> | Date | string
+    updatedAt?: DateTimeFilter<"ChatAttachment"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    conversation?: XOR<ConversationScalarRelationFilter, ConversationWhereInput>
+    message?: XOR<MessageNullableScalarRelationFilter, MessageWhereInput> | null
+  }
+
+  export type ChatAttachmentOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    chatId?: SortOrder
+    messageId?: SortOrderInput | SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    url?: SortOrder
+    uploadedAt?: SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    conversation?: ConversationOrderByWithRelationInput
+    message?: MessageOrderByWithRelationInput
+  }
+
+  export type ChatAttachmentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ChatAttachmentWhereInput | ChatAttachmentWhereInput[]
+    OR?: ChatAttachmentWhereInput[]
+    NOT?: ChatAttachmentWhereInput | ChatAttachmentWhereInput[]
+    userId?: StringFilter<"ChatAttachment"> | string
+    chatId?: StringFilter<"ChatAttachment"> | string
+    messageId?: StringNullableFilter<"ChatAttachment"> | string | null
+    fileName?: StringFilter<"ChatAttachment"> | string
+    originalName?: StringFilter<"ChatAttachment"> | string
+    fileType?: StringFilter<"ChatAttachment"> | string
+    fileSize?: IntFilter<"ChatAttachment"> | number
+    url?: StringFilter<"ChatAttachment"> | string
+    uploadedAt?: DateTimeFilter<"ChatAttachment"> | Date | string
+    metadata?: JsonNullableFilter<"ChatAttachment">
+    createdAt?: DateTimeFilter<"ChatAttachment"> | Date | string
+    updatedAt?: DateTimeFilter<"ChatAttachment"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    conversation?: XOR<ConversationScalarRelationFilter, ConversationWhereInput>
+    message?: XOR<MessageNullableScalarRelationFilter, MessageWhereInput> | null
+  }, "id">
+
+  export type ChatAttachmentOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    chatId?: SortOrder
+    messageId?: SortOrderInput | SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    url?: SortOrder
+    uploadedAt?: SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ChatAttachmentCountOrderByAggregateInput
+    _avg?: ChatAttachmentAvgOrderByAggregateInput
+    _max?: ChatAttachmentMaxOrderByAggregateInput
+    _min?: ChatAttachmentMinOrderByAggregateInput
+    _sum?: ChatAttachmentSumOrderByAggregateInput
+  }
+
+  export type ChatAttachmentScalarWhereWithAggregatesInput = {
+    AND?: ChatAttachmentScalarWhereWithAggregatesInput | ChatAttachmentScalarWhereWithAggregatesInput[]
+    OR?: ChatAttachmentScalarWhereWithAggregatesInput[]
+    NOT?: ChatAttachmentScalarWhereWithAggregatesInput | ChatAttachmentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ChatAttachment"> | string
+    userId?: StringWithAggregatesFilter<"ChatAttachment"> | string
+    chatId?: StringWithAggregatesFilter<"ChatAttachment"> | string
+    messageId?: StringNullableWithAggregatesFilter<"ChatAttachment"> | string | null
+    fileName?: StringWithAggregatesFilter<"ChatAttachment"> | string
+    originalName?: StringWithAggregatesFilter<"ChatAttachment"> | string
+    fileType?: StringWithAggregatesFilter<"ChatAttachment"> | string
+    fileSize?: IntWithAggregatesFilter<"ChatAttachment"> | number
+    url?: StringWithAggregatesFilter<"ChatAttachment"> | string
+    uploadedAt?: DateTimeWithAggregatesFilter<"ChatAttachment"> | Date | string
+    metadata?: JsonNullableWithAggregatesFilter<"ChatAttachment">
+    createdAt?: DateTimeWithAggregatesFilter<"ChatAttachment"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ChatAttachment"> | Date | string
+  }
+
+  export type MediaFileWhereInput = {
+    AND?: MediaFileWhereInput | MediaFileWhereInput[]
+    OR?: MediaFileWhereInput[]
+    NOT?: MediaFileWhereInput | MediaFileWhereInput[]
+    id?: StringFilter<"MediaFile"> | string
+    userId?: StringFilter<"MediaFile"> | string
+    fileName?: StringFilter<"MediaFile"> | string
+    originalName?: StringFilter<"MediaFile"> | string
+    fileType?: StringFilter<"MediaFile"> | string
+    fileSize?: IntFilter<"MediaFile"> | number
+    uploadType?: EnumMediaUploadTypeFilter<"MediaFile"> | $Enums.MediaUploadType
+    category?: StringNullableFilter<"MediaFile"> | string | null
+    isPublic?: BoolFilter<"MediaFile"> | boolean
+    url?: StringNullableFilter<"MediaFile"> | string | null
+    uploadedAt?: DateTimeFilter<"MediaFile"> | Date | string
+    metadata?: JsonNullableFilter<"MediaFile">
+    createdAt?: DateTimeFilter<"MediaFile"> | Date | string
+    updatedAt?: DateTimeFilter<"MediaFile"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type MediaFileOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    uploadType?: SortOrder
+    category?: SortOrderInput | SortOrder
+    isPublic?: SortOrder
+    url?: SortOrderInput | SortOrder
+    uploadedAt?: SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type MediaFileWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MediaFileWhereInput | MediaFileWhereInput[]
+    OR?: MediaFileWhereInput[]
+    NOT?: MediaFileWhereInput | MediaFileWhereInput[]
+    userId?: StringFilter<"MediaFile"> | string
+    fileName?: StringFilter<"MediaFile"> | string
+    originalName?: StringFilter<"MediaFile"> | string
+    fileType?: StringFilter<"MediaFile"> | string
+    fileSize?: IntFilter<"MediaFile"> | number
+    uploadType?: EnumMediaUploadTypeFilter<"MediaFile"> | $Enums.MediaUploadType
+    category?: StringNullableFilter<"MediaFile"> | string | null
+    isPublic?: BoolFilter<"MediaFile"> | boolean
+    url?: StringNullableFilter<"MediaFile"> | string | null
+    uploadedAt?: DateTimeFilter<"MediaFile"> | Date | string
+    metadata?: JsonNullableFilter<"MediaFile">
+    createdAt?: DateTimeFilter<"MediaFile"> | Date | string
+    updatedAt?: DateTimeFilter<"MediaFile"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type MediaFileOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    uploadType?: SortOrder
+    category?: SortOrderInput | SortOrder
+    isPublic?: SortOrder
+    url?: SortOrderInput | SortOrder
+    uploadedAt?: SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: MediaFileCountOrderByAggregateInput
+    _avg?: MediaFileAvgOrderByAggregateInput
+    _max?: MediaFileMaxOrderByAggregateInput
+    _min?: MediaFileMinOrderByAggregateInput
+    _sum?: MediaFileSumOrderByAggregateInput
+  }
+
+  export type MediaFileScalarWhereWithAggregatesInput = {
+    AND?: MediaFileScalarWhereWithAggregatesInput | MediaFileScalarWhereWithAggregatesInput[]
+    OR?: MediaFileScalarWhereWithAggregatesInput[]
+    NOT?: MediaFileScalarWhereWithAggregatesInput | MediaFileScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MediaFile"> | string
+    userId?: StringWithAggregatesFilter<"MediaFile"> | string
+    fileName?: StringWithAggregatesFilter<"MediaFile"> | string
+    originalName?: StringWithAggregatesFilter<"MediaFile"> | string
+    fileType?: StringWithAggregatesFilter<"MediaFile"> | string
+    fileSize?: IntWithAggregatesFilter<"MediaFile"> | number
+    uploadType?: EnumMediaUploadTypeWithAggregatesFilter<"MediaFile"> | $Enums.MediaUploadType
+    category?: StringNullableWithAggregatesFilter<"MediaFile"> | string | null
+    isPublic?: BoolWithAggregatesFilter<"MediaFile"> | boolean
+    url?: StringNullableWithAggregatesFilter<"MediaFile"> | string | null
+    uploadedAt?: DateTimeWithAggregatesFilter<"MediaFile"> | Date | string
+    metadata?: JsonNullableWithAggregatesFilter<"MediaFile">
+    createdAt?: DateTimeWithAggregatesFilter<"MediaFile"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MediaFile"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -22893,6 +29006,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationCreateNestedManyWithoutUser1Input
     Conversation_Conversation_user2IdToUser?: ConversationCreateNestedManyWithoutUser2Input
     wallet?: WalletCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -22914,6 +29031,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser1Input
     Conversation_Conversation_user2IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser2Input
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentUncheckedCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetUncheckedCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentUncheckedCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -22935,6 +29056,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationUpdateManyWithoutUser1NestedInput
     Conversation_Conversation_user2IdToUser?: ConversationUpdateManyWithoutUser2NestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -22956,6 +29081,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationUncheckedUpdateManyWithoutUser1NestedInput
     Conversation_Conversation_user2IdToUser?: ConversationUncheckedUpdateManyWithoutUser2NestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUncheckedUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUncheckedUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUncheckedUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -23009,6 +29138,7 @@ export namespace Prisma {
     user2: UserCreateNestedOneWithoutConversation_Conversation_user2IdToUserInput
     messages?: MessageCreateNestedManyWithoutConversationInput
     lastMessage?: MessageCreateNestedOneWithoutConversationAsLastInput
+    attachments?: ChatAttachmentCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationUncheckedCreateInput = {
@@ -23020,6 +29150,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+    attachments?: ChatAttachmentUncheckedCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationUpdateInput = {
@@ -23031,6 +29162,7 @@ export namespace Prisma {
     user2?: UserUpdateOneRequiredWithoutConversation_Conversation_user2IdToUserNestedInput
     messages?: MessageUpdateManyWithoutConversationNestedInput
     lastMessage?: MessageUpdateOneWithoutConversationAsLastNestedInput
+    attachments?: ChatAttachmentUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateInput = {
@@ -23042,6 +29174,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+    attachments?: ChatAttachmentUncheckedUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationCreateManyInput = {
@@ -23080,6 +29213,7 @@ export namespace Prisma {
     sender: UserCreateNestedOneWithoutMessage_Message_senderIdToUserInput
     receiver: UserCreateNestedOneWithoutMessage_Message_receiverIdToUserInput
     ConversationAsLast?: ConversationCreateNestedOneWithoutLastMessageInput
+    attachments?: ChatAttachmentCreateNestedManyWithoutMessageInput
   }
 
   export type MessageUncheckedCreateInput = {
@@ -23091,6 +29225,7 @@ export namespace Prisma {
     timestamp?: Date | string
     readAt?: Date | string | null
     ConversationAsLast?: ConversationUncheckedCreateNestedOneWithoutLastMessageInput
+    attachments?: ChatAttachmentUncheckedCreateNestedManyWithoutMessageInput
   }
 
   export type MessageUpdateInput = {
@@ -23102,6 +29237,7 @@ export namespace Prisma {
     sender?: UserUpdateOneRequiredWithoutMessage_Message_senderIdToUserNestedInput
     receiver?: UserUpdateOneRequiredWithoutMessage_Message_receiverIdToUserNestedInput
     ConversationAsLast?: ConversationUpdateOneWithoutLastMessageNestedInput
+    attachments?: ChatAttachmentUpdateManyWithoutMessageNestedInput
   }
 
   export type MessageUncheckedUpdateInput = {
@@ -23113,6 +29249,7 @@ export namespace Prisma {
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConversationAsLast?: ConversationUncheckedUpdateOneWithoutLastMessageNestedInput
+    attachments?: ChatAttachmentUncheckedUpdateManyWithoutMessageNestedInput
   }
 
   export type MessageCreateManyInput = {
@@ -23350,6 +29487,7 @@ export namespace Prisma {
     contract?: ContractCreateNestedOneWithoutJobInput
     client: ClientCreateNestedOneWithoutJobsInput
     proposals?: ProposalCreateNestedManyWithoutJobInput
+    assets?: JobAssetCreateNestedManyWithoutJobInput
   }
 
   export type JobUncheckedCreateInput = {
@@ -23364,6 +29502,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     contract?: ContractUncheckedCreateNestedOneWithoutJobInput
     proposals?: ProposalUncheckedCreateNestedManyWithoutJobInput
+    assets?: JobAssetUncheckedCreateNestedManyWithoutJobInput
   }
 
   export type JobUpdateInput = {
@@ -23378,6 +29517,7 @@ export namespace Prisma {
     contract?: ContractUpdateOneWithoutJobNestedInput
     client?: ClientUpdateOneRequiredWithoutJobsNestedInput
     proposals?: ProposalUpdateManyWithoutJobNestedInput
+    assets?: JobAssetUpdateManyWithoutJobNestedInput
   }
 
   export type JobUncheckedUpdateInput = {
@@ -23392,6 +29532,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contract?: ContractUncheckedUpdateOneWithoutJobNestedInput
     proposals?: ProposalUncheckedUpdateManyWithoutJobNestedInput
+    assets?: JobAssetUncheckedUpdateManyWithoutJobNestedInput
   }
 
   export type JobCreateManyInput = {
@@ -24156,6 +30297,468 @@ export namespace Prisma {
     freelancerId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type VerificationDocumentCreateInput = {
+    id?: string
+    docType: $Enums.VerificationDocType
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    status?: $Enums.VerificationStatus
+    uploadedAt?: Date | string
+    reviewedAt?: Date | string | null
+    reviewedBy?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutVerificationDocumentsInput
+  }
+
+  export type VerificationDocumentUncheckedCreateInput = {
+    id?: string
+    userId: string
+    docType: $Enums.VerificationDocType
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    status?: $Enums.VerificationStatus
+    uploadedAt?: Date | string
+    reviewedAt?: Date | string | null
+    reviewedBy?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VerificationDocumentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    docType?: EnumVerificationDocTypeFieldUpdateOperationsInput | $Enums.VerificationDocType
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    status?: EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutVerificationDocumentsNestedInput
+  }
+
+  export type VerificationDocumentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    docType?: EnumVerificationDocTypeFieldUpdateOperationsInput | $Enums.VerificationDocType
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    status?: EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VerificationDocumentCreateManyInput = {
+    id?: string
+    userId: string
+    docType: $Enums.VerificationDocType
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    status?: $Enums.VerificationStatus
+    uploadedAt?: Date | string
+    reviewedAt?: Date | string | null
+    reviewedBy?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VerificationDocumentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    docType?: EnumVerificationDocTypeFieldUpdateOperationsInput | $Enums.VerificationDocType
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    status?: EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VerificationDocumentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    docType?: EnumVerificationDocTypeFieldUpdateOperationsInput | $Enums.VerificationDocType
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    status?: EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type JobAssetCreateInput = {
+    id?: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    category?: string | null
+    isPublic?: boolean
+    url?: string | null
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutJobAssetsInput
+    job?: JobCreateNestedOneWithoutAssetsInput
+  }
+
+  export type JobAssetUncheckedCreateInput = {
+    id?: string
+    userId: string
+    jobId?: string | null
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    category?: string | null
+    isPublic?: boolean
+    url?: string | null
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type JobAssetUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutJobAssetsNestedInput
+    job?: JobUpdateOneWithoutAssetsNestedInput
+  }
+
+  export type JobAssetUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    jobId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type JobAssetCreateManyInput = {
+    id?: string
+    userId: string
+    jobId?: string | null
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    category?: string | null
+    isPublic?: boolean
+    url?: string | null
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type JobAssetUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type JobAssetUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    jobId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChatAttachmentCreateInput = {
+    id?: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    url: string
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutChatAttachmentsInput
+    conversation: ConversationCreateNestedOneWithoutAttachmentsInput
+    message?: MessageCreateNestedOneWithoutAttachmentsInput
+  }
+
+  export type ChatAttachmentUncheckedCreateInput = {
+    id?: string
+    userId: string
+    chatId: string
+    messageId?: string | null
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    url: string
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ChatAttachmentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutChatAttachmentsNestedInput
+    conversation?: ConversationUpdateOneRequiredWithoutAttachmentsNestedInput
+    message?: MessageUpdateOneWithoutAttachmentsNestedInput
+  }
+
+  export type ChatAttachmentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    chatId?: StringFieldUpdateOperationsInput | string
+    messageId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChatAttachmentCreateManyInput = {
+    id?: string
+    userId: string
+    chatId: string
+    messageId?: string | null
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    url: string
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ChatAttachmentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChatAttachmentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    chatId?: StringFieldUpdateOperationsInput | string
+    messageId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MediaFileCreateInput = {
+    id?: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    uploadType: $Enums.MediaUploadType
+    category?: string | null
+    isPublic?: boolean
+    url?: string | null
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutMediaFilesInput
+  }
+
+  export type MediaFileUncheckedCreateInput = {
+    id?: string
+    userId: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    uploadType: $Enums.MediaUploadType
+    category?: string | null
+    isPublic?: boolean
+    url?: string | null
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MediaFileUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    uploadType?: EnumMediaUploadTypeFieldUpdateOperationsInput | $Enums.MediaUploadType
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutMediaFilesNestedInput
+  }
+
+  export type MediaFileUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    uploadType?: EnumMediaUploadTypeFieldUpdateOperationsInput | $Enums.MediaUploadType
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MediaFileCreateManyInput = {
+    id?: string
+    userId: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    uploadType: $Enums.MediaUploadType
+    category?: string | null
+    isPublic?: boolean
+    url?: string | null
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MediaFileUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    uploadType?: EnumMediaUploadTypeFieldUpdateOperationsInput | $Enums.MediaUploadType
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MediaFileUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    uploadType?: EnumMediaUploadTypeFieldUpdateOperationsInput | $Enums.MediaUploadType
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -24243,6 +30846,30 @@ export namespace Prisma {
     isNot?: WalletWhereInput | null
   }
 
+  export type VerificationDocumentListRelationFilter = {
+    every?: VerificationDocumentWhereInput
+    some?: VerificationDocumentWhereInput
+    none?: VerificationDocumentWhereInput
+  }
+
+  export type JobAssetListRelationFilter = {
+    every?: JobAssetWhereInput
+    some?: JobAssetWhereInput
+    none?: JobAssetWhereInput
+  }
+
+  export type ChatAttachmentListRelationFilter = {
+    every?: ChatAttachmentWhereInput
+    some?: ChatAttachmentWhereInput
+    none?: ChatAttachmentWhereInput
+  }
+
+  export type MediaFileListRelationFilter = {
+    every?: MediaFileWhereInput
+    some?: MediaFileWhereInput
+    none?: MediaFileWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -24253,6 +30880,22 @@ export namespace Prisma {
   }
 
   export type ConversationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type VerificationDocumentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type JobAssetOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ChatAttachmentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MediaFileOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -25395,6 +32038,292 @@ export namespace Prisma {
     rating?: SortOrder
   }
 
+  export type EnumVerificationDocTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.VerificationDocType | EnumVerificationDocTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.VerificationDocType[] | ListEnumVerificationDocTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VerificationDocType[] | ListEnumVerificationDocTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumVerificationDocTypeFilter<$PrismaModel> | $Enums.VerificationDocType
+  }
+
+  export type EnumVerificationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.VerificationStatus | EnumVerificationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.VerificationStatus[] | ListEnumVerificationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VerificationStatus[] | ListEnumVerificationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumVerificationStatusFilter<$PrismaModel> | $Enums.VerificationStatus
+  }
+
+  export type VerificationDocumentUserIdDocTypeCompoundUniqueInput = {
+    userId: string
+    docType: $Enums.VerificationDocType
+  }
+
+  export type VerificationDocumentCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    docType?: SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    status?: SortOrder
+    uploadedAt?: SortOrder
+    reviewedAt?: SortOrder
+    reviewedBy?: SortOrder
+    metadata?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VerificationDocumentAvgOrderByAggregateInput = {
+    fileSize?: SortOrder
+  }
+
+  export type VerificationDocumentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    docType?: SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    status?: SortOrder
+    uploadedAt?: SortOrder
+    reviewedAt?: SortOrder
+    reviewedBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VerificationDocumentMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    docType?: SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    status?: SortOrder
+    uploadedAt?: SortOrder
+    reviewedAt?: SortOrder
+    reviewedBy?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VerificationDocumentSumOrderByAggregateInput = {
+    fileSize?: SortOrder
+  }
+
+  export type EnumVerificationDocTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.VerificationDocType | EnumVerificationDocTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.VerificationDocType[] | ListEnumVerificationDocTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VerificationDocType[] | ListEnumVerificationDocTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumVerificationDocTypeWithAggregatesFilter<$PrismaModel> | $Enums.VerificationDocType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVerificationDocTypeFilter<$PrismaModel>
+    _max?: NestedEnumVerificationDocTypeFilter<$PrismaModel>
+  }
+
+  export type EnumVerificationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.VerificationStatus | EnumVerificationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.VerificationStatus[] | ListEnumVerificationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VerificationStatus[] | ListEnumVerificationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumVerificationStatusWithAggregatesFilter<$PrismaModel> | $Enums.VerificationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVerificationStatusFilter<$PrismaModel>
+    _max?: NestedEnumVerificationStatusFilter<$PrismaModel>
+  }
+
+  export type JobNullableScalarRelationFilter = {
+    is?: JobWhereInput | null
+    isNot?: JobWhereInput | null
+  }
+
+  export type JobAssetCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    jobId?: SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    category?: SortOrder
+    isPublic?: SortOrder
+    url?: SortOrder
+    uploadedAt?: SortOrder
+    metadata?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type JobAssetAvgOrderByAggregateInput = {
+    fileSize?: SortOrder
+  }
+
+  export type JobAssetMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    jobId?: SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    category?: SortOrder
+    isPublic?: SortOrder
+    url?: SortOrder
+    uploadedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type JobAssetMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    jobId?: SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    category?: SortOrder
+    isPublic?: SortOrder
+    url?: SortOrder
+    uploadedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type JobAssetSumOrderByAggregateInput = {
+    fileSize?: SortOrder
+  }
+
+  export type ChatAttachmentCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    chatId?: SortOrder
+    messageId?: SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    url?: SortOrder
+    uploadedAt?: SortOrder
+    metadata?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ChatAttachmentAvgOrderByAggregateInput = {
+    fileSize?: SortOrder
+  }
+
+  export type ChatAttachmentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    chatId?: SortOrder
+    messageId?: SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    url?: SortOrder
+    uploadedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ChatAttachmentMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    chatId?: SortOrder
+    messageId?: SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    url?: SortOrder
+    uploadedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ChatAttachmentSumOrderByAggregateInput = {
+    fileSize?: SortOrder
+  }
+
+  export type EnumMediaUploadTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.MediaUploadType | EnumMediaUploadTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MediaUploadType[] | ListEnumMediaUploadTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MediaUploadType[] | ListEnumMediaUploadTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMediaUploadTypeFilter<$PrismaModel> | $Enums.MediaUploadType
+  }
+
+  export type MediaFileCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    uploadType?: SortOrder
+    category?: SortOrder
+    isPublic?: SortOrder
+    url?: SortOrder
+    uploadedAt?: SortOrder
+    metadata?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MediaFileAvgOrderByAggregateInput = {
+    fileSize?: SortOrder
+  }
+
+  export type MediaFileMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    uploadType?: SortOrder
+    category?: SortOrder
+    isPublic?: SortOrder
+    url?: SortOrder
+    uploadedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MediaFileMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    fileName?: SortOrder
+    originalName?: SortOrder
+    fileType?: SortOrder
+    fileSize?: SortOrder
+    uploadType?: SortOrder
+    category?: SortOrder
+    isPublic?: SortOrder
+    url?: SortOrder
+    uploadedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MediaFileSumOrderByAggregateInput = {
+    fileSize?: SortOrder
+  }
+
+  export type EnumMediaUploadTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MediaUploadType | EnumMediaUploadTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MediaUploadType[] | ListEnumMediaUploadTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MediaUploadType[] | ListEnumMediaUploadTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMediaUploadTypeWithAggregatesFilter<$PrismaModel> | $Enums.MediaUploadType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMediaUploadTypeFilter<$PrismaModel>
+    _max?: NestedEnumMediaUploadTypeFilter<$PrismaModel>
+  }
+
   export type ClientCreateNestedOneWithoutUserInput = {
     create?: XOR<ClientCreateWithoutUserInput, ClientUncheckedCreateWithoutUserInput>
     connectOrCreate?: ClientCreateOrConnectWithoutUserInput
@@ -25441,6 +32370,34 @@ export namespace Prisma {
     connect?: WalletWhereUniqueInput
   }
 
+  export type VerificationDocumentCreateNestedManyWithoutUserInput = {
+    create?: XOR<VerificationDocumentCreateWithoutUserInput, VerificationDocumentUncheckedCreateWithoutUserInput> | VerificationDocumentCreateWithoutUserInput[] | VerificationDocumentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VerificationDocumentCreateOrConnectWithoutUserInput | VerificationDocumentCreateOrConnectWithoutUserInput[]
+    createMany?: VerificationDocumentCreateManyUserInputEnvelope
+    connect?: VerificationDocumentWhereUniqueInput | VerificationDocumentWhereUniqueInput[]
+  }
+
+  export type JobAssetCreateNestedManyWithoutUserInput = {
+    create?: XOR<JobAssetCreateWithoutUserInput, JobAssetUncheckedCreateWithoutUserInput> | JobAssetCreateWithoutUserInput[] | JobAssetUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: JobAssetCreateOrConnectWithoutUserInput | JobAssetCreateOrConnectWithoutUserInput[]
+    createMany?: JobAssetCreateManyUserInputEnvelope
+    connect?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+  }
+
+  export type ChatAttachmentCreateNestedManyWithoutUserInput = {
+    create?: XOR<ChatAttachmentCreateWithoutUserInput, ChatAttachmentUncheckedCreateWithoutUserInput> | ChatAttachmentCreateWithoutUserInput[] | ChatAttachmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChatAttachmentCreateOrConnectWithoutUserInput | ChatAttachmentCreateOrConnectWithoutUserInput[]
+    createMany?: ChatAttachmentCreateManyUserInputEnvelope
+    connect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+  }
+
+  export type MediaFileCreateNestedManyWithoutUserInput = {
+    create?: XOR<MediaFileCreateWithoutUserInput, MediaFileUncheckedCreateWithoutUserInput> | MediaFileCreateWithoutUserInput[] | MediaFileUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MediaFileCreateOrConnectWithoutUserInput | MediaFileCreateOrConnectWithoutUserInput[]
+    createMany?: MediaFileCreateManyUserInputEnvelope
+    connect?: MediaFileWhereUniqueInput | MediaFileWhereUniqueInput[]
+  }
+
   export type ClientUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<ClientCreateWithoutUserInput, ClientUncheckedCreateWithoutUserInput>
     connectOrCreate?: ClientCreateOrConnectWithoutUserInput
@@ -25485,6 +32442,34 @@ export namespace Prisma {
     create?: XOR<WalletCreateWithoutUserInput, WalletUncheckedCreateWithoutUserInput>
     connectOrCreate?: WalletCreateOrConnectWithoutUserInput
     connect?: WalletWhereUniqueInput
+  }
+
+  export type VerificationDocumentUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<VerificationDocumentCreateWithoutUserInput, VerificationDocumentUncheckedCreateWithoutUserInput> | VerificationDocumentCreateWithoutUserInput[] | VerificationDocumentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VerificationDocumentCreateOrConnectWithoutUserInput | VerificationDocumentCreateOrConnectWithoutUserInput[]
+    createMany?: VerificationDocumentCreateManyUserInputEnvelope
+    connect?: VerificationDocumentWhereUniqueInput | VerificationDocumentWhereUniqueInput[]
+  }
+
+  export type JobAssetUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<JobAssetCreateWithoutUserInput, JobAssetUncheckedCreateWithoutUserInput> | JobAssetCreateWithoutUserInput[] | JobAssetUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: JobAssetCreateOrConnectWithoutUserInput | JobAssetCreateOrConnectWithoutUserInput[]
+    createMany?: JobAssetCreateManyUserInputEnvelope
+    connect?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+  }
+
+  export type ChatAttachmentUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ChatAttachmentCreateWithoutUserInput, ChatAttachmentUncheckedCreateWithoutUserInput> | ChatAttachmentCreateWithoutUserInput[] | ChatAttachmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChatAttachmentCreateOrConnectWithoutUserInput | ChatAttachmentCreateOrConnectWithoutUserInput[]
+    createMany?: ChatAttachmentCreateManyUserInputEnvelope
+    connect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+  }
+
+  export type MediaFileUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<MediaFileCreateWithoutUserInput, MediaFileUncheckedCreateWithoutUserInput> | MediaFileCreateWithoutUserInput[] | MediaFileUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MediaFileCreateOrConnectWithoutUserInput | MediaFileCreateOrConnectWithoutUserInput[]
+    createMany?: MediaFileCreateManyUserInputEnvelope
+    connect?: MediaFileWhereUniqueInput | MediaFileWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -25597,6 +32582,62 @@ export namespace Prisma {
     update?: XOR<XOR<WalletUpdateToOneWithWhereWithoutUserInput, WalletUpdateWithoutUserInput>, WalletUncheckedUpdateWithoutUserInput>
   }
 
+  export type VerificationDocumentUpdateManyWithoutUserNestedInput = {
+    create?: XOR<VerificationDocumentCreateWithoutUserInput, VerificationDocumentUncheckedCreateWithoutUserInput> | VerificationDocumentCreateWithoutUserInput[] | VerificationDocumentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VerificationDocumentCreateOrConnectWithoutUserInput | VerificationDocumentCreateOrConnectWithoutUserInput[]
+    upsert?: VerificationDocumentUpsertWithWhereUniqueWithoutUserInput | VerificationDocumentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: VerificationDocumentCreateManyUserInputEnvelope
+    set?: VerificationDocumentWhereUniqueInput | VerificationDocumentWhereUniqueInput[]
+    disconnect?: VerificationDocumentWhereUniqueInput | VerificationDocumentWhereUniqueInput[]
+    delete?: VerificationDocumentWhereUniqueInput | VerificationDocumentWhereUniqueInput[]
+    connect?: VerificationDocumentWhereUniqueInput | VerificationDocumentWhereUniqueInput[]
+    update?: VerificationDocumentUpdateWithWhereUniqueWithoutUserInput | VerificationDocumentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: VerificationDocumentUpdateManyWithWhereWithoutUserInput | VerificationDocumentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: VerificationDocumentScalarWhereInput | VerificationDocumentScalarWhereInput[]
+  }
+
+  export type JobAssetUpdateManyWithoutUserNestedInput = {
+    create?: XOR<JobAssetCreateWithoutUserInput, JobAssetUncheckedCreateWithoutUserInput> | JobAssetCreateWithoutUserInput[] | JobAssetUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: JobAssetCreateOrConnectWithoutUserInput | JobAssetCreateOrConnectWithoutUserInput[]
+    upsert?: JobAssetUpsertWithWhereUniqueWithoutUserInput | JobAssetUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: JobAssetCreateManyUserInputEnvelope
+    set?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+    disconnect?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+    delete?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+    connect?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+    update?: JobAssetUpdateWithWhereUniqueWithoutUserInput | JobAssetUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: JobAssetUpdateManyWithWhereWithoutUserInput | JobAssetUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: JobAssetScalarWhereInput | JobAssetScalarWhereInput[]
+  }
+
+  export type ChatAttachmentUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ChatAttachmentCreateWithoutUserInput, ChatAttachmentUncheckedCreateWithoutUserInput> | ChatAttachmentCreateWithoutUserInput[] | ChatAttachmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChatAttachmentCreateOrConnectWithoutUserInput | ChatAttachmentCreateOrConnectWithoutUserInput[]
+    upsert?: ChatAttachmentUpsertWithWhereUniqueWithoutUserInput | ChatAttachmentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ChatAttachmentCreateManyUserInputEnvelope
+    set?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    disconnect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    delete?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    connect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    update?: ChatAttachmentUpdateWithWhereUniqueWithoutUserInput | ChatAttachmentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ChatAttachmentUpdateManyWithWhereWithoutUserInput | ChatAttachmentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ChatAttachmentScalarWhereInput | ChatAttachmentScalarWhereInput[]
+  }
+
+  export type MediaFileUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MediaFileCreateWithoutUserInput, MediaFileUncheckedCreateWithoutUserInput> | MediaFileCreateWithoutUserInput[] | MediaFileUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MediaFileCreateOrConnectWithoutUserInput | MediaFileCreateOrConnectWithoutUserInput[]
+    upsert?: MediaFileUpsertWithWhereUniqueWithoutUserInput | MediaFileUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MediaFileCreateManyUserInputEnvelope
+    set?: MediaFileWhereUniqueInput | MediaFileWhereUniqueInput[]
+    disconnect?: MediaFileWhereUniqueInput | MediaFileWhereUniqueInput[]
+    delete?: MediaFileWhereUniqueInput | MediaFileWhereUniqueInput[]
+    connect?: MediaFileWhereUniqueInput | MediaFileWhereUniqueInput[]
+    update?: MediaFileUpdateWithWhereUniqueWithoutUserInput | MediaFileUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MediaFileUpdateManyWithWhereWithoutUserInput | MediaFileUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MediaFileScalarWhereInput | MediaFileScalarWhereInput[]
+  }
+
   export type ClientUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<ClientCreateWithoutUserInput, ClientUncheckedCreateWithoutUserInput>
     connectOrCreate?: ClientCreateOrConnectWithoutUserInput
@@ -25683,6 +32724,62 @@ export namespace Prisma {
     update?: XOR<XOR<WalletUpdateToOneWithWhereWithoutUserInput, WalletUpdateWithoutUserInput>, WalletUncheckedUpdateWithoutUserInput>
   }
 
+  export type VerificationDocumentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<VerificationDocumentCreateWithoutUserInput, VerificationDocumentUncheckedCreateWithoutUserInput> | VerificationDocumentCreateWithoutUserInput[] | VerificationDocumentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: VerificationDocumentCreateOrConnectWithoutUserInput | VerificationDocumentCreateOrConnectWithoutUserInput[]
+    upsert?: VerificationDocumentUpsertWithWhereUniqueWithoutUserInput | VerificationDocumentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: VerificationDocumentCreateManyUserInputEnvelope
+    set?: VerificationDocumentWhereUniqueInput | VerificationDocumentWhereUniqueInput[]
+    disconnect?: VerificationDocumentWhereUniqueInput | VerificationDocumentWhereUniqueInput[]
+    delete?: VerificationDocumentWhereUniqueInput | VerificationDocumentWhereUniqueInput[]
+    connect?: VerificationDocumentWhereUniqueInput | VerificationDocumentWhereUniqueInput[]
+    update?: VerificationDocumentUpdateWithWhereUniqueWithoutUserInput | VerificationDocumentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: VerificationDocumentUpdateManyWithWhereWithoutUserInput | VerificationDocumentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: VerificationDocumentScalarWhereInput | VerificationDocumentScalarWhereInput[]
+  }
+
+  export type JobAssetUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<JobAssetCreateWithoutUserInput, JobAssetUncheckedCreateWithoutUserInput> | JobAssetCreateWithoutUserInput[] | JobAssetUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: JobAssetCreateOrConnectWithoutUserInput | JobAssetCreateOrConnectWithoutUserInput[]
+    upsert?: JobAssetUpsertWithWhereUniqueWithoutUserInput | JobAssetUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: JobAssetCreateManyUserInputEnvelope
+    set?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+    disconnect?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+    delete?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+    connect?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+    update?: JobAssetUpdateWithWhereUniqueWithoutUserInput | JobAssetUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: JobAssetUpdateManyWithWhereWithoutUserInput | JobAssetUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: JobAssetScalarWhereInput | JobAssetScalarWhereInput[]
+  }
+
+  export type ChatAttachmentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ChatAttachmentCreateWithoutUserInput, ChatAttachmentUncheckedCreateWithoutUserInput> | ChatAttachmentCreateWithoutUserInput[] | ChatAttachmentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ChatAttachmentCreateOrConnectWithoutUserInput | ChatAttachmentCreateOrConnectWithoutUserInput[]
+    upsert?: ChatAttachmentUpsertWithWhereUniqueWithoutUserInput | ChatAttachmentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ChatAttachmentCreateManyUserInputEnvelope
+    set?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    disconnect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    delete?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    connect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    update?: ChatAttachmentUpdateWithWhereUniqueWithoutUserInput | ChatAttachmentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ChatAttachmentUpdateManyWithWhereWithoutUserInput | ChatAttachmentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ChatAttachmentScalarWhereInput | ChatAttachmentScalarWhereInput[]
+  }
+
+  export type MediaFileUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MediaFileCreateWithoutUserInput, MediaFileUncheckedCreateWithoutUserInput> | MediaFileCreateWithoutUserInput[] | MediaFileUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MediaFileCreateOrConnectWithoutUserInput | MediaFileCreateOrConnectWithoutUserInput[]
+    upsert?: MediaFileUpsertWithWhereUniqueWithoutUserInput | MediaFileUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MediaFileCreateManyUserInputEnvelope
+    set?: MediaFileWhereUniqueInput | MediaFileWhereUniqueInput[]
+    disconnect?: MediaFileWhereUniqueInput | MediaFileWhereUniqueInput[]
+    delete?: MediaFileWhereUniqueInput | MediaFileWhereUniqueInput[]
+    connect?: MediaFileWhereUniqueInput | MediaFileWhereUniqueInput[]
+    update?: MediaFileUpdateWithWhereUniqueWithoutUserInput | MediaFileUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MediaFileUpdateManyWithWhereWithoutUserInput | MediaFileUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MediaFileScalarWhereInput | MediaFileScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutConversation_Conversation_user1IdToUserInput = {
     create?: XOR<UserCreateWithoutConversation_Conversation_user1IdToUserInput, UserUncheckedCreateWithoutConversation_Conversation_user1IdToUserInput>
     connectOrCreate?: UserCreateOrConnectWithoutConversation_Conversation_user1IdToUserInput
@@ -25708,11 +32805,25 @@ export namespace Prisma {
     connect?: MessageWhereUniqueInput
   }
 
+  export type ChatAttachmentCreateNestedManyWithoutConversationInput = {
+    create?: XOR<ChatAttachmentCreateWithoutConversationInput, ChatAttachmentUncheckedCreateWithoutConversationInput> | ChatAttachmentCreateWithoutConversationInput[] | ChatAttachmentUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: ChatAttachmentCreateOrConnectWithoutConversationInput | ChatAttachmentCreateOrConnectWithoutConversationInput[]
+    createMany?: ChatAttachmentCreateManyConversationInputEnvelope
+    connect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+  }
+
   export type MessageUncheckedCreateNestedManyWithoutConversationInput = {
     create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
     createMany?: MessageCreateManyConversationInputEnvelope
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type ChatAttachmentUncheckedCreateNestedManyWithoutConversationInput = {
+    create?: XOR<ChatAttachmentCreateWithoutConversationInput, ChatAttachmentUncheckedCreateWithoutConversationInput> | ChatAttachmentCreateWithoutConversationInput[] | ChatAttachmentUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: ChatAttachmentCreateOrConnectWithoutConversationInput | ChatAttachmentCreateOrConnectWithoutConversationInput[]
+    createMany?: ChatAttachmentCreateManyConversationInputEnvelope
+    connect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutConversation_Conversation_user1IdToUserNestedInput = {
@@ -25755,6 +32866,20 @@ export namespace Prisma {
     update?: XOR<XOR<MessageUpdateToOneWithWhereWithoutConversationAsLastInput, MessageUpdateWithoutConversationAsLastInput>, MessageUncheckedUpdateWithoutConversationAsLastInput>
   }
 
+  export type ChatAttachmentUpdateManyWithoutConversationNestedInput = {
+    create?: XOR<ChatAttachmentCreateWithoutConversationInput, ChatAttachmentUncheckedCreateWithoutConversationInput> | ChatAttachmentCreateWithoutConversationInput[] | ChatAttachmentUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: ChatAttachmentCreateOrConnectWithoutConversationInput | ChatAttachmentCreateOrConnectWithoutConversationInput[]
+    upsert?: ChatAttachmentUpsertWithWhereUniqueWithoutConversationInput | ChatAttachmentUpsertWithWhereUniqueWithoutConversationInput[]
+    createMany?: ChatAttachmentCreateManyConversationInputEnvelope
+    set?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    disconnect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    delete?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    connect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    update?: ChatAttachmentUpdateWithWhereUniqueWithoutConversationInput | ChatAttachmentUpdateWithWhereUniqueWithoutConversationInput[]
+    updateMany?: ChatAttachmentUpdateManyWithWhereWithoutConversationInput | ChatAttachmentUpdateManyWithWhereWithoutConversationInput[]
+    deleteMany?: ChatAttachmentScalarWhereInput | ChatAttachmentScalarWhereInput[]
+  }
+
   export type MessageUncheckedUpdateManyWithoutConversationNestedInput = {
     create?: XOR<MessageCreateWithoutConversationInput, MessageUncheckedCreateWithoutConversationInput> | MessageCreateWithoutConversationInput[] | MessageUncheckedCreateWithoutConversationInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
@@ -25767,6 +32892,20 @@ export namespace Prisma {
     update?: MessageUpdateWithWhereUniqueWithoutConversationInput | MessageUpdateWithWhereUniqueWithoutConversationInput[]
     updateMany?: MessageUpdateManyWithWhereWithoutConversationInput | MessageUpdateManyWithWhereWithoutConversationInput[]
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type ChatAttachmentUncheckedUpdateManyWithoutConversationNestedInput = {
+    create?: XOR<ChatAttachmentCreateWithoutConversationInput, ChatAttachmentUncheckedCreateWithoutConversationInput> | ChatAttachmentCreateWithoutConversationInput[] | ChatAttachmentUncheckedCreateWithoutConversationInput[]
+    connectOrCreate?: ChatAttachmentCreateOrConnectWithoutConversationInput | ChatAttachmentCreateOrConnectWithoutConversationInput[]
+    upsert?: ChatAttachmentUpsertWithWhereUniqueWithoutConversationInput | ChatAttachmentUpsertWithWhereUniqueWithoutConversationInput[]
+    createMany?: ChatAttachmentCreateManyConversationInputEnvelope
+    set?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    disconnect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    delete?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    connect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    update?: ChatAttachmentUpdateWithWhereUniqueWithoutConversationInput | ChatAttachmentUpdateWithWhereUniqueWithoutConversationInput[]
+    updateMany?: ChatAttachmentUpdateManyWithWhereWithoutConversationInput | ChatAttachmentUpdateManyWithWhereWithoutConversationInput[]
+    deleteMany?: ChatAttachmentScalarWhereInput | ChatAttachmentScalarWhereInput[]
   }
 
   export type ConversationCreateNestedOneWithoutMessagesInput = {
@@ -25793,10 +32932,24 @@ export namespace Prisma {
     connect?: ConversationWhereUniqueInput
   }
 
+  export type ChatAttachmentCreateNestedManyWithoutMessageInput = {
+    create?: XOR<ChatAttachmentCreateWithoutMessageInput, ChatAttachmentUncheckedCreateWithoutMessageInput> | ChatAttachmentCreateWithoutMessageInput[] | ChatAttachmentUncheckedCreateWithoutMessageInput[]
+    connectOrCreate?: ChatAttachmentCreateOrConnectWithoutMessageInput | ChatAttachmentCreateOrConnectWithoutMessageInput[]
+    createMany?: ChatAttachmentCreateManyMessageInputEnvelope
+    connect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+  }
+
   export type ConversationUncheckedCreateNestedOneWithoutLastMessageInput = {
     create?: XOR<ConversationCreateWithoutLastMessageInput, ConversationUncheckedCreateWithoutLastMessageInput>
     connectOrCreate?: ConversationCreateOrConnectWithoutLastMessageInput
     connect?: ConversationWhereUniqueInput
+  }
+
+  export type ChatAttachmentUncheckedCreateNestedManyWithoutMessageInput = {
+    create?: XOR<ChatAttachmentCreateWithoutMessageInput, ChatAttachmentUncheckedCreateWithoutMessageInput> | ChatAttachmentCreateWithoutMessageInput[] | ChatAttachmentUncheckedCreateWithoutMessageInput[]
+    connectOrCreate?: ChatAttachmentCreateOrConnectWithoutMessageInput | ChatAttachmentCreateOrConnectWithoutMessageInput[]
+    createMany?: ChatAttachmentCreateManyMessageInputEnvelope
+    connect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -25837,6 +32990,20 @@ export namespace Prisma {
     update?: XOR<XOR<ConversationUpdateToOneWithWhereWithoutLastMessageInput, ConversationUpdateWithoutLastMessageInput>, ConversationUncheckedUpdateWithoutLastMessageInput>
   }
 
+  export type ChatAttachmentUpdateManyWithoutMessageNestedInput = {
+    create?: XOR<ChatAttachmentCreateWithoutMessageInput, ChatAttachmentUncheckedCreateWithoutMessageInput> | ChatAttachmentCreateWithoutMessageInput[] | ChatAttachmentUncheckedCreateWithoutMessageInput[]
+    connectOrCreate?: ChatAttachmentCreateOrConnectWithoutMessageInput | ChatAttachmentCreateOrConnectWithoutMessageInput[]
+    upsert?: ChatAttachmentUpsertWithWhereUniqueWithoutMessageInput | ChatAttachmentUpsertWithWhereUniqueWithoutMessageInput[]
+    createMany?: ChatAttachmentCreateManyMessageInputEnvelope
+    set?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    disconnect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    delete?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    connect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    update?: ChatAttachmentUpdateWithWhereUniqueWithoutMessageInput | ChatAttachmentUpdateWithWhereUniqueWithoutMessageInput[]
+    updateMany?: ChatAttachmentUpdateManyWithWhereWithoutMessageInput | ChatAttachmentUpdateManyWithWhereWithoutMessageInput[]
+    deleteMany?: ChatAttachmentScalarWhereInput | ChatAttachmentScalarWhereInput[]
+  }
+
   export type ConversationUncheckedUpdateOneWithoutLastMessageNestedInput = {
     create?: XOR<ConversationCreateWithoutLastMessageInput, ConversationUncheckedCreateWithoutLastMessageInput>
     connectOrCreate?: ConversationCreateOrConnectWithoutLastMessageInput
@@ -25845,6 +33012,20 @@ export namespace Prisma {
     delete?: ConversationWhereInput | boolean
     connect?: ConversationWhereUniqueInput
     update?: XOR<XOR<ConversationUpdateToOneWithWhereWithoutLastMessageInput, ConversationUpdateWithoutLastMessageInput>, ConversationUncheckedUpdateWithoutLastMessageInput>
+  }
+
+  export type ChatAttachmentUncheckedUpdateManyWithoutMessageNestedInput = {
+    create?: XOR<ChatAttachmentCreateWithoutMessageInput, ChatAttachmentUncheckedCreateWithoutMessageInput> | ChatAttachmentCreateWithoutMessageInput[] | ChatAttachmentUncheckedCreateWithoutMessageInput[]
+    connectOrCreate?: ChatAttachmentCreateOrConnectWithoutMessageInput | ChatAttachmentCreateOrConnectWithoutMessageInput[]
+    upsert?: ChatAttachmentUpsertWithWhereUniqueWithoutMessageInput | ChatAttachmentUpsertWithWhereUniqueWithoutMessageInput[]
+    createMany?: ChatAttachmentCreateManyMessageInputEnvelope
+    set?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    disconnect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    delete?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    connect?: ChatAttachmentWhereUniqueInput | ChatAttachmentWhereUniqueInput[]
+    update?: ChatAttachmentUpdateWithWhereUniqueWithoutMessageInput | ChatAttachmentUpdateWithWhereUniqueWithoutMessageInput[]
+    updateMany?: ChatAttachmentUpdateManyWithWhereWithoutMessageInput | ChatAttachmentUpdateManyWithWhereWithoutMessageInput[]
+    deleteMany?: ChatAttachmentScalarWhereInput | ChatAttachmentScalarWhereInput[]
   }
 
   export type EnumOtpTypeFieldUpdateOperationsInput = {
@@ -25980,6 +33161,13 @@ export namespace Prisma {
     connect?: ProposalWhereUniqueInput | ProposalWhereUniqueInput[]
   }
 
+  export type JobAssetCreateNestedManyWithoutJobInput = {
+    create?: XOR<JobAssetCreateWithoutJobInput, JobAssetUncheckedCreateWithoutJobInput> | JobAssetCreateWithoutJobInput[] | JobAssetUncheckedCreateWithoutJobInput[]
+    connectOrCreate?: JobAssetCreateOrConnectWithoutJobInput | JobAssetCreateOrConnectWithoutJobInput[]
+    createMany?: JobAssetCreateManyJobInputEnvelope
+    connect?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+  }
+
   export type ContractUncheckedCreateNestedOneWithoutJobInput = {
     create?: XOR<ContractCreateWithoutJobInput, ContractUncheckedCreateWithoutJobInput>
     connectOrCreate?: ContractCreateOrConnectWithoutJobInput
@@ -25991,6 +33179,13 @@ export namespace Prisma {
     connectOrCreate?: ProposalCreateOrConnectWithoutJobInput | ProposalCreateOrConnectWithoutJobInput[]
     createMany?: ProposalCreateManyJobInputEnvelope
     connect?: ProposalWhereUniqueInput | ProposalWhereUniqueInput[]
+  }
+
+  export type JobAssetUncheckedCreateNestedManyWithoutJobInput = {
+    create?: XOR<JobAssetCreateWithoutJobInput, JobAssetUncheckedCreateWithoutJobInput> | JobAssetCreateWithoutJobInput[] | JobAssetUncheckedCreateWithoutJobInput[]
+    connectOrCreate?: JobAssetCreateOrConnectWithoutJobInput | JobAssetCreateOrConnectWithoutJobInput[]
+    createMany?: JobAssetCreateManyJobInputEnvelope
+    connect?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -26037,6 +33232,20 @@ export namespace Prisma {
     deleteMany?: ProposalScalarWhereInput | ProposalScalarWhereInput[]
   }
 
+  export type JobAssetUpdateManyWithoutJobNestedInput = {
+    create?: XOR<JobAssetCreateWithoutJobInput, JobAssetUncheckedCreateWithoutJobInput> | JobAssetCreateWithoutJobInput[] | JobAssetUncheckedCreateWithoutJobInput[]
+    connectOrCreate?: JobAssetCreateOrConnectWithoutJobInput | JobAssetCreateOrConnectWithoutJobInput[]
+    upsert?: JobAssetUpsertWithWhereUniqueWithoutJobInput | JobAssetUpsertWithWhereUniqueWithoutJobInput[]
+    createMany?: JobAssetCreateManyJobInputEnvelope
+    set?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+    disconnect?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+    delete?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+    connect?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+    update?: JobAssetUpdateWithWhereUniqueWithoutJobInput | JobAssetUpdateWithWhereUniqueWithoutJobInput[]
+    updateMany?: JobAssetUpdateManyWithWhereWithoutJobInput | JobAssetUpdateManyWithWhereWithoutJobInput[]
+    deleteMany?: JobAssetScalarWhereInput | JobAssetScalarWhereInput[]
+  }
+
   export type ContractUncheckedUpdateOneWithoutJobNestedInput = {
     create?: XOR<ContractCreateWithoutJobInput, ContractUncheckedCreateWithoutJobInput>
     connectOrCreate?: ContractCreateOrConnectWithoutJobInput
@@ -26059,6 +33268,20 @@ export namespace Prisma {
     update?: ProposalUpdateWithWhereUniqueWithoutJobInput | ProposalUpdateWithWhereUniqueWithoutJobInput[]
     updateMany?: ProposalUpdateManyWithWhereWithoutJobInput | ProposalUpdateManyWithWhereWithoutJobInput[]
     deleteMany?: ProposalScalarWhereInput | ProposalScalarWhereInput[]
+  }
+
+  export type JobAssetUncheckedUpdateManyWithoutJobNestedInput = {
+    create?: XOR<JobAssetCreateWithoutJobInput, JobAssetUncheckedCreateWithoutJobInput> | JobAssetCreateWithoutJobInput[] | JobAssetUncheckedCreateWithoutJobInput[]
+    connectOrCreate?: JobAssetCreateOrConnectWithoutJobInput | JobAssetCreateOrConnectWithoutJobInput[]
+    upsert?: JobAssetUpsertWithWhereUniqueWithoutJobInput | JobAssetUpsertWithWhereUniqueWithoutJobInput[]
+    createMany?: JobAssetCreateManyJobInputEnvelope
+    set?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+    disconnect?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+    delete?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+    connect?: JobAssetWhereUniqueInput | JobAssetWhereUniqueInput[]
+    update?: JobAssetUpdateWithWhereUniqueWithoutJobInput | JobAssetUpdateWithWhereUniqueWithoutJobInput[]
+    updateMany?: JobAssetUpdateManyWithWhereWithoutJobInput | JobAssetUpdateManyWithWhereWithoutJobInput[]
+    deleteMany?: JobAssetScalarWhereInput | JobAssetScalarWhereInput[]
   }
 
   export type ClientCreateNestedOneWithoutContractsInput = {
@@ -26686,6 +33909,120 @@ export namespace Prisma {
     update?: XOR<XOR<FreelancerUpdateToOneWithWhereWithoutReviewsInput, FreelancerUpdateWithoutReviewsInput>, FreelancerUncheckedUpdateWithoutReviewsInput>
   }
 
+  export type UserCreateNestedOneWithoutVerificationDocumentsInput = {
+    create?: XOR<UserCreateWithoutVerificationDocumentsInput, UserUncheckedCreateWithoutVerificationDocumentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVerificationDocumentsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumVerificationDocTypeFieldUpdateOperationsInput = {
+    set?: $Enums.VerificationDocType
+  }
+
+  export type EnumVerificationStatusFieldUpdateOperationsInput = {
+    set?: $Enums.VerificationStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutVerificationDocumentsNestedInput = {
+    create?: XOR<UserCreateWithoutVerificationDocumentsInput, UserUncheckedCreateWithoutVerificationDocumentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVerificationDocumentsInput
+    upsert?: UserUpsertWithoutVerificationDocumentsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVerificationDocumentsInput, UserUpdateWithoutVerificationDocumentsInput>, UserUncheckedUpdateWithoutVerificationDocumentsInput>
+  }
+
+  export type UserCreateNestedOneWithoutJobAssetsInput = {
+    create?: XOR<UserCreateWithoutJobAssetsInput, UserUncheckedCreateWithoutJobAssetsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutJobAssetsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type JobCreateNestedOneWithoutAssetsInput = {
+    create?: XOR<JobCreateWithoutAssetsInput, JobUncheckedCreateWithoutAssetsInput>
+    connectOrCreate?: JobCreateOrConnectWithoutAssetsInput
+    connect?: JobWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutJobAssetsNestedInput = {
+    create?: XOR<UserCreateWithoutJobAssetsInput, UserUncheckedCreateWithoutJobAssetsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutJobAssetsInput
+    upsert?: UserUpsertWithoutJobAssetsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutJobAssetsInput, UserUpdateWithoutJobAssetsInput>, UserUncheckedUpdateWithoutJobAssetsInput>
+  }
+
+  export type JobUpdateOneWithoutAssetsNestedInput = {
+    create?: XOR<JobCreateWithoutAssetsInput, JobUncheckedCreateWithoutAssetsInput>
+    connectOrCreate?: JobCreateOrConnectWithoutAssetsInput
+    upsert?: JobUpsertWithoutAssetsInput
+    disconnect?: JobWhereInput | boolean
+    delete?: JobWhereInput | boolean
+    connect?: JobWhereUniqueInput
+    update?: XOR<XOR<JobUpdateToOneWithWhereWithoutAssetsInput, JobUpdateWithoutAssetsInput>, JobUncheckedUpdateWithoutAssetsInput>
+  }
+
+  export type UserCreateNestedOneWithoutChatAttachmentsInput = {
+    create?: XOR<UserCreateWithoutChatAttachmentsInput, UserUncheckedCreateWithoutChatAttachmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutChatAttachmentsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ConversationCreateNestedOneWithoutAttachmentsInput = {
+    create?: XOR<ConversationCreateWithoutAttachmentsInput, ConversationUncheckedCreateWithoutAttachmentsInput>
+    connectOrCreate?: ConversationCreateOrConnectWithoutAttachmentsInput
+    connect?: ConversationWhereUniqueInput
+  }
+
+  export type MessageCreateNestedOneWithoutAttachmentsInput = {
+    create?: XOR<MessageCreateWithoutAttachmentsInput, MessageUncheckedCreateWithoutAttachmentsInput>
+    connectOrCreate?: MessageCreateOrConnectWithoutAttachmentsInput
+    connect?: MessageWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutChatAttachmentsNestedInput = {
+    create?: XOR<UserCreateWithoutChatAttachmentsInput, UserUncheckedCreateWithoutChatAttachmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutChatAttachmentsInput
+    upsert?: UserUpsertWithoutChatAttachmentsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutChatAttachmentsInput, UserUpdateWithoutChatAttachmentsInput>, UserUncheckedUpdateWithoutChatAttachmentsInput>
+  }
+
+  export type ConversationUpdateOneRequiredWithoutAttachmentsNestedInput = {
+    create?: XOR<ConversationCreateWithoutAttachmentsInput, ConversationUncheckedCreateWithoutAttachmentsInput>
+    connectOrCreate?: ConversationCreateOrConnectWithoutAttachmentsInput
+    upsert?: ConversationUpsertWithoutAttachmentsInput
+    connect?: ConversationWhereUniqueInput
+    update?: XOR<XOR<ConversationUpdateToOneWithWhereWithoutAttachmentsInput, ConversationUpdateWithoutAttachmentsInput>, ConversationUncheckedUpdateWithoutAttachmentsInput>
+  }
+
+  export type MessageUpdateOneWithoutAttachmentsNestedInput = {
+    create?: XOR<MessageCreateWithoutAttachmentsInput, MessageUncheckedCreateWithoutAttachmentsInput>
+    connectOrCreate?: MessageCreateOrConnectWithoutAttachmentsInput
+    upsert?: MessageUpsertWithoutAttachmentsInput
+    disconnect?: MessageWhereInput | boolean
+    delete?: MessageWhereInput | boolean
+    connect?: MessageWhereUniqueInput
+    update?: XOR<XOR<MessageUpdateToOneWithWhereWithoutAttachmentsInput, MessageUpdateWithoutAttachmentsInput>, MessageUncheckedUpdateWithoutAttachmentsInput>
+  }
+
+  export type UserCreateNestedOneWithoutMediaFilesInput = {
+    create?: XOR<UserCreateWithoutMediaFilesInput, UserUncheckedCreateWithoutMediaFilesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMediaFilesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumMediaUploadTypeFieldUpdateOperationsInput = {
+    set?: $Enums.MediaUploadType
+  }
+
+  export type UserUpdateOneRequiredWithoutMediaFilesNestedInput = {
+    create?: XOR<UserCreateWithoutMediaFilesInput, UserUncheckedCreateWithoutMediaFilesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMediaFilesInput
+    upsert?: UserUpsertWithoutMediaFilesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMediaFilesInput, UserUpdateWithoutMediaFilesInput>, UserUncheckedUpdateWithoutMediaFilesInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -27113,6 +34450,57 @@ export namespace Prisma {
     _max?: NestedEnumTransactionTypeFilter<$PrismaModel>
   }
 
+  export type NestedEnumVerificationDocTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.VerificationDocType | EnumVerificationDocTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.VerificationDocType[] | ListEnumVerificationDocTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VerificationDocType[] | ListEnumVerificationDocTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumVerificationDocTypeFilter<$PrismaModel> | $Enums.VerificationDocType
+  }
+
+  export type NestedEnumVerificationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.VerificationStatus | EnumVerificationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.VerificationStatus[] | ListEnumVerificationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VerificationStatus[] | ListEnumVerificationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumVerificationStatusFilter<$PrismaModel> | $Enums.VerificationStatus
+  }
+
+  export type NestedEnumVerificationDocTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.VerificationDocType | EnumVerificationDocTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.VerificationDocType[] | ListEnumVerificationDocTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VerificationDocType[] | ListEnumVerificationDocTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumVerificationDocTypeWithAggregatesFilter<$PrismaModel> | $Enums.VerificationDocType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVerificationDocTypeFilter<$PrismaModel>
+    _max?: NestedEnumVerificationDocTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumVerificationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.VerificationStatus | EnumVerificationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.VerificationStatus[] | ListEnumVerificationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.VerificationStatus[] | ListEnumVerificationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumVerificationStatusWithAggregatesFilter<$PrismaModel> | $Enums.VerificationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVerificationStatusFilter<$PrismaModel>
+    _max?: NestedEnumVerificationStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumMediaUploadTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.MediaUploadType | EnumMediaUploadTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MediaUploadType[] | ListEnumMediaUploadTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MediaUploadType[] | ListEnumMediaUploadTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMediaUploadTypeFilter<$PrismaModel> | $Enums.MediaUploadType
+  }
+
+  export type NestedEnumMediaUploadTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MediaUploadType | EnumMediaUploadTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MediaUploadType[] | ListEnumMediaUploadTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MediaUploadType[] | ListEnumMediaUploadTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMediaUploadTypeWithAggregatesFilter<$PrismaModel> | $Enums.MediaUploadType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMediaUploadTypeFilter<$PrismaModel>
+    _max?: NestedEnumMediaUploadTypeFilter<$PrismaModel>
+  }
+
   export type ClientCreateWithoutUserInput = {
     id?: string
     fullName: string
@@ -27193,6 +34581,7 @@ export namespace Prisma {
     conversation: ConversationCreateNestedOneWithoutMessagesInput
     sender: UserCreateNestedOneWithoutMessage_Message_senderIdToUserInput
     ConversationAsLast?: ConversationCreateNestedOneWithoutLastMessageInput
+    attachments?: ChatAttachmentCreateNestedManyWithoutMessageInput
   }
 
   export type MessageUncheckedCreateWithoutReceiverInput = {
@@ -27203,6 +34592,7 @@ export namespace Prisma {
     timestamp?: Date | string
     readAt?: Date | string | null
     ConversationAsLast?: ConversationUncheckedCreateNestedOneWithoutLastMessageInput
+    attachments?: ChatAttachmentUncheckedCreateNestedManyWithoutMessageInput
   }
 
   export type MessageCreateOrConnectWithoutReceiverInput = {
@@ -27223,6 +34613,7 @@ export namespace Prisma {
     conversation: ConversationCreateNestedOneWithoutMessagesInput
     receiver: UserCreateNestedOneWithoutMessage_Message_receiverIdToUserInput
     ConversationAsLast?: ConversationCreateNestedOneWithoutLastMessageInput
+    attachments?: ChatAttachmentCreateNestedManyWithoutMessageInput
   }
 
   export type MessageUncheckedCreateWithoutSenderInput = {
@@ -27233,6 +34624,7 @@ export namespace Prisma {
     timestamp?: Date | string
     readAt?: Date | string | null
     ConversationAsLast?: ConversationUncheckedCreateNestedOneWithoutLastMessageInput
+    attachments?: ChatAttachmentUncheckedCreateNestedManyWithoutMessageInput
   }
 
   export type MessageCreateOrConnectWithoutSenderInput = {
@@ -27253,6 +34645,7 @@ export namespace Prisma {
     user2: UserCreateNestedOneWithoutConversation_Conversation_user2IdToUserInput
     messages?: MessageCreateNestedManyWithoutConversationInput
     lastMessage?: MessageCreateNestedOneWithoutConversationAsLastInput
+    attachments?: ChatAttachmentCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationUncheckedCreateWithoutUser1Input = {
@@ -27263,6 +34656,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+    attachments?: ChatAttachmentUncheckedCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationCreateOrConnectWithoutUser1Input = {
@@ -27283,6 +34677,7 @@ export namespace Prisma {
     user1: UserCreateNestedOneWithoutConversation_Conversation_user1IdToUserInput
     messages?: MessageCreateNestedManyWithoutConversationInput
     lastMessage?: MessageCreateNestedOneWithoutConversationAsLastInput
+    attachments?: ChatAttachmentCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationUncheckedCreateWithoutUser2Input = {
@@ -27293,6 +34688,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+    attachments?: ChatAttachmentUncheckedCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationCreateOrConnectWithoutUser2Input = {
@@ -27324,6 +34720,172 @@ export namespace Prisma {
   export type WalletCreateOrConnectWithoutUserInput = {
     where: WalletWhereUniqueInput
     create: XOR<WalletCreateWithoutUserInput, WalletUncheckedCreateWithoutUserInput>
+  }
+
+  export type VerificationDocumentCreateWithoutUserInput = {
+    id?: string
+    docType: $Enums.VerificationDocType
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    status?: $Enums.VerificationStatus
+    uploadedAt?: Date | string
+    reviewedAt?: Date | string | null
+    reviewedBy?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VerificationDocumentUncheckedCreateWithoutUserInput = {
+    id?: string
+    docType: $Enums.VerificationDocType
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    status?: $Enums.VerificationStatus
+    uploadedAt?: Date | string
+    reviewedAt?: Date | string | null
+    reviewedBy?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VerificationDocumentCreateOrConnectWithoutUserInput = {
+    where: VerificationDocumentWhereUniqueInput
+    create: XOR<VerificationDocumentCreateWithoutUserInput, VerificationDocumentUncheckedCreateWithoutUserInput>
+  }
+
+  export type VerificationDocumentCreateManyUserInputEnvelope = {
+    data: VerificationDocumentCreateManyUserInput | VerificationDocumentCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type JobAssetCreateWithoutUserInput = {
+    id?: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    category?: string | null
+    isPublic?: boolean
+    url?: string | null
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    job?: JobCreateNestedOneWithoutAssetsInput
+  }
+
+  export type JobAssetUncheckedCreateWithoutUserInput = {
+    id?: string
+    jobId?: string | null
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    category?: string | null
+    isPublic?: boolean
+    url?: string | null
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type JobAssetCreateOrConnectWithoutUserInput = {
+    where: JobAssetWhereUniqueInput
+    create: XOR<JobAssetCreateWithoutUserInput, JobAssetUncheckedCreateWithoutUserInput>
+  }
+
+  export type JobAssetCreateManyUserInputEnvelope = {
+    data: JobAssetCreateManyUserInput | JobAssetCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ChatAttachmentCreateWithoutUserInput = {
+    id?: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    url: string
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    conversation: ConversationCreateNestedOneWithoutAttachmentsInput
+    message?: MessageCreateNestedOneWithoutAttachmentsInput
+  }
+
+  export type ChatAttachmentUncheckedCreateWithoutUserInput = {
+    id?: string
+    chatId: string
+    messageId?: string | null
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    url: string
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ChatAttachmentCreateOrConnectWithoutUserInput = {
+    where: ChatAttachmentWhereUniqueInput
+    create: XOR<ChatAttachmentCreateWithoutUserInput, ChatAttachmentUncheckedCreateWithoutUserInput>
+  }
+
+  export type ChatAttachmentCreateManyUserInputEnvelope = {
+    data: ChatAttachmentCreateManyUserInput | ChatAttachmentCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MediaFileCreateWithoutUserInput = {
+    id?: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    uploadType: $Enums.MediaUploadType
+    category?: string | null
+    isPublic?: boolean
+    url?: string | null
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MediaFileUncheckedCreateWithoutUserInput = {
+    id?: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    uploadType: $Enums.MediaUploadType
+    category?: string | null
+    isPublic?: boolean
+    url?: string | null
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MediaFileCreateOrConnectWithoutUserInput = {
+    where: MediaFileWhereUniqueInput
+    create: XOR<MediaFileCreateWithoutUserInput, MediaFileUncheckedCreateWithoutUserInput>
+  }
+
+  export type MediaFileCreateManyUserInputEnvelope = {
+    data: MediaFileCreateManyUserInput | MediaFileCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type ClientUpsertWithoutUserInput = {
@@ -27527,6 +35089,149 @@ export namespace Prisma {
     transactions?: WalletTransactionUncheckedUpdateManyWithoutWalletNestedInput
   }
 
+  export type VerificationDocumentUpsertWithWhereUniqueWithoutUserInput = {
+    where: VerificationDocumentWhereUniqueInput
+    update: XOR<VerificationDocumentUpdateWithoutUserInput, VerificationDocumentUncheckedUpdateWithoutUserInput>
+    create: XOR<VerificationDocumentCreateWithoutUserInput, VerificationDocumentUncheckedCreateWithoutUserInput>
+  }
+
+  export type VerificationDocumentUpdateWithWhereUniqueWithoutUserInput = {
+    where: VerificationDocumentWhereUniqueInput
+    data: XOR<VerificationDocumentUpdateWithoutUserInput, VerificationDocumentUncheckedUpdateWithoutUserInput>
+  }
+
+  export type VerificationDocumentUpdateManyWithWhereWithoutUserInput = {
+    where: VerificationDocumentScalarWhereInput
+    data: XOR<VerificationDocumentUpdateManyMutationInput, VerificationDocumentUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type VerificationDocumentScalarWhereInput = {
+    AND?: VerificationDocumentScalarWhereInput | VerificationDocumentScalarWhereInput[]
+    OR?: VerificationDocumentScalarWhereInput[]
+    NOT?: VerificationDocumentScalarWhereInput | VerificationDocumentScalarWhereInput[]
+    id?: StringFilter<"VerificationDocument"> | string
+    userId?: StringFilter<"VerificationDocument"> | string
+    docType?: EnumVerificationDocTypeFilter<"VerificationDocument"> | $Enums.VerificationDocType
+    fileName?: StringFilter<"VerificationDocument"> | string
+    originalName?: StringFilter<"VerificationDocument"> | string
+    fileType?: StringFilter<"VerificationDocument"> | string
+    fileSize?: IntFilter<"VerificationDocument"> | number
+    status?: EnumVerificationStatusFilter<"VerificationDocument"> | $Enums.VerificationStatus
+    uploadedAt?: DateTimeFilter<"VerificationDocument"> | Date | string
+    reviewedAt?: DateTimeNullableFilter<"VerificationDocument"> | Date | string | null
+    reviewedBy?: StringNullableFilter<"VerificationDocument"> | string | null
+    metadata?: JsonNullableFilter<"VerificationDocument">
+    createdAt?: DateTimeFilter<"VerificationDocument"> | Date | string
+    updatedAt?: DateTimeFilter<"VerificationDocument"> | Date | string
+  }
+
+  export type JobAssetUpsertWithWhereUniqueWithoutUserInput = {
+    where: JobAssetWhereUniqueInput
+    update: XOR<JobAssetUpdateWithoutUserInput, JobAssetUncheckedUpdateWithoutUserInput>
+    create: XOR<JobAssetCreateWithoutUserInput, JobAssetUncheckedCreateWithoutUserInput>
+  }
+
+  export type JobAssetUpdateWithWhereUniqueWithoutUserInput = {
+    where: JobAssetWhereUniqueInput
+    data: XOR<JobAssetUpdateWithoutUserInput, JobAssetUncheckedUpdateWithoutUserInput>
+  }
+
+  export type JobAssetUpdateManyWithWhereWithoutUserInput = {
+    where: JobAssetScalarWhereInput
+    data: XOR<JobAssetUpdateManyMutationInput, JobAssetUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type JobAssetScalarWhereInput = {
+    AND?: JobAssetScalarWhereInput | JobAssetScalarWhereInput[]
+    OR?: JobAssetScalarWhereInput[]
+    NOT?: JobAssetScalarWhereInput | JobAssetScalarWhereInput[]
+    id?: StringFilter<"JobAsset"> | string
+    userId?: StringFilter<"JobAsset"> | string
+    jobId?: StringNullableFilter<"JobAsset"> | string | null
+    fileName?: StringFilter<"JobAsset"> | string
+    originalName?: StringFilter<"JobAsset"> | string
+    fileType?: StringFilter<"JobAsset"> | string
+    fileSize?: IntFilter<"JobAsset"> | number
+    category?: StringNullableFilter<"JobAsset"> | string | null
+    isPublic?: BoolFilter<"JobAsset"> | boolean
+    url?: StringNullableFilter<"JobAsset"> | string | null
+    uploadedAt?: DateTimeFilter<"JobAsset"> | Date | string
+    metadata?: JsonNullableFilter<"JobAsset">
+    createdAt?: DateTimeFilter<"JobAsset"> | Date | string
+    updatedAt?: DateTimeFilter<"JobAsset"> | Date | string
+  }
+
+  export type ChatAttachmentUpsertWithWhereUniqueWithoutUserInput = {
+    where: ChatAttachmentWhereUniqueInput
+    update: XOR<ChatAttachmentUpdateWithoutUserInput, ChatAttachmentUncheckedUpdateWithoutUserInput>
+    create: XOR<ChatAttachmentCreateWithoutUserInput, ChatAttachmentUncheckedCreateWithoutUserInput>
+  }
+
+  export type ChatAttachmentUpdateWithWhereUniqueWithoutUserInput = {
+    where: ChatAttachmentWhereUniqueInput
+    data: XOR<ChatAttachmentUpdateWithoutUserInput, ChatAttachmentUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ChatAttachmentUpdateManyWithWhereWithoutUserInput = {
+    where: ChatAttachmentScalarWhereInput
+    data: XOR<ChatAttachmentUpdateManyMutationInput, ChatAttachmentUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ChatAttachmentScalarWhereInput = {
+    AND?: ChatAttachmentScalarWhereInput | ChatAttachmentScalarWhereInput[]
+    OR?: ChatAttachmentScalarWhereInput[]
+    NOT?: ChatAttachmentScalarWhereInput | ChatAttachmentScalarWhereInput[]
+    id?: StringFilter<"ChatAttachment"> | string
+    userId?: StringFilter<"ChatAttachment"> | string
+    chatId?: StringFilter<"ChatAttachment"> | string
+    messageId?: StringNullableFilter<"ChatAttachment"> | string | null
+    fileName?: StringFilter<"ChatAttachment"> | string
+    originalName?: StringFilter<"ChatAttachment"> | string
+    fileType?: StringFilter<"ChatAttachment"> | string
+    fileSize?: IntFilter<"ChatAttachment"> | number
+    url?: StringFilter<"ChatAttachment"> | string
+    uploadedAt?: DateTimeFilter<"ChatAttachment"> | Date | string
+    metadata?: JsonNullableFilter<"ChatAttachment">
+    createdAt?: DateTimeFilter<"ChatAttachment"> | Date | string
+    updatedAt?: DateTimeFilter<"ChatAttachment"> | Date | string
+  }
+
+  export type MediaFileUpsertWithWhereUniqueWithoutUserInput = {
+    where: MediaFileWhereUniqueInput
+    update: XOR<MediaFileUpdateWithoutUserInput, MediaFileUncheckedUpdateWithoutUserInput>
+    create: XOR<MediaFileCreateWithoutUserInput, MediaFileUncheckedCreateWithoutUserInput>
+  }
+
+  export type MediaFileUpdateWithWhereUniqueWithoutUserInput = {
+    where: MediaFileWhereUniqueInput
+    data: XOR<MediaFileUpdateWithoutUserInput, MediaFileUncheckedUpdateWithoutUserInput>
+  }
+
+  export type MediaFileUpdateManyWithWhereWithoutUserInput = {
+    where: MediaFileScalarWhereInput
+    data: XOR<MediaFileUpdateManyMutationInput, MediaFileUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type MediaFileScalarWhereInput = {
+    AND?: MediaFileScalarWhereInput | MediaFileScalarWhereInput[]
+    OR?: MediaFileScalarWhereInput[]
+    NOT?: MediaFileScalarWhereInput | MediaFileScalarWhereInput[]
+    id?: StringFilter<"MediaFile"> | string
+    userId?: StringFilter<"MediaFile"> | string
+    fileName?: StringFilter<"MediaFile"> | string
+    originalName?: StringFilter<"MediaFile"> | string
+    fileType?: StringFilter<"MediaFile"> | string
+    fileSize?: IntFilter<"MediaFile"> | number
+    uploadType?: EnumMediaUploadTypeFilter<"MediaFile"> | $Enums.MediaUploadType
+    category?: StringNullableFilter<"MediaFile"> | string | null
+    isPublic?: BoolFilter<"MediaFile"> | boolean
+    url?: StringNullableFilter<"MediaFile"> | string | null
+    uploadedAt?: DateTimeFilter<"MediaFile"> | Date | string
+    metadata?: JsonNullableFilter<"MediaFile">
+    createdAt?: DateTimeFilter<"MediaFile"> | Date | string
+    updatedAt?: DateTimeFilter<"MediaFile"> | Date | string
+  }
+
   export type UserCreateWithoutConversation_Conversation_user1IdToUserInput = {
     id?: string
     email: string
@@ -27545,6 +35250,10 @@ export namespace Prisma {
     Message_Message_senderIdToUser?: MessageCreateNestedManyWithoutSenderInput
     Conversation_Conversation_user2IdToUser?: ConversationCreateNestedManyWithoutUser2Input
     wallet?: WalletCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutConversation_Conversation_user1IdToUserInput = {
@@ -27565,6 +35274,10 @@ export namespace Prisma {
     Message_Message_senderIdToUser?: MessageUncheckedCreateNestedManyWithoutSenderInput
     Conversation_Conversation_user2IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser2Input
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentUncheckedCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetUncheckedCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentUncheckedCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutConversation_Conversation_user1IdToUserInput = {
@@ -27590,6 +35303,10 @@ export namespace Prisma {
     Message_Message_senderIdToUser?: MessageCreateNestedManyWithoutSenderInput
     Conversation_Conversation_user1IdToUser?: ConversationCreateNestedManyWithoutUser1Input
     wallet?: WalletCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutConversation_Conversation_user2IdToUserInput = {
@@ -27610,6 +35327,10 @@ export namespace Prisma {
     Message_Message_senderIdToUser?: MessageUncheckedCreateNestedManyWithoutSenderInput
     Conversation_Conversation_user1IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser1Input
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentUncheckedCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetUncheckedCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentUncheckedCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutConversation_Conversation_user2IdToUserInput = {
@@ -27625,6 +35346,7 @@ export namespace Prisma {
     sender: UserCreateNestedOneWithoutMessage_Message_senderIdToUserInput
     receiver: UserCreateNestedOneWithoutMessage_Message_receiverIdToUserInput
     ConversationAsLast?: ConversationCreateNestedOneWithoutLastMessageInput
+    attachments?: ChatAttachmentCreateNestedManyWithoutMessageInput
   }
 
   export type MessageUncheckedCreateWithoutConversationInput = {
@@ -27635,6 +35357,7 @@ export namespace Prisma {
     timestamp?: Date | string
     readAt?: Date | string | null
     ConversationAsLast?: ConversationUncheckedCreateNestedOneWithoutLastMessageInput
+    attachments?: ChatAttachmentUncheckedCreateNestedManyWithoutMessageInput
   }
 
   export type MessageCreateOrConnectWithoutConversationInput = {
@@ -27655,6 +35378,7 @@ export namespace Prisma {
     conversation: ConversationCreateNestedOneWithoutMessagesInput
     sender: UserCreateNestedOneWithoutMessage_Message_senderIdToUserInput
     receiver: UserCreateNestedOneWithoutMessage_Message_receiverIdToUserInput
+    attachments?: ChatAttachmentCreateNestedManyWithoutMessageInput
   }
 
   export type MessageUncheckedCreateWithoutConversationAsLastInput = {
@@ -27665,11 +35389,52 @@ export namespace Prisma {
     content: string
     timestamp?: Date | string
     readAt?: Date | string | null
+    attachments?: ChatAttachmentUncheckedCreateNestedManyWithoutMessageInput
   }
 
   export type MessageCreateOrConnectWithoutConversationAsLastInput = {
     where: MessageWhereUniqueInput
     create: XOR<MessageCreateWithoutConversationAsLastInput, MessageUncheckedCreateWithoutConversationAsLastInput>
+  }
+
+  export type ChatAttachmentCreateWithoutConversationInput = {
+    id?: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    url: string
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutChatAttachmentsInput
+    message?: MessageCreateNestedOneWithoutAttachmentsInput
+  }
+
+  export type ChatAttachmentUncheckedCreateWithoutConversationInput = {
+    id?: string
+    userId: string
+    messageId?: string | null
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    url: string
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ChatAttachmentCreateOrConnectWithoutConversationInput = {
+    where: ChatAttachmentWhereUniqueInput
+    create: XOR<ChatAttachmentCreateWithoutConversationInput, ChatAttachmentUncheckedCreateWithoutConversationInput>
+  }
+
+  export type ChatAttachmentCreateManyConversationInputEnvelope = {
+    data: ChatAttachmentCreateManyConversationInput | ChatAttachmentCreateManyConversationInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutConversation_Conversation_user1IdToUserInput = {
@@ -27701,6 +35466,10 @@ export namespace Prisma {
     Message_Message_senderIdToUser?: MessageUpdateManyWithoutSenderNestedInput
     Conversation_Conversation_user2IdToUser?: ConversationUpdateManyWithoutUser2NestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutConversation_Conversation_user1IdToUserInput = {
@@ -27721,6 +35490,10 @@ export namespace Prisma {
     Message_Message_senderIdToUser?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     Conversation_Conversation_user2IdToUser?: ConversationUncheckedUpdateManyWithoutUser2NestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUncheckedUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUncheckedUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUncheckedUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutConversation_Conversation_user2IdToUserInput = {
@@ -27752,6 +35525,10 @@ export namespace Prisma {
     Message_Message_senderIdToUser?: MessageUpdateManyWithoutSenderNestedInput
     Conversation_Conversation_user1IdToUser?: ConversationUpdateManyWithoutUser1NestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutConversation_Conversation_user2IdToUserInput = {
@@ -27772,6 +35549,10 @@ export namespace Prisma {
     Message_Message_senderIdToUser?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     Conversation_Conversation_user1IdToUser?: ConversationUncheckedUpdateManyWithoutUser1NestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUncheckedUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUncheckedUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUncheckedUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MessageUpsertWithWhereUniqueWithoutConversationInput = {
@@ -27809,6 +35590,7 @@ export namespace Prisma {
     conversation?: ConversationUpdateOneRequiredWithoutMessagesNestedInput
     sender?: UserUpdateOneRequiredWithoutMessage_Message_senderIdToUserNestedInput
     receiver?: UserUpdateOneRequiredWithoutMessage_Message_receiverIdToUserNestedInput
+    attachments?: ChatAttachmentUpdateManyWithoutMessageNestedInput
   }
 
   export type MessageUncheckedUpdateWithoutConversationAsLastInput = {
@@ -27819,6 +35601,23 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    attachments?: ChatAttachmentUncheckedUpdateManyWithoutMessageNestedInput
+  }
+
+  export type ChatAttachmentUpsertWithWhereUniqueWithoutConversationInput = {
+    where: ChatAttachmentWhereUniqueInput
+    update: XOR<ChatAttachmentUpdateWithoutConversationInput, ChatAttachmentUncheckedUpdateWithoutConversationInput>
+    create: XOR<ChatAttachmentCreateWithoutConversationInput, ChatAttachmentUncheckedCreateWithoutConversationInput>
+  }
+
+  export type ChatAttachmentUpdateWithWhereUniqueWithoutConversationInput = {
+    where: ChatAttachmentWhereUniqueInput
+    data: XOR<ChatAttachmentUpdateWithoutConversationInput, ChatAttachmentUncheckedUpdateWithoutConversationInput>
+  }
+
+  export type ChatAttachmentUpdateManyWithWhereWithoutConversationInput = {
+    where: ChatAttachmentScalarWhereInput
+    data: XOR<ChatAttachmentUpdateManyMutationInput, ChatAttachmentUncheckedUpdateManyWithoutConversationInput>
   }
 
   export type ConversationCreateWithoutMessagesInput = {
@@ -27829,6 +35628,7 @@ export namespace Prisma {
     user1: UserCreateNestedOneWithoutConversation_Conversation_user1IdToUserInput
     user2: UserCreateNestedOneWithoutConversation_Conversation_user2IdToUserInput
     lastMessage?: MessageCreateNestedOneWithoutConversationAsLastInput
+    attachments?: ChatAttachmentCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationUncheckedCreateWithoutMessagesInput = {
@@ -27839,6 +35639,7 @@ export namespace Prisma {
     lastActivity?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    attachments?: ChatAttachmentUncheckedCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationCreateOrConnectWithoutMessagesInput = {
@@ -27864,6 +35665,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationCreateNestedManyWithoutUser1Input
     Conversation_Conversation_user2IdToUser?: ConversationCreateNestedManyWithoutUser2Input
     wallet?: WalletCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMessage_Message_senderIdToUserInput = {
@@ -27884,6 +35689,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser1Input
     Conversation_Conversation_user2IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser2Input
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentUncheckedCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetUncheckedCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentUncheckedCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMessage_Message_senderIdToUserInput = {
@@ -27909,6 +35718,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationCreateNestedManyWithoutUser1Input
     Conversation_Conversation_user2IdToUser?: ConversationCreateNestedManyWithoutUser2Input
     wallet?: WalletCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMessage_Message_receiverIdToUserInput = {
@@ -27929,6 +35742,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser1Input
     Conversation_Conversation_user2IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser2Input
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentUncheckedCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetUncheckedCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentUncheckedCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMessage_Message_receiverIdToUserInput = {
@@ -27944,6 +35761,7 @@ export namespace Prisma {
     user1: UserCreateNestedOneWithoutConversation_Conversation_user1IdToUserInput
     user2: UserCreateNestedOneWithoutConversation_Conversation_user2IdToUserInput
     messages?: MessageCreateNestedManyWithoutConversationInput
+    attachments?: ChatAttachmentCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationUncheckedCreateWithoutLastMessageInput = {
@@ -27954,11 +35772,52 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+    attachments?: ChatAttachmentUncheckedCreateNestedManyWithoutConversationInput
   }
 
   export type ConversationCreateOrConnectWithoutLastMessageInput = {
     where: ConversationWhereUniqueInput
     create: XOR<ConversationCreateWithoutLastMessageInput, ConversationUncheckedCreateWithoutLastMessageInput>
+  }
+
+  export type ChatAttachmentCreateWithoutMessageInput = {
+    id?: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    url: string
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutChatAttachmentsInput
+    conversation: ConversationCreateNestedOneWithoutAttachmentsInput
+  }
+
+  export type ChatAttachmentUncheckedCreateWithoutMessageInput = {
+    id?: string
+    userId: string
+    chatId: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    url: string
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ChatAttachmentCreateOrConnectWithoutMessageInput = {
+    where: ChatAttachmentWhereUniqueInput
+    create: XOR<ChatAttachmentCreateWithoutMessageInput, ChatAttachmentUncheckedCreateWithoutMessageInput>
+  }
+
+  export type ChatAttachmentCreateManyMessageInputEnvelope = {
+    data: ChatAttachmentCreateManyMessageInput | ChatAttachmentCreateManyMessageInput[]
+    skipDuplicates?: boolean
   }
 
   export type ConversationUpsertWithoutMessagesInput = {
@@ -27980,6 +35839,7 @@ export namespace Prisma {
     user1?: UserUpdateOneRequiredWithoutConversation_Conversation_user1IdToUserNestedInput
     user2?: UserUpdateOneRequiredWithoutConversation_Conversation_user2IdToUserNestedInput
     lastMessage?: MessageUpdateOneWithoutConversationAsLastNestedInput
+    attachments?: ChatAttachmentUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateWithoutMessagesInput = {
@@ -27990,6 +35850,7 @@ export namespace Prisma {
     lastActivity?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachments?: ChatAttachmentUncheckedUpdateManyWithoutConversationNestedInput
   }
 
   export type UserUpsertWithoutMessage_Message_senderIdToUserInput = {
@@ -28021,6 +35882,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationUpdateManyWithoutUser1NestedInput
     Conversation_Conversation_user2IdToUser?: ConversationUpdateManyWithoutUser2NestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessage_Message_senderIdToUserInput = {
@@ -28041,6 +35906,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationUncheckedUpdateManyWithoutUser1NestedInput
     Conversation_Conversation_user2IdToUser?: ConversationUncheckedUpdateManyWithoutUser2NestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUncheckedUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUncheckedUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUncheckedUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutMessage_Message_receiverIdToUserInput = {
@@ -28072,6 +35941,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationUpdateManyWithoutUser1NestedInput
     Conversation_Conversation_user2IdToUser?: ConversationUpdateManyWithoutUser2NestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessage_Message_receiverIdToUserInput = {
@@ -28092,6 +35965,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationUncheckedUpdateManyWithoutUser1NestedInput
     Conversation_Conversation_user2IdToUser?: ConversationUncheckedUpdateManyWithoutUser2NestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUncheckedUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUncheckedUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUncheckedUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ConversationUpsertWithoutLastMessageInput = {
@@ -28113,6 +35990,7 @@ export namespace Prisma {
     user1?: UserUpdateOneRequiredWithoutConversation_Conversation_user1IdToUserNestedInput
     user2?: UserUpdateOneRequiredWithoutConversation_Conversation_user2IdToUserNestedInput
     messages?: MessageUpdateManyWithoutConversationNestedInput
+    attachments?: ChatAttachmentUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateWithoutLastMessageInput = {
@@ -28123,6 +36001,23 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+    attachments?: ChatAttachmentUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ChatAttachmentUpsertWithWhereUniqueWithoutMessageInput = {
+    where: ChatAttachmentWhereUniqueInput
+    update: XOR<ChatAttachmentUpdateWithoutMessageInput, ChatAttachmentUncheckedUpdateWithoutMessageInput>
+    create: XOR<ChatAttachmentCreateWithoutMessageInput, ChatAttachmentUncheckedCreateWithoutMessageInput>
+  }
+
+  export type ChatAttachmentUpdateWithWhereUniqueWithoutMessageInput = {
+    where: ChatAttachmentWhereUniqueInput
+    data: XOR<ChatAttachmentUpdateWithoutMessageInput, ChatAttachmentUncheckedUpdateWithoutMessageInput>
+  }
+
+  export type ChatAttachmentUpdateManyWithWhereWithoutMessageInput = {
+    where: ChatAttachmentScalarWhereInput
+    data: XOR<ChatAttachmentUpdateManyMutationInput, ChatAttachmentUncheckedUpdateManyWithoutMessageInput>
   }
 
   export type UserCreateWithoutClientInput = {
@@ -28143,6 +36038,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationCreateNestedManyWithoutUser1Input
     Conversation_Conversation_user2IdToUser?: ConversationCreateNestedManyWithoutUser2Input
     wallet?: WalletCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutClientInput = {
@@ -28163,6 +36062,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser1Input
     Conversation_Conversation_user2IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser2Input
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentUncheckedCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetUncheckedCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentUncheckedCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutClientInput = {
@@ -28217,6 +36120,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     contract?: ContractCreateNestedOneWithoutJobInput
     proposals?: ProposalCreateNestedManyWithoutJobInput
+    assets?: JobAssetCreateNestedManyWithoutJobInput
   }
 
   export type JobUncheckedCreateWithoutClientInput = {
@@ -28230,6 +36134,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     contract?: ContractUncheckedCreateNestedOneWithoutJobInput
     proposals?: ProposalUncheckedCreateNestedManyWithoutJobInput
+    assets?: JobAssetUncheckedCreateNestedManyWithoutJobInput
   }
 
   export type JobCreateOrConnectWithoutClientInput = {
@@ -28271,6 +36176,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationUpdateManyWithoutUser1NestedInput
     Conversation_Conversation_user2IdToUser?: ConversationUpdateManyWithoutUser2NestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClientInput = {
@@ -28291,6 +36200,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationUncheckedUpdateManyWithoutUser1NestedInput
     Conversation_Conversation_user2IdToUser?: ConversationUncheckedUpdateManyWithoutUser2NestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUncheckedUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUncheckedUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUncheckedUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ContractUpsertWithWhereUniqueWithoutClientInput = {
@@ -28445,6 +36358,48 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type JobAssetCreateWithoutJobInput = {
+    id?: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    category?: string | null
+    isPublic?: boolean
+    url?: string | null
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutJobAssetsInput
+  }
+
+  export type JobAssetUncheckedCreateWithoutJobInput = {
+    id?: string
+    userId: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    category?: string | null
+    isPublic?: boolean
+    url?: string | null
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type JobAssetCreateOrConnectWithoutJobInput = {
+    where: JobAssetWhereUniqueInput
+    create: XOR<JobAssetCreateWithoutJobInput, JobAssetUncheckedCreateWithoutJobInput>
+  }
+
+  export type JobAssetCreateManyJobInputEnvelope = {
+    data: JobAssetCreateManyJobInput | JobAssetCreateManyJobInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ContractUpsertWithoutJobInput = {
     update: XOR<ContractUpdateWithoutJobInput, ContractUncheckedUpdateWithoutJobInput>
     create: XOR<ContractCreateWithoutJobInput, ContractUncheckedCreateWithoutJobInput>
@@ -28548,6 +36503,22 @@ export namespace Prisma {
     status?: EnumProposalStatusFilter<"Proposal"> | $Enums.ProposalStatus
   }
 
+  export type JobAssetUpsertWithWhereUniqueWithoutJobInput = {
+    where: JobAssetWhereUniqueInput
+    update: XOR<JobAssetUpdateWithoutJobInput, JobAssetUncheckedUpdateWithoutJobInput>
+    create: XOR<JobAssetCreateWithoutJobInput, JobAssetUncheckedCreateWithoutJobInput>
+  }
+
+  export type JobAssetUpdateWithWhereUniqueWithoutJobInput = {
+    where: JobAssetWhereUniqueInput
+    data: XOR<JobAssetUpdateWithoutJobInput, JobAssetUncheckedUpdateWithoutJobInput>
+  }
+
+  export type JobAssetUpdateManyWithWhereWithoutJobInput = {
+    where: JobAssetScalarWhereInput
+    data: XOR<JobAssetUpdateManyMutationInput, JobAssetUncheckedUpdateManyWithoutJobInput>
+  }
+
   export type ClientCreateWithoutContractsInput = {
     id?: string
     fullName: string
@@ -28631,6 +36602,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     client: ClientCreateNestedOneWithoutJobsInput
     proposals?: ProposalCreateNestedManyWithoutJobInput
+    assets?: JobAssetCreateNestedManyWithoutJobInput
   }
 
   export type JobUncheckedCreateWithoutContractInput = {
@@ -28644,6 +36616,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     proposals?: ProposalUncheckedCreateNestedManyWithoutJobInput
+    assets?: JobAssetUncheckedCreateNestedManyWithoutJobInput
   }
 
   export type JobCreateOrConnectWithoutContractInput = {
@@ -28810,6 +36783,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     client?: ClientUpdateOneRequiredWithoutJobsNestedInput
     proposals?: ProposalUpdateManyWithoutJobNestedInput
+    assets?: JobAssetUpdateManyWithoutJobNestedInput
   }
 
   export type JobUncheckedUpdateWithoutContractInput = {
@@ -28823,6 +36797,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     proposals?: ProposalUncheckedUpdateManyWithoutJobNestedInput
+    assets?: JobAssetUncheckedUpdateManyWithoutJobNestedInput
   }
 
   export type PaymentUpsertWithWhereUniqueWithoutContractInput = {
@@ -28937,6 +36912,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationCreateNestedManyWithoutUser1Input
     Conversation_Conversation_user2IdToUser?: ConversationCreateNestedManyWithoutUser2Input
     wallet?: WalletCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFreelancerInput = {
@@ -28957,6 +36936,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser1Input
     Conversation_Conversation_user2IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser2Input
     wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentUncheckedCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetUncheckedCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentUncheckedCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFreelancerInput = {
@@ -29136,6 +37119,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationUpdateManyWithoutUser1NestedInput
     Conversation_Conversation_user2IdToUser?: ConversationUpdateManyWithoutUser2NestedInput
     wallet?: WalletUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFreelancerInput = {
@@ -29156,6 +37143,10 @@ export namespace Prisma {
     Conversation_Conversation_user1IdToUser?: ConversationUncheckedUpdateManyWithoutUser1NestedInput
     Conversation_Conversation_user2IdToUser?: ConversationUncheckedUpdateManyWithoutUser2NestedInput
     wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUncheckedUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUncheckedUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUncheckedUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PortfolioLinkUpsertWithWhereUniqueWithoutFreelancerInput = {
@@ -29498,6 +37489,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     contract?: ContractCreateNestedOneWithoutJobInput
     client: ClientCreateNestedOneWithoutJobsInput
+    assets?: JobAssetCreateNestedManyWithoutJobInput
   }
 
   export type JobUncheckedCreateWithoutProposalsInput = {
@@ -29511,6 +37503,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     contract?: ContractUncheckedCreateNestedOneWithoutJobInput
+    assets?: JobAssetUncheckedCreateNestedManyWithoutJobInput
   }
 
   export type JobCreateOrConnectWithoutProposalsInput = {
@@ -29587,6 +37580,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contract?: ContractUpdateOneWithoutJobNestedInput
     client?: ClientUpdateOneRequiredWithoutJobsNestedInput
+    assets?: JobAssetUpdateManyWithoutJobNestedInput
   }
 
   export type JobUncheckedUpdateWithoutProposalsInput = {
@@ -29600,6 +37594,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contract?: ContractUncheckedUpdateOneWithoutJobNestedInput
+    assets?: JobAssetUncheckedUpdateManyWithoutJobNestedInput
   }
 
   export type ContractCreateWithoutPaymentsInput = {
@@ -29688,6 +37683,10 @@ export namespace Prisma {
     Message_Message_senderIdToUser?: MessageCreateNestedManyWithoutSenderInput
     Conversation_Conversation_user1IdToUser?: ConversationCreateNestedManyWithoutUser1Input
     Conversation_Conversation_user2IdToUser?: ConversationCreateNestedManyWithoutUser2Input
+    verificationDocuments?: VerificationDocumentCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWalletInput = {
@@ -29708,6 +37707,10 @@ export namespace Prisma {
     Message_Message_senderIdToUser?: MessageUncheckedCreateNestedManyWithoutSenderInput
     Conversation_Conversation_user1IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser1Input
     Conversation_Conversation_user2IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser2Input
+    verificationDocuments?: VerificationDocumentUncheckedCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetUncheckedCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentUncheckedCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWalletInput = {
@@ -29772,6 +37775,10 @@ export namespace Prisma {
     Message_Message_senderIdToUser?: MessageUpdateManyWithoutSenderNestedInput
     Conversation_Conversation_user1IdToUser?: ConversationUpdateManyWithoutUser1NestedInput
     Conversation_Conversation_user2IdToUser?: ConversationUpdateManyWithoutUser2NestedInput
+    verificationDocuments?: VerificationDocumentUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWalletInput = {
@@ -29792,6 +37799,10 @@ export namespace Prisma {
     Message_Message_senderIdToUser?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     Conversation_Conversation_user1IdToUser?: ConversationUncheckedUpdateManyWithoutUser1NestedInput
     Conversation_Conversation_user2IdToUser?: ConversationUncheckedUpdateManyWithoutUser2NestedInput
+    verificationDocuments?: VerificationDocumentUncheckedUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUncheckedUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUncheckedUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type WalletTransactionUpsertWithWhereUniqueWithoutWalletInput = {
@@ -30115,6 +38126,646 @@ export namespace Prisma {
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutFreelancerNestedInput
   }
 
+  export type UserCreateWithoutVerificationDocumentsInput = {
+    id?: string
+    email: string
+    password?: string | null
+    name: string
+    role: $Enums.Role
+    isVerified: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    googleId?: string | null
+    profilePicture?: string | null
+    authProvider?: $Enums.AuthProvider
+    Client?: ClientCreateNestedOneWithoutUserInput
+    Freelancer?: FreelancerCreateNestedOneWithoutUserInput
+    Message_Message_receiverIdToUser?: MessageCreateNestedManyWithoutReceiverInput
+    Message_Message_senderIdToUser?: MessageCreateNestedManyWithoutSenderInput
+    Conversation_Conversation_user1IdToUser?: ConversationCreateNestedManyWithoutUser1Input
+    Conversation_Conversation_user2IdToUser?: ConversationCreateNestedManyWithoutUser2Input
+    wallet?: WalletCreateNestedOneWithoutUserInput
+    jobAssets?: JobAssetCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutVerificationDocumentsInput = {
+    id?: string
+    email: string
+    password?: string | null
+    name: string
+    role: $Enums.Role
+    isVerified: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    googleId?: string | null
+    profilePicture?: string | null
+    authProvider?: $Enums.AuthProvider
+    Client?: ClientUncheckedCreateNestedOneWithoutUserInput
+    Freelancer?: FreelancerUncheckedCreateNestedOneWithoutUserInput
+    Message_Message_receiverIdToUser?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    Message_Message_senderIdToUser?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    Conversation_Conversation_user1IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser1Input
+    Conversation_Conversation_user2IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser2Input
+    wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    jobAssets?: JobAssetUncheckedCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentUncheckedCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutVerificationDocumentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutVerificationDocumentsInput, UserUncheckedCreateWithoutVerificationDocumentsInput>
+  }
+
+  export type UserUpsertWithoutVerificationDocumentsInput = {
+    update: XOR<UserUpdateWithoutVerificationDocumentsInput, UserUncheckedUpdateWithoutVerificationDocumentsInput>
+    create: XOR<UserCreateWithoutVerificationDocumentsInput, UserUncheckedCreateWithoutVerificationDocumentsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutVerificationDocumentsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutVerificationDocumentsInput, UserUncheckedUpdateWithoutVerificationDocumentsInput>
+  }
+
+  export type UserUpdateWithoutVerificationDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    Client?: ClientUpdateOneWithoutUserNestedInput
+    Freelancer?: FreelancerUpdateOneWithoutUserNestedInput
+    Message_Message_receiverIdToUser?: MessageUpdateManyWithoutReceiverNestedInput
+    Message_Message_senderIdToUser?: MessageUpdateManyWithoutSenderNestedInput
+    Conversation_Conversation_user1IdToUser?: ConversationUpdateManyWithoutUser1NestedInput
+    Conversation_Conversation_user2IdToUser?: ConversationUpdateManyWithoutUser2NestedInput
+    wallet?: WalletUpdateOneWithoutUserNestedInput
+    jobAssets?: JobAssetUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutVerificationDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    Client?: ClientUncheckedUpdateOneWithoutUserNestedInput
+    Freelancer?: FreelancerUncheckedUpdateOneWithoutUserNestedInput
+    Message_Message_receiverIdToUser?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    Message_Message_senderIdToUser?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    Conversation_Conversation_user1IdToUser?: ConversationUncheckedUpdateManyWithoutUser1NestedInput
+    Conversation_Conversation_user2IdToUser?: ConversationUncheckedUpdateManyWithoutUser2NestedInput
+    wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    jobAssets?: JobAssetUncheckedUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUncheckedUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutJobAssetsInput = {
+    id?: string
+    email: string
+    password?: string | null
+    name: string
+    role: $Enums.Role
+    isVerified: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    googleId?: string | null
+    profilePicture?: string | null
+    authProvider?: $Enums.AuthProvider
+    Client?: ClientCreateNestedOneWithoutUserInput
+    Freelancer?: FreelancerCreateNestedOneWithoutUserInput
+    Message_Message_receiverIdToUser?: MessageCreateNestedManyWithoutReceiverInput
+    Message_Message_senderIdToUser?: MessageCreateNestedManyWithoutSenderInput
+    Conversation_Conversation_user1IdToUser?: ConversationCreateNestedManyWithoutUser1Input
+    Conversation_Conversation_user2IdToUser?: ConversationCreateNestedManyWithoutUser2Input
+    wallet?: WalletCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutJobAssetsInput = {
+    id?: string
+    email: string
+    password?: string | null
+    name: string
+    role: $Enums.Role
+    isVerified: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    googleId?: string | null
+    profilePicture?: string | null
+    authProvider?: $Enums.AuthProvider
+    Client?: ClientUncheckedCreateNestedOneWithoutUserInput
+    Freelancer?: FreelancerUncheckedCreateNestedOneWithoutUserInput
+    Message_Message_receiverIdToUser?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    Message_Message_senderIdToUser?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    Conversation_Conversation_user1IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser1Input
+    Conversation_Conversation_user2IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser2Input
+    wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentUncheckedCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentUncheckedCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutJobAssetsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutJobAssetsInput, UserUncheckedCreateWithoutJobAssetsInput>
+  }
+
+  export type JobCreateWithoutAssetsInput = {
+    id?: string
+    title: string
+    description: string
+    budget: number
+    category: string
+    status?: $Enums.JobStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contract?: ContractCreateNestedOneWithoutJobInput
+    client: ClientCreateNestedOneWithoutJobsInput
+    proposals?: ProposalCreateNestedManyWithoutJobInput
+  }
+
+  export type JobUncheckedCreateWithoutAssetsInput = {
+    id?: string
+    clientId: string
+    title: string
+    description: string
+    budget: number
+    category: string
+    status?: $Enums.JobStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contract?: ContractUncheckedCreateNestedOneWithoutJobInput
+    proposals?: ProposalUncheckedCreateNestedManyWithoutJobInput
+  }
+
+  export type JobCreateOrConnectWithoutAssetsInput = {
+    where: JobWhereUniqueInput
+    create: XOR<JobCreateWithoutAssetsInput, JobUncheckedCreateWithoutAssetsInput>
+  }
+
+  export type UserUpsertWithoutJobAssetsInput = {
+    update: XOR<UserUpdateWithoutJobAssetsInput, UserUncheckedUpdateWithoutJobAssetsInput>
+    create: XOR<UserCreateWithoutJobAssetsInput, UserUncheckedCreateWithoutJobAssetsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutJobAssetsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutJobAssetsInput, UserUncheckedUpdateWithoutJobAssetsInput>
+  }
+
+  export type UserUpdateWithoutJobAssetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    Client?: ClientUpdateOneWithoutUserNestedInput
+    Freelancer?: FreelancerUpdateOneWithoutUserNestedInput
+    Message_Message_receiverIdToUser?: MessageUpdateManyWithoutReceiverNestedInput
+    Message_Message_senderIdToUser?: MessageUpdateManyWithoutSenderNestedInput
+    Conversation_Conversation_user1IdToUser?: ConversationUpdateManyWithoutUser1NestedInput
+    Conversation_Conversation_user2IdToUser?: ConversationUpdateManyWithoutUser2NestedInput
+    wallet?: WalletUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutJobAssetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    Client?: ClientUncheckedUpdateOneWithoutUserNestedInput
+    Freelancer?: FreelancerUncheckedUpdateOneWithoutUserNestedInput
+    Message_Message_receiverIdToUser?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    Message_Message_senderIdToUser?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    Conversation_Conversation_user1IdToUser?: ConversationUncheckedUpdateManyWithoutUser1NestedInput
+    Conversation_Conversation_user2IdToUser?: ConversationUncheckedUpdateManyWithoutUser2NestedInput
+    wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUncheckedUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUncheckedUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type JobUpsertWithoutAssetsInput = {
+    update: XOR<JobUpdateWithoutAssetsInput, JobUncheckedUpdateWithoutAssetsInput>
+    create: XOR<JobCreateWithoutAssetsInput, JobUncheckedCreateWithoutAssetsInput>
+    where?: JobWhereInput
+  }
+
+  export type JobUpdateToOneWithWhereWithoutAssetsInput = {
+    where?: JobWhereInput
+    data: XOR<JobUpdateWithoutAssetsInput, JobUncheckedUpdateWithoutAssetsInput>
+  }
+
+  export type JobUpdateWithoutAssetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    budget?: FloatFieldUpdateOperationsInput | number
+    category?: StringFieldUpdateOperationsInput | string
+    status?: EnumJobStatusFieldUpdateOperationsInput | $Enums.JobStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contract?: ContractUpdateOneWithoutJobNestedInput
+    client?: ClientUpdateOneRequiredWithoutJobsNestedInput
+    proposals?: ProposalUpdateManyWithoutJobNestedInput
+  }
+
+  export type JobUncheckedUpdateWithoutAssetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    budget?: FloatFieldUpdateOperationsInput | number
+    category?: StringFieldUpdateOperationsInput | string
+    status?: EnumJobStatusFieldUpdateOperationsInput | $Enums.JobStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contract?: ContractUncheckedUpdateOneWithoutJobNestedInput
+    proposals?: ProposalUncheckedUpdateManyWithoutJobNestedInput
+  }
+
+  export type UserCreateWithoutChatAttachmentsInput = {
+    id?: string
+    email: string
+    password?: string | null
+    name: string
+    role: $Enums.Role
+    isVerified: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    googleId?: string | null
+    profilePicture?: string | null
+    authProvider?: $Enums.AuthProvider
+    Client?: ClientCreateNestedOneWithoutUserInput
+    Freelancer?: FreelancerCreateNestedOneWithoutUserInput
+    Message_Message_receiverIdToUser?: MessageCreateNestedManyWithoutReceiverInput
+    Message_Message_senderIdToUser?: MessageCreateNestedManyWithoutSenderInput
+    Conversation_Conversation_user1IdToUser?: ConversationCreateNestedManyWithoutUser1Input
+    Conversation_Conversation_user2IdToUser?: ConversationCreateNestedManyWithoutUser2Input
+    wallet?: WalletCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutChatAttachmentsInput = {
+    id?: string
+    email: string
+    password?: string | null
+    name: string
+    role: $Enums.Role
+    isVerified: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    googleId?: string | null
+    profilePicture?: string | null
+    authProvider?: $Enums.AuthProvider
+    Client?: ClientUncheckedCreateNestedOneWithoutUserInput
+    Freelancer?: FreelancerUncheckedCreateNestedOneWithoutUserInput
+    Message_Message_receiverIdToUser?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    Message_Message_senderIdToUser?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    Conversation_Conversation_user1IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser1Input
+    Conversation_Conversation_user2IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser2Input
+    wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentUncheckedCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetUncheckedCreateNestedManyWithoutUserInput
+    mediaFiles?: MediaFileUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutChatAttachmentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutChatAttachmentsInput, UserUncheckedCreateWithoutChatAttachmentsInput>
+  }
+
+  export type ConversationCreateWithoutAttachmentsInput = {
+    id?: string
+    lastActivity?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user1: UserCreateNestedOneWithoutConversation_Conversation_user1IdToUserInput
+    user2: UserCreateNestedOneWithoutConversation_Conversation_user2IdToUserInput
+    messages?: MessageCreateNestedManyWithoutConversationInput
+    lastMessage?: MessageCreateNestedOneWithoutConversationAsLastInput
+  }
+
+  export type ConversationUncheckedCreateWithoutAttachmentsInput = {
+    id?: string
+    user1Id: string
+    user2Id: string
+    lastMessageId?: string | null
+    lastActivity?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutAttachmentsInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutAttachmentsInput, ConversationUncheckedCreateWithoutAttachmentsInput>
+  }
+
+  export type MessageCreateWithoutAttachmentsInput = {
+    id?: string
+    content: string
+    timestamp?: Date | string
+    readAt?: Date | string | null
+    conversation: ConversationCreateNestedOneWithoutMessagesInput
+    sender: UserCreateNestedOneWithoutMessage_Message_senderIdToUserInput
+    receiver: UserCreateNestedOneWithoutMessage_Message_receiverIdToUserInput
+    ConversationAsLast?: ConversationCreateNestedOneWithoutLastMessageInput
+  }
+
+  export type MessageUncheckedCreateWithoutAttachmentsInput = {
+    id?: string
+    conversationId: string
+    senderId: string
+    receiverId: string
+    content: string
+    timestamp?: Date | string
+    readAt?: Date | string | null
+    ConversationAsLast?: ConversationUncheckedCreateNestedOneWithoutLastMessageInput
+  }
+
+  export type MessageCreateOrConnectWithoutAttachmentsInput = {
+    where: MessageWhereUniqueInput
+    create: XOR<MessageCreateWithoutAttachmentsInput, MessageUncheckedCreateWithoutAttachmentsInput>
+  }
+
+  export type UserUpsertWithoutChatAttachmentsInput = {
+    update: XOR<UserUpdateWithoutChatAttachmentsInput, UserUncheckedUpdateWithoutChatAttachmentsInput>
+    create: XOR<UserCreateWithoutChatAttachmentsInput, UserUncheckedCreateWithoutChatAttachmentsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutChatAttachmentsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutChatAttachmentsInput, UserUncheckedUpdateWithoutChatAttachmentsInput>
+  }
+
+  export type UserUpdateWithoutChatAttachmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    Client?: ClientUpdateOneWithoutUserNestedInput
+    Freelancer?: FreelancerUpdateOneWithoutUserNestedInput
+    Message_Message_receiverIdToUser?: MessageUpdateManyWithoutReceiverNestedInput
+    Message_Message_senderIdToUser?: MessageUpdateManyWithoutSenderNestedInput
+    Conversation_Conversation_user1IdToUser?: ConversationUpdateManyWithoutUser1NestedInput
+    Conversation_Conversation_user2IdToUser?: ConversationUpdateManyWithoutUser2NestedInput
+    wallet?: WalletUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutChatAttachmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    Client?: ClientUncheckedUpdateOneWithoutUserNestedInput
+    Freelancer?: FreelancerUncheckedUpdateOneWithoutUserNestedInput
+    Message_Message_receiverIdToUser?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    Message_Message_senderIdToUser?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    Conversation_Conversation_user1IdToUser?: ConversationUncheckedUpdateManyWithoutUser1NestedInput
+    Conversation_Conversation_user2IdToUser?: ConversationUncheckedUpdateManyWithoutUser2NestedInput
+    wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUncheckedUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUncheckedUpdateManyWithoutUserNestedInput
+    mediaFiles?: MediaFileUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ConversationUpsertWithoutAttachmentsInput = {
+    update: XOR<ConversationUpdateWithoutAttachmentsInput, ConversationUncheckedUpdateWithoutAttachmentsInput>
+    create: XOR<ConversationCreateWithoutAttachmentsInput, ConversationUncheckedCreateWithoutAttachmentsInput>
+    where?: ConversationWhereInput
+  }
+
+  export type ConversationUpdateToOneWithWhereWithoutAttachmentsInput = {
+    where?: ConversationWhereInput
+    data: XOR<ConversationUpdateWithoutAttachmentsInput, ConversationUncheckedUpdateWithoutAttachmentsInput>
+  }
+
+  export type ConversationUpdateWithoutAttachmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lastActivity?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user1?: UserUpdateOneRequiredWithoutConversation_Conversation_user1IdToUserNestedInput
+    user2?: UserUpdateOneRequiredWithoutConversation_Conversation_user2IdToUserNestedInput
+    messages?: MessageUpdateManyWithoutConversationNestedInput
+    lastMessage?: MessageUpdateOneWithoutConversationAsLastNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutAttachmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user1Id?: StringFieldUpdateOperationsInput | string
+    user2Id?: StringFieldUpdateOperationsInput | string
+    lastMessageId?: NullableStringFieldUpdateOperationsInput | string | null
+    lastActivity?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type MessageUpsertWithoutAttachmentsInput = {
+    update: XOR<MessageUpdateWithoutAttachmentsInput, MessageUncheckedUpdateWithoutAttachmentsInput>
+    create: XOR<MessageCreateWithoutAttachmentsInput, MessageUncheckedCreateWithoutAttachmentsInput>
+    where?: MessageWhereInput
+  }
+
+  export type MessageUpdateToOneWithWhereWithoutAttachmentsInput = {
+    where?: MessageWhereInput
+    data: XOR<MessageUpdateWithoutAttachmentsInput, MessageUncheckedUpdateWithoutAttachmentsInput>
+  }
+
+  export type MessageUpdateWithoutAttachmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    conversation?: ConversationUpdateOneRequiredWithoutMessagesNestedInput
+    sender?: UserUpdateOneRequiredWithoutMessage_Message_senderIdToUserNestedInput
+    receiver?: UserUpdateOneRequiredWithoutMessage_Message_receiverIdToUserNestedInput
+    ConversationAsLast?: ConversationUpdateOneWithoutLastMessageNestedInput
+  }
+
+  export type MessageUncheckedUpdateWithoutAttachmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    conversationId?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    receiverId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ConversationAsLast?: ConversationUncheckedUpdateOneWithoutLastMessageNestedInput
+  }
+
+  export type UserCreateWithoutMediaFilesInput = {
+    id?: string
+    email: string
+    password?: string | null
+    name: string
+    role: $Enums.Role
+    isVerified: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    googleId?: string | null
+    profilePicture?: string | null
+    authProvider?: $Enums.AuthProvider
+    Client?: ClientCreateNestedOneWithoutUserInput
+    Freelancer?: FreelancerCreateNestedOneWithoutUserInput
+    Message_Message_receiverIdToUser?: MessageCreateNestedManyWithoutReceiverInput
+    Message_Message_senderIdToUser?: MessageCreateNestedManyWithoutSenderInput
+    Conversation_Conversation_user1IdToUser?: ConversationCreateNestedManyWithoutUser1Input
+    Conversation_Conversation_user2IdToUser?: ConversationCreateNestedManyWithoutUser2Input
+    wallet?: WalletCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutMediaFilesInput = {
+    id?: string
+    email: string
+    password?: string | null
+    name: string
+    role: $Enums.Role
+    isVerified: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    googleId?: string | null
+    profilePicture?: string | null
+    authProvider?: $Enums.AuthProvider
+    Client?: ClientUncheckedCreateNestedOneWithoutUserInput
+    Freelancer?: FreelancerUncheckedCreateNestedOneWithoutUserInput
+    Message_Message_receiverIdToUser?: MessageUncheckedCreateNestedManyWithoutReceiverInput
+    Message_Message_senderIdToUser?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    Conversation_Conversation_user1IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser1Input
+    Conversation_Conversation_user2IdToUser?: ConversationUncheckedCreateNestedManyWithoutUser2Input
+    wallet?: WalletUncheckedCreateNestedOneWithoutUserInput
+    verificationDocuments?: VerificationDocumentUncheckedCreateNestedManyWithoutUserInput
+    jobAssets?: JobAssetUncheckedCreateNestedManyWithoutUserInput
+    chatAttachments?: ChatAttachmentUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutMediaFilesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMediaFilesInput, UserUncheckedCreateWithoutMediaFilesInput>
+  }
+
+  export type UserUpsertWithoutMediaFilesInput = {
+    update: XOR<UserUpdateWithoutMediaFilesInput, UserUncheckedUpdateWithoutMediaFilesInput>
+    create: XOR<UserCreateWithoutMediaFilesInput, UserUncheckedCreateWithoutMediaFilesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMediaFilesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMediaFilesInput, UserUncheckedUpdateWithoutMediaFilesInput>
+  }
+
+  export type UserUpdateWithoutMediaFilesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    Client?: ClientUpdateOneWithoutUserNestedInput
+    Freelancer?: FreelancerUpdateOneWithoutUserNestedInput
+    Message_Message_receiverIdToUser?: MessageUpdateManyWithoutReceiverNestedInput
+    Message_Message_senderIdToUser?: MessageUpdateManyWithoutSenderNestedInput
+    Conversation_Conversation_user1IdToUser?: ConversationUpdateManyWithoutUser1NestedInput
+    Conversation_Conversation_user2IdToUser?: ConversationUpdateManyWithoutUser2NestedInput
+    wallet?: WalletUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMediaFilesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    Client?: ClientUncheckedUpdateOneWithoutUserNestedInput
+    Freelancer?: FreelancerUncheckedUpdateOneWithoutUserNestedInput
+    Message_Message_receiverIdToUser?: MessageUncheckedUpdateManyWithoutReceiverNestedInput
+    Message_Message_senderIdToUser?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    Conversation_Conversation_user1IdToUser?: ConversationUncheckedUpdateManyWithoutUser1NestedInput
+    Conversation_Conversation_user2IdToUser?: ConversationUncheckedUpdateManyWithoutUser2NestedInput
+    wallet?: WalletUncheckedUpdateOneWithoutUserNestedInput
+    verificationDocuments?: VerificationDocumentUncheckedUpdateManyWithoutUserNestedInput
+    jobAssets?: JobAssetUncheckedUpdateManyWithoutUserNestedInput
+    chatAttachments?: ChatAttachmentUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type MessageCreateManyReceiverInput = {
     id?: string
     conversationId: string
@@ -30151,6 +38802,69 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type VerificationDocumentCreateManyUserInput = {
+    id?: string
+    docType: $Enums.VerificationDocType
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    status?: $Enums.VerificationStatus
+    uploadedAt?: Date | string
+    reviewedAt?: Date | string | null
+    reviewedBy?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type JobAssetCreateManyUserInput = {
+    id?: string
+    jobId?: string | null
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    category?: string | null
+    isPublic?: boolean
+    url?: string | null
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ChatAttachmentCreateManyUserInput = {
+    id?: string
+    chatId: string
+    messageId?: string | null
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    url: string
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MediaFileCreateManyUserInput = {
+    id?: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    uploadType: $Enums.MediaUploadType
+    category?: string | null
+    isPublic?: boolean
+    url?: string | null
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type MessageUpdateWithoutReceiverInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -30159,6 +38873,7 @@ export namespace Prisma {
     conversation?: ConversationUpdateOneRequiredWithoutMessagesNestedInput
     sender?: UserUpdateOneRequiredWithoutMessage_Message_senderIdToUserNestedInput
     ConversationAsLast?: ConversationUpdateOneWithoutLastMessageNestedInput
+    attachments?: ChatAttachmentUpdateManyWithoutMessageNestedInput
   }
 
   export type MessageUncheckedUpdateWithoutReceiverInput = {
@@ -30169,6 +38884,7 @@ export namespace Prisma {
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConversationAsLast?: ConversationUncheckedUpdateOneWithoutLastMessageNestedInput
+    attachments?: ChatAttachmentUncheckedUpdateManyWithoutMessageNestedInput
   }
 
   export type MessageUncheckedUpdateManyWithoutReceiverInput = {
@@ -30188,6 +38904,7 @@ export namespace Prisma {
     conversation?: ConversationUpdateOneRequiredWithoutMessagesNestedInput
     receiver?: UserUpdateOneRequiredWithoutMessage_Message_receiverIdToUserNestedInput
     ConversationAsLast?: ConversationUpdateOneWithoutLastMessageNestedInput
+    attachments?: ChatAttachmentUpdateManyWithoutMessageNestedInput
   }
 
   export type MessageUncheckedUpdateWithoutSenderInput = {
@@ -30198,6 +38915,7 @@ export namespace Prisma {
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConversationAsLast?: ConversationUncheckedUpdateOneWithoutLastMessageNestedInput
+    attachments?: ChatAttachmentUncheckedUpdateManyWithoutMessageNestedInput
   }
 
   export type MessageUncheckedUpdateManyWithoutSenderInput = {
@@ -30217,6 +38935,7 @@ export namespace Prisma {
     user2?: UserUpdateOneRequiredWithoutConversation_Conversation_user2IdToUserNestedInput
     messages?: MessageUpdateManyWithoutConversationNestedInput
     lastMessage?: MessageUpdateOneWithoutConversationAsLastNestedInput
+    attachments?: ChatAttachmentUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateWithoutUser1Input = {
@@ -30227,6 +38946,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+    attachments?: ChatAttachmentUncheckedUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateManyWithoutUser1Input = {
@@ -30246,6 +38966,7 @@ export namespace Prisma {
     user1?: UserUpdateOneRequiredWithoutConversation_Conversation_user1IdToUserNestedInput
     messages?: MessageUpdateManyWithoutConversationNestedInput
     lastMessage?: MessageUpdateOneWithoutConversationAsLastNestedInput
+    attachments?: ChatAttachmentUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateWithoutUser2Input = {
@@ -30256,6 +38977,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+    attachments?: ChatAttachmentUncheckedUpdateManyWithoutConversationNestedInput
   }
 
   export type ConversationUncheckedUpdateManyWithoutUser2Input = {
@@ -30263,6 +38985,195 @@ export namespace Prisma {
     user1Id?: StringFieldUpdateOperationsInput | string
     lastMessageId?: NullableStringFieldUpdateOperationsInput | string | null
     lastActivity?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VerificationDocumentUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    docType?: EnumVerificationDocTypeFieldUpdateOperationsInput | $Enums.VerificationDocType
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    status?: EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VerificationDocumentUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    docType?: EnumVerificationDocTypeFieldUpdateOperationsInput | $Enums.VerificationDocType
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    status?: EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VerificationDocumentUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    docType?: EnumVerificationDocTypeFieldUpdateOperationsInput | $Enums.VerificationDocType
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    status?: EnumVerificationStatusFieldUpdateOperationsInput | $Enums.VerificationStatus
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type JobAssetUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    job?: JobUpdateOneWithoutAssetsNestedInput
+  }
+
+  export type JobAssetUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    jobId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type JobAssetUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    jobId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChatAttachmentUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    conversation?: ConversationUpdateOneRequiredWithoutAttachmentsNestedInput
+    message?: MessageUpdateOneWithoutAttachmentsNestedInput
+  }
+
+  export type ChatAttachmentUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chatId?: StringFieldUpdateOperationsInput | string
+    messageId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChatAttachmentUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    chatId?: StringFieldUpdateOperationsInput | string
+    messageId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MediaFileUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    uploadType?: EnumMediaUploadTypeFieldUpdateOperationsInput | $Enums.MediaUploadType
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MediaFileUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    uploadType?: EnumMediaUploadTypeFieldUpdateOperationsInput | $Enums.MediaUploadType
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MediaFileUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    uploadType?: EnumMediaUploadTypeFieldUpdateOperationsInput | $Enums.MediaUploadType
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -30276,6 +39187,21 @@ export namespace Prisma {
     readAt?: Date | string | null
   }
 
+  export type ChatAttachmentCreateManyConversationInput = {
+    id?: string
+    userId: string
+    messageId?: string | null
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    url: string
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type MessageUpdateWithoutConversationInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -30284,6 +39210,7 @@ export namespace Prisma {
     sender?: UserUpdateOneRequiredWithoutMessage_Message_senderIdToUserNestedInput
     receiver?: UserUpdateOneRequiredWithoutMessage_Message_receiverIdToUserNestedInput
     ConversationAsLast?: ConversationUpdateOneWithoutLastMessageNestedInput
+    attachments?: ChatAttachmentUpdateManyWithoutMessageNestedInput
   }
 
   export type MessageUncheckedUpdateWithoutConversationInput = {
@@ -30294,6 +39221,7 @@ export namespace Prisma {
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ConversationAsLast?: ConversationUncheckedUpdateOneWithoutLastMessageNestedInput
+    attachments?: ChatAttachmentUncheckedUpdateManyWithoutMessageNestedInput
   }
 
   export type MessageUncheckedUpdateManyWithoutConversationInput = {
@@ -30303,6 +39231,111 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ChatAttachmentUpdateWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutChatAttachmentsNestedInput
+    message?: MessageUpdateOneWithoutAttachmentsNestedInput
+  }
+
+  export type ChatAttachmentUncheckedUpdateWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    messageId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChatAttachmentUncheckedUpdateManyWithoutConversationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    messageId?: NullableStringFieldUpdateOperationsInput | string | null
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChatAttachmentCreateManyMessageInput = {
+    id?: string
+    userId: string
+    chatId: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    url: string
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ChatAttachmentUpdateWithoutMessageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutChatAttachmentsNestedInput
+    conversation?: ConversationUpdateOneRequiredWithoutAttachmentsNestedInput
+  }
+
+  export type ChatAttachmentUncheckedUpdateWithoutMessageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    chatId?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChatAttachmentUncheckedUpdateManyWithoutMessageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    chatId?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    url?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ContractCreateManyClientInput = {
@@ -30375,6 +39408,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contract?: ContractUpdateOneWithoutJobNestedInput
     proposals?: ProposalUpdateManyWithoutJobNestedInput
+    assets?: JobAssetUpdateManyWithoutJobNestedInput
   }
 
   export type JobUncheckedUpdateWithoutClientInput = {
@@ -30388,6 +39422,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contract?: ContractUncheckedUpdateOneWithoutJobNestedInput
     proposals?: ProposalUncheckedUpdateManyWithoutJobNestedInput
+    assets?: JobAssetUncheckedUpdateManyWithoutJobNestedInput
   }
 
   export type JobUncheckedUpdateManyWithoutClientInput = {
@@ -30408,6 +39443,22 @@ export namespace Prisma {
     proposedRate: number
     createdAt?: Date | string
     status?: $Enums.ProposalStatus
+  }
+
+  export type JobAssetCreateManyJobInput = {
+    id?: string
+    userId: string
+    fileName: string
+    originalName: string
+    fileType: string
+    fileSize: number
+    category?: string | null
+    isPublic?: boolean
+    url?: string | null
+    uploadedAt?: Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProposalUpdateWithoutJobInput = {
@@ -30435,6 +39486,54 @@ export namespace Prisma {
     proposedRate?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumProposalStatusFieldUpdateOperationsInput | $Enums.ProposalStatus
+  }
+
+  export type JobAssetUpdateWithoutJobInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutJobAssetsNestedInput
+  }
+
+  export type JobAssetUncheckedUpdateWithoutJobInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type JobAssetUncheckedUpdateManyWithoutJobInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    originalName?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    fileSize?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentCreateManyContractInput = {

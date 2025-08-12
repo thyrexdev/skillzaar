@@ -24,6 +24,6 @@ app.route('/client', clientRoutes);
 app.route('/freelancer', freelancerRoutes);
 
 export default {
-    port: process.env.PORT || 5001,
+    port: process.env.PORT,
     fetch: app.fetch,
 };

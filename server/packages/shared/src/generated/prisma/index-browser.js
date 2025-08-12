@@ -293,6 +293,73 @@ exports.Prisma.ReviewScalarFieldEnum = {
   freelancerId: 'freelancerId'
 };
 
+exports.Prisma.VerificationDocumentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  docType: 'docType',
+  fileName: 'fileName',
+  originalName: 'originalName',
+  fileType: 'fileType',
+  fileSize: 'fileSize',
+  status: 'status',
+  uploadedAt: 'uploadedAt',
+  reviewedAt: 'reviewedAt',
+  reviewedBy: 'reviewedBy',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.JobAssetScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  jobId: 'jobId',
+  fileName: 'fileName',
+  originalName: 'originalName',
+  fileType: 'fileType',
+  fileSize: 'fileSize',
+  category: 'category',
+  isPublic: 'isPublic',
+  url: 'url',
+  uploadedAt: 'uploadedAt',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ChatAttachmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  chatId: 'chatId',
+  messageId: 'messageId',
+  fileName: 'fileName',
+  originalName: 'originalName',
+  fileType: 'fileType',
+  fileSize: 'fileSize',
+  url: 'url',
+  uploadedAt: 'uploadedAt',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MediaFileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  fileName: 'fileName',
+  originalName: 'originalName',
+  fileType: 'fileType',
+  fileSize: 'fileSize',
+  uploadType: 'uploadType',
+  category: 'category',
+  isPublic: 'isPublic',
+  url: 'url',
+  uploadedAt: 'uploadedAt',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -391,6 +458,27 @@ exports.TransactionType = exports.$Enums.TransactionType = {
   ADJUSTMENT: 'ADJUSTMENT'
 };
 
+exports.VerificationDocType = exports.$Enums.VerificationDocType = {
+  FRONT: 'FRONT',
+  BACK: 'BACK',
+  SELFIE: 'SELFIE'
+};
+
+exports.VerificationStatus = exports.$Enums.VerificationStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  EXPIRED: 'EXPIRED'
+};
+
+exports.MediaUploadType = exports.$Enums.MediaUploadType = {
+  VERIFICATION: 'VERIFICATION',
+  JOB: 'JOB',
+  CHAT: 'CHAT',
+  PROFILE: 'PROFILE',
+  OTHER: 'OTHER'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Conversation: 'Conversation',
@@ -407,7 +495,11 @@ exports.Prisma.ModelName = {
   Wallet: 'Wallet',
   Withdrawal: 'Withdrawal',
   WalletTransaction: 'WalletTransaction',
-  Review: 'Review'
+  Review: 'Review',
+  VerificationDocument: 'VerificationDocument',
+  JobAsset: 'JobAsset',
+  ChatAttachment: 'ChatAttachment',
+  MediaFile: 'MediaFile'
 };
 
 /**

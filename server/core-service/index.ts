@@ -8,7 +8,7 @@ app.route('/job', jobRoutes);
 app.route('/proposals', proposalRoutes);
 
 export default {
-    port: process.env.PORT || 5002,
+    port: process.env.PORT || 5001,
     fetch: app.fetch,
 };
 

@@ -11,6 +11,7 @@ frevix/server/
 ├── auth-service/          # Auth + OTP + user management (Hono HTTP)
 ├── core-service/          # Main business logic (Hono HTTP)
 ├── chat-service/          # Realtime chat over WebSockets (Bun WS)
+├── media-service/         # File uploads & media handling (Cloudflare Workers + R2)
 ├── payment-service/       # Payments endpoints (Hono HTTP)
 ├── packages/
 │   ├── config/            # Shared env parsing, logger, constants, headers
@@ -113,14 +114,96 @@ payment-service/
     └── index.ts         # Service entry point
 ```
 
+## Media Service (`media-service`)
+
+### Technology Stack
+- Runtime: Cloudflare Workers
+- Framework: Hono
+- Storage: Cloudflare R2 (dual buckets for different file types)
+- Database: PostgreSQL via shared Prisma client (`@frevix/shared`)
+- Auth: JWT verification with auth-service integration
+- Validation: Custom file validation based on upload context
+
+### Project Structure
+```
+media-service/
+├── src/
+│   ├── index.ts         # Worker entry point with Hono app
+│   ├── types/
+│   │   └── bindings.ts  # Cloudflare bindings & interfaces
+│   ├── utils/
+│   │   └── fileUtils.ts # File validation & utility functions
+│   └── routes/
+│       ├── upload.routes.ts      # Generic upload endpoints
+│       ├── verification.routes.ts # ID verification uploads
+│       ├── job.routes.ts         # Job asset uploads
+│       ├── chat.routes.ts        # Chat attachment uploads
+│       └── file.routes.ts        # File serving & management
+├── wrangler.jsonc       # Cloudflare Worker configuration
+├── package.json
+└── README.md           # Comprehensive service documentation
+```
+
+### File Upload Scenarios
+The media service handles three primary upload scenarios:
+
+1. **ID Verification** (`/api/verification/*`)
+   - **Purpose**: Government ID verification (front, back, selfie with ID)
+   - **Files**: 3 images max (one for each document type)
+   - **Size**: 10MB per file
+   - **Types**: Images only (JPEG, PNG, WebP)
+   - **Storage**: Private verification bucket (`frivico-verification-docs`)
+   - **Access**: Owner and admins only
+   - **Workflow**: Upload → Pending → Admin Review → Approved/Rejected
+
+2. **Job Assets** (`/api/jobs/*`)
+   - **Purpose**: Files attached to job postings
+   - **Files**: 10 files max per upload
+   - **Size**: 50MB per file
+   - **Types**: Images + Documents (PDF, Word, Text)
+   - **Storage**: General media bucket (`frivico-media-files`)
+   - **Access**: Job owner, public if marked as such
+   - **Categories**: requirements, reference, mockup, etc.
+
+3. **Chat Attachments** (`/api/chat/*`)
+   - **Purpose**: File sharing in chat conversations
+   - **Files**: Unlimited files per message
+   - **Size**: 100MB per file
+   - **Types**: Images + Documents + Videos
+   - **Storage**: General media bucket (`frivico-media-files`)
+   - **Access**: Chat participants only
+   - **Features**: Message linking, conversation organization
+
+### Storage Architecture
+- **Dual R2 Buckets**: 
+  - `frivico-verification-docs`: Private bucket for sensitive ID documents
+  - `frivico-media-files`: General bucket for job assets and chat files
+- **Access Control**: File-level permissions based on upload type and user roles
+- **Metadata Storage**: File metadata stored in PostgreSQL via shared Prisma schema
+
+### Authentication Integration
+- JWT token validation with auth-service
+- User context injection for all protected endpoints
+- Service-to-service communication for token verification
+
 ## Database Schema (`packages/shared/prisma/schema.prisma`)
 
 A single Prisma schema defines the entire database structure, including:
-- User Management: `User`, `Otp`
-- Profiles: `Client`, `Freelancer`
-- Job Marketplace: `Job`, `Proposal`, `Contract`, `Review`
-- Skills & Portfolio: `Skill`, `PortfolioLink`
-- Chat: `Conversation`, `Message`
+- **User Management**: `User`, `Otp`
+- **Profiles**: `Client`, `Freelancer`
+- **Job Marketplace**: `Job`, `Proposal`, `Contract`, `Review`
+- **Skills & Portfolio**: `Skill`, `PortfolioLink`
+- **Chat**: `Conversation`, `Message`
+- **Media & Files**: `VerificationDocument`, `JobAsset`, `ChatAttachment`, `MediaFile`
+- **Financial**: `Wallet`, `WalletTransaction`, `Payment`, `Withdrawal`
+
+### Media Service Models
+The media service introduces four new models to handle different file upload scenarios:
+
+- `VerificationDocument`: ID verification files with approval workflow
+- `JobAsset`: Files attached to job postings with public/private access
+- `ChatAttachment`: Files shared in chat conversations with participant access
+- `MediaFile`: General file metadata for other upload types
 
 ## Inter-Service Communication
 
@@ -157,8 +240,25 @@ cd server/core-service && bun run dev
 # Chat Service (WebSocket)
 cd server/chat-service && bun run dev
 
+# Media Service (Cloudflare Workers)
+cd server/media-service && bun run dev
+
 # Payment Service
 cd server/payment-service && bun run dev
+```
+
+### Media Service Deployment
+```bash
+# Deploy to Cloudflare Workers
+cd server/media-service && bun run deploy
+
+# View real-time logs
+wrangler tail frivico-media-service
+
+# Set secrets
+wrangler secret put JWT_SECRET
+wrangler secret put DATABASE_URL
+wrangler secret put AUTH_SERVICE_URL
 ```
 
 ### Prisma CLI (run from server root)

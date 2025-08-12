@@ -30,6 +30,12 @@ model User {
   Conversation_Conversation_user2IdToUser Conversation[] @relation("Conversation_user2IdToUser")
 
   wallet Wallet?
+
+  // Media service relations
+  verificationDocuments VerificationDocument[]
+  jobAssets             JobAsset[]
+  chatAttachments       ChatAttachment[]
+  mediaFiles            MediaFile[]
 }
 
 model Conversation {
@@ -42,10 +48,11 @@ model Conversation {
   updatedAt     DateTime @updatedAt
 
   // Relations
-  user1       User      @relation("Conversation_user1IdToUser", fields: [user1Id], references: [id])
-  user2       User      @relation("Conversation_user2IdToUser", fields: [user2Id], references: [id])
+  user1       User             @relation("Conversation_user1IdToUser", fields: [user1Id], references: [id])
+  user2       User             @relation("Conversation_user2IdToUser", fields: [user2Id], references: [id])
   messages    Message[]
-  lastMessage Message?  @relation("ConversationLastMessage", fields: [lastMessageId], references: [id])
+  lastMessage Message?         @relation("ConversationLastMessage", fields: [lastMessageId], references: [id])
+  attachments ChatAttachment[]
 
   // Ensure unique conversation between two users
   @@unique([user1Id, user2Id])
@@ -64,10 +71,11 @@ model Message {
   readAt         DateTime? // Read receipt timestamp
 
   // Relations
-  conversation       Conversation  @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  sender             User          @relation("Message_senderIdToUser", fields: [senderId], references: [id])
-  receiver           User          @relation("Message_receiverIdToUser", fields: [receiverId], references: [id])
-  ConversationAsLast Conversation? @relation("ConversationLastMessage")
+  conversation       Conversation     @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender             User             @relation("Message_senderIdToUser", fields: [senderId], references: [id])
+  receiver           User             @relation("Message_receiverIdToUser", fields: [receiverId], references: [id])
+  ConversationAsLast Conversation?    @relation("ConversationLastMessage")
+  attachments        ChatAttachment[]
 
   // Indexes for efficient queries
   @@index([conversationId, timestamp])
@@ -121,6 +129,7 @@ model Job {
   contract    Contract?
   client      Client     @relation(fields: [clientId], references: [id])
   proposals   Proposal[]
+  assets      JobAsset[]
 
   // Indexes for browse jobs performance
   @@index([status, createdAt(sort: Desc)])
@@ -332,4 +341,121 @@ enum ExperienceLevel {
 enum AuthProvider {
   EMAIL
   GOOGLE
+}
+
+// Media Service Models
+model VerificationDocument {
+  id           String              @id @default(uuid())
+  userId       String
+  docType      VerificationDocType
+  fileName     String // R2 object key
+  originalName String
+  fileType     String
+  fileSize     Int
+  status       VerificationStatus  @default(PENDING)
+  uploadedAt   DateTime            @default(now())
+  reviewedAt   DateTime?
+  reviewedBy   String? // Admin user ID
+  metadata     Json? // Additional metadata
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, docType]) // Each user can have only one doc per type
+  @@index([userId, status])
+  @@index([status, uploadedAt])
+}
+
+model JobAsset {
+  id           String   @id @default(uuid())
+  userId       String // Owner of the file
+  jobId        String? // Can be null for draft jobs
+  fileName     String // R2 object key
+  originalName String
+  fileType     String
+  fileSize     Int
+  category     String? // e.g., 'requirements', 'reference', 'mockup'
+  isPublic     Boolean  @default(false)
+  url          String? // Public URL if isPublic is true
+  uploadedAt   DateTime @default(now())
+  metadata     Json? // Additional metadata
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  job  Job? @relation(fields: [jobId], references: [id], onDelete: SetNull)
+
+  @@index([userId, jobId])
+  @@index([jobId, isPublic])
+  @@index([uploadedAt])
+}
+
+model ChatAttachment {
+  id           String   @id @default(uuid())
+  userId       String // Uploader
+  chatId       String // Reference to conversation
+  messageId    String? // Reference to specific message
+  fileName     String // R2 object key
+  originalName String
+  fileType     String
+  fileSize     Int
+  url          String // Internal URL for serving
+  uploadedAt   DateTime @default(now())
+  metadata     Json? // Additional metadata
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conversation Conversation @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  message      Message?     @relation(fields: [messageId], references: [id], onDelete: SetNull)
+
+  @@index([chatId, uploadedAt])
+  @@index([userId, uploadedAt])
+  @@index([messageId])
+}
+
+model MediaFile {
+  id           String          @id @default(uuid())
+  userId       String // Owner of the file
+  fileName     String // R2 object key
+  originalName String
+  fileType     String
+  fileSize     Int
+  uploadType   MediaUploadType
+  category     String?
+  isPublic     Boolean         @default(false)
+  url          String? // Public URL if isPublic is true
+  uploadedAt   DateTime        @default(now())
+  metadata     Json? // Additional metadata
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, uploadType])
+  @@index([uploadType, isPublic])
+  @@index([uploadedAt])
+}
+
+// Enums for Media Service
+enum VerificationDocType {
+  FRONT // Front of ID
+  BACK // Back of ID
+  SELFIE // Selfie with ID
+}
+
+enum VerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  EXPIRED
+}
+
+enum MediaUploadType {
+  VERIFICATION
+  JOB
+  CHAT
+  PROFILE
+  OTHER
 }
