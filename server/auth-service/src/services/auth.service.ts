@@ -18,28 +18,54 @@ register: async ({ name, email, password, role }: RegisterRequest): Promise<Auth
     const hashed = await bcrypt.hash(password, 10);
     const normalizedRole = role.toUpperCase() as 'CLIENT' | 'FREELANCER' | 'ADMIN';
     
-    const user = await prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashed,
-        role: normalizedRole,
-        isVerified: false,
-      },
+    // Use a transaction to ensure user and profile creation are atomic
+    const result = await prisma.$transaction(async (tx) => {
+      // Create user first
+      const user = await tx.user.create({
+        data: {
+          name,
+          email,
+          password: hashed,
+          role: normalizedRole,
+          isVerified: false,
+        },
+      });
+
+      // Create corresponding profile based on role
+      if (normalizedRole === 'CLIENT') {
+        await tx.client.create({
+          data: {
+            userId: user.id,
+            fullName: name, // Use the user's name as fullName
+          },
+        });
+        logger.info(`Created Client profile for: ${user.email}`);
+      } else if (normalizedRole === 'FREELANCER') {
+        await tx.freelancer.create({
+          data: {
+            userId: user.id,
+            fullName: name, // Use the user's name as fullName
+            experienceLevel: 'JUNIOR', // Default to JUNIOR, user can update later
+          },
+        });
+        logger.info(`Created Freelancer profile for: ${user.email}`);
+      }
+
+      return user;
     });
 
     const secret = new TextEncoder().encode(env.JWT_SECRET);
     const alg = 'HS256';
 
-    const token = await new jose.SignJWT({ sub: user.id, role: user.role })
+    const token = await new jose.SignJWT({ sub: result.id, role: result.role })
       .setProtectedHeader({ alg })
       .setExpirationTime('7d')
       .sign(secret);
 
     // Remove password from user object before returning
-    const { password: _, ...userWithoutPassword } = user;
+    const { password: _, ...userWithoutPassword } = result;
 
-    logger.info(`User registered: ${user.email}`);
+    logger.info(`User registered: ${result.email}`);
     return { user: userWithoutPassword, token };
   },
 

@@ -16,7 +16,8 @@
 	 */
 	"vars": {
 		"ALLOWED_FILE_TYPES": "image/jpeg,image/png,image/webp,image/gif,application/pdf,video/mp4",
-		"MAX_FILE_SIZE": "104857600"
+		"MAX_FILE_SIZE": "104857600",
+		"AUTH_SERVICE_URL": "http://localhost:5000"
 	},
 	
 	/**

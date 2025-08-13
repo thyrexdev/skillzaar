@@ -26,7 +26,7 @@ jobRoutes.get("/public/:jobId", getJobByIdPublic);
 // 🔒 Authenticated routes (require JWT)
 jobRoutes.use("*", authMiddleware);
 
-jobRoutes.post("/", createJob);
+jobRoutes.post("/post", createJob);
 jobRoutes.get("/", getClientJobs);
 jobRoutes.get("/:jobId", getJobById);
 jobRoutes.put("/:jobId", updateJob);

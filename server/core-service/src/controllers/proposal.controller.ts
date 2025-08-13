@@ -13,9 +13,9 @@ export const createProposal = async (c: Context) => {
     const validatedData = createProposalSchema.parse(body);
 
     const user = c.get("user");
-    if (!user?.userId) return c.json({ error: "User not authenticated" }, 401);
+    if (!user?.sub) return c.json({ error: "User not authenticated" }, 401);
 
-    const proposal = await ProposalService.createProposal(user.userId, validatedData.body);
+    const proposal = await ProposalService.createProposal(user.sub, validatedData.body);
     return c.json({ message: "Proposal submitted successfully", proposal }, 201);
   } catch (error: any) {
     if (error instanceof z.ZodError) {
@@ -29,9 +29,9 @@ export const getProposalById = async (c: Context) => {
   try {
     const proposalId = c.req.param("id");
     const user = c.get("user");
-    if (!user?.userId) return c.json({ error: "User not authenticated" }, 401);
+    if (!user?.sub) return c.json({ error: "User not authenticated" }, 401);
 
-    const proposal = await ProposalService.getProposalById(proposalId, user.userId);
+    const proposal = await ProposalService.getProposalById(proposalId, user.sub);
     if (!proposal) return c.json({ error: "Proposal not found" }, 404);
 
     return c.json({ proposal });
@@ -44,12 +44,12 @@ export const getProposalById = async (c: Context) => {
 export const getProposals = async (c: Context) => {
   try {
     const user = c.get("user");
-    if (!user?.userId) return c.json({ error: "User not authenticated" }, 401);
+    if (!user?.sub) return c.json({ error: "User not authenticated" }, 401);
 
     const query = c.req.query();
     const validatedFilters = getProposalsSchema.parse(query);
 
-    const result = await ProposalService.getProposals(user.userId, validatedFilters.query);
+    const result = await ProposalService.getProposals(user.sub, validatedFilters.query);
 
     return c.json({
       proposals: result.proposals,
@@ -72,14 +72,14 @@ export const updateProposalStatus = async (c: Context) => {
   try {
     const proposalId = c.req.param("id");
     const user = c.get("user");
-    if (!user?.userId) return c.json({ error: "User not authenticated" }, 401);
+    if (!user?.sub) return c.json({ error: "User not authenticated" }, 401);
 
     const body = await c.req.json();
     const validatedData = updateProposalStatusSchema.parse(body);
 
     const proposal = await ProposalService.updateProposalStatus(
       proposalId,
-      user.userId,
+      user.sub,
       validatedData.body.status
     );
 
@@ -98,9 +98,9 @@ export const deleteProposal = async (c: Context) => {
   try {
     const proposalId = c.req.param("id");
     const user = c.get("user");
-    if (!user?.userId) return c.json({ error: "User not authenticated" }, 401);
+    if (!user?.sub) return c.json({ error: "User not authenticated" }, 401);
 
-    const result = await ProposalService.deleteProposal(proposalId, user.userId);
+    const result = await ProposalService.deleteProposal(proposalId, user.sub);
     return c.json(result);
   } catch (error: any) {
     if (error.message === "Proposal not found or access denied") return c.json({ error: error.message }, 404);
@@ -113,9 +113,9 @@ export const getProposalsByJobId = async (c: Context) => {
   try {
     const jobId = c.req.param("jobId");
     const user = c.get("user");
-    if (!user?.userId) return c.json({ error: "User not authenticated" }, 401);
+    if (!user?.sub) return c.json({ error: "User not authenticated" }, 401);
 
-    const proposals = await ProposalService.getProposalsByJobId(jobId, user.userId);
+    const proposals = await ProposalService.getProposalsByJobId(jobId, user.sub);
     return c.json({ proposals });
   } catch (error: any) {
     if (error.message === "Job not found or access denied") return c.json({ error: error.message }, 404);
@@ -127,9 +127,9 @@ export const getProposalsByJobId = async (c: Context) => {
 export const getMyProposals = async (c: Context) => {
   try {
     const user = c.get("user");
-    if (!user?.userId) return c.json({ error: "User not authenticated" }, 401);
+    if (!user?.sub) return c.json({ error: "User not authenticated" }, 401);
 
-    const proposals = await ProposalService.getProposalsByFreelancerId(user.userId);
+    const proposals = await ProposalService.getProposalsByFreelancerId(user.sub);
     return c.json({ proposals });
   } catch (error: any) {
     if (error.message === "Freelancer not found") return c.json({ error: error.message }, 403);

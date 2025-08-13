@@ -45,18 +45,46 @@ export const OAuthService = {
             }
           });
         } else {
-          // Create new user
-          user = await prisma.user.create({
-            data: {
-              email,
-              name,
-              role: role.toUpperCase() as 'CLIENT' | 'FREELANCER',
-              isVerified: true, // OAuth accounts are considered verified
-              profilePicture,
-              authProvider: provider,
-              googleId: id,
+          // Create new user with profile in a transaction
+          const normalizedRole = role.toUpperCase() as 'CLIENT' | 'FREELANCER';
+          
+          user = await prisma.$transaction(async (tx) => {
+            // Create user first
+            const newUser = await tx.user.create({
+              data: {
+                email,
+                name,
+                role: normalizedRole,
+                isVerified: true, // OAuth accounts are considered verified
+                profilePicture,
+                authProvider: provider,
+                googleId: id,
+              }
+            });
+
+            // Create corresponding profile based on role
+            if (normalizedRole === 'CLIENT') {
+              await tx.client.create({
+                data: {
+                  userId: newUser.id,
+                  fullName: name, // Use the user's name as fullName
+                },
+              });
+              logger.info(`Created Client profile for OAuth user: ${newUser.email}`);
+            } else if (normalizedRole === 'FREELANCER') {
+              await tx.freelancer.create({
+                data: {
+                  userId: newUser.id,
+                  fullName: name, // Use the user's name as fullName
+                  experienceLevel: 'JUNIOR', // Default to JUNIOR, user can update later
+                },
+              });
+              logger.info(`Created Freelancer profile for OAuth user: ${newUser.email}`);
             }
+
+            return newUser;
           });
+          
           isNewUser = true;
         }
       }

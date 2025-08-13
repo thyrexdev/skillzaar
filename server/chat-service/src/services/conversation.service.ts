@@ -1,5 +1,5 @@
 import { prisma } from "@frevix/shared";
-import type { Conversation, Message } from "@frevix/shared/src/generated/prisma/";
+import type { Conversation, Message } from "@frevix/shared/src/generated/prisma";
 import { logger } from "@frevix/config";
 
 export type ConversationWithLastMessage = Conversation & {

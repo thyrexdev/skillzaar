@@ -1,5 +1,5 @@
 import { prisma } from "@frevix/shared";
-import type { Message } from "@frevix/shared/src/generated/prisma/";
+import type { Message } from "@frevix/shared/src/generated/prisma";
 import { findOrCreateConversation, updateConversationActivity } from "./conversation.service";
 import { logger } from "@frevix/config";
 

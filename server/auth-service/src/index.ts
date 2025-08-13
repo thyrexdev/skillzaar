@@ -23,6 +23,23 @@ app.route('/otp', otpRoutes);
 app.route('/client', clientRoutes);
 app.route('/freelancer', freelancerRoutes);
 
+// Token verification endpoint for other services
+app.post('/verify-token', async (c) => {
+  const authHeader = c.req.header('Authorization');
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return c.json({ error: 'Missing or invalid authorization header' }, 401);
+  }
+
+  const token = authHeader.replace('Bearer ', '');
+  try {
+    const { getUserFromToken } = await import('@frevix/shared');
+    const user = await getUserFromToken(token);
+    return c.json(user, 200);
+  } catch (error: any) {
+    return c.json({ error: 'Invalid token' }, 401);
+  }
+});
+
 export default {
     port: process.env.PORT,
     fetch: app.fetch,

@@ -1,5 +1,6 @@
 import type { Context } from "hono";
 import { z } from "zod";
+import { logger } from '@frevix/config/dist/logger';
 import { JobService } from "../services/job.service";
 import {
   createJobSchema,
@@ -11,13 +12,19 @@ import {
 
 export const createJob = async (c: Context) => {
   try {
+    logger.info('🚀 createJob controller called');
     const body = await c.req.json();
+    logger.info('📝 Request body:', body);
     const validatedData = createJobSchema.parse(body);
+    logger.info('✅ Validation passed:', validatedData);
 
     const user = c.get("user");
-    if (!user?.userId) return c.json({ error: "User not authenticated" }, 401);
+    logger.info('👤 User from context:', user);
+    if (!user?.sub) return c.json({ error: "User not authenticated" }, 401);
 
-    const job = await JobService.createJob(user.userId, validatedData);
+    logger.info('🔄 Calling JobService.createJob with userId:', user.sub);
+    const job = await JobService.createJob(user.sub, validatedData);
+    logger.info('✅ Job created successfully:', job.id);
     return c.json({ message: "Job created successfully", job }, 201);
   } catch (error: any) {
     if (error instanceof z.ZodError) {
@@ -30,12 +37,12 @@ export const createJob = async (c: Context) => {
 export const getClientJobs = async (c: Context) => {
   try {
     const user = c.get("user");
-    if (!user?.userId) return c.json({ error: "User not authenticated" }, 401);
+    if (!user?.sub) return c.json({ error: "User not authenticated" }, 401);
 
     const query = c.req.query();
     const validatedFilters = jobFiltersSchema.parse(query);
 
-    const jobs = await JobService.getClientJobs(user.userId, validatedFilters);
+    const jobs = await JobService.getClientJobs(user.sub, validatedFilters);
     return c.json(jobs);
   } catch (error: any) {
     return c.json({ error: error.message }, 400);
@@ -47,7 +54,7 @@ export const getJobById = async (c: Context) => {
     const jobId = c.req.param("jobId");
     const user = c.get("user");
 
-    const job = await JobService.getJobById(jobId, user?.userId);
+    const job = await JobService.getJobById(jobId, user?.sub);
     return c.json({ job });
   } catch (error: any) {
     return c.json({ error: error.message }, error.message === "Job not found" ? 404 : 400);
@@ -62,7 +69,7 @@ export const updateJob = async (c: Context) => {
 
     const validatedData = updateJobSchema.parse(body);
 
-    const job = await JobService.updateJob(jobId, user?.userId, validatedData);
+    const job = await JobService.updateJob(jobId, user?.sub, validatedData);
     return c.json({ message: "Job updated successfully", job });
   } catch (error: any) {
     if (error instanceof z.ZodError) {
@@ -77,7 +84,7 @@ export const deleteJob = async (c: Context) => {
     const jobId = c.req.param("jobId");
     const user = c.get("user");
 
-    await JobService.deleteJob(jobId, user?.userId);
+    await JobService.deleteJob(jobId, user?.sub);
     return c.json({ message: "Job deleted successfully" });
   } catch (error: any) {
     return c.json({ error: error.message }, error.message === "Job not found" ? 404 : 400);
@@ -87,9 +94,9 @@ export const deleteJob = async (c: Context) => {
 export const getJobStats = async (c: Context) => {
   try {
     const user = c.get("user");
-    if (!user?.userId) return c.json({ error: "User not authenticated" }, 401);
+    if (!user?.sub) return c.json({ error: "User not authenticated" }, 401);
 
-    const stats = await JobService.getJobStats(user.userId);
+    const stats = await JobService.getJobStats(user.sub);
     return c.json({ stats });
   } catch (error: any) {
     return c.json({ error: error.message }, 400);
@@ -105,7 +112,7 @@ export const getJobProposals = async (c: Context) => {
     const page = Number(query.page ?? 1);
     const limit = Number(query.limit ?? 10);
 
-    const proposals = await JobService.getJobProposals(jobId, user?.userId, { page, limit });
+    const proposals = await JobService.getJobProposals(jobId, user?.sub, { page, limit });
     return c.json(proposals);
   } catch (error: any) {
     return c.json({ error: error.message }, error.message === "Job not found" ? 404 : 400);
@@ -120,7 +127,7 @@ export const updateJobStatus = async (c: Context) => {
 
     const { status } = updateJobStatusSchema.parse(body);
 
-    const job = await JobService.updateJobStatus(jobId, user?.userId, status);
+    const job = await JobService.updateJobStatus(jobId, user?.sub, status);
     return c.json({ message: "Job status updated successfully", job });
   } catch (error: any) {
     if (error instanceof z.ZodError) {
