@@ -11,6 +11,7 @@ frevix/server/
 ├── auth-service/          # Auth + OTP + user management (Hono HTTP)
 ├── core-service/          # Main business logic (Hono HTTP)
 ├── chat-service/          # Realtime chat over WebSockets (Bun WS)
+├── admin-service/         # Admin panel API with role-based access (Hono HTTP)
 ├── media-service/         # File uploads & media handling (Cloudflare Workers + R2)
 ├── payment-service/       # Payments endpoints (Hono HTTP)
 ├── packages/
@@ -99,6 +100,78 @@ chat-service/
     ├── services/        # Chat-related business logic
     └── types/           # TypeScript types for chat
 ```
+
+## Admin Service (`admin-service`)
+
+### Technology Stack
+- Runtime: Bun
+- Framework: Hono
+- Database: PostgreSQL via shared Prisma client (`@frevix/shared`)
+- Auth: JWT verification with `jose` and admin role enforcement
+- Validation: `zod`
+- Port: 3005 (configurable via ADMIN_PORT environment variable)
+
+### Project Structure
+```
+admin-service/
+└── src/
+    ├── index.ts         # Service entry point
+    ├── controllers/     # Function-based request handlers
+    │   ├── analytics.controller.ts
+    │   ├── content-moderation.controller.ts
+    │   ├── dashboard.controller.ts
+    │   ├── financial-oversight.controller.ts
+    │   ├── job-management.controller.ts
+    │   └── user-management.controller.ts
+    ├── interfaces/      # Service-specific TypeScript types
+    ├── middleware/      # Admin authentication and authorization
+    │   └── admin.middleware.ts
+    ├── routes/          # API route definitions
+    │   ├── analytics.routes.ts
+    │   ├── content-moderation.routes.ts
+    │   ├── dashboard.routes.ts
+    │   ├── financial-oversight.routes.ts
+    │   ├── job-management.routes.ts
+    │   └── user-management.routes.ts
+    └── validators/      # Zod validation schemas
+```
+
+### Admin Authorization
+The admin service implements strict role-based access control:
+
+- **Authentication**: All endpoints require valid JWT tokens
+- **Authorization**: Users must have the `ADMIN` role in their JWT payload
+- **Middleware**: Custom `requireAdmin` and `optionalAdmin` middleware functions
+- **Error Handling**: Proper HTTP status codes (401 Unauthorized, 403 Forbidden)
+- **Logging**: Comprehensive audit logging for admin actions
+
+### API Endpoints
+All endpoints are prefixed with `/api` and require admin authentication:
+
+- **Dashboard** (`/api/dashboard`): System overview and statistics
+- **User Management** (`/api/users`): User account administration
+- **Job Management** (`/api/jobs`): Job posting oversight and moderation
+- **Financial Oversight** (`/api/financial`): Payment and transaction monitoring
+- **Analytics** (`/api/analytics`): Platform metrics and reporting
+- **Content Moderation** (`/api/moderation`): Content review and moderation tools
+
+### Function-Based Architecture
+The admin service uses a consistent function-based controller pattern:
+
+```typescript
+// Example controller structure
+export const getDashboardStats = async (c: Context) => {
+  const user = c.get('user'); // Admin user from middleware
+  // Business logic here
+  return c.json({ success: true, data: stats });
+};
+```
+
+This pattern ensures:
+- Consistency with other services in the monorepo
+- Easy testing and maintainability
+- Clear separation of concerns
+- Simplified dependency injection
 
 ## Payment Service (`payment-service`)
 
@@ -214,8 +287,9 @@ The media service introduces four new models to handle different file upload sce
 ### Authentication Flow
 1. A user authenticates via the Auth Service.
 2. A JWT token is issued by the Auth Service.
-3. The Core Service and Chat Service validate the JWT token using helpers from `packages/shared/auth`.
-4. A shared secret (JWT_SECRET), provided via environment variables, ensures token compatibility across all services.
+3. The Core Service, Chat Service, and Admin Service validate the JWT token using helpers from `packages/shared/auth`.
+4. The Admin Service additionally enforces role-based access control, requiring users to have the `ADMIN` role.
+5. A shared secret (JWT_SECRET), provided via environment variables, ensures token compatibility across all services.
 
 ## Environment Variables
 - Each service can have its own `.env` for local development (e.g., `server/auth-service/.env`).
@@ -239,6 +313,9 @@ cd server/core-service && bun run dev
 
 # Chat Service (WebSocket)
 cd server/chat-service && bun run dev
+
+# Admin Service (Admin Panel API)
+cd server/admin-service && bun run dev
 
 # Media Service (Cloudflare Workers)
 cd server/media-service && bun run dev

@@ -2,6 +2,7 @@
   "name": "frevix-server",
   "private": true,
   "workspaces": [
+    "admin-service",
     "auth-service",
     "chat-service",
     "core-service",
