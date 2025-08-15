@@ -16,6 +16,7 @@ const colors = {
   auth: '\x1b[32m',      // Green
   chat: '\x1b[33m',      // Yellow
   core: '\x1b[35m',      // Magenta
+  admin: '\x1b[34m',     // Blue
   reset: '\x1b[0m'       // Reset
 };
 
@@ -44,6 +45,12 @@ const services: Service[] = [
     color: colors.core,
     command: [bunPath, "run", "dev"],
     cwd: join(projectRoot, "server", "core-service")
+  },
+  {
+    name: "ADMIN",
+    color: colors.admin,
+    command: [bunPath, "run", "dev"],
+    cwd: join(projectRoot, "server", "admin-service")
   },
   {
     name: "PAYMENT",

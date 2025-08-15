@@ -4,7 +4,7 @@ import { z } from 'zod';
 export interface UserManagementFilters {
   role?: 'CLIENT' | 'FREELANCER';
   isVerified?: boolean;
-  status?: 'active' | 'suspended' | 'banned';
+  status?: 'ACTIVE' | 'SUSPENDED' | 'BANNED';
   dateRange?: {
     start: Date;
     end: Date;
@@ -189,7 +189,7 @@ export interface PlatformMetrics {
 export const userManagementFiltersSchema = z.object({
   role: z.enum(['CLIENT', 'FREELANCER']).optional(),
   isVerified: z.boolean().optional(),
-  status: z.enum(['active', 'suspended', 'banned']).optional(),
+  status: z.enum(['ACTIVE', 'SUSPENDED', 'BANNED']).optional(),
   dateRange: z.object({
     start: z.string().datetime(),
     end: z.string().datetime(),

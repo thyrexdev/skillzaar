@@ -39,7 +39,16 @@ export const getUsers = async (c: Context) => {
       return c.json({ error: 'Invalid filters', details: filters.error.issues }, 400);
     }
 
-    const result = await userService.getUsers(filters.data, page, limit);
+    // Convert date strings to Date objects for the service
+    const processedFilters = {
+      ...filters.data,
+      dateRange: filters.data.dateRange ? {
+        start: new Date(filters.data.dateRange.start),
+        end: new Date(filters.data.dateRange.end)
+      } : undefined
+    };
+
+    const result = await userService.getUsers(processedFilters, page, limit);
     return c.json({ success: true, data: result });
   } catch (error: any) {
     return c.json({ error: error.message }, 500);

@@ -74,6 +74,10 @@ export class UserManagementService {
       };
     }
 
+    if (filters.status) {
+      where.status = filters.status;
+    }
+
     const [users, totalCount] = await Promise.all([
       prisma.user.findMany({
         where,
@@ -84,6 +88,7 @@ export class UserManagementService {
           email: true,
           name: true,
           role: true,
+          status: true,
           isVerified: true,
           createdAt: true,
           updatedAt: true,
