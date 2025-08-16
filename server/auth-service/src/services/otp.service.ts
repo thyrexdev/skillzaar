@@ -1,8 +1,8 @@
-import { prisma } from "@frevix/shared";
+import { prisma } from "@vync/shared";
 import { generateOtp } from "../utils/generateOtp";
 import { sendOtpEmail, OtpEmailType } from "../utils/sendOtpEmail";
 import { OTP_CONFIGS } from "../config/otpConfig";
-import { logger } from "@frevix/config/dist/logger";
+import { logger } from "@vync/config";
 import {
   CreateAndSendOtpResult,
   VerifyOtpResult

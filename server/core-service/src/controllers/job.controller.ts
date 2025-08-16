@@ -1,6 +1,6 @@
 import type { Context } from "hono";
 import { z } from "zod";
-import { logger } from '@frevix/config/dist/logger';
+import { logger } from '@vync/config';
 import { JobService } from "../services/job.service";
 import {
   createJobSchema,

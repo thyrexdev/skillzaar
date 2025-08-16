@@ -8,7 +8,7 @@ import {
   getProposalsByJobId,
   getMyProposals,
 } from "../controllers/proposal.controller";
-import { authMiddleware } from "../middlewares/auth.middleware";
+import { authMiddleware } from "@vync/shared/src";
 
 const proposalRoutes = new Hono();
 

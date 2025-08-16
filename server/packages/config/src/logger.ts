@@ -2,12 +2,12 @@ import { env } from "./env";
 
 export const logger = {
   info: (...args: any[]) => {
-    if (process.env.NODE_ENV !== "production") {
+    if (env.NODE_ENV !== "production") {
       console.log("[INFO]", ...args);
     }
   },
   warn: (...args: any[]) => {
-    if (process.env.NODE_ENV !== "production") {
+    if (env.NODE_ENV !== "production") {
       console.warn("[WARN]", ...args);
     }
   },

@@ -1,5 +1,5 @@
 {
-  "name": "@frevix/payment-service",
+  "name": "@vync/payment-service",
   "module": "src/index.ts",
   "type": "module",
   "private": true,

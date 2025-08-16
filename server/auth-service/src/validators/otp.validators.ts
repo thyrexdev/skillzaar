@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { OtpType } from "@frevix/shared/src/generated/prisma";
+import { OtpType } from "@vync/shared/src/generated/prisma";
 
 export const requestOtpSchema = z.object({
   email: z.string().email("Invalid email format"),

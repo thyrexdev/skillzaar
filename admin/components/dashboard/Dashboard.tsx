@@ -1,24 +1,18 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { Row, Col, Card, Statistic, Progress, Table, Tag, Avatar, List, Spin, Alert } from 'antd';
+import { Row, Col, Card, Statistic, Progress, Table, Spin, Alert } from 'antd';
 import {
   ArrowUpOutlined,
-  ArrowDownOutlined,
-  UserOutlined,
   DollarCircleOutlined,
   FileTextOutlined,
   TeamOutlined,
-  WalletOutlined,
   AlertOutlined,
 } from '@ant-design/icons';
 import {
-  LineChart,
-  Line,
+
   AreaChart,
   Area,
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -28,9 +22,9 @@ import {
   Pie,
   Cell,
 } from 'recharts';
-import { getDashboardOverview, getUserActivity, getReportedContent } from '@/lib/api/admin-api';
+import { getDashboardOverview, getReportedContent } from '@/lib/api/admin-api';
 import { useAdminStore } from '@/stores/adminStore';
-import { useColors, useSemanticColors, useTagColors } from '@/hooks/useColors';
+import { useColors } from '@/hooks/useColors';
 import ThemeTag from '@/components/common/ThemeTag';
 import { toast } from 'sonner';
 
@@ -40,7 +34,6 @@ const Dashboard: React.FC = () => {
     dashboardLoading,
     dashboardError,
     reportedContent,
-    moderationLoading,
     setDashboardData,
     setDashboardLoading,
     setDashboardError,
@@ -49,8 +42,7 @@ const Dashboard: React.FC = () => {
   } = useAdminStore();
   
   const { primary, secondary, success, error, warning, info, theme } = useColors();
-  const { getSemanticColor } = useSemanticColors();
-  const { getSemanticTagColor, getTagColor } = useTagColors();
+
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -67,8 +59,8 @@ const Dashboard: React.FC = () => {
         setReportedContent(reports.data);
         
         toast.success('Dashboard loaded successfully');
-      } catch (err: any) {
-        const errorMessage = err.message || 'Failed to load dashboard data';
+      } catch (error) {
+        const errorMessage = error.message || 'Failed to load dashboard data';
         setDashboardError(errorMessage);
         toast.error(errorMessage);
       } finally {

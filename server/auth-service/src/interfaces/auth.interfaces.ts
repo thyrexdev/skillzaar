@@ -1,4 +1,4 @@
-import { Role } from '@frevix/shared/src/generated/prisma';
+import { Role } from '@vync/shared/src';
 
 // Request interfaces
 export interface RegisterRequest {

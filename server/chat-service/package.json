@@ -1,5 +1,5 @@
 {
-  "name": "@frevix/chat-service",
+  "name": "@vync/chat-service",
   "module": "src/index.ts",
   "devDependencies": {
     "@types/bun": "latest",
@@ -14,8 +14,8 @@
     "dev": "bun --watch src/index.ts"
   },
   "dependencies": {
-    "@frevix/config": "workspace:*",
-    "@frevix/shared": "workspace:*",
+    "@vync/config": "workspace:*",
+    "@vync/shared": "workspace:*",
     "jose": "^6.0.12"
   }
 }

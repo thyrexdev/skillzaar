@@ -1,7 +1,7 @@
-import { prisma } from "@frevix/shared";
-import type { Message } from "@frevix/shared/src/generated/prisma";
+import { prisma } from "@vync/shared";
+import type { Message } from "@vync/shared/src/generated/prisma";
 import { findOrCreateConversation, updateConversationActivity } from "./conversation.service";
-import { logger } from "@frevix/config";
+import { logger } from "@vync/config";
 
 type SaveMessageInput = {
   senderId: string;

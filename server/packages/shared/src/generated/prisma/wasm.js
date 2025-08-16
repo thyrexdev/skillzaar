@@ -306,6 +306,8 @@ exports.Prisma.VerificationDocumentScalarFieldEnum = {
   uploadedAt: 'uploadedAt',
   reviewedAt: 'reviewedAt',
   reviewedBy: 'reviewedBy',
+  rejectionReason: 'rejectionReason',
+  adminNotes: 'adminNotes',
   metadata: 'metadata',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

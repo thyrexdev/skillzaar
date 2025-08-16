@@ -5,7 +5,7 @@ import {
   updateProfileSchema,
 } from "../validators/client.validator";
 import type {UpdateClientProfileRequest} from "../interfaces/client.interface";
-import { logger } from '@frevix/config/dist/logger';
+import { logger } from '@vync/config';
 
 export const getClientProfile = async (c: Context) => {
   try {

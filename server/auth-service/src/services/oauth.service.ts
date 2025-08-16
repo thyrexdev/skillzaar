@@ -1,8 +1,7 @@
-import { prisma } from '@frevix/shared';
+import { prisma } from '@vync/shared';
 import * as jose from 'jose';
-import { env } from '../config/env';
-import { logger } from '@frevix/config/dist/logger';
-
+import { logger } from '@vync/config';
+import { env } from '@vync/config';
 export interface OAuthUserProfile {
   id: string;
   email: string;

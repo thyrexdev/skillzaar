@@ -1,8 +1,8 @@
 import type { MiddlewareHandler } from 'hono';
 import { jwtVerify } from 'jose';
-import { logger } from '@frevix/config/dist/logger';
+import { env, logger } from '@vync/config';
 
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = env.JWT_SECRET;
 
 export const requireAdmin: MiddlewareHandler = async (c, next) => {
     logger.info('🔍 Admin middleware called for:', c.req.method, c.req.url);

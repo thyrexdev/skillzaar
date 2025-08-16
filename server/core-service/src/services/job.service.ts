@@ -1,5 +1,5 @@
-import { prisma } from "@frevix/shared";
-import { type Job, JobStatus } from "@frevix/shared/src/generated/prisma";
+import { prisma } from "@vync/shared";
+import { type Job, JobStatus } from "@vync/shared/src/generated/prisma";
 import type {
     CreateJobRequest,
     UpdateJobRequest,

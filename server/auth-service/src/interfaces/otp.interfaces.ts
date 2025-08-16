@@ -1,4 +1,4 @@
-import { Otp, OtpStatus, OtpType } from '@frevix/shared/src/generated/prisma';
+import { Otp, OtpStatus, OtpType } from '@vync/shared/src/generated/prisma';
 import { OtpEmailType } from '../utils/sendOtpEmail';
 
 // Request interfaces

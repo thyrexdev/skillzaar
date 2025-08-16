@@ -1,9 +1,13 @@
 import { verifyToken } from "./jwt";
 
+export type UserTokenPayload = {
+  userId: string;
+  role: string;
+};
+
 export const getUserFromToken = async (token: string) => {
   try {
-    const user = await verifyToken<{ userId: string; role: string }>(token);
-    return user;
+    return await verifyToken<UserTokenPayload>(token);
   } catch {
     return null;
   }

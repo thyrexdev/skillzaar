@@ -1,5 +1,5 @@
-import { prisma } from "@frevix/shared";
-import { Freelancer } from "@frevix/shared/src/generated/prisma";
+import { prisma } from "@vync/shared";
+import { Freelancer } from "@vync/shared/src/generated/prisma";
 import { UpdateProfileData, PublicFreelancerProfile } from "../../interfaces/freelancer/freelancer.interface";
 
 export const ProfileService = {

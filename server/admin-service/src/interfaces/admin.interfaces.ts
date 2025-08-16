@@ -158,6 +158,77 @@ export interface EscrowStats {
   averageEscrowDuration: number;
 }
 
+// Verification Queue Interfaces
+export interface VerificationQueueItem {
+  id: string;
+  userId: string;
+  userEmail: string;
+  userName: string;
+  userRole: 'CLIENT' | 'FREELANCER';
+  documents: {
+    id: string;
+    docType: 'FRONT' | 'BACK' | 'SELFIE';
+    fileName: string;
+    originalName: string;
+    fileType: string;
+    fileSize: number;
+    uploadedAt: Date;
+    status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'EXPIRED';
+    rejectionReason?: string;
+    adminNotes?: string;
+  }[];
+  submittedAt: Date;
+  lastUpdated: Date;
+  overallStatus: 'PENDING' | 'INCOMPLETE' | 'UNDER_REVIEW' | 'APPROVED' | 'REJECTED';
+}
+
+export interface VerificationFilters {
+  status?: 'PENDING' | 'APPROVED' | 'REJECTED' | 'EXPIRED';
+  docType?: 'FRONT' | 'BACK' | 'SELFIE';
+  userRole?: 'CLIENT' | 'FREELANCER';
+  dateRange?: {
+    start: Date;
+    end: Date;
+  };
+  search?: string;
+}
+
+export interface VerificationStats {
+  totalPending: number;
+  totalApproved: number;
+  totalRejected: number;
+  averageReviewTime: number;
+  completionRate: number;
+  docTypeBreakdown: {
+    front: { pending: number; approved: number; rejected: number };
+    back: { pending: number; approved: number; rejected: number };
+    selfie: { pending: number; approved: number; rejected: number };
+  };
+  recentActivity: Array<{
+    date: string;
+    approved: number;
+    rejected: number;
+    submitted: number;
+  }>;
+}
+
+export interface DocumentPreview {
+  id: string;
+  userId: string;
+  userName: string;
+  userEmail: string;
+  docType: 'FRONT' | 'BACK' | 'SELFIE';
+  fileName: string;
+  originalName: string;
+  fileType: string;
+  fileSize: number;
+  uploadedAt: Date;
+  status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'EXPIRED';
+  rejectionReason?: string;
+  adminNotes?: string;
+  downloadUrl: string;
+}
+
 // Platform Analytics Interfaces
 export interface PlatformMetrics {
   userGrowth: {
@@ -245,13 +316,25 @@ export const adminActionSchema = z.object({
 export const verificationDocumentActionSchema = z.object({
   documentId: z.string(),
   action: z.enum(['approve', 'reject']),
-  reason: z.string().optional(),
+  rejectionReason: z.string().min(5, 'Rejection reason must be at least 5 characters').optional(),
+  adminNotes: z.string().optional(),
 });
 
 export const contentModerationActionSchema = z.object({
   reportId: z.string(),
   action: z.enum(['approve', 'remove_content', 'warn_user', 'suspend_user', 'ban_user']),
   reason: z.string().min(10),
+});
+
+export const verificationFiltersSchema = z.object({
+  status: z.enum(['PENDING', 'APPROVED', 'REJECTED', 'EXPIRED']).optional(),
+  docType: z.enum(['FRONT', 'BACK', 'SELFIE']).optional(),
+  userRole: z.enum(['CLIENT', 'FREELANCER']).optional(),
+  dateRange: z.object({
+    start: z.string().datetime(),
+    end: z.string().datetime(),
+  }).optional(),
+  search: z.string().optional(),
 });
 
 export type UserManagementFiltersType = z.infer<typeof userManagementFiltersSchema>;
@@ -261,3 +344,4 @@ export type TransactionFiltersType = z.infer<typeof transactionFiltersSchema>;
 export type AdminActionType = z.infer<typeof adminActionSchema>;
 export type VerificationDocumentActionType = z.infer<typeof verificationDocumentActionSchema>;
 export type ContentModerationActionType = z.infer<typeof contentModerationActionSchema>;
+export type VerificationFiltersType = z.infer<typeof verificationFiltersSchema>;

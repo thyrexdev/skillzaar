@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Role } from "@frevix/shared/src/generated/prisma";
+import { Role } from "@vync/shared/src/generated/prisma";
 
 export const registerSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters long"),

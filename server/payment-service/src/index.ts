@@ -1,5 +1,4 @@
 import { Hono } from 'hono';
-import { logger } from '@frevix/config/dist/logger';
 
 const app = new Hono();
 

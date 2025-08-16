@@ -1,4 +1,4 @@
-import type { Job, JobStatus, Proposal } from "@frevix/shared/src/generated/prisma";
+import type { Job, JobStatus, Proposal } from "@vync/shared/src/generated/prisma";
 
 // Request interfaces
 export interface CreateJobRequest {

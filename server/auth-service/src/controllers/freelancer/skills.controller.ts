@@ -1,7 +1,7 @@
 import { Context } from "hono";
 import { SkillsService } from "../../services/freelancer/skills.service";
 import { UpdateSkillsValidator } from "../../validators/freelancer/skills.validator";
-import { logger } from "@frevix/config/dist/logger";
+import { logger } from "@vync/config";
 
 export const SkillsController = {
   updateSkills: async (c: Context) => {

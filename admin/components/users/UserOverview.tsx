@@ -1,12 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import React, { useEffect } from 'react';
-import { Card, Row, Col, Statistic, Progress, Table, Tag, Avatar, Button, Space, Divider } from 'antd';
+import { Card, Row, Col, Statistic, Progress, Table, Avatar, Button, Space, Divider } from 'antd';
 import { 
   UserOutlined, 
   TeamOutlined, 
   UserAddOutlined, 
-  UserDeleteOutlined,
   TrophyOutlined,
   ClockCircleOutlined,
   CheckCircleOutlined,
@@ -21,62 +21,6 @@ const UserOverview: React.FC = () => {
     fetchUserStats();
     fetchUserActivity();
   }, [fetchUserStats, fetchUserActivity]);
-
-  const recentUsersColumns = [
-    {
-      title: 'User',
-      key: 'user',
-      render: (record: any) => (
-        <Space>
-          <Avatar src={record.avatar} icon={<UserOutlined />} />
-          <div>
-            <div className="font-medium">{record.name}</div>
-            <div className="text-gray-500 text-sm">{record.email}</div>
-          </div>
-        </Space>
-      ),
-    },
-    {
-      title: 'Role',
-      dataIndex: 'role',
-      key: 'role',
-      render: (role: string) => (
-        <Tag color={role === 'FREELANCER' ? 'blue' : role === 'CLIENT' ? 'green' : 'purple'}>
-          {role}
-        </Tag>
-      ),
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      render: (status: string) => {
-        const colors = {
-          ACTIVE: 'green',
-          SUSPENDED: 'orange',
-          BANNED: 'red',
-          PENDING: 'blue'
-        };
-        return <Tag color={colors[status as keyof typeof colors]}>{status}</Tag>;
-      },
-    },
-    {
-      title: 'Joined',
-      dataIndex: 'createdAt',
-      key: 'createdAt',
-      render: (date: string) => new Date(date).toLocaleDateString(),
-    },
-    {
-      title: 'Actions',
-      key: 'actions',
-      render: (record: any) => (
-        <Space>
-          <Button size="small" type="link">View</Button>
-          <Button size="small" type="link">Edit</Button>
-        </Space>
-      ),
-    },
-  ];
 
   const activityColumns = [
     {
@@ -135,8 +79,8 @@ const UserOverview: React.FC = () => {
         <Col xs={24} sm={12} md={6}>
           <Card>
             <Statistic
-              title="Pending Verification"
-              value={userStats?.pendingVerification || 0}
+              title="Unverified Users"
+              value={userStats?.unverifiedUsers || 0}
               prefix={<ClockCircleOutlined />}
               valueStyle={{ color: '#fa8c16' }}
             />
@@ -152,20 +96,20 @@ const UserOverview: React.FC = () => {
               <div>
                 <div className="flex justify-between mb-1">
                   <span>Freelancers</span>
-                  <span>{userStats?.freelancers || 0}</span>
+                  <span>{userStats?.usersByRole?.freelancers || 0}</span>
                 </div>
                 <Progress 
-                  percent={((userStats?.freelancers || 0) / (userStats?.totalUsers || 1)) * 100} 
+                  percent={((userStats?.usersByRole?.freelancers || 0) / (userStats?.totalUsers || 1)) * 100} 
                   strokeColor="#1890ff" 
                 />
               </div>
               <div>
                 <div className="flex justify-between mb-1">
                   <span>Clients</span>
-                  <span>{userStats?.clients || 0}</span>
+                  <span>{userStats?.usersByRole?.clients || 0}</span>
                 </div>
                 <Progress 
-                  percent={((userStats?.clients || 0) / (userStats?.totalUsers || 1)) * 100} 
+                  percent={((userStats?.usersByRole?.clients || 0) / (userStats?.totalUsers || 1)) * 100} 
                   strokeColor="#52c41a" 
                 />
               </div>
@@ -216,8 +160,8 @@ const UserOverview: React.FC = () => {
               <Col span={12} className="mt-4">
                 <Card size="small">
                   <Statistic
-                    title="Pending"
-                    value={userStats?.pendingUsers || 0}
+                    title="Unverified"
+                    value={userStats?.unverifiedUsers || 0}
                     valueStyle={{ color: '#1890ff', fontSize: '18px' }}
                   />
                 </Card>

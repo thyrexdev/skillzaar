@@ -1,5 +1,5 @@
-import { prisma } from "@frevix/shared";
-import { logger } from "@frevix/config";
+import { prisma } from "@vync/shared";
+import { logger } from "@vync/config";
 
 export type ReadReceiptInput = {
   messageIds: string[];

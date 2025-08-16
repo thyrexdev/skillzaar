@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ExperienceLevel } from "@frevix/shared/src/generated/prisma";
+import { ExperienceLevel } from "@vync/shared/src/generated/prisma";
 
 export const UpdateFreelancerProfileValidator = z.object({
   bio: z

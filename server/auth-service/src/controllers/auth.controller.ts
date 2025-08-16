@@ -2,9 +2,9 @@ import { Context } from 'hono';
 import { AuthService } from '../services/auth.service';
 import { OtpService } from '../services/otp.service';
 import { OtpEmailType } from '../utils/sendOtpEmail';
-import { prisma } from '@frevix/shared';
+import { prisma } from '@vync/shared';
 import bcrypt from 'bcryptjs';
-import { logger } from '@frevix/config/dist/logger';
+import { logger } from '@vync/config';
 
 export const register = async (c: Context) => {
   try {

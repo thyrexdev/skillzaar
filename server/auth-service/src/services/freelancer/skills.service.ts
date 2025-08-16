@@ -1,5 +1,5 @@
-import { prisma } from "@frevix/shared";
-import { Freelancer, Skill } from "@frevix/shared/src/generated/prisma";
+import { prisma } from "@vync/shared";
+import { Freelancer, Skill } from "@vync/shared/src/generated/prisma";
 import { UpdateSkillsData } from "../../interfaces/freelancer/skills.interface";
 
 type FreelancerWithSkills = Freelancer & {

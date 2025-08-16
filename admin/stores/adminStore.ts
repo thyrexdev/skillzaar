@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import type {
@@ -18,11 +19,6 @@ import {
   getUserStats,
   getUsers,
   getUserActivity,
-  getJobStats,
-  getFinancialStats,
-  getModerationStats,
-  getReportedContent,
-  getPlatformMetrics,
 } from '@/lib/api/admin-api';
 
 interface AdminState {
@@ -62,6 +58,18 @@ interface AdminState {
   platformMetrics: PlatformMetrics | null;
   analyticsLoading: boolean;
   analyticsError: string | null;
+
+  // Enhanced User Management UI State
+  searchTerm: string;
+  selectedRole: string | undefined;
+  selectedStatus: string | undefined;
+  detailDrawerVisible: boolean;
+  selectedUser: UserDetail | null;
+  userDetails: UserDetail;
+  actionModalVisible: boolean;
+  currentAction: { type: string; user: UserDetail } | null;
+  dateRange: [any, any] | null;
+  advancedFilters: boolean;
 }
 
 interface AdminActions {
@@ -107,6 +115,19 @@ interface AdminActions {
   setAnalyticsLoading: (loading: boolean) => void;
   setAnalyticsError: (error: string | null) => void;
 
+  // Enhanced User Management UI Actions
+  setSearchTerm: (term: string) => void;
+  setSelectedRole: (role: string | undefined) => void;
+  setSelectedStatus: (status: string | undefined) => void;
+  setDetailDrawerVisible: (visible: boolean) => void;
+  setSelectedUser: (user: UserDetail | null) => void;
+  setUserDetails: (details: UserDetail) => void;
+  setActionModalVisible: (visible: boolean) => void;
+  setCurrentAction: (action: { type: string; user: UserDetail } | null) => void;
+  setDateRange: (range: [any, any] | null) => void;
+  setAdvancedFilters: (show: boolean) => void;
+  resetUserManagementFilters: () => void;
+
   // General actions
   clearAllErrors: () => void;
   resetAllData: () => void;
@@ -114,7 +135,7 @@ interface AdminActions {
 
 export const useAdminStore = create<AdminState & AdminActions>()(
   devtools(
-    (set, get) => ({
+    (set) => ({
       // Initial state
       dashboardData: null,
       dashboardLoading: false,
@@ -145,6 +166,18 @@ export const useAdminStore = create<AdminState & AdminActions>()(
       platformMetrics: null,
       analyticsLoading: false,
       analyticsError: null,
+
+      // Enhanced User Management UI State
+      searchTerm: '',
+      selectedRole: undefined,
+      selectedStatus: undefined,
+      detailDrawerVisible: false,
+      selectedUser: null,
+      userDetails: null,
+      actionModalVisible: false,
+      currentAction: null,
+      dateRange: null,
+      advancedFilters: false,
 
       // Dashboard actions
       setDashboardData: (data) => set({ dashboardData: data }),
@@ -246,6 +279,25 @@ export const useAdminStore = create<AdminState & AdminActions>()(
       setAnalyticsLoading: (loading) => set({ analyticsLoading: loading }),
       setAnalyticsError: (error) => set({ analyticsError: error }),
 
+      // Enhanced User Management UI Actions
+      setSearchTerm: (term) => set({ searchTerm: term }),
+      setSelectedRole: (role) => set({ selectedRole: role }),
+      setSelectedStatus: (status) => set({ selectedStatus: status }),
+      setDetailDrawerVisible: (visible) => set({ detailDrawerVisible: visible }),
+      setSelectedUser: (user) => set({ selectedUser: user }),
+      setUserDetails: (details) => set({ userDetails: details }),
+      setActionModalVisible: (visible) => set({ actionModalVisible: visible }),
+      setCurrentAction: (action) => set({ currentAction: action }),
+      setDateRange: (range) => set({ dateRange: range }),
+      setAdvancedFilters: (show) => set({ advancedFilters: show }),
+      resetUserManagementFilters: () => set({
+        searchTerm: '',
+        selectedRole: undefined,
+        selectedStatus: undefined,
+        dateRange: null,
+        advancedFilters: false,
+      }),
+
       // General actions
       clearAllErrors: () =>
         set({
@@ -268,6 +320,17 @@ export const useAdminStore = create<AdminState & AdminActions>()(
           reportedContent: [],
           platformMetrics: null,
           loading: false,
+          // Reset Enhanced User Management UI State
+          searchTerm: '',
+          selectedRole: undefined,
+          selectedStatus: undefined,
+          detailDrawerVisible: false,
+          selectedUser: null,
+          userDetails: null,
+          actionModalVisible: false,
+          currentAction: null,
+          dateRange: null,
+          advancedFilters: false,
         }),
     }),
     {

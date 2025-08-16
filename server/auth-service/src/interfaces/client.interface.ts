@@ -1,4 +1,4 @@
-import { Client, Job } from '@frevix/shared/src/generated/prisma';
+import { Client, Job } from '@vync/shared/src/generated/prisma';
 
 
 export interface UpdateClientProfileRequest {

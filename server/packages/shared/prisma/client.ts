@@ -1,4 +1,5 @@
 // packages/shared/prisma/client.ts
+import { env } from "@vync/config";
 import { PrismaClient } from "../src/generated/prisma";
 
 const globalForPrisma = globalThis as unknown as {
@@ -8,4 +9,4 @@ const globalForPrisma = globalThis as unknown as {
 export const prisma =
   globalForPrisma.prisma ?? new PrismaClient();
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+if (env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;

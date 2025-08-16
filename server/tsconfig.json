@@ -10,8 +10,8 @@
     "outDir": "./dist",
     "baseUrl": ".",
     "paths": {
-      "@frevix/*": ["packages/*"]
+      "@vync/*": ["packages/*"]
     }
   },
-  "include": ["packages/*/src", "services/*/src"]
+  "include": ["packages/*/src", "services/*/src", "packages/shared/auth/middlewares", "packages/config/index.ts"]
 }

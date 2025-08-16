@@ -1,7 +1,7 @@
 import { Context } from "hono";
 import { ProfileService } from "../../services/freelancer/profile.service";
 import { UpdateFreelancerProfileValidator } from "../../validators/freelancer/profile.validator";
-import { logger } from "@frevix/config/dist/logger";
+import { logger } from "@vync/config";
 
 export const ProfileController = {
   // ✅ Get current freelancer profile

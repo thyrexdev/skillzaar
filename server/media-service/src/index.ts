@@ -1,6 +1,5 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
-import { bearerAuth } from 'hono/bearer-auth';
 import { uploadRoutes } from './routes/upload.routes';
 import { fileRoutes } from './routes/file.routes';
 import { verificationRoutes } from './routes/verification.routes';

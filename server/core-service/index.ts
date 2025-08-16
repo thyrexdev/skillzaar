@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import jobRoutes from "./src/routes/job.route";
 import proposalRoutes from "./src/routes/proposal.route";
+import { env } from "@vync/config";
 
 const app = new Hono();
 
@@ -20,7 +21,7 @@ app.route('/job', jobRoutes);
 app.route('/proposals', proposalRoutes);
 
 export default {
-    port: process.env.PORT || 5001,
+    port: env.CORE_SERVICE_PORT,
     fetch: app.fetch,
 };
 

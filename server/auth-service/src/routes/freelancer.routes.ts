@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { ProfileController } from "../controllers/freelancer/profile.controller";
 import { SkillsController } from "../controllers/freelancer/skills.controller";
 import { PortfolioController } from "../controllers/freelancer/portfolio.controller";
-import { authMiddleware } from "../middlewares/auth.middleware";
+import { authMiddleware } from "@vync/shared/src";
 
 const freelancerRoutes = new Hono();
 

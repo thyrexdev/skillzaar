@@ -5,7 +5,7 @@ import {
   updateClientProfile,
   getClientStats
 } from "../controllers/client.controller";
-import { authMiddleware } from "../middlewares/auth.middleware";
+import { authMiddleware } from "@vync/shared/src";
 
 const clientRoutes = new Hono();
 

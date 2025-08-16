@@ -1,7 +1,7 @@
 import { Context } from 'hono';
 import { OtpService } from '../services/otp.service';
 import { OtpEmailType } from '../utils/sendOtpEmail';
-import { logger } from '@frevix/config/dist/logger';
+import { logger } from '@vync/config';
 
 
 export const requestOtp = async (c: Context) => {

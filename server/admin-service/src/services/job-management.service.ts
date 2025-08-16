@@ -1,4 +1,4 @@
-import { prisma } from '@frevix/shared';
+import { prisma } from '@vync/shared';
 import { JobFilters, JobStats, ProposalStats } from '../interfaces/admin.interfaces';
 
 export class JobManagementService {

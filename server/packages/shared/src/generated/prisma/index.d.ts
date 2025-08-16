@@ -21898,6 +21898,8 @@ export namespace Prisma {
     uploadedAt: Date | null
     reviewedAt: Date | null
     reviewedBy: string | null
+    rejectionReason: string | null
+    adminNotes: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -21914,6 +21916,8 @@ export namespace Prisma {
     uploadedAt: Date | null
     reviewedAt: Date | null
     reviewedBy: string | null
+    rejectionReason: string | null
+    adminNotes: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -21930,6 +21934,8 @@ export namespace Prisma {
     uploadedAt: number
     reviewedAt: number
     reviewedBy: number
+    rejectionReason: number
+    adminNotes: number
     metadata: number
     createdAt: number
     updatedAt: number
@@ -21957,6 +21963,8 @@ export namespace Prisma {
     uploadedAt?: true
     reviewedAt?: true
     reviewedBy?: true
+    rejectionReason?: true
+    adminNotes?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -21973,6 +21981,8 @@ export namespace Prisma {
     uploadedAt?: true
     reviewedAt?: true
     reviewedBy?: true
+    rejectionReason?: true
+    adminNotes?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -21989,6 +21999,8 @@ export namespace Prisma {
     uploadedAt?: true
     reviewedAt?: true
     reviewedBy?: true
+    rejectionReason?: true
+    adminNotes?: true
     metadata?: true
     createdAt?: true
     updatedAt?: true
@@ -22093,6 +22105,8 @@ export namespace Prisma {
     uploadedAt: Date
     reviewedAt: Date | null
     reviewedBy: string | null
+    rejectionReason: string | null
+    adminNotes: string | null
     metadata: JsonValue | null
     createdAt: Date
     updatedAt: Date
@@ -22129,6 +22143,8 @@ export namespace Prisma {
     uploadedAt?: boolean
     reviewedAt?: boolean
     reviewedBy?: boolean
+    rejectionReason?: boolean
+    adminNotes?: boolean
     metadata?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -22147,6 +22163,8 @@ export namespace Prisma {
     uploadedAt?: boolean
     reviewedAt?: boolean
     reviewedBy?: boolean
+    rejectionReason?: boolean
+    adminNotes?: boolean
     metadata?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -22165,6 +22183,8 @@ export namespace Prisma {
     uploadedAt?: boolean
     reviewedAt?: boolean
     reviewedBy?: boolean
+    rejectionReason?: boolean
+    adminNotes?: boolean
     metadata?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -22183,12 +22203,14 @@ export namespace Prisma {
     uploadedAt?: boolean
     reviewedAt?: boolean
     reviewedBy?: boolean
+    rejectionReason?: boolean
+    adminNotes?: boolean
     metadata?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type VerificationDocumentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "docType" | "fileName" | "originalName" | "fileType" | "fileSize" | "status" | "uploadedAt" | "reviewedAt" | "reviewedBy" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["verificationDocument"]>
+  export type VerificationDocumentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "docType" | "fileName" | "originalName" | "fileType" | "fileSize" | "status" | "uploadedAt" | "reviewedAt" | "reviewedBy" | "rejectionReason" | "adminNotes" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["verificationDocument"]>
   export type VerificationDocumentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -22216,6 +22238,8 @@ export namespace Prisma {
       uploadedAt: Date
       reviewedAt: Date | null
       reviewedBy: string | null
+      rejectionReason: string | null
+      adminNotes: string | null
       metadata: Prisma.JsonValue | null
       createdAt: Date
       updatedAt: Date
@@ -22654,6 +22678,8 @@ export namespace Prisma {
     readonly uploadedAt: FieldRef<"VerificationDocument", 'DateTime'>
     readonly reviewedAt: FieldRef<"VerificationDocument", 'DateTime'>
     readonly reviewedBy: FieldRef<"VerificationDocument", 'String'>
+    readonly rejectionReason: FieldRef<"VerificationDocument", 'String'>
+    readonly adminNotes: FieldRef<"VerificationDocument", 'String'>
     readonly metadata: FieldRef<"VerificationDocument", 'Json'>
     readonly createdAt: FieldRef<"VerificationDocument", 'DateTime'>
     readonly updatedAt: FieldRef<"VerificationDocument", 'DateTime'>
@@ -26983,6 +27009,8 @@ export namespace Prisma {
     uploadedAt: 'uploadedAt',
     reviewedAt: 'reviewedAt',
     reviewedBy: 'reviewedBy',
+    rejectionReason: 'rejectionReason',
+    adminNotes: 'adminNotes',
     metadata: 'metadata',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -28635,6 +28663,8 @@ export namespace Prisma {
     uploadedAt?: DateTimeFilter<"VerificationDocument"> | Date | string
     reviewedAt?: DateTimeNullableFilter<"VerificationDocument"> | Date | string | null
     reviewedBy?: StringNullableFilter<"VerificationDocument"> | string | null
+    rejectionReason?: StringNullableFilter<"VerificationDocument"> | string | null
+    adminNotes?: StringNullableFilter<"VerificationDocument"> | string | null
     metadata?: JsonNullableFilter<"VerificationDocument">
     createdAt?: DateTimeFilter<"VerificationDocument"> | Date | string
     updatedAt?: DateTimeFilter<"VerificationDocument"> | Date | string
@@ -28653,6 +28683,8 @@ export namespace Prisma {
     uploadedAt?: SortOrder
     reviewedAt?: SortOrderInput | SortOrder
     reviewedBy?: SortOrderInput | SortOrder
+    rejectionReason?: SortOrderInput | SortOrder
+    adminNotes?: SortOrderInput | SortOrder
     metadata?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -28675,6 +28707,8 @@ export namespace Prisma {
     uploadedAt?: DateTimeFilter<"VerificationDocument"> | Date | string
     reviewedAt?: DateTimeNullableFilter<"VerificationDocument"> | Date | string | null
     reviewedBy?: StringNullableFilter<"VerificationDocument"> | string | null
+    rejectionReason?: StringNullableFilter<"VerificationDocument"> | string | null
+    adminNotes?: StringNullableFilter<"VerificationDocument"> | string | null
     metadata?: JsonNullableFilter<"VerificationDocument">
     createdAt?: DateTimeFilter<"VerificationDocument"> | Date | string
     updatedAt?: DateTimeFilter<"VerificationDocument"> | Date | string
@@ -28693,6 +28727,8 @@ export namespace Prisma {
     uploadedAt?: SortOrder
     reviewedAt?: SortOrderInput | SortOrder
     reviewedBy?: SortOrderInput | SortOrder
+    rejectionReason?: SortOrderInput | SortOrder
+    adminNotes?: SortOrderInput | SortOrder
     metadata?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -28718,6 +28754,8 @@ export namespace Prisma {
     uploadedAt?: DateTimeWithAggregatesFilter<"VerificationDocument"> | Date | string
     reviewedAt?: DateTimeNullableWithAggregatesFilter<"VerificationDocument"> | Date | string | null
     reviewedBy?: StringNullableWithAggregatesFilter<"VerificationDocument"> | string | null
+    rejectionReason?: StringNullableWithAggregatesFilter<"VerificationDocument"> | string | null
+    adminNotes?: StringNullableWithAggregatesFilter<"VerificationDocument"> | string | null
     metadata?: JsonNullableWithAggregatesFilter<"VerificationDocument">
     createdAt?: DateTimeWithAggregatesFilter<"VerificationDocument"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"VerificationDocument"> | Date | string
@@ -30361,6 +30399,8 @@ export namespace Prisma {
     uploadedAt?: Date | string
     reviewedAt?: Date | string | null
     reviewedBy?: string | null
+    rejectionReason?: string | null
+    adminNotes?: string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -30379,6 +30419,8 @@ export namespace Prisma {
     uploadedAt?: Date | string
     reviewedAt?: Date | string | null
     reviewedBy?: string | null
+    rejectionReason?: string | null
+    adminNotes?: string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -30395,6 +30437,8 @@ export namespace Prisma {
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30413,6 +30457,8 @@ export namespace Prisma {
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30430,6 +30476,8 @@ export namespace Prisma {
     uploadedAt?: Date | string
     reviewedAt?: Date | string | null
     reviewedBy?: string | null
+    rejectionReason?: string | null
+    adminNotes?: string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -30446,6 +30494,8 @@ export namespace Prisma {
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30463,6 +30513,8 @@ export namespace Prisma {
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32142,6 +32194,8 @@ export namespace Prisma {
     uploadedAt?: SortOrder
     reviewedAt?: SortOrder
     reviewedBy?: SortOrder
+    rejectionReason?: SortOrder
+    adminNotes?: SortOrder
     metadata?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -32163,6 +32217,8 @@ export namespace Prisma {
     uploadedAt?: SortOrder
     reviewedAt?: SortOrder
     reviewedBy?: SortOrder
+    rejectionReason?: SortOrder
+    adminNotes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -32179,6 +32235,8 @@ export namespace Prisma {
     uploadedAt?: SortOrder
     reviewedAt?: SortOrder
     reviewedBy?: SortOrder
+    rejectionReason?: SortOrder
+    adminNotes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -34827,6 +34885,8 @@ export namespace Prisma {
     uploadedAt?: Date | string
     reviewedAt?: Date | string | null
     reviewedBy?: string | null
+    rejectionReason?: string | null
+    adminNotes?: string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -34843,6 +34903,8 @@ export namespace Prisma {
     uploadedAt?: Date | string
     reviewedAt?: Date | string | null
     reviewedBy?: string | null
+    rejectionReason?: string | null
+    adminNotes?: string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35214,6 +35276,8 @@ export namespace Prisma {
     uploadedAt?: DateTimeFilter<"VerificationDocument"> | Date | string
     reviewedAt?: DateTimeNullableFilter<"VerificationDocument"> | Date | string | null
     reviewedBy?: StringNullableFilter<"VerificationDocument"> | string | null
+    rejectionReason?: StringNullableFilter<"VerificationDocument"> | string | null
+    adminNotes?: StringNullableFilter<"VerificationDocument"> | string | null
     metadata?: JsonNullableFilter<"VerificationDocument">
     createdAt?: DateTimeFilter<"VerificationDocument"> | Date | string
     updatedAt?: DateTimeFilter<"VerificationDocument"> | Date | string
@@ -38951,6 +39015,8 @@ export namespace Prisma {
     uploadedAt?: Date | string
     reviewedAt?: Date | string | null
     reviewedBy?: string | null
+    rejectionReason?: string | null
+    adminNotes?: string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -39138,6 +39204,8 @@ export namespace Prisma {
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39154,6 +39222,8 @@ export namespace Prisma {
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39170,6 +39240,8 @@ export namespace Prisma {
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    rejectionReason?: NullableStringFieldUpdateOperationsInput | string | null
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

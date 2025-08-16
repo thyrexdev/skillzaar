@@ -1,4 +1,4 @@
-import { Freelancer, Skill, PortfolioLink, Proposal, Contract, Review, ExperienceLevel } from '@frevix/shared/src/generated/prisma';
+import { Freelancer, Skill, PortfolioLink, Proposal, Contract, Review, ExperienceLevel } from '@vync/shared/src/generated/prisma';
 
 // Request interfaces
 export interface UpdateFreelancerProfileRequest {

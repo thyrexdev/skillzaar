@@ -13,7 +13,8 @@ import {
   getJobMarketStats,
   getFeaturedJobs,
 } from "../controllers/job.controller";
-import { authMiddleware } from "../middlewares/auth.middleware";
+import {authMiddleware} from "@vync/shared"
+
 
 const jobRoutes = new Hono();
 

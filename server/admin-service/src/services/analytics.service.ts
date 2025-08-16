@@ -1,4 +1,4 @@
-import { prisma } from '@frevix/shared';
+import { prisma } from '@vync/shared';
 import { PlatformMetrics } from '../interfaces/admin.interfaces';
 
 export class AnalyticsService {

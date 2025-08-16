@@ -1,5 +1,5 @@
 {
-  "name": "frevix-server",
+  "name": "vync-server",
   "private": true,
   "workspaces": [
     "admin-service",

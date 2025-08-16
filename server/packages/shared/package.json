@@ -1,5 +1,5 @@
 {
-  "name": "@frevix/shared",
+  "name": "@vync/shared",
   "version": "1.0.0",
   "main": "src/index.ts",
   "types": "src/index.ts",
@@ -11,7 +11,7 @@
       "import": "./prisma/client.ts"
     },
     "./auth": {
-      "import": "./auth/jwt.ts"
+      "import": "./src/middlewares/auth.middleware"
     }
   },
   "scripts": {

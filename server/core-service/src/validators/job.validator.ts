@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { JobStatus } from "@frevix/shared/src/generated/prisma";
+import { JobStatus } from "@vync/shared/src/generated/prisma";
 
 export const createJobSchema = z.object({
   title: z.string().min(5, "Title must be at least 5 characters long"),

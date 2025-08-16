@@ -1,3 +1,4 @@
+import { env } from "@vync/config";
 import { transporter } from "../config/nodemailer";
 
 export enum OtpEmailType {
@@ -71,7 +72,7 @@ export const sendOtpEmail = async (to: string, otp: string, type: OtpEmailType =
   const template = getEmailTemplate(type, otp);
 
   await transporter.sendMail({
-    from: `"Skillzaar" <${process.env.EMAIL_FROM}>`,
+    from: `"Vync" <${env.EMAIL_FROM}>`,
     to,
     subject: template.subject,
     html: template.html,

@@ -1,6 +1,6 @@
 import type { ServerWebSocket } from "bun";
 import { saveMessage } from "../services/message.service";
-import { logger } from "@frevix/config";
+import { logger } from "@vync/config";
 import { markMessagesAsRead } from "../services/readReceipt.service";
 import type {
   WSData,

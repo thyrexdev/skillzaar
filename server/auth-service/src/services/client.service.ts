@@ -1,10 +1,10 @@
-import { prisma } from "@frevix/shared";
-import { Client, Job, JobStatus } from "@frevix/shared/src/generated/prisma";
+import { prisma } from "@vync/shared";
+import { Client, Job, JobStatus } from "@vync/shared/src/generated/prisma";
 import {
   UpdateProfileData,
   ClientStats
 } from "../interfaces/client.interface";
-import { logger } from "@frevix/config/dist/logger";
+import { logger } from "@vync/config";
 
 export const ClientService = {
   getClientByUserId: async (userId: string): Promise<Client> => {

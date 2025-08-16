@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
 import * as jose from 'jose';
-import { prisma } from "@frevix/shared";
-import { env } from "@frevix/config";
-import { logger } from "@frevix/config/dist/logger";
+import { prisma } from "@vync/shared";
+import { env } from "@vync/config";
+import { logger } from "@vync/config";
 import { 
   RegisterRequest, 
   LoginRequest, 

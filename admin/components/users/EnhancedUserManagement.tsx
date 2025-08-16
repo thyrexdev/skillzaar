@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { 
   Table, Card, Space, Button, Input, Select, Tag, Avatar, Modal, Form, 
   message, Drawer, Descriptions, Tabs, Badge, DatePicker,
-  Row, Col, Statistic, Typography, Tooltip
+  Row, Col, Statistic, Typography, Tooltip, List
 } from 'antd';
 import { 
   UserOutlined, EditOutlined, EyeOutlined, 
@@ -15,6 +15,7 @@ import {
 } from '@ant-design/icons';
 import { useAdminStore } from '@/stores/adminStore';
 import { performUserAction, suspendUser, banUser, verifyUser, getUserDetails } from '@/lib/api/admin-api';
+import type { UserDetail } from '@/types/admin.types';
 
 const { Search } = Input;
 const { Option } = Select;
@@ -22,45 +23,76 @@ const { RangePicker } = DatePicker;
 const { TabPane } = Tabs;
 const { Text, Title } = Typography;
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: 'CLIENT' | 'FREELANCER' | 'ADMIN';
-  status: 'ACTIVE' | 'SUSPENDED' | 'BANNED';
-  isVerified: boolean;
-  createdAt: string;
+// Extended UserDetail to match component expectations
+interface ExtendedUserDetail extends UserDetail {
+  name?: string; // Computed from firstName + lastName
+  avatar?: string; // From profile.avatar
   lastLoginAt?: string;
-  avatar?: string;
+  walletBalance?: number;
   profile?: {
+    avatar?: string;
+    bio?: string;
+    location?: string;
+    skills?: string[];
     completedJobs?: number;
     totalEarnings?: number;
     rating?: number;
-    description?: string;
-    skills?: string[];
   };
-  walletBalance?: number;
 }
 
+// Helper function to transform UserDetail to component format
+const transformUserDetail = (user: UserDetail): ExtendedUserDetail => {
+  return {
+    ...user,
+    name: `${user.firstName} ${user.lastName}`.trim(),
+    avatar: user.profile?.avatar,
+    lastLoginAt: user.lastActivity ? new Date(user.lastActivity).toISOString() : undefined,
+    profile: {
+      ...user.profile,
+      completedJobs: user.statistics?.jobsCompleted,
+      totalEarnings: user.statistics?.totalEarnings,
+      rating: user.statistics?.rating,
+    },
+  };
+};
+
 const EnhancedUserManagement: React.FC = () => {
-  const { users, fetchUsers, loading } = useAdminStore();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedRole, setSelectedRole] = useState<string | undefined>(undefined);
-  const [selectedStatus, setSelectedStatus] = useState<string | undefined>(undefined);
-  const [detailDrawerVisible, setDetailDrawerVisible] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const [userDetails, setUserDetails] = useState<any>(null);
-  const [actionModalVisible, setActionModalVisible] = useState(false);
-  const [currentAction, setCurrentAction] = useState<{ type: string; user: User } | null>(null);
+  const {
+    // Data
+    users,
+    loading,
+    // UI State
+    searchTerm,
+    selectedRole,
+    selectedStatus,
+    detailDrawerVisible,
+    selectedUser,
+    userDetails,
+    actionModalVisible,
+    currentAction,
+    dateRange,
+    advancedFilters,
+    // Actions
+    fetchUsers,
+    setSearchTerm,
+    setSelectedRole,
+    setSelectedStatus,
+    setDetailDrawerVisible,
+    setSelectedUser,
+    setUserDetails,
+    setActionModalVisible,
+    setCurrentAction,
+    setDateRange,
+    setAdvancedFilters,
+  } = useAdminStore();
+  
   const [form] = Form.useForm();
-  const [dateRange, setDateRange] = useState<[any, any] | null>(null);
-  const [advancedFilters, setAdvancedFilters] = useState(false);
 
   useEffect(() => {
     const filters = {
       search: searchTerm,
-      role: selectedRole,
-      status: selectedStatus,
+      role: selectedRole as 'CLIENT' | 'FREELANCER' | undefined,
+      status: selectedStatus as 'ACTIVE' | 'SUSPENDED' | 'BANNED' | undefined,
       dateRange: dateRange ? {
         start: dateRange[0]?.toDate(),
         end: dateRange[1]?.toDate()
@@ -69,45 +101,80 @@ const EnhancedUserManagement: React.FC = () => {
     fetchUsers(filters);
   }, [fetchUsers, searchTerm, selectedRole, selectedStatus, dateRange]);
 
-  const handleUserAction = async (userId: string, action: string, data?: any) => {
+  const handleUserAction = async (userId: string, action: string, data?: Record<string, unknown>) => {
     try {
       switch (action) {
         case 'suspend':
-          await suspendUser(userId, data.reason, data.duration);
+          await suspendUser(userId, data?.reason as string, data?.duration as number);
           break;
         case 'ban':
-          await banUser(userId, data.reason);
+          await banUser(userId, data?.reason as string);
           break;
         case 'verify':
-          await verifyUser(userId, data.reason);
+          await verifyUser(userId, data?.reason as string);
           break;
         default:
-          await performUserAction({ action, userId, ...data });
+          await performUserAction({
+            action: action as 'suspend' | 'unsuspend' | 'ban' | 'unban' | 'verify' | 'unverify', userId, ...data,
+            reason: ''
+          });
       }
       
       message.success(`User ${action}ed successfully`);
       fetchUsers(); // Refresh the list
       setActionModalVisible(false);
+      setCurrentAction(null);
       form.resetFields();
-    } catch (error: any) {
-      message.error(error.message || `Failed to ${action} user`);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : `Failed to ${action} user`;
+      message.error(errorMessage);
     }
   };
 
-  const showUserDetails = async (user: User) => {
-    setSelectedUser(user);
+  const showUserDetails = async (user: ExtendedUserDetail) => {
+    // Convert ExtendedUserDetail back to UserDetail for store
+    const userDetail: UserDetail = {
+      id: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      role: user.role,
+      isVerified: user.isVerified,
+      status: user.status,
+      createdAt: user.createdAt,
+      lastActivity: user.lastActivity,
+      profile: user.profile,
+      statistics: user.statistics,
+    };
+    
+    setSelectedUser(userDetail);
     setDetailDrawerVisible(true);
     
     try {
       const details = await getUserDetails(user.id);
       setUserDetails(details);
-    } catch (error) {
+    } catch {
       message.error('Failed to load user details');
     }
   };
 
-  const showActionModal = (actionType: string, user: User) => {
-    setCurrentAction({ type: actionType, user });
+  const showActionModal = (actionType: string, user: ExtendedUserDetail) => {
+    // Convert ExtendedUserDetail back to UserDetail for store
+    const userDetail: UserDetail = {
+      id: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      role: user.role,
+      isVerified: user.isVerified,
+      status: user.status,
+      createdAt: user.createdAt,
+      lastActivity: user.lastActivity,
+      profile: user.profile,
+      statistics: user.statistics,
+    };
+    
+    setCurrentAction({ type: actionType, user: userDetail });
     setActionModalVisible(true);
   };
 
@@ -117,7 +184,7 @@ const EnhancedUserManagement: React.FC = () => {
       key: 'user',
       fixed: 'left' as const,
       width: 250,
-      render: (record: User) => (
+      render: (record: ExtendedUserDetail) => (
         <Space>
           <Avatar src={record.avatar} icon={<UserOutlined />} />
           <div>
@@ -155,7 +222,7 @@ const EnhancedUserManagement: React.FC = () => {
       dataIndex: 'status',
       key: 'status',
       width: 120,
-      render: (status: string, record: User) => {
+      render: (status: string, record: ExtendedUserDetail) => {
         const colors = {
           ACTIVE: 'green',
           SUSPENDED: 'orange',
@@ -172,7 +239,7 @@ const EnhancedUserManagement: React.FC = () => {
       title: 'Performance',
       key: 'performance',
       width: 150,
-      render: (record: User) => (
+      render: (record: ExtendedUserDetail) => (
         <Space direction="vertical" size="small">
           {record.profile?.completedJobs !== undefined && (
             <Text type="secondary" className="text-xs">
@@ -208,7 +275,7 @@ const EnhancedUserManagement: React.FC = () => {
       key: 'actions',
       fixed: 'right' as const,
       width: 200,
-      render: (record: User) => (
+      render: (record: ExtendedUserDetail) => (
         <Space wrap>
           <Tooltip title="View Details">
             <Button 
@@ -254,7 +321,7 @@ const EnhancedUserManagement: React.FC = () => {
                 size="small" 
                 type="primary"
                 icon={<ReloadOutlined />}
-                onClick={() => showActionModal('activate', record)}
+                onClick={() => showActionModal('unsuspend', record)}
               />
             </Tooltip>
           )}
@@ -271,7 +338,7 @@ const EnhancedUserManagement: React.FC = () => {
       suspend: 'Suspend User',
       ban: 'Ban User',
       verify: 'Verify User',
-      activate: 'Reactivate User'
+      unsuspend: 'Reactivate User'
     };
 
     return (
@@ -280,6 +347,7 @@ const EnhancedUserManagement: React.FC = () => {
         open={actionModalVisible}
         onCancel={() => {
           setActionModalVisible(false);
+          setCurrentAction(null);
           form.resetFields();
         }}
         footer={null}
@@ -291,9 +359,9 @@ const EnhancedUserManagement: React.FC = () => {
         >
           <div className="mb-4 p-4 bg-gray-50 rounded">
             <Space>
-              <Avatar src={user.avatar} icon={<UserOutlined />} />
+              <Avatar src={user.profile?.avatar} icon={<UserOutlined />} />
               <div>
-                <Text strong>{user.name}</Text>
+                <Text strong>{`${user.firstName} ${user.lastName}`.trim()}</Text>
                 <br />
                 <Text type="secondary">{user.email}</Text>
               </div>
@@ -337,7 +405,7 @@ const EnhancedUserManagement: React.FC = () => {
             </Form.Item>
           )}
 
-          {type === 'activate' && (
+          {type === 'unsuspend' && (
             <Form.Item name="reason" label="Reactivation Notes">
               <Input.TextArea rows={2} placeholder="Optional notes about reactivation..." />
             </Form.Item>
@@ -345,7 +413,10 @@ const EnhancedUserManagement: React.FC = () => {
 
           <Form.Item className="mb-0 text-right">
             <Space>
-              <Button onClick={() => setActionModalVisible(false)}>
+              <Button onClick={() => {
+                setActionModalVisible(false);
+                setCurrentAction(null);
+              }}>
                 Cancel
               </Button>
               <Button 
@@ -371,7 +442,7 @@ const EnhancedUserManagement: React.FC = () => {
           <div className="flex items-center justify-between">
             <Space>
               <Title level={4} className="mb-0">User Management</Title>
-              <Badge count={users?.totalCount || 0} showZero color="blue" />
+              <Badge count={users?.pagination.total || 0} showZero color="blue" />
             </Space>
             <Space>
               <Button icon={<ExportOutlined />}>Export</Button>
@@ -484,13 +555,13 @@ const EnhancedUserManagement: React.FC = () => {
         {/* Users Table */}
         <Table
           columns={columns}
-          dataSource={users?.users || []}
+          dataSource={users?.data?.map(transformUserDetail) || []}
           rowKey="id"
           loading={loading}
           pagination={{
-            current: users?.currentPage || 1,
-            pageSize: 20,
-            total: users?.totalCount || 0,
+            current: users?.pagination.page || 1,
+            pageSize: users?.pagination.limit || 20,
+            total: users?.pagination.total || 0,
             showSizeChanger: true,
             showQuickJumper: true,
             showTotal: (total, range) => 
@@ -512,9 +583,9 @@ const EnhancedUserManagement: React.FC = () => {
         title={
           selectedUser && (
             <Space>
-              <Avatar src={selectedUser.avatar} icon={<UserOutlined />} />
+              <Avatar src={selectedUser.profile?.avatar} icon={<UserOutlined />} />
               <div>
-                <Text strong>{selectedUser.name}</Text>
+                <Text strong>{`${selectedUser.firstName} ${selectedUser.lastName}`.trim()}</Text>
                 <br />
                 <Text type="secondary" className="text-sm">{selectedUser.email}</Text>
               </div>
@@ -525,6 +596,7 @@ const EnhancedUserManagement: React.FC = () => {
         open={detailDrawerVisible}
         onClose={() => {
           setDetailDrawerVisible(false);
+          setSelectedUser(null);
           setUserDetails(null);
         }}
         extra={(
@@ -538,7 +610,7 @@ const EnhancedUserManagement: React.FC = () => {
             <TabPane tab="Overview" key="overview">
               <Descriptions column={1} bordered size="small">
                 <Descriptions.Item label="User ID">{selectedUser.id}</Descriptions.Item>
-                <Descriptions.Item label="Name">{selectedUser.name}</Descriptions.Item>
+                <Descriptions.Item label="Name">{`${selectedUser.firstName} ${selectedUser.lastName}`.trim()}</Descriptions.Item>
                 <Descriptions.Item label="Email">{selectedUser.email}</Descriptions.Item>
                 <Descriptions.Item label="Role">
                   <Tag color={selectedUser.role === 'FREELANCER' ? 'blue' : 'green'}>
@@ -561,16 +633,11 @@ const EnhancedUserManagement: React.FC = () => {
                   {new Date(selectedUser.createdAt).toLocaleDateString()}
                 </Descriptions.Item>
                 <Descriptions.Item label="Last Login">
-                  {selectedUser.lastLoginAt ? new Date(selectedUser.lastLoginAt).toLocaleDateString() : 'Never'}
+                  {selectedUser.lastActivity ? new Date(selectedUser.lastActivity).toLocaleDateString() : 'Never'}
                 </Descriptions.Item>
-                {selectedUser.walletBalance !== undefined && (
-                  <Descriptions.Item label="Wallet Balance">
-                    <Text strong>${selectedUser.walletBalance.toFixed(2)}</Text>
-                  </Descriptions.Item>
-                )}
               </Descriptions>
               
-              {selectedUser.profile && (
+              {selectedUser.statistics && (
                 <>
                   <Title level={5} className="mt-4">Performance Metrics</Title>
                   <Row gutter={16}>
@@ -578,7 +645,7 @@ const EnhancedUserManagement: React.FC = () => {
                       <Card size="small">
                         <Statistic
                           title="Completed Jobs"
-                          value={selectedUser.profile.completedJobs || 0}
+                          value={selectedUser.statistics.jobsCompleted || 0}
                           prefix={<ProjectOutlined />}
                         />
                       </Card>
@@ -587,7 +654,7 @@ const EnhancedUserManagement: React.FC = () => {
                       <Card size="small">
                         <Statistic
                           title="Total Earnings"
-                          value={selectedUser.profile.totalEarnings || 0}
+                          value={selectedUser.statistics.totalEarnings || 0}
                           prefix={<DollarOutlined />}
                           precision={2}
                         />
@@ -597,7 +664,7 @@ const EnhancedUserManagement: React.FC = () => {
                       <Card size="small">
                         <Statistic
                           title="Rating"
-                          value={selectedUser.profile.rating || 0}
+                          value={selectedUser.statistics.rating || 0}
                           prefix={<StarOutlined />}
                           precision={1}
                           suffix="/ 5.0"
@@ -613,7 +680,7 @@ const EnhancedUserManagement: React.FC = () => {
               {userDetails?.activity ? (
                 <List
                   dataSource={userDetails.activity}
-                  renderItem={(item: any) => (
+                  renderItem={(item: { action: string; timestamp: string }) => (
                     <List.Item>
                       <List.Item.Meta
                         avatar={<Avatar icon={<ClockCircleOutlined />} size="small" />}
@@ -640,7 +707,7 @@ const EnhancedUserManagement: React.FC = () => {
                   <Button 
                     type="primary" 
                     icon={<CheckCircleOutlined />} 
-                    onClick={() => showActionModal('verify', selectedUser)}
+                    onClick={() => showActionModal('verify', transformUserDetail(selectedUser))}
                     block
                   >
                     Verify User
@@ -651,7 +718,7 @@ const EnhancedUserManagement: React.FC = () => {
                     <Button 
                       danger 
                       icon={<StopOutlined />}
-                      onClick={() => showActionModal('suspend', selectedUser)}
+                      onClick={() => showActionModal('suspend', transformUserDetail(selectedUser))}
                       block
                     >
                       Suspend User
@@ -659,7 +726,7 @@ const EnhancedUserManagement: React.FC = () => {
                     <Button 
                       danger 
                       icon={<CloseOutlined />}
-                      onClick={() => showActionModal('ban', selectedUser)}
+                      onClick={() => showActionModal('ban', transformUserDetail(selectedUser))}
                       block
                     >
                       Ban User
@@ -670,7 +737,7 @@ const EnhancedUserManagement: React.FC = () => {
                   <Button 
                     type="primary" 
                     icon={<ReloadOutlined />}
-                    onClick={() => showActionModal('activate', selectedUser)}
+                    onClick={() => showActionModal('unsuspend', transformUserDetail(selectedUser))}
                     block
                   >
                     Reactivate User

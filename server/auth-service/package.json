@@ -1,5 +1,5 @@
 {
-  "name": "@frevix/auth-service",
+  "name": "@vync/auth-service",
   "module": "src/index.ts",
   "devDependencies": {
     "@types/bun": "latest",
@@ -16,8 +16,8 @@
     "dev": "bun --watch src/index.ts"
   },
   "dependencies": {
-    "@frevix/config": "*",
-    "@frevix/shared": "*",
+    "@vync/config": "*",
+    "@vync/shared": "*",
     "bcryptjs": "^2.4.3",
     "hono": "^4.8.12",
     "jose": "^6.0.12",

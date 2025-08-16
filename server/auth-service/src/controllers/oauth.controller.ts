@@ -1,9 +1,8 @@
 import { Context } from 'hono';
 import axios from 'axios';
-import { env } from '../config/env';
 import { OAuthService, OAuthUserProfile } from '../services/oauth.service';
-import { logger } from '@frevix/config/dist/logger';
-
+import { logger } from '@vync/config';
+import { env } from '@vync/config';
 export const googleOAuth = async (c: Context) => {
   try {
     const { code, role } = await c.req.json();

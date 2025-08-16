@@ -8,15 +8,16 @@ import {
   setClientsMap,
 } from "./handlers/messageHandlers";
 import type { WSData, IncomingMessage } from "./types/message.types";
+import { env } from "@vync/config";
 
 const clients = new Map<string, ServerWebSocket<WSData>>();
-const jwtSecret = new TextEncoder().encode(process.env.JWT_SECRET);
+const jwtSecret = new TextEncoder().encode(env.JWT_SECRET);
 
 // Initialize handlers with clients map
 setClientsMap(clients);
 
 const server = Bun.serve<WSData, {}>({
-  port: 5002,
+  port: env.CHAT_SERVICE_PORT,
 
   async fetch(req, server) {
     const upgradeHeader = req.headers.get("upgrade") || "";

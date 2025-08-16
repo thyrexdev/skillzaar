@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
-import { logger } from '@frevix/config/dist/logger';
+import { env, logger } from '@vync/config';
 import authRoutes from './routes/auth.routes';
 import otpRoutes from './routes/otp.routes';
 import clientRoutes from './routes/client.routes';
@@ -32,7 +32,7 @@ app.post('/verify-token', async (c) => {
 
   const token = authHeader.replace('Bearer ', '');
   try {
-    const { getUserFromToken } = await import('@frevix/shared');
+    const { getUserFromToken } = await import('@vync/shared');
     const user = await getUserFromToken(token);
     return c.json(user, 200);
   } catch (error: any) {
@@ -41,6 +41,6 @@ app.post('/verify-token', async (c) => {
 });
 
 export default {
-    port: process.env.PORT,
+    port: env.AUTH_SERVICE_PORT,
     fetch: app.fetch,
 };

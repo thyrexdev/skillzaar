@@ -4,7 +4,7 @@ import {
   CreatePortfolioValidator,
   UpdatePortfolioValidator
 } from "../../validators/freelancer/portfolio.validator";
-import { logger } from "@frevix/config/dist/logger";
+import { logger } from "@vync/config";
 
 export const PortfolioController = {
   createProject: async (c: Context) => {

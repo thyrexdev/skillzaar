@@ -1,6 +1,6 @@
-import { prisma } from "@frevix/shared";
-import type { Conversation, Message } from "@frevix/shared/src/generated/prisma";
-import { logger } from "@frevix/config";
+import { prisma } from "@vync/shared";
+import type { Conversation, Message } from "@vync/shared/src/generated/prisma";
+import { logger } from "@vync/config";
 
 export type ConversationWithLastMessage = Conversation & {
   lastMessage: Message | null;
