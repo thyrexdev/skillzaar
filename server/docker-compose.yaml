@@ -11,6 +11,19 @@ services:
     networks:
       - vync_network
 
+  redis:
+    image: redis:7
+    container_name: vync_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - vync_network
+    env_file:
+      - ./packages/config/.env
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
   core_service:
     container_name: core_service
     env_file:
@@ -29,6 +42,7 @@ services:
       - vync_network
     depends_on:
       - vync_postgres
+      - redis
 
   admin_service:
     container_name: admin_service
@@ -48,6 +62,7 @@ services:
       - vync_network
     depends_on:
       - vync_postgres
+      - redis
 
   auth_service:
     container_name: auth_service
@@ -67,6 +82,7 @@ services:
       - vync_network
     depends_on:
       - vync_postgres
+      - redis
 
   chat_service:
     container_name: chat_service
@@ -86,6 +102,7 @@ services:
       - vync_network
     depends_on:
       - vync_postgres
+      - redis
 
   media_service:
     container_name: media_service
@@ -105,6 +122,7 @@ services:
       - vync_network
     depends_on:
       - vync_postgres
+      - redis
 
 networks:
   vync_network:
@@ -112,3 +130,4 @@ networks:
 
 volumes:
   pgdata:
+  redis_data:

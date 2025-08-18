@@ -26,6 +26,11 @@ export const env = {
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
 
+  // Redis
+  REDIS_HOST: process.env.REDIS_HOST || 'redis',
+  REDIS_PORT: parseInt(process.env.REDIS_PORT || '6379'),
+  REDIS_PASSWORD: process.env.REDIS_PASSWORD || undefined,
+
   // Services URLs
   AUTH_SERVICE_URL: process.env.AUTH_SERVICE_URL,
   CORE_SERVICE_URL: process.env.CORE_SERVICE_URL,
