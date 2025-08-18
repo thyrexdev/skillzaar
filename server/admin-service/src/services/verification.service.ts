@@ -1,12 +1,10 @@
-import { PrismaClient } from '@vync/shared/src/generated/prisma';
+import { prisma } from '@vync/shared/prisma';
 import { 
   VerificationQueueItem, 
   VerificationFilters, 
   VerificationStats,
   DocumentPreview 
 } from '../interfaces/admin.interfaces';
-
-const prisma = new PrismaClient();
 
 /**
  * Get verification queue with filters

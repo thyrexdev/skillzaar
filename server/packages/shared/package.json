@@ -7,11 +7,17 @@
     ".": {
       "import": "./src/index.ts"
     },
+    "./src": {
+      "import": "./src/index.ts"
+    },
+    "./src/generated/prisma": {
+      "import": "./src/generated/prisma/index.js"
+    },
     "./prisma": {
       "import": "./prisma/client.ts"
     },
     "./auth": {
-      "import": "./src/middlewares/auth.middleware"
+      "import": "./auth/middlewares/auth.middleware.ts"
     }
   },
   "scripts": {

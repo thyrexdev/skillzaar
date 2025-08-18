@@ -1,0 +1,114 @@
+services:
+  vync_postgres:
+    image: postgres:16
+    container_name: vync_postgres
+    env_file:
+      - ./packages/config/.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - vync_network
+
+  core_service:
+    container_name: core_service
+    env_file:
+      - ./packages/config/.env
+    build:
+      context: .
+      dockerfile: ./core-service/Dockerfile
+    command: bun run dev
+    volumes:
+      - ./core-service:/src/core-service
+      - /src/core-service/node_modules
+      - ./packages:/src/packages
+    ports:
+      - "5001:5001"
+    networks:
+      - vync_network
+    depends_on:
+      - vync_postgres
+
+  admin_service:
+    container_name: admin_service
+    env_file:
+      - ./packages/config/.env
+    build:
+      context: .
+      dockerfile: ./admin-service/Dockerfile
+    command: bun run dev
+    volumes:
+      - ./admin-service:/src/admin-service
+      - /src/admin-service/node_modules
+      - ./packages:/src/packages
+    ports:
+      - "5004:5004"
+    networks:
+      - vync_network
+    depends_on:
+      - vync_postgres
+
+  auth_service:
+    container_name: auth_service
+    env_file:
+      - ./packages/config/.env
+    build:
+      context: .
+      dockerfile: ./auth-service/Dockerfile
+    command: bun run dev
+    volumes:
+      - ./auth-service:/src/auth-service
+      - /src/auth-service/node_modules
+      - ./packages:/src/packages
+    ports:
+      - "5000:5000"
+    networks:
+      - vync_network
+    depends_on:
+      - vync_postgres
+
+  chat_service:
+    container_name: chat_service
+    env_file:
+      - ./packages/config/.env
+    build:
+      context: .
+      dockerfile: ./chat-service/Dockerfile
+    command: bun run dev
+    volumes:
+      - ./chat-service:/src/chat-service
+      - /src/chat-service/node_modules
+      - ./packages:/src/packages
+    ports:
+      - "5002:5002"
+    networks:
+      - vync_network
+    depends_on:
+      - vync_postgres
+
+  media_service:
+    container_name: media_service
+    env_file:
+      - ./packages/config/.env
+    build:
+      context: .
+      dockerfile: ./media-service/Dockerfile
+    command: bun run dev
+    volumes:
+      - ./media-service:/src/media-service
+      - /src/media-service/node_modules
+      - ./packages:/src/packages
+    ports:
+      - "5003:5003"
+    networks:
+      - vync_network
+    depends_on:
+      - vync_postgres
+
+networks:
+  vync_network:
+    driver: bridge
+
+volumes:
+  pgdata:

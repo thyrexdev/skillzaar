@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import { googleOAuth, getOAuthConfig, unlinkGoogleProvider } from '../controllers/oauth.controller';
-import { authMiddleware } from "@vync/shared/src";
+import { authMiddleware } from '@vync/shared/src';
+
 
 const oauthRoutes = new Hono();
 

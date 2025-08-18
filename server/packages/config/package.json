@@ -1,8 +1,7 @@
 {
   "name": "@vync/config",
   "version": "1.0.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "index.js",
   "private": true,
   "scripts": {
     "build": "tsc"

@@ -1,4 +1,4 @@
-import { Role } from '@vync/shared/src';
+import { Role } from "@vync/shared/src/generated/prisma";
 
 // Request interfaces
 export interface RegisterRequest {
