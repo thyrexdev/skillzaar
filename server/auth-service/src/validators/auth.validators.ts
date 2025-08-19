@@ -8,7 +8,7 @@ export const registerSchema = z.object({
     .min(8, "Password must be at least 8 characters long")
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, "Password must contain at least one lowercase letter, one uppercase letter, and one number"),
   role: z.nativeEnum(Role, {
-    errorMap: () => ({ message: "Role must be one of: CLIENT, FREELANCER, ADMIN" })
+    message: "Role must be one of: CLIENT, FREELANCER, ADMIN"
   }),
 });
 

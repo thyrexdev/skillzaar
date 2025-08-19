@@ -5,6 +5,7 @@ import { OtpEmailType } from '../utils/sendOtpEmail';
 import { prisma } from '@vync/shared';
 import bcrypt from 'bcryptjs';
 import { logger } from '@vync/config';
+import * as jose from 'jose';
 
 export const register = async (c: Context) => {
   try {
@@ -20,7 +21,10 @@ export const register = async (c: Context) => {
 export const login = async (c: Context) => {
   try {
     const body = await c.req.json();
-    const { user, token } = await AuthService.login(body);
+    const ipAddress = c.req.header('X-Forwarded-For') || c.req.header('X-Real-IP') || 'unknown';
+    const userAgent = c.req.header('User-Agent') || 'unknown';
+    
+    const { user, token } = await AuthService.login(body, ipAddress, userAgent);
     return c.json({ user, token }, 200);
   } catch (err: any) {
     logger.error(`Login error: ${err.message}`);
@@ -75,5 +79,31 @@ export const resetPassword = async (c: Context) => {
   } catch (error: any) {
     logger.error(`Reset password error: ${error.message}`);
     return c.json({ error: error.message }, 400);
+  }
+};
+
+export const logout = async (c: Context) => {
+  try {
+    const authHeader = c.req.header('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return c.json({ error: 'Missing or invalid authorization header' }, 401);
+    }
+
+    const token = authHeader.replace('Bearer ', '');
+    
+    // Decode token to get user ID
+    const decoded = jose.decodeJwt(token);
+    const userId = decoded.sub;
+    
+    if (!userId) {
+      return c.json({ error: 'Invalid token' }, 401);
+    }
+
+    // Logout using AuthService
+    const result = await AuthService.logout(userId, token);
+    return c.json(result, 200);
+  } catch (err: any) {
+    logger.error(`Logout error: ${err.message}`);
+    return c.json({ error: err.message }, 400);
   }
 };

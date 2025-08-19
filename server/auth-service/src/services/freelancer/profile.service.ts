@@ -70,11 +70,11 @@ export const ProfileService = {
       hourlyRate: user.Freelancer.hourlyRate,
       experienceLevel: user.Freelancer.experienceLevel,
       skills: user.Freelancer.skills.map((skill: { name: string }) => skill.name),
-      portfolioLinks: user.Freelancer.portfolioLinks.map((link: { title: string; description: string; imageUrls: string[]; liveUrl: string }) => ({
+      portfolioLinks: user.Freelancer.portfolioLinks.map((link) => ({
         title: link.title,
-        description: link.description,
+        description: link.description || '',
         imageUrls: link.imageUrls,
-        liveUrl: link.liveUrl
+        liveUrl: link.liveUrl || ''
       })),
       contractsCount: user.Freelancer._count.contracts,
       reviewsCount: user.Freelancer._count.reviews
