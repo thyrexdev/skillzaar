@@ -42,6 +42,7 @@ const LoginPage = () => {
   }, [clearError]);
 
   return (
+    
     <div className="flex justify-center items-center min-h-screen bg-background">
       <Card className="w-full max-w-md shadow-xl p-4">
         <CardHeader>
