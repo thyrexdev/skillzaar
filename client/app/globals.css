@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
-/*
-  SKILLZAAR GLOBAL THEME — ROYAL BLUE (OKLCH)
-  - Primary: Royal Blue (oklch(0.65 0.22 255))
-  - Accent: Lighter blue
-  - Secondary: Muted blue/gray
-  - Muted: Subtle blue-gray
-  - Destructive: Vibrant red
-  - All colors tuned for contrast and vibrance
-*/
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-primary-light: var(--color-primary-light);
+  --color-accent: var(--color-accent);
+
+  --color-black: var(--color-black);
+  --color-gray: var(--color-gray);
+  --color-gray-light: var(--color-gray-light);
+  --color-white: var(--color-white);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-tajawal);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -30,9 +30,9 @@
   --color-chart-3: var(--chart-3);
   --color-chart-2: var(--chart-2);
   --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
+  --color-ring: #6858D5;
   --color-input: var(--input);
-  --color-border: var(--border);
+  --color-border: #6858D5;
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
@@ -53,6 +53,17 @@
 }
 
 :root {
+
+  --primary: #6858D5;   
+  --color-primary-dark: #4B3BAA;
+  --color-primary-light: #A89EF2;
+  --color-accent: #FFB266;
+
+  --color-black: #212121;
+  --color-gray: #757575;
+  --color-gray-light: #E0E0E0;
+  --color-white: #FFFFFF;
+
   --radius: 0.625rem;
 
   /* Base background and text */
@@ -66,12 +77,11 @@
   --popover-foreground: oklch(0.18 0.02 255);
 
   /* Primary: Royal Blue */
-  --primary: oklch(0.65 0.22 255); /* Royal blue */
-  --primary-foreground: oklch(0.99 0.01 255); /* on blue: white-ish */
+
 
   /* Accent: Lighter blue */
-  --accent: oklch(0.85 0.13 255); /* light blue */
-  --accent-foreground: oklch(0.18 0.02 255);
+  --accent: #FFB266; /* light blue */
+  --accent-foreground: #FFB266;
 
   /* Secondary: Muted blue/gray */
   --secondary: oklch(0.92 0.04 255); /* pale blue-gray */
@@ -156,5 +166,15 @@
   }
   body {
     @apply bg-background text-foreground;
+    
   }
 }
+
+
+
+
+  .underline-input {
+    @apply h-14 bg-transparent border-0 border-b border-gray-300 rounded-none p-3
+           focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0
+           focus:border-b-2 focus:border-primary transition-colors text-lg;
+  }

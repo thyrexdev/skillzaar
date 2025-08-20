@@ -13,6 +13,8 @@ import * as jose from 'jose';
 export interface CachedUser {
   id: string;
   email: string;
+  phoneNumber?: string,
+  country?: string,
   name: string;
   role: string;
   isVerified: boolean;

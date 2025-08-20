@@ -3,9 +3,6 @@ import { User } from "@/stores/useAuth";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
-// For auth endpoints, we don't need the interceptors since we're not authenticated yet
-// So we use a separate axios instance for auth
-
 export const loginUser = async (email: string, password: string, role: string) => {
   const res = await axios.post(`${API_URL}/auth/login`, { email, password, role });
   return res.data as { user: User; token: string };
@@ -14,12 +11,16 @@ export const loginUser = async (email: string, password: string, role: string) =
 export const registerUser = async (
   name: string,
   email: string,
+  phoneNumber: string,
+  country:string,
   password: string,
   role: string
 ) => {
   const res = await axios.post(`${API_URL}/auth/register`, {
     name,
     email,
+    phoneNumber,
+    country,
     password,
     role,
   });

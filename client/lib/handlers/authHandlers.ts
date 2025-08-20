@@ -22,6 +22,8 @@ export const handleLogin = async (
 export const handleRegister = async (
   name: string,
   email: string,
+  phoneNumber: string,
+  country: string,
   password: string,
   role: string
 ): Promise<void> => {
@@ -29,7 +31,7 @@ export const handleRegister = async (
 
   try {
     setLoading(true);
-    const { user, token } = await registerUser(name, email, password, role);
+    const { user, token } = await registerUser(name, email,phoneNumber, country, password, role);
     register(user, token);
   } catch (error: any) {
     setError(error?.response?.data?.message || "Registration failed");

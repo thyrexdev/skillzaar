@@ -7,6 +7,8 @@ export type UserRole = "client" | "freelancer" | "admin";
 export type User = {
   id: string;
   name: string;
+  phoneNumber: string;
+  country: string;
   email: string;
   avatar?: string;
   role?: UserRole;

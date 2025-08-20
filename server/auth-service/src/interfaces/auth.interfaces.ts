@@ -4,6 +4,8 @@ import { Role } from "@vync/shared/src/generated/prisma";
 export interface RegisterRequest {
   name: string;
   email: string;
+  phoneNumber: string,
+  country: string,
   password: string;
   role: string;
 }

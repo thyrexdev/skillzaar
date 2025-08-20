@@ -10,15 +10,17 @@ datasource db {
 }
 
 model User {
-  id         String     @id @default(uuid())
-  email      String     @unique
-  password   String?
-  name       String
-  role       Role
-  status     UserStatus @default(ACTIVE)
-  isVerified Boolean
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
+  id          String     @id @default(uuid())
+  email       String     @unique
+  password    String?
+  name        String
+  phoneNumber String
+  country     String
+  role        Role
+  status      UserStatus @default(ACTIVE)
+  isVerified  Boolean
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 
   // OAuth fields
   googleId                                String?        @unique

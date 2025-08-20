@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist,} from "next/font/google";
+import { Tajawal } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
@@ -7,6 +8,12 @@ const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
+
+const tajawal = Tajawal({
+  variable: "--font-tajawal",
+  subsets: ["arabic"],
+  weight: ["200", "300", "400", "500", "700", "800", "900"],
+})
 
 export const metadata: Metadata = {
   title: "Skillzaar",
@@ -19,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" dir="rtl">
-      <body className={`${geistSans.variable}  antialiased`}>
+    <html lang="ar" dir="rtl">
+      <body className={`${tajawal.variable} ${geistSans.variable}  antialiased`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

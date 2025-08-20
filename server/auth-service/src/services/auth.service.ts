@@ -12,7 +12,7 @@ import {
 } from "../interfaces/auth.interfaces";
 
 export const AuthService = {
-register: async ({ name, email, password, role }: RegisterRequest): Promise<AuthServiceRegisterResult> => {
+register: async ({ name, email, phoneNumber, country, password, role }: RegisterRequest): Promise<AuthServiceRegisterResult> => {
     const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) throw new Error("User already exists");
 
@@ -26,6 +26,8 @@ register: async ({ name, email, password, role }: RegisterRequest): Promise<Auth
         data: {
           name,
           email,
+          phoneNumber,
+          country,
           password: hashed,
           role: normalizedRole,
           isVerified: false,
@@ -71,6 +73,8 @@ register: async ({ name, email, password, role }: RegisterRequest): Promise<Auth
       const cachedUser: CachedUser = {
         id: result.id,
         email: result.email,
+        phoneNumber: result.phoneNumber,
+        country: result.country,
         name: result.name,
         role: result.role,
         isVerified: result.isVerified,
@@ -204,6 +208,8 @@ login: async ({ email, password }: LoginRequest, ipAddress?: string, userAgent?:
         id: user.id,
         email: user.email,
         name: user.name,
+        phoneNumber: user.phoneNumber,
+        country: user.country,
         role: user.role,
         isVerified: user.isVerified,
         createdAt: user.createdAt.toISOString(),
