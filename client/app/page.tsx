@@ -1,14 +1,25 @@
-"use client"
-import ProfileHeader from "@/components/ProfileHeader";
 
+import Hero from '@/components/landing/Hero'
+import WhyChooseFrivico from '@/components/landing/WhyChooseFrivico'
+import WhyFreivico from '@/components/landing/WhyFreivico'
+import Frevico from'@/components/landing/Frevico'
+import React from 'react'
+import Testimonials from '@/components/landing/Testimonials'
+import Advertisement from '@/components/landing/Advertisement'
+import Footer from '@/components/landing/Footer'
 
-export default function Home() {
-
-
+const page = () => {
   return (
-    <div className="p-4 text-center">
-      <ProfileHeader />
-
-    </div>
-  );
+   <>
+   <Hero/>
+   <WhyFreivico />
+   <WhyChooseFrivico />
+   <Frevico />
+   <Testimonials/>
+   <Advertisement/>
+   <Footer/>
+   </>
+  )
 }
+
+export default page
