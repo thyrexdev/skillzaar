@@ -1,0 +1,285 @@
+@import "tailwindcss";
+@import "../styles/theme-vars.css";
+
+/* Ant Design Overrides */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  background-color: var(--bg-default);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--neutral-100);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neutral-300);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neutral-400);
+}
+
+/* Focus outline consistency */
+*:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Ant Design component adjustments */
+.ant-layout {
+  background: var(--bg-default) !important;
+}
+
+.ant-layout-header {
+  background: var(--bg-paper) !important;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.ant-layout-sider {
+  background: var(--bg-paper) !important;
+  border-right: 1px solid var(--border-default);
+}
+
+.ant-menu {
+  background: transparent !important;
+}
+
+.ant-card {
+  background: var(--bg-paper) !important;
+  border-color: var(--border-default) !important;
+}
+
+.ant-table-thead > tr > th {
+  background: var(--neutral-50) !important;
+  border-bottom-color: var(--border-default) !important;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background: var(--neutral-50) !important;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom-color: var(--border-light) !important;
+}
+
+/* Button enhancements */
+.ant-btn-primary {
+  background: var(--gradient-primary) !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(75, 59, 170, 0.15) !important;
+}
+
+.ant-btn-primary:hover {
+  background: var(--gradient-primary) !important;
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(75, 59, 170, 0.25) !important;
+}
+
+/* Tag enhancements with proper theme colors */
+.ant-tag {
+  border-radius: 12px !important;
+  font-weight: 500 !important;
+  border: 1px solid !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Theme-aware tag colors */
+.ant-tag-blue {
+  background-color: var(--primary-50) !important;
+  color: var(--primary-700) !important;
+  border-color: var(--primary-200) !important;
+}
+
+.dark .ant-tag-blue {
+  background-color: var(--primary-800) !important;
+  color: var(--primary-200) !important;
+  border-color: var(--primary-600) !important;
+}
+
+.ant-tag-green {
+  background-color: var(--success-50) !important;
+  color: var(--success-700) !important;
+  border-color: var(--success-200) !important;
+}
+
+.dark .ant-tag-green {
+  background-color: var(--success-800) !important;
+  color: var(--success-200) !important;
+  border-color: var(--success-600) !important;
+}
+
+.ant-tag-orange {
+  background-color: var(--warning-50) !important;
+  color: var(--warning-700) !important;
+  border-color: var(--warning-200) !important;
+}
+
+.dark .ant-tag-orange {
+  background-color: var(--warning-800) !important;
+  color: var(--warning-100) !important;
+  border-color: var(--warning-600) !important;
+}
+
+.ant-tag-red {
+  background-color: var(--error-50) !important;
+  color: var(--error-700) !important;
+  border-color: var(--error-200) !important;
+}
+
+.dark .ant-tag-red {
+  background-color: var(--error-800) !important;
+  color: var(--error-200) !important;
+  border-color: var(--error-600) !important;
+}
+
+.ant-tag-yellow {
+  background-color: var(--warning-50) !important;
+  color: var(--warning-800) !important;
+  border-color: var(--warning-200) !important;
+}
+
+.dark .ant-tag-yellow {
+  background-color: var(--warning-900) !important;
+  color: var(--warning-100) !important;
+  border-color: var(--warning-700) !important;
+}
+
+/* Input field enhancements */
+.ant-input:focus,
+.ant-select-selector:focus,
+.ant-select-focused .ant-select-selector {
+  border-color: var(--border-focus) !important;
+  box-shadow: 0 0 0 2px rgba(75, 59, 170, 0.1) !important;
+}
+
+/* Loading spinner color */
+.ant-spin-dot-item {
+  background-color: var(--primary-main) !important;
+}
+
+/* Modal and drawer backgrounds */
+.ant-modal-content,
+.ant-drawer-content {
+  background: var(--bg-paper) !important;
+}
+
+.ant-modal-mask,
+.ant-drawer-mask {
+  background: var(--bg-backdrop) !important;
+}
+
+/* Notification styling */
+.ant-notification {
+  background: var(--bg-paper) !important;
+  border: 1px solid var(--border-default) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Tooltip styling */
+.ant-tooltip-inner {
+  background: var(--neutral-800) !important;
+  color: var(--neutral-100) !important;
+}
+
+/* Dropdown styling */
+.ant-dropdown {
+  background: var(--bg-paper) !important;
+  border: 1px solid var(--border-default) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Custom utility classes */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-effect {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-hover {
+  transition: all 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Badge enhancements */
+.ant-badge-count {
+  background: var(--secondary-main) !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(255, 178, 102, 0.25) !important;
+  font-weight: 600 !important;
+}
+
+.dark .ant-badge-count {
+  box-shadow: 0 2px 8px rgba(255, 178, 102, 0.4) !important;
+}
+
+/* Progress bar enhancements */
+.ant-progress-bg {
+  background: var(--gradient-primary) !important;
+}
+
+.ant-progress-success-bg {
+  background: var(--success-main) !important;
+}
+
+/* Better text contrast for cards */
+.ant-card-head-title {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+}
+
+.ant-statistic-title {
+  color: var(--text-secondary) !important;
+}
+
+.ant-statistic-content {
+  color: var(--text-primary) !important;
+}
+
+/* Table improvements */
+.ant-table-thead > tr > th {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+}
+
+.ant-table-tbody > tr > td {
+  color: var(--text-primary) !important;
+}

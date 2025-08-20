@@ -8,15 +8,17 @@ import { loginSchema } from "@/schemas/loginSchema";
 import z from "zod";
 
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { OAuthButtons } from "@/components/auth/OAuthButtons";
 
 type FormData = z.infer<typeof loginSchema>;
 
 const LoginPage = () => {
   const router = useRouter();
+  const [selectedRole, setSelectedRole] = useState<'CLIENT' | 'FREELANCER' | ''>('');
 
   const { error, isLoading, clearError } = useAuth();
 
@@ -80,6 +82,10 @@ const LoginPage = () => {
             <div>
               <select
                 {...formRegister("role")}
+                onChange={(e) => {
+                  formRegister("role").onChange(e);
+                  setSelectedRole(e.target.value as 'CLIENT' | 'FREELANCER' | '');
+                }}
                 className="w-full border rounded-md px-3 py-2 text-sm bg-input text-foreground border-border focus:ring-2 focus:ring-ring"
               >
                 <option value="">Select Role</option>
@@ -97,6 +103,28 @@ const LoginPage = () => {
               {isLoading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
+          
+          {/* OAuth Section */}
+          <div className="mt-6">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-2 text-muted-foreground">
+                  Or continue with
+                </span>
+              </div>
+            </div>
+            
+            <div className="mt-4">
+              <OAuthButtons 
+                role={selectedRole as 'CLIENT' | 'FREELANCER'}
+                onSuccess={() => router.push('/dashboard')}
+                onError={(error) => clearError()}
+              />
+            </div>
+          </div>
           
           <div className="mt-4 text-center">
             <a 

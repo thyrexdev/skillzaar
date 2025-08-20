@@ -1,0 +1,5 @@
+[install]
+workspaces = ["server/*", "packages/*"]
+
+[define]
+BUN_WATCH = "true"

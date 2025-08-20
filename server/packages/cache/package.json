@@ -1,0 +1,29 @@
+{
+  "name": "@vync/cache",
+  "version": "1.0.0",
+  "module": "index.ts",
+  "main": "index.ts",
+  "types": "index.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./index.ts"
+    },
+    "./redis": {
+      "import": "./src/redis.ts"
+    }
+  },
+  "scripts": {
+    "build": "bun build index.ts --outdir ./dist"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/ioredis": "^5.0.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "ioredis": "^5.7.0"
+  }
+}
