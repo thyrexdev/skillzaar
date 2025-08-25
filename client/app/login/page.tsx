@@ -13,7 +13,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { OAuthButtons } from "@/components/auth/OAuthButtons";
-
+import ForgotPasswordPage from "../forgot-password/page";
+import Link from "next/link";
 type FormData = z.infer<typeof loginSchema>;
 
 const LoginPage = () => {
@@ -42,7 +43,7 @@ const LoginPage = () => {
   }, [clearError]);
 
   return (
-    
+     
     // <div className="flex justify-center items-center min-h-screen bg-background">
     //   <Card className="w-full max-w-md shadow-xl p-4">
     //     <CardHeader>
@@ -153,7 +154,7 @@ const LoginPage = () => {
           <div className="flex items-center text-2xl">
             <input type="checkbox" id="agree" className="ml-1 " />
             <label htmlFor="agree">تذكرني</label>
-            <a href="#" className="p-20 ">هل نسيت كلمه المرور ؟</a>
+            < Link href="/forgot-password" className="p-20 ">هل نسيت كلمه المرور ؟</Link>
  </div>
           <button type="submit" className="bg-[#7c3aed] text-white p-3 border-none border-r-4 cursor-pointer">تسجيل الدخول</button>
           <p className="">ليس لدي حساب ؟ انشاء حساب </p>
@@ -163,6 +164,7 @@ const LoginPage = () => {
         <img src="/profile.png" className=" w-4/5 max-w-96" />
       </div>
     </div>
+  
   );
 };
 

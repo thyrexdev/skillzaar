@@ -50,54 +50,61 @@ const ForgotPasswordPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-background">
-      <Card className="w-full max-w-md shadow-xl p-4">
-        <CardHeader>
-          <h2 className="text-2xl font-semibold text-center">
-            Forgot Password
-          </h2>
-          <p className="text-sm text-center text-muted-foreground">
-            Enter your email address and we'll send you an OTP to reset your password.
-          </p>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div>
-              <Input
-                placeholder="Enter your email address"
-                type="email"
-                {...register("email")}
-                disabled={isLoading}
-              />
-              {errors.email && (
-                <p className="text-sm text-destructive mt-1">
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
-            
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Sending OTP..." : "Send Reset OTP"}
-            </Button>
-            
-            {message && (
-              <p className={`text-sm text-center mt-2 ${isSuccess ? 'text-green-600' : 'text-destructive'}`}>
-                {message}
-              </p>
-            )}
-          </form>
-          
-          <div className="mt-6 text-center">
-            <Link 
-              href="/login" 
-              className="text-sm text-muted-foreground hover:text-primary underline"
-            >
-              Back to Sign In
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
+    <div>
+    <div className="container flex min-h-24 font-sans justify-center items-center">
+      <div className="flex-1 p-10 bg-[#f9f9f9]">
+        <h2 className=" text-2xl mb-2.5 ">اعاده تعيين كلمه المرور </h2>
+        <p className="mb-5 ">أدخل بريدك الإلكتروني وسنرسل لك رابط لإعادة التعيين.</p>
+        <form className="flex flex-col gap-3.5 ">
+          <input type="email" placeholder="البريد الإلكتروني" required className="p-2.5 border-solid border-r-4" />
+          <div className="flex items-center text-2xl">
+            <input type="checkbox" id="agree" className="ml-1 " />
+            <label htmlFor="agree">تذكرني</label>
+            <Link href="#" className="p-20 ">هل نسيت كلمه المرور ؟</Link>
+ </div>
+          <button type="submit" className="bg-[#7c3aed] text-white p-3 border-none border-r-4 cursor-pointer">اعاده تعيين</button>
+          <p className="">ليس لدي حساب ؟ انشاء حساب </p>
+        </form>
+      </div>
+       <div className="flex-1  bg-[#7c3aed] justify-center items-center ">
+        <img src="/profile.png" className=" w-4/5 max-w-96" />
+      </div>
     </div>
+    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="w-full md:w-1/2 mb-6 md:mb-0">
+      </div>
+
+      <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-xl font-bold mb-4 text-right">تحقق من بريدك الإلكتروني</h2>
+        <p className="text-sm text-right mb-4">
+ ادخل رمز التحقق المكوّن من 6 أرقام الذي أُرسل إلى بريدك الإلكتروني
+        </p>
+        <div className="flex justify-center gap-2 mb-6">
+            <input 
+            
+              type="text"
+              maxLength={1}
+              className="w-10 h-12 text-center border rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-purple-500"   />
+        
+        </div>
+
+        <button
+        
+          className="w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition"
+        >
+          إرسال
+        </button>
+        <p className="text-center text-gray-500 text-sm mt-4">
+          لم يصلك الرمز؟ إعادة الإرسال بعد 30 ثانية
+        </p>
+      </div>
+       <img
+          src="/profile.png" // بدّليها بصورة مناسبة
+          alt="support"
+          className=" flex-1  bg-[#7c3aed] justify-center items-center"
+        />
+    </div>
+        </div>
   );
 };
 
