@@ -1,31 +1,35 @@
 services:
-  vync_postgres:
+  postgres:
     image: postgres:16
-    container_name: vync_postgres
+    container_name: postgres
     env_file:
       - ./packages/config/.env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
-      - vync_network
+      - vync-network
 
   redis:
     image: redis:7
-    container_name: vync_redis
+    container_name: redis
     ports:
       - "6379:6379"
     networks:
-      - vync_network
+      - vync-network
     env_file:
       - ./packages/config/.env
     volumes:
-      - redis_data:/data
+      - redis-data:/data
     restart: unless-stopped
 
-  core_service:
-    container_name: core_service
+  core:
+    container_name: core
     env_file:
       - ./packages/config/.env
     build:
@@ -39,13 +43,13 @@ services:
     ports:
       - "5001:5001"
     networks:
-      - vync_network
+      - vync-network
     depends_on:
-      - vync_postgres
+      - postgres
       - redis
 
-  admin_service:
-    container_name: admin_service
+  admin:
+    container_name: admin
     env_file:
       - ./packages/config/.env
     build:
@@ -59,13 +63,13 @@ services:
     ports:
       - "5004:5004"
     networks:
-      - vync_network
+      - vync-network
     depends_on:
-      - vync_postgres
+      - postgres
       - redis
 
-  auth_service:
-    container_name: auth_service
+  auth:
+    container_name: auth
     env_file:
       - ./packages/config/.env
     build:
@@ -79,13 +83,13 @@ services:
     ports:
       - "5000:5000"
     networks:
-      - vync_network
+      - vync-network
     depends_on:
-      - vync_postgres
+      - postgres
       - redis
 
-  chat_service:
-    container_name: chat_service
+  chat:
+    container_name: chat
     env_file:
       - ./packages/config/.env
     build:
@@ -99,13 +103,13 @@ services:
     ports:
       - "5002:5002"
     networks:
-      - vync_network
+      - vync-network
     depends_on:
-      - vync_postgres
+      - postgres
       - redis
 
-  media_service:
-    container_name: media_service
+  media:
+    container_name: media
     env_file:
       - ./packages/config/.env
     build:
@@ -119,15 +123,15 @@ services:
     ports:
       - "5003:5003"
     networks:
-      - vync_network
+      - vync-network
     depends_on:
-      - vync_postgres
+      - postgres
       - redis
 
 networks:
-  vync_network:
+  vync-network:
     driver: bridge
 
 volumes:
   pgdata:
-  redis_data:
+  redis-data:

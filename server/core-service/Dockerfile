@@ -2,6 +2,8 @@ FROM oven/bun:latest
 
 WORKDIR /src
 
+RUN apt-get update -y && apt-get install -y openssl
+
 # Copy root workspace configuration
 COPY package.json /src/
 COPY bun.lock /src/

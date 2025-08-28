@@ -10,8 +10,21 @@
     "outDir": "./dist",
     "baseUrl": ".",
     "paths": {
-      "@vync/*": ["packages/*"]
+      "@vync/cache": [
+        "packages/cache/src"
+      ],
+      "@vync/config": [
+        "packages/config/src"
+      ],
+      "@vync/shared": [
+        "packages/shared/src"
+      ]
     }
   },
-  "include": ["packages/*/src", "services/*/src", "packages/shared/auth/middlewares", "packages/config/index.ts"]
+  "include": [
+    "packages/*/src",
+    "services/*/src",
+    "packages/shared/auth/middlewares",
+    "packages/config/index.ts"
+  ]
 }

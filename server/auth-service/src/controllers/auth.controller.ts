@@ -23,7 +23,7 @@ export const login = async (c: Context) => {
     const body = await c.req.json();
     const ipAddress = c.req.header('X-Forwarded-For') || c.req.header('X-Real-IP') || 'unknown';
     const userAgent = c.req.header('User-Agent') || 'unknown';
-    
+
     const { user, token } = await AuthService.login(body, ipAddress, userAgent);
     return c.json({ user, token }, 200);
   } catch (err: any) {
@@ -90,17 +90,17 @@ export const logout = async (c: Context) => {
     }
 
     const token = authHeader.replace('Bearer ', '');
-    
+
     // Decode token to get user ID
     const decoded = jose.decodeJwt(token);
     const userId = decoded.sub;
-    
+
     if (!userId) {
       return c.json({ error: 'Invalid token' }, 401);
     }
 
     // Logout using AuthService
-    const result = await AuthService.logout(userId, token);
+    const result = await AuthService.logout(token);
     return c.json(result, 200);
   } catch (err: any) {
     logger.error(`Logout error: ${err.message}`);
