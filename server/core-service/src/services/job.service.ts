@@ -1,18 +1,19 @@
 import { prisma } from "@vync/shared";
 import { type Job, JobStatus } from "@vync/shared/src/generated/prisma";
 import type {
-    CreateJobRequest,
-    UpdateJobRequest,
-    GetClientJobsFilters,
-    GetJobProposalsFilters,
-    JobStats,
-    ClientJobsResponse,
-    JobProposalsResponse,
-    DeleteJobResponse,
-    BrowseJobsFilters,
-    BrowseJobsResponse,
-    JobMarketStats
+  CreateJobRequest,
+  UpdateJobRequest,
+  GetClientJobsFilters,
+  GetJobProposalsFilters,
+  JobStats,
+  ClientJobsResponse,
+  JobProposalsResponse,
+  DeleteJobResponse,
+  BrowseJobsFilters,
+  BrowseJobsResponse,
+  JobMarketStats
 } from "../interfaces/job.interface";
+import { cachedBrowseJobs, cachedClientJobs, cachedFeaturedJobs, cachedJob, cachedJobMarketStats, getCachedBrowseJobs, getCachedClientJobs, getCachedFeaturedJobs, getCachedJob, getCachedJobMarketStats } from "../cache/core.cache";
 
 export const JobService = {
   createJob: async (userId: string, jobData: CreateJobRequest): Promise<Job> => {
@@ -64,6 +65,14 @@ export const JobService = {
       }
     });
 
+
+    const cached = await getCachedClientJobs(user.Client.id);
+    if (cached) {
+      await cachedClientJobs(user.Client.id, [job, ...cached], 60 * 5);
+    } else {
+      await cachedClientJobs(user.Client.id, [job], 60 * 5);
+    }
+
     return job;
   },
 
@@ -97,6 +106,19 @@ export const JobService = {
       };
     }
 
+    const cached = await getCachedClientJobs(userId)
+    if (cached) {
+      const paginated = cached.slice(skip, skip + limit)
+      return {
+        jobs: paginated,
+        pagination: {
+          page,
+          limit,
+          total: cached.length,
+          pages: Math.ceil(cached.length / limit)
+        }
+      }
+    }
     // Get jobs with pagination
     const [jobs, total] = await Promise.all([
       prisma.job.findMany({
@@ -128,14 +150,11 @@ export const JobService = {
       prisma.job.count({ where })
     ]);
 
+    await cachedClientJobs(userId, jobs, 60 * 5)
+
     return {
       jobs,
-      pagination: {
-        page,
-        limit,
-        total,
-        pages: Math.ceil(total / limit)
-      }
+      pagination: { page, limit, total, pages: Math.ceil(total / limit) }
     };
   },
 
@@ -148,6 +167,11 @@ export const JobService = {
 
     if (!user || user.role !== "CLIENT" || !user.Client) {
       throw new Error("Client not found");
+    }
+
+    const jobFromCache = await getCachedJob(jobId);
+    if (jobFromCache) {
+      return jobFromCache;
     }
 
     const job = await prisma.job.findFirst({
@@ -197,6 +221,9 @@ export const JobService = {
     if (!job) {
       throw new Error("Job not found");
     }
+
+
+    await cachedJob(job, 3600);
 
     return job;
   },
@@ -321,19 +348,19 @@ export const JobService = {
         where: { clientId: user.Client.id }
       }),
       prisma.job.count({
-        where: { 
+        where: {
           clientId: user.Client.id,
           status: JobStatus.OPEN
         }
       }),
       prisma.job.count({
-        where: { 
+        where: {
           clientId: user.Client.id,
           status: JobStatus.COMPLETED
         }
       }),
       prisma.job.count({
-        where: { 
+        where: {
           clientId: user.Client.id,
           status: JobStatus.IN_PROGRESS
         }
@@ -346,7 +373,7 @@ export const JobService = {
         }
       }),
       prisma.job.aggregate({
-        where: { 
+        where: {
           clientId: user.Client.id,
           status: JobStatus.COMPLETED
         },
@@ -487,32 +514,48 @@ export const JobService = {
   },
 
   // Browse all jobs (for freelancers and general browsing)
+
   browseJobs: async (filters: BrowseJobsFilters): Promise<BrowseJobsResponse> => {
-    const { page, limit, category, minBudget, maxBudget, status, search } = filters;
-    const skip = (page - 1) * limit;
+    const { page, limit, category, minBudget, maxBudget, status, search } = filters
+    const skip = (page - 1) * limit
+
+    // 🔑 1. Check cache first
+    const cached = await getCachedBrowseJobs(filters)
+    if (cached) {
+      const total = cached.length
+      return {
+        jobs: cached,
+        pagination: {
+          page,
+          limit,
+          total,
+          pages: Math.ceil(total / limit),
+        },
+      }
+    }
 
     // Build where clause
-    const where: any = {};
+    const where: any = {}
 
     // Filter by status (default to OPEN jobs)
-    where.status = status || JobStatus.OPEN;
+    where.status = status || JobStatus.OPEN
 
     // Filter by category
     if (category) {
       where.category = {
         contains: category,
-        mode: 'insensitive'
-      };
+        mode: "insensitive",
+      }
     }
 
     // Filter by budget range
     if (minBudget || maxBudget) {
-      where.budget = {};
+      where.budget = {}
       if (minBudget) {
-        where.budget.gte = minBudget;
+        where.budget.gte = minBudget
       }
       if (maxBudget) {
-        where.budget.lte = maxBudget;
+        where.budget.lte = maxBudget
       }
     }
 
@@ -522,26 +565,26 @@ export const JobService = {
         {
           title: {
             contains: search,
-            mode: 'insensitive'
-          }
+            mode: "insensitive",
+          },
         },
         {
           description: {
             contains: search,
-            mode: 'insensitive'
-          }
-        }
-      ];
+            mode: "insensitive",
+          },
+        },
+      ]
     }
 
-    // Get jobs with pagination
+    // 2. Get jobs from DB
     const [jobs, total] = await Promise.all([
       prisma.job.findMany({
         where,
         skip,
         take: limit,
         orderBy: {
-          createdAt: 'desc'
+          createdAt: "desc",
         },
         include: {
           client: {
@@ -554,33 +597,42 @@ export const JobService = {
                   id: true,
                   name: true,
                   email: true,
-                }
-              }
-            }
+                },
+              },
+            },
           },
           _count: {
             select: {
-              proposals: true
-            }
-          }
-        }
+              proposals: true,
+            },
+          },
+        },
       }),
-      prisma.job.count({ where })
-    ]);
+      prisma.job.count({ where }),
+    ])
 
-    return {
+    const response: BrowseJobsResponse = {
       jobs,
       pagination: {
         page,
         limit,
         total,
-        pages: Math.ceil(total / limit)
-      }
-    };
+        pages: Math.ceil(total / limit),
+      },
+    }
+
+    // 3. Store in cache for next time
+    await cachedBrowseJobs(filters, jobs)
+
+    return response
   },
 
   // Get job market statistics
   getJobMarketStats: async (): Promise<JobMarketStats> => {
+
+    const cached = await getCachedJobMarketStats()
+    if (cached) return cached
+
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
@@ -630,16 +682,24 @@ export const JobService = {
       count: item._count.category
     }));
 
-    return {
+    const stats: JobMarketStats = {
       totalOpenJobs,
       totalJobsThisWeek,
       averageBudget: averageBudgetData._avg.budget || 0,
       topCategories
-    };
+    }
+
+    await cachedJobMarketStats(stats, 600)
+
+    return stats
   },
 
   // Get a single job by ID (public - for freelancers)
   getJobByIdPublic: async (jobId: string): Promise<Job> => {
+
+    const cached = await getCachedJob(jobId);
+    if (cached) return cached;
+
     const job = await prisma.job.findUnique({
       where: { id: jobId },
       include: {
@@ -674,11 +734,17 @@ export const JobService = {
       throw new Error("Job is not available");
     }
 
+    await cachedJob(job, 300);
+
     return job;
   },
 
   // Get featured jobs (most recent or with most proposals)
   getFeaturedJobs: async (limit: number = 6): Promise<Job[]> => {
+
+    const cached = await getCachedFeaturedJobs()
+    if (cached) return cached
+
     const jobs = await prisma.job.findMany({
       where: { status: JobStatus.OPEN },
       take: limit,
@@ -714,6 +780,8 @@ export const JobService = {
         }
       }
     });
+
+    await cachedFeaturedJobs(jobs)
 
     return jobs;
   }
