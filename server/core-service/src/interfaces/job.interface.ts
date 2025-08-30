@@ -91,19 +91,22 @@ export interface JobWithProposals extends Job {
   };
 }
 
+
 export interface ProposalWithFreelancer extends Proposal {
   freelancer: {
     id: string;
-    name: string;
-    email: string;
-    skills: string[];
+    user: {
+      id: string;
+      name: string;
+      email: string;
+    };
+    skills: { id: string; name: string }[];
     _count: {
       contracts: number;
       reviews: number;
     };
   };
 }
-
 // Browse jobs interfaces (for freelancers)
 export interface BrowseJobsFilters {
   page: number;

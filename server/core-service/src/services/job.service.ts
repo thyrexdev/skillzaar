@@ -14,6 +14,7 @@ import type {
   JobMarketStats
 } from "../interfaces/job.interface";
 import { cachedBrowseJobs, cachedClientJobs, cachedFeaturedJobs, cachedJob, cachedJobMarketStats, getCachedBrowseJobs, getCachedClientJobs, getCachedFeaturedJobs, getCachedJob, getCachedJobMarketStats } from "../cache/core.cache";
+import { refreshJobCache } from "../cache/core.invalidate";
 
 export const JobService = {
   createJob: async (userId: string, jobData: CreateJobRequest): Promise<Job> => {
@@ -65,13 +66,7 @@ export const JobService = {
       }
     });
 
-
-    const cached = await getCachedClientJobs(user.Client.id);
-    if (cached) {
-      await cachedClientJobs(user.Client.id, [job, ...cached], 60 * 5);
-    } else {
-      await cachedClientJobs(user.Client.id, [job], 60 * 5);
-    }
+    refreshJobCache(job.id, user.Client.id)
 
     return job;
   },
@@ -279,6 +274,8 @@ export const JobService = {
       }
     });
 
+    await refreshJobCache(job.id, user.Client.id)
+
     return job;
   },
 
@@ -321,6 +318,8 @@ export const JobService = {
     await prisma.job.delete({
       where: { id: jobId }
     });
+
+    refreshJobCache(existingJob.id, user.Client.id)
 
     return { message: "Job deleted successfully" };
   },
@@ -509,6 +508,8 @@ export const JobService = {
         }
       }
     });
+
+    refreshJobCache(job.id, user.Client.id)
 
     return job;
   },
